@@ -1,0 +1,50 @@
+# configure text
+version: "v0.1"
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom: "data"
+	top:	"surfpoint"
+	imagepair_param{
+		pair{
+			left: "F:/MATLAB/left/I01.bmp"
+			right: "F:/MATLAB/right/I01.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I02.bmp"
+			right: "F:/MATLAB/right/I02.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I03.bmp"
+			right: "F:/MATLAB/right/I03.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I04.bmp"
+			right: "F:/MATLAB/right/I04.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I05.bmp"
+			right: "F:/MATLAB/right/I06.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I07.bmp"
+			right: "F:/MATLAB/right/I07.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I08.bmp"
+			right: "F:/MATLAB/right/I08.bmp"
+		}
+	}
+}
+layer{
+	name:	"surfpoint"
+	type:	SURF_POINT
+	bottom: "data"
+	top:	"surfpoint"
+	surfpoint_param{
+		stride:		2
+		octaves:	5
+		intervals:	4
+		thresh:		0.0001
+	}
+}

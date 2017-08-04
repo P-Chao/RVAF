@@ -1,0 +1,233 @@
+# configure text
+name:	"Surf Feature Match Locate"
+version: "v0.1"
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom: "data"
+	top:	"rectify"
+	imagepair_param{
+		pair{
+			left: "F:/MATLAB/left/I01.bmp"
+			right: "F:/MATLAB/right/I01.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I02.bmp"
+			right: "F:/MATLAB/right/I02.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I03.bmp"
+			right: "F:/MATLAB/right/I03.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I04.bmp"
+			right: "F:/MATLAB/right/I04.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I05.bmp"
+			right: "F:/MATLAB/right/I05.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I06.bmp"
+			right: "F:/MATLAB/right/I06.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I07.bmp"
+			right: "F:/MATLAB/right/I07.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I08.bmp"
+			right: "F:/MATLAB/right/I08.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I09.bmp"
+			right: "F:/MATLAB/right/I09.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I10.bmp"
+			right: "F:/MATLAB/right/I10.bmp"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/MATLAB/calibration/rectify.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	bottom:	"rectify"
+	top:	"surfpoint"
+	adaboost_param{
+		detector:	"F:/MATLAB/boost/models/detector.dat"
+		sync_frame:	true
+		#sync_video: true
+		#epipolar:	true
+		thresh:		0
+	}
+}
+layer{
+	name:	"surfpoint"
+	type:	SURF_POINT
+	bottom: "adaboost"
+	top:	"surfdescriptor"
+	surfpoint_param{
+		stride:		2
+		octaves:	5
+		intervals:	4
+		thresh:		0.00005
+	}
+}
+layer{
+	name:	"surfdescriptor"
+	type:	SURF_DESP
+	bottom:	"surfpoint"
+	top:	"eularmatch"
+}
+layer{
+	name:	"eularmatch"
+	type:	EULAR_MATCH
+	bottom:	"surfdescriptor"
+	top:	"ransac"
+	eularmatch_param{
+		thresh:	0.65
+	}
+}
+layer{
+	name:	"ransac"
+	type:	RANSAC
+	bottom:	"eularmatch"
+	top:	"3dpoint"
+	ransac_param{
+		thresh: 5.0
+	}
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	bottom:	"ransac"
+	top:	"camera2world"
+	triang_param{
+		visible:	true
+	}
+}
+layer{
+	name:	"camera2world"
+	type:	MXMUL
+	bottom:	"3dpoint"
+	top:	"camera2world"
+	mxmul_param{
+		filename:	"F:/MATLAB/calibration/camera2world.dat"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+###################
+
+name:	"Surf Match with Rectified Image"
+version:	"v_1.03"
+pause:	500
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR_FOLDER
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	pairfolder_param{
+		pair{
+			left:	"F:/data/BaseData/left/"
+			right:	"F:/data/BaseData/right/"
+		}
+	}
+	
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"surfpoint"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		sync_frame:	true
+		#sync_video:	true
+		epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+}
+layer{
+	name:	"surfpoint"
+	type:	SURF_POINT
+	top:	"surfdescriptor"
+	surfpoint_param{
+		stride:		2
+		octaves:	5
+		intervals:	4
+		thresh:		0.00005
+	}
+}
+layer{
+	name:	"surfdescriptor"
+	type:	SURF_DESP
+	top:	"eularmatch"
+}
+layer{
+	name:	"eularmatch"
+	type:	EULAR_MATCH
+	bottom:	"surfdescriptor"
+	top:	"ransac"
+	eularmatch_param{
+		thresh:	0.65
+	}
+}
+layer{
+	name:	"ransac"
+	type:	RANSAC
+	bottom:	"eularmatch"
+	top:	"3dpoint"
+	ransac_param{
+		thresh: 5.0
+	}
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"camera2world"
+	triang_param{
+		visible:	false
+		toolbox_dir:	"F:/svaf/calib/"
+		calibmat_dir:	"F:/svaf/data/calib/mat_161103/"
+	}
+}
+layer{
+	name:	"camera2world"
+	type:	MXMUL
+	top:	"camera2world"
+	mxmul_param{
+		filename:	"F:/svaf/data/calib/camera2world_rectified_161103.dat"
+	}
+}

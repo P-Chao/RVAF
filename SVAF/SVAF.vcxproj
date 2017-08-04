@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C6494107-21B7-4005-99E3-155964E3E205}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SVAF</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Intel C++ Compiler 16.0</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Intel C++ Compiler 16.0</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="OpenCV.Debug.x64.props" />
+    <Import Project="PCL.Debug.x64.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="OpenCV.Release.x64.props" />
+    <Import Project="PCL.Release.x64.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <SourcePath>$(SourcePath)</SourcePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level2</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>NOMINMAX;_OPENMP;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OpenMP>GenerateParallelCode</OpenMP>
+      <Cpp0xSupport>true</Cpp0xSupport>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_OPENMP;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OpenMPSupport>true</OpenMPSupport>
+      <Cpp0xSupport>true</Cpp0xSupport>
+      <UseIntelOptimizedHeaders>true</UseIntelOptimizedHeaders>
+      <OpenMP>GenerateParallelCode</OpenMP>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="svaf\cvpoint.pbf" />
+    <None Include="svaf\detect.pbf" />
+    <None Include="svaf\eadpmatch.pbf" />
+    <None Include="svaf\surfmatch.pbf" />
+    <None Include="svaf\svaf.pbf" />
+    <None Include="svaf\svaf.proto" />
+    <None Include="svaf\temp.pbf" />
+    <None Include="svaf\track.pbf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\AcfDetect\acfDetect.cpp" />
+    <ClCompile Include="..\AcfDetect\chnsCompute.cpp" />
+    <ClCompile Include="..\AcfDetect\chnsPyramid.cpp" />
+    <ClCompile Include="..\AcfDetect\convTri.cpp" />
+    <ClCompile Include="..\AcfDetect\disp.cpp" />
+    <ClCompile Include="..\AcfDetect\gradient.cpp" />
+    <ClCompile Include="..\CameraLibrary\VideoCapture.cpp" />
+    <ClCompile Include="..\MilTrack\classifier.cpp" />
+    <ClCompile Include="..\MilTrack\common.cpp" />
+    <ClCompile Include="..\MilTrack\feature.cpp" />
+    <ClCompile Include="..\MilTrack\trackmain.cpp" />
+    <ClCompile Include="..\MilTrack\train.cpp" />
+    <ClCompile Include="..\SuperPixelSegment\BaseFuncDef.c" />
+    <ClCompile Include="..\SuperPixelSegment\ctmf.c" />
+    <ClCompile Include="..\SuperPixelSegment\ctmfopt.c" />
+    <ClCompile Include="..\SuperPixelSegment\DataIO.cpp" />
+    <ClCompile Include="..\SuperPixelSegment\DataTypeConvert.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageCensus.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageColor.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageGradient.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageIer.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageIO.cpp" />
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchAggregation.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchCost.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchEadp.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchPostprocess.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchSgm.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageMedian3x3.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageRegionClassify.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageRegionFeature.c" />
+    <ClCompile Include="..\SuperPixelSegment\ImageRoadDetection.c" />
+    <ClCompile Include="..\SuperPixelSegment\maininterface.cpp" />
+    <ClCompile Include="..\SuperPixelSegment\Stat.c" />
+    <ClCompile Include="..\SuperPixelSegment\svafinterface.cpp" />
+    <ClCompile Include="..\SuperPixelSegment\TimeStat.c" />
+    <ClCompile Include="..\SuperPixelSegment\VectorBasic.c" />
+    <ClCompile Include="..\SurfDetect\descriptor.cpp" />
+    <ClCompile Include="..\SurfDetect\fasthessian.cpp" />
+    <ClCompile Include="..\SurfDetect\integral.cpp" />
+    <ClCompile Include="..\SurfDetect\mosaic.cpp" />
+    <ClCompile Include="..\SurfDetect\stereo.cpp" />
+    <ClCompile Include="..\SurfDetect\surf.cpp" />
+    <ClCompile Include="..\SurfDetect\surfdisp.cpp" />
+    <ClCompile Include="layer\AdaboostLayer.cpp" />
+    <ClCompile Include="layer\BinoTrackLayer.cpp" />
+    <ClCompile Include="layer\CenterPointLayer.cpp" />
+    <ClCompile Include="layer\CVDesciptorLayer.cpp" />
+    <ClCompile Include="layer\CVMatchLayer.cpp" />
+    <ClCompile Include="layer\CVPointLayer.cpp" />
+    <ClCompile Include="layer\DataLayer.cpp" />
+    <ClCompile Include="layer\EadpMatchLayer.cpp" />
+    <ClCompile Include="layer\ECMatchLayer.cpp" />
+    <ClCompile Include="layer\EularMatchLayer.cpp" />
+    <ClCompile Include="layer\FeaturePoolLayer.cpp" />
+    <ClCompile Include="layer\Layer.cpp" />
+    <ClCompile Include="layer\MatrixMulLayer.cpp" />
+    <ClCompile Include="layer\MilTrackLayer.cpp" />
+    <ClCompile Include="layer\RansacLayer.cpp" />
+    <ClCompile Include="layer\SgmMatchLayer.cpp" />
+    <ClCompile Include="layer\StereoLayer.cpp" />
+    <ClCompile Include="layer\StereoRectifyLayer.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Full</Optimization>
+    </ClCompile>
+    <ClCompile Include="layer\SupixSegLayer.cpp" />
+    <ClCompile Include="layer\SurfDescriptorLayer.cpp" />
+    <ClCompile Include="layer\SurfPointLayer.cpp" />
+    <ClCompile Include="layer\TriangulationLayer.cpp" />
+    <ClCompile Include="src\Circuit.cpp" />
+    <ClCompile Include="src\Figures.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Param.cpp" />
+    <ClCompile Include="svaf\io.cpp" />
+    <ClCompile Include="svaf\svaf.pb.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\AcfDetect\acfDetect.h" />
+    <ClInclude Include="..\AcfDetect\chnsCompute.h" />
+    <ClInclude Include="..\AcfDetect\chnsPyramid.h" />
+    <ClInclude Include="..\AcfDetect\convTri.h" />
+    <ClInclude Include="..\AcfDetect\disp.h" />
+    <ClInclude Include="..\AcfDetect\gradient.h" />
+    <ClInclude Include="..\AcfDetect\sse.hpp" />
+    <ClInclude Include="..\AcfDetect\wrappers.hpp" />
+    <ClInclude Include="..\CameraLibrary\VideoCapture.h" />
+    <ClInclude Include="..\MilTrack\classifier.h" />
+    <ClInclude Include="..\MilTrack\common.h" />
+    <ClInclude Include="..\MilTrack\feature.h" />
+    <ClInclude Include="..\MilTrack\milsvaf.h" />
+    <ClInclude Include="..\MilTrack\train.h" />
+    <ClInclude Include="..\SuperPixelSegment\BaseConstDef.h" />
+    <ClInclude Include="..\SuperPixelSegment\BaseFuncDef.h" />
+    <ClInclude Include="..\SuperPixelSegment\BaseTypeDef.h" />
+    <ClInclude Include="..\SuperPixelSegment\ctmf.h" />
+    <ClInclude Include="..\SuperPixelSegment\ctmfopt.h" />
+    <ClInclude Include="..\SuperPixelSegment\DataIO.h" />
+    <ClInclude Include="..\SuperPixelSegment\DataIOc.h" />
+    <ClInclude Include="..\SuperPixelSegment\DataTypeConvert.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageCensus.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageColor.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageGradient.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageIer.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageIO.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchAggregation.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchCost.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchEadp.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchPostprocess.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchSgm.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageRegionClassify.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageRegionFeature.h" />
+    <ClInclude Include="..\SuperPixelSegment\ImageRoadDetection.h" />
+    <ClInclude Include="..\SuperPixelSegment\Stat.h" />
+    <ClInclude Include="..\SuperPixelSegment\StatFuncDef.h" />
+    <ClInclude Include="..\SuperPixelSegment\svafinterface.h" />
+    <ClInclude Include="..\SuperPixelSegment\TimeStat.h" />
+    <ClInclude Include="..\SuperPixelSegment\VectorBasic.h" />
+    <ClInclude Include="..\SuperPixelSegment\VectorFuncDef.h" />
+    <ClInclude Include="..\SurfDetect\common.h" />
+    <ClInclude Include="..\SurfDetect\descriptor.h" />
+    <ClInclude Include="..\SurfDetect\fasthessian.h" />
+    <ClInclude Include="..\SurfDetect\integral.h" />
+    <ClInclude Include="..\SurfDetect\mosaic.h" />
+    <ClInclude Include="..\SurfDetect\stereo.h" />
+    <ClInclude Include="..\SurfDetect\surfdisp.h" />
+    <ClInclude Include="layer\AdaboostLayer.h" />
+    <ClInclude Include="layer\BinoTrackLayer.h" />
+    <ClInclude Include="layer\CenterPointLayer.h" />
+    <ClInclude Include="layer\CVDesciptorLayer.h" />
+    <ClInclude Include="layer\CVMatchLayer.h" />
+    <ClInclude Include="layer\CVPointLayer.h" />
+    <ClInclude Include="layer\DataLayer.h" />
+    <ClInclude Include="layer\EadpMatchLayer.h" />
+    <ClInclude Include="layer\ECMatchLayer.h" />
+    <ClInclude Include="layer\EularMatchLayer.h" />
+    <ClInclude Include="layer\FeaturePoolLayer.h" />
+    <ClInclude Include="layer\Layer.h" />
+    <ClInclude Include="layer\MatrixMulLayer.h" />
+    <ClInclude Include="layer\MilTrackLayer.h" />
+    <ClInclude Include="layer\RansacLayer.h" />
+    <ClInclude Include="layer\SgmMatchLayer.h" />
+    <ClInclude Include="layer\StereoLayer.h" />
+    <ClInclude Include="layer\StereoRectifyLayer.h" />
+    <ClInclude Include="layer\SupixSegLayer.h" />
+    <ClInclude Include="layer\SurfDescriptorLayer.h" />
+    <ClInclude Include="layer\SurfPointLayer.h" />
+    <ClInclude Include="layer\TriangulationLayer.h" />
+    <ClInclude Include="src\Circuit.h" />
+    <ClInclude Include="src\Figures.h" />
+    <ClInclude Include="src\Param.h" />
+    <ClInclude Include="svaf\io.hpp" />
+    <ClInclude Include="svaf\svaf.pb.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

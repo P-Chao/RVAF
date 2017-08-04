@@ -1,0 +1,392 @@
+##############################±ê×¼################################
+layer{
+	name:	"featpoint2"
+	type:	CV_POINT
+	top:	"featpoint2"
+	cvpoint_param{
+		type:	FAST # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		fast_param{
+			thresh:	5
+			isnms:	true
+			ftype:	T_5_8 # T_9_16 = 1;T_7_12 = 2;T_5_8 = 3;
+		}
+		mser_param{
+			delta:		5
+			min_area:	60
+			max_area:	14400
+			max_varia:	0.25
+			min_divers:	0.2
+			max_evolution:	200
+			area_thresh:	1.01
+			min_margin:		0.003
+			edgeblur_size:	5
+		}
+		orb_param{
+			nfeatures:	500
+			scalefactor: 1.2
+			nlevels:	3
+			edgethresh:	3
+			firstlevel:	0
+			wta_k:		2
+			scoretype:	HARRIS_SCORE   #HARRIS_SCORE = 1;FAST_SCORE = 2;
+			patchsize:	31
+		}
+		brisk_param{
+			thresh:		30
+			octaves:	3
+			ptscale:	1.0
+			#dmax:		5.85
+			#dmin:		8.2
+		}
+		star_param{
+			maxsize:	16
+			response_thresh:	30
+			projected_thresh:	10
+			binarized_thresh:	8
+			nms_size:	5
+		}
+		sift_param{
+			nfeatures:	0
+			octaves:	2
+			contrast_thresh:	0.04
+			edge_thresh:	10
+			sigma:		1.6
+		}
+		surf_param{
+			hassian_thresh:	0.0004
+			octaves:	4
+			intevals:	2
+			extended:	false
+			upright:	false
+		}
+		gftt_param{
+			maxcornners:	1000
+			quality:	0.01
+			mindist:	1
+			blocksize:	3
+			useharris:	false
+			k:			0.04
+		}
+		harris_param{
+			maxcornners:	1000
+			quality:	0.01
+			mindist:	1
+			blocksize:	3
+			k:			0.04
+		}
+		dense_param{
+			initfeatscale:	1
+			featscalelevel:	1
+			featscalemul:	0.1
+			initxystep:		6
+			initbound:		0
+			varyxyscale:	true
+			varybdscale:	false
+		}
+	}
+	display: true
+}
+
+
+
+
+#####################################################
+name:	"OpenCV Feature Point Detect"
+version:	"v_1.04"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR_FOLDER
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	pairfolder_param{
+		pair{
+			left:	"F:/data/BaseData/left/"
+			right:	"F:/data/BaseData/right/"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"featpoint"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		sync_frame:	true
+		#sync_video:	true
+		epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+}
+layer{
+	name:	"featpoint"
+	type:	CV_POINT
+	top:	"featpoint"
+	cvpoint_param{
+		type:	SURF # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;
+	}
+}
+
+###################################################FULL
+name:	"OpenCV Feature Point Detect"
+version:	"v_1.04"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR_FOLDER
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	pairfolder_param{
+		pair{
+			left:	"F:/data/BaseData/left/"
+			right:	"F:/data/BaseData/right/"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"featpoint"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		sync_frame:	true
+		#sync_video:	true
+		epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	display: true
+}
+layer{
+	name:	"featpoint"
+	type:	CV_POINT
+	top:	"featpoint1"
+	cvpoint_param{
+		type:	SURF # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		surf_param{
+			hassian_thresh:	0.0004
+			octaves:	4
+			intevals:	2
+			extended:	false
+			upright:	false
+		}
+	}
+	display: true
+}
+layer{
+	name:	"featpoint1"
+	type:	CV_POINT
+	top:	"featpoint2"
+	cvpoint_param{
+		type:	SIFT # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		sift_param{
+			nfeatures:	0
+			octaves:	2
+			contrast_thresh:	0.04
+			edge_thresh:	5
+			sigma:		1.6
+		}
+	}
+	display: true
+}
+layer{
+	name:	"featpoint2"
+	type:	CV_POINT
+	top:	"featpoint3"
+	cvpoint_param{
+		type:	FAST # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		fast_param{
+			thresh:	5
+			isnms:	true
+			ftype:	T_5_8 # T_9_16 = 1;T_7_12 = 2;T_5_8 = 3;
+		}
+		mser_param{
+			delta:		5
+			min_area:	60
+			max_area:	14400
+			max_varia:	0.25
+			min_divers:	0.2
+			max_evolution:	200
+			area_thresh:	1.01
+			min_margin:		0.003
+			edgeblur_size:	5
+		}
+		orb_param{
+			nfeatures:	500
+			scalefactor: 1.2
+			nlevels:	3
+			edgethresh:	3
+			firstlevel:	0
+			wta_k:		2
+			scoretype:	HARRIS_SCORE   #HARRIS_SCORE = 1;FAST_SCORE = 2;
+			patchsize:	31
+		}
+		brisk_param{
+			thresh:		30
+			octaves:	3
+			ptscale:	1.0
+			#dmax:		5.85
+			#dmin:		8.2
+		}
+		star_param{
+			maxsize:	16
+			response_thresh:	30
+			projected_thresh:	10
+			binarized_thresh:	8
+			nms_size:	5
+		}
+		sift_param{
+			nfeatures:	0
+			octaves:	2
+			contrast_thresh:	0.04
+			edge_thresh:	10
+			sigma:		1.6
+		}
+		surf_param{
+			hassian_thresh:	0.0004
+			octaves:	4
+			intevals:	2
+			extended:	false
+			upright:	false
+		}
+		gftt_param{
+			maxcornners:	1000
+			quality:	0.01
+			mindist:	1
+			blocksize:	3
+			useharris:	false
+			k:			0.04
+		}
+		harris_param{
+			maxcornners:	1000
+			quality:	0.01
+			mindist:	1
+			blocksize:	3
+			k:			0.04
+		}
+		dense_param{
+			initfeatscale:	1
+			featscalelevel:	1
+			featscalemul:	0.1
+			initxystep:		6
+			initbound:		0
+			varyxyscale:	true
+			varybdscale:	false
+		}
+	}
+	display: true
+}
+layer{
+	name:	"featpoint3"
+	type:	CV_POINT
+	top:	"featpoint4"
+	cvpoint_param{
+		type:	ORB # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		orb_param{
+			nfeatures:	500
+			scalefactor: 1.2
+			nlevels:	3
+			edgethresh:	3
+			firstlevel:	0
+			wta_k:		2
+			scoretype:	HARRIS_SCORE   #HARRIS_SCORE = 1;FAST_SCORE = 2;
+			patchsize:	31
+		}
+	}
+	display: true
+}
+layer{
+	name:	"featpoint4"
+	type:	CV_POINT
+	top:	"featpoint5"
+	cvpoint_param{
+		type:	MSER # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		mser_param{
+			delta:		5
+			min_area:	60
+			max_area:	14400
+			max_varia:	0.25
+			min_divers:	0.2
+			max_evolution:	200
+			area_thresh:	1.01
+			min_margin:		0.003
+			edgeblur_size:	5
+		}
+	}
+	display: true
+}
+layer{
+	name:	"featpoint5"
+	type:	CV_POINT
+	top:	"featpoint6"
+	cvpoint_param{
+		type:	STAR # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		star_param{
+			maxsize:	16
+			response_thresh:	30
+			projected_thresh:	10
+			binarized_thresh:	8
+			nms_size:	5
+		}
+	}
+	display: true
+}
+layer{
+	name:	"featpoint6"
+	type:	CV_POINT
+	top:	"featpoint7"
+	cvpoint_param{
+		type:	GFTT # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		gftt_param{
+			maxcornners:	1000
+			quality:	0.01
+			mindist:	1
+			blocksize:	3
+			useharris:	false
+			k:			0.04
+		}
+	}
+	display: true
+}
+layer{
+	name:	"featpoint7"
+	type:	CV_POINT
+	top:	"featpoint7"
+	cvpoint_param{
+		type:	DENSE # FAST = 1;FASTX = 2;MSER = 3;ORB = 4;BRISK = 5;FREAK = 6;STAR = 7;SIFT = 8;SURF = 9;GFTT = 10;HARRIS = 11;DENSE = 12;SBLOB = 13;AKAZE = 14;
+		dense_param{
+			initfeatscale:	1
+			featscalelevel:	1
+			featscalemul:	0.1
+			initxystep:		6
+			initbound:		0
+			varyxyscale:	true
+			varybdscale:	false
+		}
+	}
+	display: true
+}
+

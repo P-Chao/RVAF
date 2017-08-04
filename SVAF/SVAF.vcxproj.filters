@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Layer Source">
+      <UniqueIdentifier>{477e46ce-5d15-49b0-97cc-c59c3ac4e810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Projects">
+      <UniqueIdentifier>{38ada3de-7f26-47a0-98c3-1fc823a2e933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Projects\Surf Detect">
+      <UniqueIdentifier>{e7361ace-7815-428d-a4de-62982f96ab98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Projects\DSP Camera">
+      <UniqueIdentifier>{efea7c46-4306-46c4-ad70-0ab1ea65eeb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Projects\Supix Segment">
+      <UniqueIdentifier>{a1f67c25-5555-43d8-a2ab-3083b6852461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Projects\Acf Detect">
+      <UniqueIdentifier>{97b60d71-28c0-46bb-aebc-2a18c89d5b6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Proto Interface">
+      <UniqueIdentifier>{64a39928-a931-48cd-8c52-431c401d0dff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External Projects\Mil Track">
+      <UniqueIdentifier>{cd48826d-ea4b-44df-9552-7ec31ef4133e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="svaf\svaf.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\svaf.proto">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\temp.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\cvpoint.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\surfmatch.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\detect.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\track.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\eadpmatch.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="layer\AdaboostLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\CenterPointLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\CVDesciptorLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\CVMatchLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\CVPointLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\DataLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\EadpMatchLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\ECMatchLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\EularMatchLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\Layer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\MatrixMulLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\RansacLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\SgmMatchLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\StereoLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\StereoRectifyLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\SupixSegLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\SurfDescriptorLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\SurfPointLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\TriangulationLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Circuit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Param.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SurfDetect\descriptor.cpp">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SurfDetect\fasthessian.cpp">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SurfDetect\integral.cpp">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SurfDetect\mosaic.cpp">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SurfDetect\stereo.cpp">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SurfDetect\surf.cpp">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SurfDetect\surfdisp.cpp">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CameraLibrary\VideoCapture.cpp">
+      <Filter>External Projects\DSP Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AcfDetect\acfDetect.cpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AcfDetect\chnsCompute.cpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AcfDetect\chnsPyramid.cpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AcfDetect\convTri.cpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AcfDetect\disp.cpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AcfDetect\gradient.cpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\BaseFuncDef.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ctmf.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ctmfopt.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\DataIO.cpp">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\DataTypeConvert.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageCensus.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageColor.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageGradient.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageIer.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageIO.cpp">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchAggregation.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchCost.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchEadp.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchPostprocess.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageMatchSgm.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageMedian3x3.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageRegionClassify.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageRegionFeature.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\ImageRoadDetection.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\maininterface.cpp">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\Stat.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\svafinterface.cpp">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\TimeStat.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SuperPixelSegment\VectorBasic.c">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClCompile>
+    <ClCompile Include="svaf\io.cpp">
+      <Filter>Proto Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="svaf\svaf.pb.cc">
+      <Filter>Proto Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Figures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MilTrack\classifier.cpp">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MilTrack\common.cpp">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MilTrack\feature.cpp">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MilTrack\trackmain.cpp">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MilTrack\train.cpp">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\MilTrackLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\FeaturePoolLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\BinoTrackLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="layer\AdaboostLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\CenterPointLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\CVDesciptorLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\CVMatchLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\CVPointLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\DataLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\EadpMatchLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\ECMatchLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\EularMatchLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\Layer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\MatrixMulLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\RansacLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\SgmMatchLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\StereoLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\StereoRectifyLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\SupixSegLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\SurfDescriptorLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\SurfPointLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\TriangulationLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Circuit.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Param.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SurfDetect\common.h">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SurfDetect\descriptor.h">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SurfDetect\fasthessian.h">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SurfDetect\integral.h">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SurfDetect\mosaic.h">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SurfDetect\stereo.h">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SurfDetect\surfdisp.h">
+      <Filter>External Projects\Surf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CameraLibrary\VideoCapture.h">
+      <Filter>External Projects\DSP Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\acfDetect.h">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\chnsCompute.h">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\chnsPyramid.h">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\convTri.h">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\disp.h">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\gradient.h">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\sse.hpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AcfDetect\wrappers.hpp">
+      <Filter>External Projects\Acf Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\BaseConstDef.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\BaseFuncDef.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\BaseTypeDef.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ctmf.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ctmfopt.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\DataIO.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\DataIOc.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\DataTypeConvert.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageCensus.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageColor.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageGradient.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageIer.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageIO.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchAggregation.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchCost.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchEadp.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchPostprocess.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageMatchSgm.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageRegionClassify.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageRegionFeature.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\ImageRoadDetection.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\Stat.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\StatFuncDef.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\svafinterface.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\TimeStat.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\VectorBasic.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SuperPixelSegment\VectorFuncDef.h">
+      <Filter>External Projects\Supix Segment</Filter>
+    </ClInclude>
+    <ClInclude Include="svaf\io.hpp">
+      <Filter>Proto Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="svaf\svaf.pb.h">
+      <Filter>Proto Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Figures.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MilTrack\classifier.h">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MilTrack\common.h">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MilTrack\feature.h">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MilTrack\train.h">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\MilTrackLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MilTrack\milsvaf.h">
+      <Filter>External Projects\Mil Track</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\FeaturePoolLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\BinoTrackLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

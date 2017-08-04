@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseFuncDef.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ctmf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ctmfopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTypeConvert.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageCensus.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageColor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageGradient.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageIer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMatchAggregation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMatchCost.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMatchEadp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMatchPostprocess.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMatchSgm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageMedian3x3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageRegionClassify.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageRegionFeature.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageRoadDetection.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeStat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorBasic.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="maininterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="svafinterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseConstDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseFuncDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypeDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ctmf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ctmfopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataIOc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypeConvert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageCensus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageGradient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageIer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMatchAggregation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMatchCost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMatchEadp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMatchPostprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageMatchSgm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageRegionClassify.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageRegionFeature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageRoadDetection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatFuncDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeStat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorBasic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorFuncDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svafinterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

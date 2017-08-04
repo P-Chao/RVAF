@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CB32A6C3-D090-42EF-935C-BB2332BFCD61}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SuperPixelSegment</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>D:\opencv\build\x86\vc12\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opencv_ml2413d.lib;opencv_calib3d2413d.lib;opencv_contrib2413d.lib;opencv_core2413d.lib;opencv_features2d2413d.lib;opencv_flann2413d.lib;opencv_gpu2413d.lib;opencv_highgui2413d.lib;opencv_imgproc2413d.lib;opencv_legacy2413d.lib;opencv_objdetect2413d.lib;opencv_ts2413d.lib;opencv_video2413d.lib;opencv_nonfree2413d.lib;opencv_ocl2413d.lib;opencv_photo2413d.lib;opencv_stitching2413d.lib;opencv_superres2413d.lib;opencv_videostab2413d.lib;gflags_staticd.lib;libglog_staticd.lib;libprotobufd.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseFuncDef.c" />
+    <ClCompile Include="ctmf.c" />
+    <ClCompile Include="ctmfopt.c" />
+    <ClCompile Include="DataIO.cpp" />
+    <ClCompile Include="DataTypeConvert.c" />
+    <ClCompile Include="ImageCensus.c" />
+    <ClCompile Include="ImageColor.c" />
+    <ClCompile Include="ImageGradient.c" />
+    <ClCompile Include="ImageIer.c" />
+    <ClCompile Include="ImageIO.cpp" />
+    <ClCompile Include="ImageMatchAggregation.c" />
+    <ClCompile Include="ImageMatchCost.c" />
+    <ClCompile Include="ImageMatchEadp.c" />
+    <ClCompile Include="ImageMatchPostprocess.c" />
+    <ClCompile Include="ImageMatchSgm.c" />
+    <ClCompile Include="ImageMedian3x3.c" />
+    <ClCompile Include="ImageRegionClassify.c" />
+    <ClCompile Include="ImageRegionFeature.c" />
+    <ClCompile Include="ImageRoadDetection.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="maininterface.cpp" />
+    <ClCompile Include="Stat.c" />
+    <ClCompile Include="svafinterface.cpp" />
+    <ClCompile Include="TimeStat.c" />
+    <ClCompile Include="VectorBasic.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseConstDef.h" />
+    <ClInclude Include="BaseFuncDef.h" />
+    <ClInclude Include="BaseTypeDef.h" />
+    <ClInclude Include="ctmf.h" />
+    <ClInclude Include="ctmfopt.h" />
+    <ClInclude Include="DataIO.h" />
+    <ClInclude Include="DataIOc.h" />
+    <ClInclude Include="DataTypeConvert.h" />
+    <ClInclude Include="ImageCensus.h" />
+    <ClInclude Include="ImageColor.h" />
+    <ClInclude Include="ImageGradient.h" />
+    <ClInclude Include="ImageIer.h" />
+    <ClInclude Include="ImageIO.h" />
+    <ClInclude Include="ImageMatchAggregation.h" />
+    <ClInclude Include="ImageMatchCost.h" />
+    <ClInclude Include="ImageMatchEadp.h" />
+    <ClInclude Include="ImageMatchPostprocess.h" />
+    <ClInclude Include="ImageMatchSgm.h" />
+    <ClInclude Include="ImageRegionClassify.h" />
+    <ClInclude Include="ImageRegionFeature.h" />
+    <ClInclude Include="ImageRoadDetection.h" />
+    <ClInclude Include="Stat.h" />
+    <ClInclude Include="StatFuncDef.h" />
+    <ClInclude Include="svafinterface.h" />
+    <ClInclude Include="TimeStat.h" />
+    <ClInclude Include="VectorBasic.h" />
+    <ClInclude Include="VectorFuncDef.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

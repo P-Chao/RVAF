@@ -1,0 +1,44 @@
+# configure text
+version: "v0.1"
+layer{
+	name:	"data"
+	type:	IMAGE
+	bottom: "data"
+	top:	"adaboost"
+	imagedata_param{
+		name:	"F:/VS/StereoVisionAlgorithmFramework/AcfDetect/a.jpg"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	bottom:	"data"
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"F:/VS/StereoVisionAlgorithmFramework/AcfDetect/acfCarDetector.dat"
+		thresh:		40.0
+	}
+}
+
+
+# configure text
+version: "v0.1"
+layer{
+	name:	"data"
+	type:	DSP
+	bottom: "data"
+	top:	"adaboost"
+	data_param{
+		color:	true
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	bottom:	"data"
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"F:/VS/StereoVisionAlgorithmFramework/detector/detector_workpiece.dat"
+		thresh:		40.0
+	}
+}

@@ -1,0 +1,681 @@
+# configure text
+version: "v0.1"
+layer{
+	name: "image"
+	type: IMAGE_PAIR
+	imagepair_param{
+		pair{
+			left: "F:/MATLAB/left/I01.bmp"
+			right: "F:/MATLAB/right/I01.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I02.bmp"
+			right: "F:/MATLAB/right/I02.bmp"
+		}
+	}
+}
+layer{
+	name: "rectify"
+	type: NONE
+}
+
+# configure text
+version: "v0.1"
+layer{
+	name: "video"
+	type: VIDEO
+	videodata_param{
+		name: "F:/1.mp4";
+	}
+}
+layer{
+	name: "rectify"
+	type: NONE
+}
+
+# configure text
+version: "v0.1"
+layer{
+	name: "video"
+	type: DSP
+}
+layer{
+	name: "rectify"
+	type: NONE
+}
+
+# configure text
+version: "v0.1"
+layer{
+	name:	"video"
+	bottom: "video"
+	top:	"rectify"
+
+	type:	VIDEO
+	videodata_param{
+		name: "F:/1.mp4";
+	}
+}
+layer{
+	name:	"rectify"
+	bottom:	"video"
+	top:	"rectify"
+	type:	NONE
+}
+
+
+# configure text
+version: "v0.1"
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom: "data"
+	top:	"adaboost"
+	imagepair_param{
+		pair{
+			left: "F:/MATLAB/left/I01.bmp"
+			right: "F:/MATLAB/right/I01.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I02.bmp"
+			right: "F:/MATLAB/right/I02.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I03.bmp"
+			right: "F:/MATLAB/right/I03.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I04.bmp"
+			right: "F:/MATLAB/right/I04.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I05.bmp"
+			right: "F:/MATLAB/right/I06.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I07.bmp"
+			right: "F:/MATLAB/right/I07.bmp"
+		}
+		pair{
+			left: "F:/MATLAB/left/I08.bmp"
+			right: "F:/MATLAB/right/I08.bmp"
+		}
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	bottom:	"data"
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"F:/MATLAB/boost/models/detector.dat"
+		sync_frame:	true
+		sync_video: true
+		thresh:		40
+	}
+}
+
+
+########################
+
+
+name:	"Compute 3D pointcload via Eadp Match"
+version:	"v_1.08"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR_FOLDER
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	pairfolder_param{
+		pair{
+			left:	"F:/data/BaseData/left/"
+			right:	"F:/data/BaseData/right/"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"eadp"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		sync_frame:	true
+		#sync_video:	true
+		epipolar:	true
+		thresh:		40
+		nms:		0.3
+		pad_rect{
+			left:	10
+			right:	10
+			top:	10
+			bottom:	10
+			xshift:	0
+		}
+	}
+	
+	display: true
+}
+layer{
+	name:	"eadp"
+	type:	EADP_MATCH
+	top:	"3dpoint"
+	display: true
+	eadp_param{
+		max_disp:	30
+		factor:		2048
+	}
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"3dpoint"
+	triang_param{
+		visible:	false
+		savepc:		true
+		toolbox_dir:	"F:/svaf/calib/"
+		calibmat_dir:	"F:/svaf/data/calib/mat_161103/"
+	}
+	
+	display: true
+}
+
+######################## test camera
+
+name:	"Compute Center of ROI with DSP"
+version:	"v_1.03"
+pause:	10
+layer{
+	name:	"bino_dsp"
+	type:	DSP_PAIR
+	bottom:	"bino_dsp"
+	top:	"adaboost"
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	display: true
+}
+
+######################### MIL Track
+name:	"Compute Center of ROI with DSP"
+version:	"v_1.16"
+pause:	10
+layer{
+	name:	"bino_dsp"
+	type:	DSP  #DSP_PAIR
+	bottom:	"bino_dsp"
+	top:	"miltrack"
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}
+layer{
+	name:	"miltrack"
+	type:	MILTRACK
+	top:	"miltrack"
+	miltrack_param{
+		init_type:	MOUSE
+		track_type: MIL
+		track_count: -1
+		tr_width:	200
+		tr_height:	150
+	}
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}
+
+###################################################
+name:	"Surf Cross Match"
+version:	"v_1.16"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	imagepair_param{
+		#pair{
+			#left:	"F:/data/test_time/left/161102150802721.bmp"
+			#right:	"F:/data/test_time/right/161102150802721.bmp"
+		#}
+		pair{
+			left:	"F:/data/test_time/left/161102150924651.bmp"
+			right:	"F:/data/test_time/right/161102150924651.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102150928272.bmp"
+			right:	"F:/data/test_time/right/161102150928272.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102150931222.bmp"
+			right:	"F:/data/test_time/right/161102150931222.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102150934041.bmp"
+			right:	"F:/data/test_time/right/161102150934041.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102150937830.bmp"
+			right:	"F:/data/test_time/right/161102150937830.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102150942059.bmp"
+			right:	"F:/data/test_time/right/161102150942059.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102150945915.bmp"
+			right:	"F:/data/test_time/right/161102150945915.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102150959658.bmp"
+			right:	"F:/data/test_time/right/161102150959658.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102151011480.bmp"
+			right:	"F:/data/test_time/right/161102151011480.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102151244242.bmp"
+			right:	"F:/data/test_time/right/161102151244242.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152106218.bmp"
+			right:	"F:/data/test_time/right/161102152106218.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152114143.bmp"
+			right:	"F:/data/test_time/right/161102152114143.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152134048.bmp"
+			right:	"F:/data/test_time/right/161102152134048.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152142911.bmp"
+			right:	"F:/data/test_time/right/161102152142911.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152144142.bmp"
+			right:	"F:/data/test_time/right/161102152144142.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152150163.bmp"
+			right:	"F:/data/test_time/right/161102152150163.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152217900.bmp"
+			right:	"F:/data/test_time/right/161102152217900.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152221863.bmp"
+			right:	"F:/data/test_time/right/161102152221863.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152233453.bmp"
+			right:	"F:/data/test_time/right/161102152233453.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152245029.bmp"
+			right:	"F:/data/test_time/right/161102152245029.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152403278.bmp"
+			right:	"F:/data/test_time/right/161102152403278.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152433901.bmp"
+			right:	"F:/data/test_time/right/161102152433901.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152505569.bmp"
+			right:	"F:/data/test_time/right/161102152505569.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152620871.bmp"
+			right:	"F:/data/test_time/right/161102152620871.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152624053.bmp"
+			right:	"F:/data/test_time/right/161102152624053.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152643913.bmp"
+			right:	"F:/data/test_time/right/161102152643913.bmp"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/Svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"surfpoint"
+	adaboost_param{
+		detector:	"F:/Svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		sync_epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	show: true
+}
+layer{
+	name:	"surfpoint"
+	type:	SURF_POINT
+	top:	"surfdescriptor"
+	surfpoint_param{
+		stride:		2
+		octaves:	5
+		intervals:	4
+		thresh:		0.00000
+	}
+	show: true
+}
+layer{
+	name:	"surfdescriptor"
+	type:	SURF_DESP
+	top:	"eularmatch"
+}
+layer{
+	name:	"eularmatch"
+	type:	EULAR_MATCH
+	top:	"ransac"
+	eularmatch_param{
+		thresh:	0.65
+	}
+	show: true
+}
+layer{
+	name:	"ransac"
+	type:	RANSAC
+	top:	"3dpoint"
+	ransac_param{
+		thresh: 5.0
+	}
+	show: true
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"featurepool"
+	triang_param{
+		visible:	true
+		#savepc:		true
+		toolbox_dir:	"F:/Svaf/calib/"
+		calibmat_dir:	"F:/Svaf/data/calib/mat_161103/"
+	}
+	show: true
+}
+layer{
+	name:	"featurepool"
+	type:	FEAT_POOL
+	top:	"featurepool"
+	featpool_param{
+	}
+	show: true
+	#save: true
+}
+
+########################SURF's Final Expierienment
+
+name:	"Surf Cross Match"
+version:	"v_1.16"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	imagepair_param{
+		_pair{
+			left:	"F:/data/test_time/left/161102150802721.bmp"
+			right:	"F:/data/test_time/right/161102150802721.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150924651.bmp"
+			right:	"F:/data/test_time/right/161102150924651.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150928272.bmp"
+			right:	"F:/data/test_time/right/161102150928272.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150931222.bmp"
+			right:	"F:/data/test_time/right/161102150931222.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150934041.bmp"
+			right:	"F:/data/test_time/right/161102150934041.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150937830.bmp"
+			right:	"F:/data/test_time/right/161102150937830.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150942059.bmp"
+			right:	"F:/data/test_time/right/161102150942059.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150945915.bmp"
+			right:	"F:/data/test_time/right/161102150945915.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102150959658.bmp"
+			right:	"F:/data/test_time/right/161102150959658.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102151011480.bmp"
+			right:	"F:/data/test_time/right/161102151011480.bmp"
+		}
+		_pair{
+			left:	"F:/data/test_time/left/161102151244242.bmp"
+			right:	"F:/data/test_time/right/161102151244242.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152106218.bmp"
+			right:	"F:/data/test_time/right/161102152106218.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152106218.bmp"
+			right:	"F:/data/test_time/right/161102152106218.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152114143.bmp"
+			right:	"F:/data/test_time/right/161102152114143.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152134048.bmp"
+			right:	"F:/data/test_time/right/161102152134048.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152142911.bmp"
+			right:	"F:/data/test_time/right/161102152142911.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152144142.bmp"
+			right:	"F:/data/test_time/right/161102152144142.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152150163.bmp"
+			right:	"F:/data/test_time/right/161102152150163.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152217900.bmp"
+			right:	"F:/data/test_time/right/161102152217900.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152221863.bmp"
+			right:	"F:/data/test_time/right/161102152221863.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152233453.bmp"
+			right:	"F:/data/test_time/right/161102152233453.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152245029.bmp"
+			right:	"F:/data/test_time/right/161102152245029.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152403278.bmp"
+			right:	"F:/data/test_time/right/161102152403278.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152433901.bmp"
+			right:	"F:/data/test_time/right/161102152433901.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152505569.bmp"
+			right:	"F:/data/test_time/right/161102152505569.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152620871.bmp"
+			right:	"F:/data/test_time/right/161102152620871.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152624053.bmp"
+			right:	"F:/data/test_time/right/161102152624053.bmp"
+		}
+		pair{
+			left:	"F:/data/test_time/left/161102152643913.bmp"
+			right:	"F:/data/test_time/right/161102152643913.bmp"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/Svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"surfpoint"
+	adaboost_param{
+		detector:	"F:/Svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		sync_epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	show: true
+}
+layer{
+	name:	"surfpoint"
+	type:	SURF_POINT
+	top:	"surfdescriptor"
+	surfpoint_param{
+		stride:		2
+		octaves:	5
+		intervals:	4
+		thresh:		0.00000
+	}
+	show: true
+}
+layer{
+	name:	"surfdescriptor"
+	type:	SURF_DESP
+	top:	"eularmatch"
+}
+layer{
+	name:	"eularmatch"
+	type:	EULAR_MATCH
+	top:	"ransac"
+	eularmatch_param{
+		thresh:	0.65
+	}
+	show: true
+}
+layer{
+	name:	"ransac"
+	type:	RANSAC
+	top:	"3dpoint"
+	ransac_param{
+		thresh: 5.0
+	}
+	show: true
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"featurepool"
+	triang_param{
+		visible:	false
+		#savepc:		true
+		toolbox_dir:	"F:/Svaf/calib/"
+		calibmat_dir:	"F:/Svaf/data/calib/mat_161103/"
+	}
+	#show: true
+}
+layer{
+	name:	"featurepool"
+	type:	FEAT_POOL
+	top:	"featurepool"
+	featpool_param{
+	}
+	show: true
+	#save: true
+}
+
+

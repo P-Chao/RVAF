@@ -1,0 +1,328 @@
+name:	"MILTrack Test"
+version:	"v_1.17"
+pause:	10
+layer{
+	name:	"data"
+	type:	 IMAGE_PAIR_FOLDER #DSP_PAIR
+	bottom:	"data"
+	top:	"miltrack"
+	pairfolder_param{
+		pair{
+			left:  "F:/MATLAB/trackdata/4/L_rectify/"
+			right: "F:/MATLAB/trackdata/4/R_rectify/"
+		}
+	}
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"miltrack"
+	type:	MILTRACK
+	top:	"miltrack"
+	miltrack_param{
+		init_type:	SELECT #SELECT #MOUSE
+		track_type: MIL
+		track_count: -1
+		tr_width:	240
+		tr_height:	180
+		#scalefactor: 0.5
+
+		init_negnum: 65 #65
+		negnum: 65
+		posmax: 100000
+		srchwinsz: 25
+
+		negsample_strat: 1
+		numfeat: 250
+		numsel:  50
+
+		lrate:	0.95
+		posrad: 3.0 #ada 1.0
+		init_posrad: 3.0
+
+		uselogr: true
+
+		#left
+		init_rect{
+			x:	160
+			y:	118
+			width:	115
+			height:	115
+		}
+		#right
+		init_rect{
+			x:	20
+			y:	118
+			width:	115
+			height:	115
+		}
+
+	}
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}
+
+############################################################################
+
+name:	"BITTrack Test"
+version:	"v_1.17"
+pause:	5
+layer{
+	name:	"data"
+	type:	 IMAGE_PAIR_FOLDER #DSP_PAIR
+	bottom:	"data"
+	top:	"bittrack"
+	pairfolder_param{
+		pair{
+			left:  "F:/MATLAB/trackdata/2/L/"
+			right: "F:/MATLAB/trackdata/2/R/"
+		}
+	}
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"bittrack"
+	type:	BITTRACK
+	top:	"bittrack"
+	bittrack_param{
+		init_type:	MOUSE
+		track_type: MIL
+		track_count: -1
+		tr_width:	200
+		tr_height:	150
+	}
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}
+
+####################################################
+
+
+name:	"BITTrack Test"
+version:	"v_1.17"
+pause:	10
+layer{
+	name:	"data"
+	type:	 IMAGE_PAIR_FOLDER #DSP_PAIR
+	bottom:	"data"
+	top:	"bittrack"
+	pairfolder_param{
+		pair{
+			left:  "F:/MATLAB/trackdata/4/L_rectify/"
+			right: "F:/MATLAB/trackdata/4/R_rectify/"
+		}
+	}
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"bittrack"
+	type:	BITTRACK
+	top:	"bittrack"
+	bittrack_param{
+		init_type:	SELECT #SELECT #MOUSE
+		track_type: MIL
+		track_count: -1
+		tr_width:	240
+		tr_height:	180
+		#scalefactor: 0.5
+
+		init_negnum: 65 #65
+		negnum: 65
+		posmax: 100000
+		srchwinsz: 25
+
+		negsample_strat: 1
+		numfeat: 250
+		numsel:  50
+
+		lrate:	1.0
+		posrad: 3.0
+		init_posrad: 3.0
+
+		uselogr: true
+
+		#left
+		init_rect{
+			x:	160
+			y:	118
+			width:	115
+			height:	115
+		}
+		#right
+		init_rect{
+			x:	20
+			y:	118
+			width:	115
+			height:	115
+		}
+
+	}
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}
+##############################pool time test##########################
+
+name:	"BITTrack Test"
+version:	"v_1.17"
+pause:	-1
+layer{
+	name:	"data"
+	type:	 IMAGE_PAIR_FOLDER #DSP_PAIR
+	bottom:	"data"
+	top:	"bittrack"
+	pairfolder_param{
+		pair{
+			left:  "F:/MATLAB/trackdata/2/L_rectify/"
+			right: "F:/MATLAB/trackdata/2/R_rectify/"
+		}
+	}
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"bittrack"
+	type:	BITTRACK
+	top:	"bittrack"
+	bittrack_param{
+		init_type:	SELECT #SELECT #MOUSE
+		track_type: MIL_RGB
+		track_count: -1
+		tr_width:	240
+		tr_height:	180
+		#scalefactor: 0.5
+
+		init_negnum: 65 #65
+		negnum: 65
+		posmax: 100000
+		srchwinsz: 25
+
+		negsample_strat: 1
+		numfeat: 250
+		numsel:  50
+
+		lrate:	0.85
+		posrad: 3.0
+		init_posrad: 3.0
+
+		uselogr: true
+
+		sync: true
+		pool: true
+		mixfeat: false
+
+		#left
+		init_rect{
+			x:	304
+			y:	243
+			width:	92
+			height:	127
+		}
+		#right
+		init_rect{
+			x:	168
+			y:	243
+			width:	92
+			height:	127
+		}
+
+	}
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: false
+	logt: true
+}
+
+#############################init_rect################################
+#1
+		#left
+		init_rect{
+			x:	172
+			y:	370
+			width:	113
+			height:	42
+		}
+		#right
+		init_rect{
+			x:	15
+			y:	370
+			width:	113
+			height:	42
+		}
+#2
+		#left
+		init_rect{
+			x:	304
+			y:	243
+			width:	92
+			height:	127
+		}
+		#right
+		init_rect{
+			x:	168
+			y:	243
+			width:	92
+			height:	127
+		}
+#3
+		#left
+		init_rect{
+			x:	100
+			y:	100
+			width:	23
+			height:	24
+		}
+		#right
+		init_rect{
+			x:	100
+			y:	100
+			width:	23
+			height:	24
+		}
+#4
+		#left
+		init_rect{
+			x:	160
+			y:	118
+			width:	115
+			height:	115
+		}
+		#right
+		init_rect{
+			x:	20
+			y:	118
+			width:	115
+			height:	115
+		}

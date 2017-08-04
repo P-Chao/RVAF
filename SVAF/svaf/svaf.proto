@@ -1,0 +1,633 @@
+// global configuration of the svaf
+package svaf;
+
+message SvafTask{
+	optional string	name = 1 [default = "Untitled Algorithm"];
+	optional string version = 2;
+	repeated LayerParameter layer = 3;
+	optional int32 pause = 4 [default = 10];
+}
+
+message ImageOperationParameter{
+}
+
+message SuperPixelSegmentParameter{
+	optional int32 K = 1 [default = 400];
+	optional int32 M = 2 [default = 10];
+	optional bool optint = 3 [default = true];
+	optional bool saveseg = 4 [default = false];
+	optional string segname = 5 [default = "./supix.seg"];
+}
+
+message ImageResizeParameter{
+}
+
+message ImageCropParameter{
+}
+
+message StereoOperationParameter{
+}
+
+message StereoRectifyParameter{
+	optional string filename = 1;
+}
+
+message DataParameter{
+	optional bool color = 1;
+}
+
+message ImageDataParameter{
+	repeated string name = 1;
+}
+
+message BinocularPair{
+	optional string left = 1;
+	optional string right = 2;
+}
+
+message ImagePairParameter{
+	repeated BinocularPair pair = 1;
+	repeated BinocularPair _pair = 255;
+}
+
+message VideoDataParameter{
+	repeated string name = 1;
+}
+
+message VideoPairParameter{
+	repeated BinocularPair pair = 1;
+	repeated BinocularPair _pair = 255;
+}
+
+message CameraDataParameter{
+	optional int64 camere = 1;
+}
+
+message CameraPairParameter{
+	optional int64 leftcamera = 1;
+	optional int64 rightcamera = 2;
+}
+
+message DSPCameraDataParameter{
+	optional int32	chns = 1;
+}
+
+message DSPCameraPairParameter{
+	optional int32	chns = 1;
+}
+
+message KinectDataParameter{
+	
+}
+
+message ImageFolderParameter{
+	repeated string name = 1;
+}
+
+message ImagePairFolderParameter{
+	repeated BinocularPair pair = 1;
+	repeated BinocularPair _pair = 255;
+}
+
+message RecognizeParameter{
+}
+
+message ROIExtention{
+	optional int32 left = 1 [default = 0];
+	optional int32 right = 2 [default = 0];
+	optional int32 top = 3 [default = 0];
+	optional int32 bottom = 4 [default = 0];
+	optional int32 xshift = 5 [default = 0];
+}
+
+message AdaboostParameter{
+	optional string detector = 1;
+	optional bool	sync_frame = 2 [default = false];
+	optional bool	sync_video = 3 [default = false];
+	optional bool	sync_epipolar = 4 [default = false];
+	optional float	thresh = 5 [default = 0];
+	optional float	nms = 6 [default = 0.65];
+	optional ROIExtention pad_rect = 7;
+}
+
+message TrackParameter{
+}
+
+message InitRectParameter{
+	optional uint32 x = 1;
+	optional uint32 y = 2;
+	optional uint32 width = 3;
+	optional uint32 height = 4;
+}
+
+message MilTrackParameter{
+	enum InitType{
+		MOUSE = 1;
+		SELECT = 2;
+		AUTORECT = 3;
+		ADABOOST = 4;
+	}
+	optional InitType init_type = 1 [default = AUTORECT];
+	enum TrackType{
+		MIL = 1;
+		ADA = 2;
+
+		MIL_GRAY = 11;
+		MIL_RGB = 12;
+		MIL_LUV = 13;
+		MIL_HSV = 14;
+	}
+	optional TrackType track_type = 2 [default = MIL];
+	optional int32 track_count = 3 [default = 20];
+	repeated InitRectParameter init_rect = 4;
+	optional uint32 tr_width = 5 [default = 200];
+	optional uint32 tr_height = 6 [default = 150];
+	optional float  scalefactor = 7 [default = 0.5];
+
+	optional uint32 init_negnum = 11 [default = 65];
+	optional uint32 negnum = 12 [default = 65];
+	optional uint32 posmax = 13 [default = 100000];
+	optional uint32 srchwinsz = 14 [default = 25];
+	optional uint32 negsample_strat = 15 [default = 1];
+	optional uint32 numfeat = 16 [default = 250];
+	optional uint32 numsel = 17 [default = 50];
+	
+	optional float	lrate = 21 [default = 0.85];
+	optional float	posrad = 22 [default = 1.0];
+	optional float	init_posrad = 23 [default = 3.0];
+	optional uint32 haarmin_rectnum = 24 [default = 2];
+	optional uint32 haarmax_rectnum = 25 [default = 6];
+
+	optional bool	uselogr = 29 [default = true];
+
+	// only avaliable on binocular track
+	optional bool	tss = 31 [default = false];
+	optional bool	pool = 32 [default = false];
+	optional bool	sync = 33 [default = false];
+	optional bool	mixfeat = 34 [default = false];
+	optional bool	showprob = 35 [default = false];
+
+}
+
+message FeaturePointParameter{
+}
+
+message SIFTPointParameter{
+}
+
+message SURFPointParameter{
+	optional int32	stride = 1 [default = 2];
+	optional int32	octaves = 2 [default = 5];
+	optional int32	intervals = 3 [default = 4];
+	optional float	thresh = 4 [default = 0.0004];
+}
+
+message STARPointParameter{
+}
+
+message BRISKPointParameter{
+}
+
+message FASTPointParameter{
+	optional int32	thresh = 1 [default = 40];
+	optional bool	nms	= 2 [default = true];
+}
+
+message ORBPointParameter{
+}
+
+message KAZEPointParameter{
+}
+
+message HarrisPointParameter{
+}
+
+// OPENCV FEATURE POINT DETECTOR
+message FastParamCP{
+	optional int32	thresh = 1 [default = 40];
+	optional bool	isnms = 2 [default = true];
+	enum FastType{
+		T_9_16 = 1;
+		T_7_12 = 2;
+		T_5_8 = 3;
+	}
+	optional FastType ftype = 3 [default = T_9_16];
+}
+
+message MSERParamCP{
+	optional int32	delta = 1 [default = 5];
+	optional int32	min_area = 2 [default = 60];
+	optional int32	max_area = 3 [default = 14400];
+	optional float	max_varia = 4 [default = 0.25];
+	optional float	min_divers = 5 [default = 0.2];
+	optional int32	max_evolution = 6 [default = 200];
+	optional float	area_thresh = 7 [default = 1.01];
+	optional float	min_margin = 8 [default = 0.003];
+	optional int32	edgeblur_size = 9 [default = 5];
+}
+
+message ORBParamCP{
+	optional int32	nfeatures = 1 [default = 500];
+	optional float	scalefactor = 2 [default = 1.2];
+	optional int32	nlevels = 3 [default = 8];
+	optional int32	edgethresh = 4 [default = 31];
+	optional int32	firstlevel = 5 [default = 0];
+	optional int32	wta_k = 6 [default = 2];
+	enum OBRScoreType{
+		HARRIS_SCORE = 1;
+		FAST_SCORE = 2;
+	}
+	optional OBRScoreType	scoretype = 7 [default = HARRIS_SCORE];
+	optional int32			patchsize = 8 [default = 31];
+}
+
+message BriskParamCP{
+	optional int32	thresh = 1 [default = 30];
+	optional int32	octaves = 2 [default = 3];
+	optional float	ptscale = 3 [default = 1];
+	//optional float	dmax = 4 [default = 5.85];
+	//optional float	dmin = 5 [default = 8.2];
+}
+
+message FreakParamCP{
+	optional bool	orientnorm = 1 [default = true];
+	optional bool	scalenorm = 2 [default = true];
+	optional float	ptscale = 3 [default = 22];
+	optional int32	octaves = 4 [default = 4];
+}
+
+message StarParamCP{
+	optional int32	maxsize = 1 [default = 16];
+	optional int32	response_thresh = 2 [default = 30];
+	optional int32	projected_thresh = 3 [default = 10];
+	optional int32	binarized_thresh = 4 [default = 8];
+	optional int32	nms_size = 5 [default = 5];
+}
+
+message SiftParamCP{
+	optional int32	nfeatures = 1 [default = 0];
+	optional int32	octaves = 2 [default = 3];
+	optional float	contrast_thresh = 3 [default = 0.04];
+	optional float	edge_thresh = 4 [default = 10];
+	optional float	sigma = 5 [default = 1.6];
+}
+
+message SurfParamCP{
+	optional float	hassian_thresh = 1 [default = 0.0004];
+	optional int32	octaves = 2 [default = 4];
+	optional int32	intevals = 3 [default = 2];
+	optional bool	extended = 4 [default = false];
+	optional bool	upright = 5 [default = false];
+}
+
+message GFTTParamCP{
+	optional int32	maxcornners = 1 [default = 1000];
+	optional float	quality = 2 [default = 0.01];
+	optional float	mindist = 3 [default = 1];
+	optional int32	blocksize = 4 [default = 3];
+	optional bool	useharris = 5 [default = false];
+	optional float	k = 6 [default = 0.04];
+}
+
+message HarrisParamCP{
+	optional int32	maxcornners = 1 [default = 1000];
+	optional float	quality = 2 [default = 0.01];
+	optional float	mindist = 3 [default = 1];
+	optional int32	blocksize = 4 [default = 3];
+	//optional bool	useharris = 5 [default = true];
+	optional float	k = 6 [default = 0.04];
+}
+
+message DenseParamCP{
+	optional float	initfeatscale = 1 [default = 1];
+	optional int32	featscalelevel = 2 [default = 1];
+	optional float	featscalemul = 3 [default = 0.1];
+	optional int32	initxystep = 4 [default = 6];
+	optional int32	initbound = 5 [default = 0];
+	optional bool	varyxyscale = 6 [default = true];
+	optional bool	varybdscale = 7 [default = false];
+}
+
+message SimpleBlobParamCP{
+}
+
+message AkazeParamCP{
+}
+
+message CVPointParameter{
+	enum PointType{
+		FAST = 1;
+		FASTX = 2;
+		MSER = 3;
+		ORB = 4;
+		BRISK = 5;
+		FREAK = 6;
+		STAR = 7;
+		SIFT = 8;
+		SURF = 9;
+		GFTT = 10;
+		HARRIS = 11;
+		DENSE = 12;
+		SBLOB = 13;
+		AKAZE = 14;
+	}
+	optional PointType	type = 1;
+	optional bool		isadd = 2 [default = false];
+
+	optional FastParamCP	fast_param	= 11;
+	//optional FastParamCP	fastx_param = 12;
+	optional MSERParamCP	mser_param	= 13;
+	optional ORBParamCP		orb_param	= 14;
+	optional BriskParamCP	brisk_param = 15;
+	optional FreakParamCP	freak_param = 16;
+	optional StarParamCP	star_param	= 17;
+	optional SiftParamCP	sift_param	= 18;
+	optional SurfParamCP	surf_param	= 19;
+	optional GFTTParamCP	gftt_param	= 20;
+	optional HarrisParamCP	harris_param = 21;
+	optional DenseParamCP	dense_param = 22;
+	optional SimpleBlobParamCP	sb_param = 23;
+	optional AkazeParamCP	akaze_param = 24;
+
+}
+
+message FeatureDescriptorParameter{
+}
+
+message SIFTDescriptorParameter{
+}
+
+message SURFDescriptorParameter{
+	optional bool	upright = 1 [default = false];
+}
+
+message STARDescriptorParameter{
+}
+
+message BRIEFDescriptorParameter{
+}
+
+message BRISKDescriptorParameter{
+}
+
+message FASTDescriptorParameter{
+}
+
+message ORBDescriptorParameter{
+}
+
+message KAZEDescriptorParameter{
+}
+
+// OPENCV FEATURE DESCRIPTOR
+message BriefDespCV{
+	optional int32 length = 1 [default = 32]; // 16/32/64
+}
+
+message CVDescriptorParameter{
+	enum DespType{
+		SIFT = 1;
+		SURF = 2;
+		BRIEF = 3;
+		BRISK = 4;
+		ORB = 5;
+		FREAK = 6;
+		OPPONENT = 7;
+	}
+	optional DespType type = 1;
+	optional BriefDespCV brief_param = 2;
+}
+
+message VectorMatchParameter{
+}
+
+message KDTreeMatchParameter{
+}
+
+message EularMatchParameter{
+	optional float	thresh = 1 [default = 0.65];
+}
+
+message RansacParameter{
+	optional float	thresh = 1 [default = 5];
+}
+
+message BruteForceMatchParameter{
+}
+
+message FLANNMatchParameter{
+}
+
+message ECMatchParameter{
+}
+
+message CVMatchParameter{
+	enum MatchType{
+		BFL1 = 1;
+		BFL2 = 2;
+		BFH1 = 3;
+		BFH2 = 4;
+		FLANN = 5;
+	}
+	optional MatchType	type = 1;
+	optional bool		crosscheck = 2 [default = true];
+}
+
+message StereoMatchParameter{
+}
+
+message SGMMatchParameter{
+	optional int32 max_disp = 1 [default = 24];
+	optional int32 factor = 2 [default = 2560];
+	optional int32 dispmr = 3 [default = 1];
+	optional float r1 = 4 [default = 10];
+	optional float r2 = 5 [default = 500];
+	optional string prefix = 6 [default = "./sgm"];
+	optional bool	savetxt = 7 [default = false];
+}
+
+message EADPMatchParameter{
+	optional int32 max_disp = 1 [default = 24];
+	optional int32 factor = 2 [default = 2560];
+	optional int32 guidmr = 3 [default = 1];
+	optional int32 dispmr = 4 [default = 1];
+	optional float sg = 5 [default = -25.0];
+	optional float sc = 6 [default = 25.5];
+	optional float r1 = 7 [default = 10];
+	optional float r2 = 8 [default = 500];
+	optional string prefix = 9 [default = "./eadp"];
+	optional bool	savetxt = 10 [default = false];
+}
+
+message OutputParameter{
+}
+
+message TriangularParameter{
+	optional bool	visible = 1 [default = true];
+	optional string toolbox_dir = 2;
+	optional string calibmat_dir = 3;
+	optional bool	savepc = 4 [default = false];
+	optional string pcname = 5 [default = "./ref_pointcloud.pc"];
+}
+
+message MatrixMulParameter{
+	optional string	filename = 1;
+	optional string col0 = 2;
+	optional string col1 = 3;
+	optional string col2 = 4;
+}
+
+message PositionEstimateParameter{
+}
+
+message CenterPointParameter{
+}
+
+//message LMPositionEstimateParameter{}
+
+message FeaturePoolParameter{
+}
+
+message LayerParameter{
+	optional string name = 1;
+	optional string bottom = 2;
+	optional string top = 3;
+	optional bool	show = 4 [default = false];
+	optional bool	save = 5 [default = false];
+	optional bool	logt = 6 [default = false];
+	optional bool	logi = 7 [default = false];
+	enum LayerType{
+		NONE = 0;
+		IMAGE = 1;
+		IMAGE_PAIR = 2;
+		VIDEO = 3;
+		VIDEO_PAIR = 4;
+		CAMERA = 5; 
+		CAMERA_PAIR = 6;
+		DSP = 7;
+		DSP_PAIR = 8;
+		KINECT = 9;
+		IMAGE_FOLDER = 11;
+		IMAGE_PAIR_FOLDER = 12;
+
+		ADABOOST = 21;
+
+		MILTRACK = 31;
+		BITTRACK = 32;
+
+		SIFT_POINT = 41;
+		SURF_POINT = 42;
+		STAR_POINT = 43;
+		BRISK_POINT = 44;
+		FAST_POINT = 45;
+		ORB_POINT = 46;
+		KAZE_POINT = 47;
+		HARRIS_POINT = 48;
+		CV_POINT = 49;
+
+		SIFT_DESP = 51;
+		SURF_DESP = 52;
+		STAR_DESP = 53;
+		BRIEF_DESP = 54;
+		BRISK_DESP = 55;
+		FAST_DESP = 56;
+		ORB_DESP = 57;
+		KAZE_DESP = 58;
+		CV_DESP = 59;
+		
+		KDTREE_MATCH = 61;
+		EULAR_MATCH = 62;
+		RANSAC = 63;
+		BF_MATCH = 64;
+		FLANN_MATCH = 65;
+		EC_MATCH = 68;
+		CV_MATCH = 69;
+
+		SGM_MATCH = 71;
+		EADP_MATCH = 72;
+
+		TRIANG = 81;
+		MXMUL = 82;
+
+		CENTER_POS = 91;
+		//LM_POS = 92;
+		FEAT_POOL = 93;
+
+		SUPIX_SEG = 101;
+
+		RECTIFY = 141;
+	}
+	optional LayerType type = 10;
+
+	optional ImageOperationParameter imageop_param = 200;
+	optional SuperPixelSegmentParameter supix_param = 201;
+	optional ImageResizeParameter resize_param = 202;
+	optional ImageCropParameter crop_param = 203;
+
+	optional StereoOperationParameter stereoop_param = 240;
+	optional StereoRectifyParameter rectify_param = 241;
+	
+	optional DataParameter data_param = 100;
+	optional ImageDataParameter imagedata_param = 101;
+	optional ImagePairParameter imagepair_param = 102;
+	optional VideoDataParameter videodata_param = 103;
+	optional VideoPairParameter videopair_param = 104;
+	optional CameraDataParameter cameradata_param = 105;
+	optional CameraPairParameter camerapair_param = 106;
+	optional DSPCameraDataParameter dspcameradata_param = 107;
+	optional DSPCameraPairParameter dspcamerapair_param = 108;
+	optional KinectDataParameter kinectdata_param = 109;
+	optional ImageFolderParameter folder_param = 111;
+	optional ImagePairFolderParameter pairfolder_param = 112;
+
+	optional RecognizeParameter recognize_param = 120;
+	optional AdaboostParameter adaboost_param = 121;
+
+	optional TrackParameter track_param = 130;
+	optional MilTrackParameter miltrack_param = 131;
+	optional MilTrackParameter bittrack_param = 132; //Binocular Mil Tracker
+
+	optional FeaturePointParameter featurepoint_param = 140;
+	optional SIFTPointParameter siftpoint_param = 141;
+	optional SURFPointParameter surfpoint_param = 142;
+	optional STARPointParameter starpoint_param = 143;
+	optional BRISKPointParameter briskpoint_param = 144;
+	optional FASTPointParameter fastpoint_param = 145;
+	optional ORBPointParameter orbpoint_param = 146;
+	optional KAZEPointParameter kazepoint_param = 147;
+	optional HarrisPointParameter harrispoint_param = 148;
+	optional CVPointParameter cvpoint_param = 149;
+
+	optional FeatureDescriptorParameter featuredescriptor_param = 150;
+	optional SIFTDescriptorParameter siftdescriptor_param = 151;
+	optional SURFDescriptorParameter surfdescriptor_param = 152;
+	optional STARDescriptorParameter stardescriptor_param = 153;
+	optional BRIEFDescriptorParameter briefdescriptor_param = 154;
+	optional BRISKDescriptorParameter briskdescriptor_param = 155;
+	optional FASTDescriptorParameter fastdescriptor_param = 156;
+	optional ORBDescriptorParameter orbdescriptor_param = 157;
+	optional KAZEDescriptorParameter kazedescriptor_param = 158;
+	optional CVDescriptorParameter cvdescriptor_param = 159;
+
+	optional VectorMatchParameter vectormatch_param = 160;
+	optional KDTreeMatchParameter kdtreematch_param = 161;
+	optional EularMatchParameter eularmatch_param = 162;
+	optional RansacParameter ransac_param = 163;
+	optional BruteForceMatchParameter bfmatch_param = 164;
+	optional FLANNMatchParameter flannmatch_param = 165;
+	optional ECMatchParameter ecmatch_param = 168;
+	optional CVMatchParameter cvmatch_param = 169;
+
+	optional StereoMatchParameter stereomatch_param = 170;
+	optional SGMMatchParameter sgm_param = 171;
+	optional EADPMatchParameter eadp_param = 172;
+
+	optional OutputParameter output_param = 180;
+	optional TriangularParameter triang_param = 181;
+	optional MatrixMulParameter mxmul_param = 182;
+
+	optional PositionEstimateParameter posest_param = 190;
+	optional CenterPointParameter centerpoint_param = 191;
+	//optional LMPositionEstimateParameter lm_param = 192;
+	optional FeaturePoolParameter featpool_param = 193;
+}

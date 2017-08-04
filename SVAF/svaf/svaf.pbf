@@ -1,0 +1,52 @@
+name:	"OpenCV Feature Point Detect"
+version:	"v_1.19"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR_FOLDER
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	pairfolder_param{
+		pair{
+			left:	"F:/data/BaseData/left/"
+			right:	"F:/data/BaseData/right/"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"eadp"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		sync_frame:	true
+		#sync_video:	true
+		sync_epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	#show: true
+}
+layer{
+	name:	"eadp"
+	type:	EADP_MATCH
+	top:	"eadp"
+	eadp_param{
+		max_disp:	24
+		factor:		2560
+		r1:			30
+		r2:			500
+	}
+	show:	true
+}
