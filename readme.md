@@ -109,6 +109,14 @@ Installation instructions
 8. __添加数据文件__
 
     下载bgr2luv.dat文件，放置到`SVAF\bgr2luv.dat`和`\AcfDetect\bgr2luv.dat`。该文件是在目标检测时使用的色彩空间转换表，数据过大，不利于git提交和下载，所以分离出来单独下载。
+### 编译过程
+
+1. __Proto文件的编译__
+    
+    <pre>cd SVAF/svaf/
+    protoc --cpp_out=./ svaf.proto</pre>
+    或者直接运行`SVAF/svaf/build.bat`
+
 ### 辅助工具
 1. [__Camera Calibration Toolbox for Matlab__](http://www.vision.caltech.edu/bouguetj/calib_doc/index.html)
 

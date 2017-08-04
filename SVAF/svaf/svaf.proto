@@ -485,8 +485,8 @@ message CenterPointParameter{
 
 //message LMPositionEstimateParameter{}
 
-message FeaturePoolParameter{
-}
+//message FeaturePoolParameter{
+//}
 
 message LayerParameter{
 	optional string name = 1;
@@ -551,7 +551,7 @@ message LayerParameter{
 
 		CENTER_POS = 91;
 		//LM_POS = 92;
-		FEAT_POOL = 93;
+		//FEAT_POOL = 93;
 
 		SUPIX_SEG = 101;
 
@@ -629,5 +629,5 @@ message LayerParameter{
 	optional PositionEstimateParameter posest_param = 190;
 	optional CenterPointParameter centerpoint_param = 191;
 	//optional LMPositionEstimateParameter lm_param = 192;
-	optional FeaturePoolParameter featpool_param = 193;
+	//optional FeaturePoolParameter featpool_param = 193;
 }

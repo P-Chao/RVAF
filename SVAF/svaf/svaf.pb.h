@@ -110,7 +110,6 @@ class TriangularParameter;
 class MatrixMulParameter;
 class PositionEstimateParameter;
 class CenterPointParameter;
-class FeaturePoolParameter;
 class LayerParameter;
 
 enum MilTrackParameter_InitType {
@@ -319,7 +318,6 @@ enum LayerParameter_LayerType {
   LayerParameter_LayerType_TRIANG = 81,
   LayerParameter_LayerType_MXMUL = 82,
   LayerParameter_LayerType_CENTER_POS = 91,
-  LayerParameter_LayerType_FEAT_POOL = 93,
   LayerParameter_LayerType_SUPIX_SEG = 101,
   LayerParameter_LayerType_RECTIFY = 141
 };
@@ -7769,75 +7767,6 @@ class CenterPointParameter : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class FeaturePoolParameter : public ::google::protobuf::Message {
- public:
-  FeaturePoolParameter();
-  virtual ~FeaturePoolParameter();
-
-  FeaturePoolParameter(const FeaturePoolParameter& from);
-
-  inline FeaturePoolParameter& operator=(const FeaturePoolParameter& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const FeaturePoolParameter& default_instance();
-
-  void Swap(FeaturePoolParameter* other);
-
-  // implements Message ----------------------------------------------
-
-  FeaturePoolParameter* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const FeaturePoolParameter& from);
-  void MergeFrom(const FeaturePoolParameter& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // @@protoc_insertion_point(class_scope:svaf.FeaturePoolParameter)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_svaf_2eproto();
-  friend void protobuf_AssignDesc_svaf_2eproto();
-  friend void protobuf_ShutdownFile_svaf_2eproto();
-
-  void InitAsDefaultInstance();
-  static FeaturePoolParameter* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class LayerParameter : public ::google::protobuf::Message {
  public:
   LayerParameter();
@@ -7935,7 +7864,6 @@ class LayerParameter : public ::google::protobuf::Message {
   static const LayerType TRIANG = LayerParameter_LayerType_TRIANG;
   static const LayerType MXMUL = LayerParameter_LayerType_MXMUL;
   static const LayerType CENTER_POS = LayerParameter_LayerType_CENTER_POS;
-  static const LayerType FEAT_POOL = LayerParameter_LayerType_FEAT_POOL;
   static const LayerType SUPIX_SEG = LayerParameter_LayerType_SUPIX_SEG;
   static const LayerType RECTIFY = LayerParameter_LayerType_RECTIFY;
   static inline bool LayerType_IsValid(int value) {
@@ -8563,15 +8491,6 @@ class LayerParameter : public ::google::protobuf::Message {
   inline ::svaf::CenterPointParameter* release_centerpoint_param();
   inline void set_allocated_centerpoint_param(::svaf::CenterPointParameter* centerpoint_param);
 
-  // optional .svaf.FeaturePoolParameter featpool_param = 193;
-  inline bool has_featpool_param() const;
-  inline void clear_featpool_param();
-  static const int kFeatpoolParamFieldNumber = 193;
-  inline const ::svaf::FeaturePoolParameter& featpool_param() const;
-  inline ::svaf::FeaturePoolParameter* mutable_featpool_param();
-  inline ::svaf::FeaturePoolParameter* release_featpool_param();
-  inline void set_allocated_featpool_param(::svaf::FeaturePoolParameter* featpool_param);
-
   // @@protoc_insertion_point(class_scope:svaf.LayerParameter)
  private:
   inline void set_has_name();
@@ -8708,8 +8627,6 @@ class LayerParameter : public ::google::protobuf::Message {
   inline void clear_has_posest_param();
   inline void set_has_centerpoint_param();
   inline void clear_has_centerpoint_param();
-  inline void set_has_featpool_param();
-  inline void clear_has_featpool_param();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8782,7 +8699,6 @@ class LayerParameter : public ::google::protobuf::Message {
   ::svaf::MatrixMulParameter* mxmul_param_;
   ::svaf::PositionEstimateParameter* posest_param_;
   ::svaf::CenterPointParameter* centerpoint_param_;
-  ::svaf::FeaturePoolParameter* featpool_param_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -14723,10 +14639,6 @@ inline void MatrixMulParameter::set_allocated_col2(::std::string* col2) {
 
 // -------------------------------------------------------------------
 
-// FeaturePoolParameter
-
-// -------------------------------------------------------------------
-
 // LayerParameter
 
 // optional string name = 1;
@@ -17495,47 +17407,6 @@ inline void LayerParameter::set_allocated_centerpoint_param(::svaf::CenterPointP
     clear_has_centerpoint_param();
   }
   // @@protoc_insertion_point(field_set_allocated:svaf.LayerParameter.centerpoint_param)
-}
-
-// optional .svaf.FeaturePoolParameter featpool_param = 193;
-inline bool LayerParameter::has_featpool_param() const {
-  return (_has_bits_[2] & 0x00000008u) != 0;
-}
-inline void LayerParameter::set_has_featpool_param() {
-  _has_bits_[2] |= 0x00000008u;
-}
-inline void LayerParameter::clear_has_featpool_param() {
-  _has_bits_[2] &= ~0x00000008u;
-}
-inline void LayerParameter::clear_featpool_param() {
-  if (featpool_param_ != NULL) featpool_param_->::svaf::FeaturePoolParameter::Clear();
-  clear_has_featpool_param();
-}
-inline const ::svaf::FeaturePoolParameter& LayerParameter::featpool_param() const {
-  // @@protoc_insertion_point(field_get:svaf.LayerParameter.featpool_param)
-  return featpool_param_ != NULL ? *featpool_param_ : *default_instance_->featpool_param_;
-}
-inline ::svaf::FeaturePoolParameter* LayerParameter::mutable_featpool_param() {
-  set_has_featpool_param();
-  if (featpool_param_ == NULL) featpool_param_ = new ::svaf::FeaturePoolParameter;
-  // @@protoc_insertion_point(field_mutable:svaf.LayerParameter.featpool_param)
-  return featpool_param_;
-}
-inline ::svaf::FeaturePoolParameter* LayerParameter::release_featpool_param() {
-  clear_has_featpool_param();
-  ::svaf::FeaturePoolParameter* temp = featpool_param_;
-  featpool_param_ = NULL;
-  return temp;
-}
-inline void LayerParameter::set_allocated_featpool_param(::svaf::FeaturePoolParameter* featpool_param) {
-  delete featpool_param_;
-  featpool_param_ = featpool_param;
-  if (featpool_param) {
-    set_has_featpool_param();
-  } else {
-    clear_has_featpool_param();
-  }
-  // @@protoc_insertion_point(field_set_allocated:svaf.LayerParameter.featpool_param)
 }
 
 

@@ -272,9 +272,6 @@
     <ClCompile Include="layer\MilTrackLayer.cpp">
       <Filter>Layer Source</Filter>
     </ClCompile>
-    <ClCompile Include="layer\FeaturePoolLayer.cpp">
-      <Filter>Layer Source</Filter>
-    </ClCompile>
     <ClCompile Include="layer\BinoTrackLayer.cpp">
       <Filter>Layer Source</Filter>
     </ClCompile>
@@ -498,9 +495,6 @@
     </ClInclude>
     <ClInclude Include="..\MilTrack\milsvaf.h">
       <Filter>External Projects\Mil Track</Filter>
-    </ClInclude>
-    <ClInclude Include="layer\FeaturePoolLayer.h">
-      <Filter>Layer Source</Filter>
     </ClInclude>
     <ClInclude Include="layer\BinoTrackLayer.h">
       <Filter>Layer Source</Filter>

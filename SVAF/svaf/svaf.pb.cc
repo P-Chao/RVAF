@@ -255,9 +255,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* CenterPointParameter_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CenterPointParameter_reflection_ = NULL;
-const ::google::protobuf::Descriptor* FeaturePoolParameter_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  FeaturePoolParameter_reflection_ = NULL;
 const ::google::protobuf::Descriptor* LayerParameter_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   LayerParameter_reflection_ = NULL;
@@ -1526,22 +1523,8 @@ void protobuf_AssignDesc_svaf_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CenterPointParameter));
-  FeaturePoolParameter_descriptor_ = file->message_type(76);
-  static const int FeaturePoolParameter_offsets_[1] = {
-  };
-  FeaturePoolParameter_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      FeaturePoolParameter_descriptor_,
-      FeaturePoolParameter::default_instance_,
-      FeaturePoolParameter_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FeaturePoolParameter, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FeaturePoolParameter, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(FeaturePoolParameter));
-  LayerParameter_descriptor_ = file->message_type(77);
-  static const int LayerParameter_offsets_[68] = {
+  LayerParameter_descriptor_ = file->message_type(76);
+  static const int LayerParameter_offsets_[67] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LayerParameter, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LayerParameter, bottom_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LayerParameter, top_),
@@ -1609,7 +1592,6 @@ void protobuf_AssignDesc_svaf_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LayerParameter, mxmul_param_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LayerParameter, posest_param_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LayerParameter, centerpoint_param_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LayerParameter, featpool_param_),
   };
   LayerParameter_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1788,8 +1770,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     CenterPointParameter_descriptor_, &CenterPointParameter::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    FeaturePoolParameter_descriptor_, &FeaturePoolParameter::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     LayerParameter_descriptor_, &LayerParameter::default_instance());
 }
 
@@ -1953,8 +1933,6 @@ void protobuf_ShutdownFile_svaf_2eproto() {
   delete PositionEstimateParameter_reflection_;
   delete CenterPointParameter::default_instance_;
   delete CenterPointParameter_reflection_;
-  delete FeaturePoolParameter::default_instance_;
-  delete FeaturePoolParameter_reflection_;
   delete LayerParameter::default_instance_;
   delete LayerParameter_reflection_;
 }
@@ -2137,111 +2115,108 @@ void protobuf_AddDesc_svaf_2eproto() {
     "\022MatrixMulParameter\022\020\n\010filename\030\001 \001(\t\022\014\n"
     "\004col0\030\002 \001(\t\022\014\n\004col1\030\003 \001(\t\022\014\n\004col2\030\004 \001(\t\""
     "\033\n\031PositionEstimateParameter\"\026\n\024CenterPo"
-    "intParameter\"\026\n\024FeaturePoolParameter\"\243 \n"
-    "\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\016\n\006bottom\030"
-    "\002 \001(\t\022\013\n\003top\030\003 \001(\t\022\023\n\004show\030\004 \001(\010:\005false\022"
-    "\023\n\004save\030\005 \001(\010:\005false\022\023\n\004logt\030\006 \001(\010:\005fals"
-    "e\022\023\n\004logi\030\007 \001(\010:\005false\022,\n\004type\030\n \001(\0162\036.s"
-    "vaf.LayerParameter.LayerType\0225\n\rimageop_"
-    "param\030\310\001 \001(\0132\035.svaf.ImageOperationParame"
-    "ter\0226\n\013supix_param\030\311\001 \001(\0132 .svaf.SuperPi"
-    "xelSegmentParameter\0221\n\014resize_param\030\312\001 \001"
-    "(\0132\032.svaf.ImageResizeParameter\022-\n\ncrop_p"
-    "aram\030\313\001 \001(\0132\030.svaf.ImageCropParameter\0227\n"
-    "\016stereoop_param\030\360\001 \001(\0132\036.svaf.StereoOper"
-    "ationParameter\0224\n\rrectify_param\030\361\001 \001(\0132\034"
-    ".svaf.StereoRectifyParameter\022\'\n\ndata_par"
-    "am\030d \001(\0132\023.svaf.DataParameter\0221\n\017imageda"
-    "ta_param\030e \001(\0132\030.svaf.ImageDataParameter"
-    "\0221\n\017imagepair_param\030f \001(\0132\030.svaf.ImagePa"
-    "irParameter\0221\n\017videodata_param\030g \001(\0132\030.s"
-    "vaf.VideoDataParameter\0221\n\017videopair_para"
-    "m\030h \001(\0132\030.svaf.VideoPairParameter\0223\n\020cam"
-    "eradata_param\030i \001(\0132\031.svaf.CameraDataPar"
-    "ameter\0223\n\020camerapair_param\030j \001(\0132\031.svaf."
-    "CameraPairParameter\0229\n\023dspcameradata_par"
-    "am\030k \001(\0132\034.svaf.DSPCameraDataParameter\0229"
-    "\n\023dspcamerapair_param\030l \001(\0132\034.svaf.DSPCa"
-    "meraPairParameter\0223\n\020kinectdata_param\030m "
-    "\001(\0132\031.svaf.KinectDataParameter\0220\n\014folder"
-    "_param\030o \001(\0132\032.svaf.ImageFolderParameter"
-    "\0228\n\020pairfolder_param\030p \001(\0132\036.svaf.ImageP"
-    "airFolderParameter\0221\n\017recognize_param\030x "
-    "\001(\0132\030.svaf.RecognizeParameter\022/\n\016adaboos"
-    "t_param\030y \001(\0132\027.svaf.AdaboostParameter\022*"
-    "\n\013track_param\030\202\001 \001(\0132\024.svaf.TrackParamet"
-    "er\0220\n\016miltrack_param\030\203\001 \001(\0132\027.svaf.MilTr"
-    "ackParameter\0220\n\016bittrack_param\030\204\001 \001(\0132\027."
-    "svaf.MilTrackParameter\0228\n\022featurepoint_p"
-    "aram\030\214\001 \001(\0132\033.svaf.FeaturePointParameter"
-    "\0222\n\017siftpoint_param\030\215\001 \001(\0132\030.svaf.SIFTPo"
-    "intParameter\0222\n\017surfpoint_param\030\216\001 \001(\0132\030"
-    ".svaf.SURFPointParameter\0222\n\017starpoint_pa"
-    "ram\030\217\001 \001(\0132\030.svaf.STARPointParameter\0224\n\020"
-    "briskpoint_param\030\220\001 \001(\0132\031.svaf.BRISKPoin"
-    "tParameter\0222\n\017fastpoint_param\030\221\001 \001(\0132\030.s"
-    "vaf.FASTPointParameter\0220\n\016orbpoint_param"
-    "\030\222\001 \001(\0132\027.svaf.ORBPointParameter\0222\n\017kaze"
-    "point_param\030\223\001 \001(\0132\030.svaf.KAZEPointParam"
-    "eter\0226\n\021harrispoint_param\030\224\001 \001(\0132\032.svaf."
-    "HarrisPointParameter\022.\n\rcvpoint_param\030\225\001"
-    " \001(\0132\026.svaf.CVPointParameter\022B\n\027featured"
-    "escriptor_param\030\226\001 \001(\0132 .svaf.FeatureDes"
-    "criptorParameter\022<\n\024siftdescriptor_param"
-    "\030\227\001 \001(\0132\035.svaf.SIFTDescriptorParameter\022<"
-    "\n\024surfdescriptor_param\030\230\001 \001(\0132\035.svaf.SUR"
-    "FDescriptorParameter\022<\n\024stardescriptor_p"
-    "aram\030\231\001 \001(\0132\035.svaf.STARDescriptorParamet"
-    "er\022>\n\025briefdescriptor_param\030\232\001 \001(\0132\036.sva"
-    "f.BRIEFDescriptorParameter\022>\n\025briskdescr"
-    "iptor_param\030\233\001 \001(\0132\036.svaf.BRISKDescripto"
-    "rParameter\022<\n\024fastdescriptor_param\030\234\001 \001("
-    "\0132\035.svaf.FASTDescriptorParameter\022:\n\023orbd"
-    "escriptor_param\030\235\001 \001(\0132\034.svaf.ORBDescrip"
-    "torParameter\022<\n\024kazedescriptor_param\030\236\001 "
-    "\001(\0132\035.svaf.KAZEDescriptorParameter\0228\n\022cv"
-    "descriptor_param\030\237\001 \001(\0132\033.svaf.CVDescrip"
-    "torParameter\0226\n\021vectormatch_param\030\240\001 \001(\013"
-    "2\032.svaf.VectorMatchParameter\0226\n\021kdtreema"
-    "tch_param\030\241\001 \001(\0132\032.svaf.KDTreeMatchParam"
-    "eter\0224\n\020eularmatch_param\030\242\001 \001(\0132\031.svaf.E"
-    "ularMatchParameter\022,\n\014ransac_param\030\243\001 \001("
-    "\0132\025.svaf.RansacParameter\0226\n\rbfmatch_para"
-    "m\030\244\001 \001(\0132\036.svaf.BruteForceMatchParameter"
-    "\0224\n\020flannmatch_param\030\245\001 \001(\0132\031.svaf.FLANN"
-    "MatchParameter\022.\n\recmatch_param\030\250\001 \001(\0132\026"
-    ".svaf.ECMatchParameter\022.\n\rcvmatch_param\030"
-    "\251\001 \001(\0132\026.svaf.CVMatchParameter\0226\n\021stereo"
-    "match_param\030\252\001 \001(\0132\032.svaf.StereoMatchPar"
-    "ameter\022+\n\tsgm_param\030\253\001 \001(\0132\027.svaf.SGMMat"
-    "chParameter\022-\n\neadp_param\030\254\001 \001(\0132\030.svaf."
-    "EADPMatchParameter\022,\n\014output_param\030\264\001 \001("
-    "\0132\025.svaf.OutputParameter\0220\n\014triang_param"
-    "\030\265\001 \001(\0132\031.svaf.TriangularParameter\022.\n\013mx"
-    "mul_param\030\266\001 \001(\0132\030.svaf.MatrixMulParamet"
-    "er\0226\n\014posest_param\030\276\001 \001(\0132\037.svaf.Positio"
-    "nEstimateParameter\0226\n\021centerpoint_param\030"
-    "\277\001 \001(\0132\032.svaf.CenterPointParameter\0223\n\016fe"
-    "atpool_param\030\301\001 \001(\0132\032.svaf.FeaturePoolPa"
-    "rameter\"\320\005\n\tLayerType\022\010\n\004NONE\020\000\022\t\n\005IMAGE"
-    "\020\001\022\016\n\nIMAGE_PAIR\020\002\022\t\n\005VIDEO\020\003\022\016\n\nVIDEO_P"
-    "AIR\020\004\022\n\n\006CAMERA\020\005\022\017\n\013CAMERA_PAIR\020\006\022\007\n\003DS"
-    "P\020\007\022\014\n\010DSP_PAIR\020\010\022\n\n\006KINECT\020\t\022\020\n\014IMAGE_F"
-    "OLDER\020\013\022\025\n\021IMAGE_PAIR_FOLDER\020\014\022\014\n\010ADABOO"
-    "ST\020\025\022\014\n\010MILTRACK\020\037\022\014\n\010BITTRACK\020 \022\016\n\nSIFT"
-    "_POINT\020)\022\016\n\nSURF_POINT\020*\022\016\n\nSTAR_POINT\020+"
-    "\022\017\n\013BRISK_POINT\020,\022\016\n\nFAST_POINT\020-\022\r\n\tORB"
-    "_POINT\020.\022\016\n\nKAZE_POINT\020/\022\020\n\014HARRIS_POINT"
-    "\0200\022\014\n\010CV_POINT\0201\022\r\n\tSIFT_DESP\0203\022\r\n\tSURF_"
-    "DESP\0204\022\r\n\tSTAR_DESP\0205\022\016\n\nBRIEF_DESP\0206\022\016\n"
-    "\nBRISK_DESP\0207\022\r\n\tFAST_DESP\0208\022\014\n\010ORB_DESP"
-    "\0209\022\r\n\tKAZE_DESP\020:\022\013\n\007CV_DESP\020;\022\020\n\014KDTREE"
-    "_MATCH\020=\022\017\n\013EULAR_MATCH\020>\022\n\n\006RANSAC\020\?\022\014\n"
-    "\010BF_MATCH\020@\022\017\n\013FLANN_MATCH\020A\022\014\n\010EC_MATCH"
-    "\020D\022\014\n\010CV_MATCH\020E\022\r\n\tSGM_MATCH\020G\022\016\n\nEADP_"
-    "MATCH\020H\022\n\n\006TRIANG\020Q\022\t\n\005MXMUL\020R\022\016\n\nCENTER"
-    "_POS\020[\022\r\n\tFEAT_POOL\020]\022\r\n\tSUPIX_SEG\020e\022\014\n\007"
-    "RECTIFY\020\215\001", 11010);
+    "intParameter\"\337\037\n\016LayerParameter\022\014\n\004name\030"
+    "\001 \001(\t\022\016\n\006bottom\030\002 \001(\t\022\013\n\003top\030\003 \001(\t\022\023\n\004sh"
+    "ow\030\004 \001(\010:\005false\022\023\n\004save\030\005 \001(\010:\005false\022\023\n\004"
+    "logt\030\006 \001(\010:\005false\022\023\n\004logi\030\007 \001(\010:\005false\022,"
+    "\n\004type\030\n \001(\0162\036.svaf.LayerParameter.Layer"
+    "Type\0225\n\rimageop_param\030\310\001 \001(\0132\035.svaf.Imag"
+    "eOperationParameter\0226\n\013supix_param\030\311\001 \001("
+    "\0132 .svaf.SuperPixelSegmentParameter\0221\n\014r"
+    "esize_param\030\312\001 \001(\0132\032.svaf.ImageResizePar"
+    "ameter\022-\n\ncrop_param\030\313\001 \001(\0132\030.svaf.Image"
+    "CropParameter\0227\n\016stereoop_param\030\360\001 \001(\0132\036"
+    ".svaf.StereoOperationParameter\0224\n\rrectif"
+    "y_param\030\361\001 \001(\0132\034.svaf.StereoRectifyParam"
+    "eter\022\'\n\ndata_param\030d \001(\0132\023.svaf.DataPara"
+    "meter\0221\n\017imagedata_param\030e \001(\0132\030.svaf.Im"
+    "ageDataParameter\0221\n\017imagepair_param\030f \001("
+    "\0132\030.svaf.ImagePairParameter\0221\n\017videodata"
+    "_param\030g \001(\0132\030.svaf.VideoDataParameter\0221"
+    "\n\017videopair_param\030h \001(\0132\030.svaf.VideoPair"
+    "Parameter\0223\n\020cameradata_param\030i \001(\0132\031.sv"
+    "af.CameraDataParameter\0223\n\020camerapair_par"
+    "am\030j \001(\0132\031.svaf.CameraPairParameter\0229\n\023d"
+    "spcameradata_param\030k \001(\0132\034.svaf.DSPCamer"
+    "aDataParameter\0229\n\023dspcamerapair_param\030l "
+    "\001(\0132\034.svaf.DSPCameraPairParameter\0223\n\020kin"
+    "ectdata_param\030m \001(\0132\031.svaf.KinectDataPar"
+    "ameter\0220\n\014folder_param\030o \001(\0132\032.svaf.Imag"
+    "eFolderParameter\0228\n\020pairfolder_param\030p \001"
+    "(\0132\036.svaf.ImagePairFolderParameter\0221\n\017re"
+    "cognize_param\030x \001(\0132\030.svaf.RecognizePara"
+    "meter\022/\n\016adaboost_param\030y \001(\0132\027.svaf.Ada"
+    "boostParameter\022*\n\013track_param\030\202\001 \001(\0132\024.s"
+    "vaf.TrackParameter\0220\n\016miltrack_param\030\203\001 "
+    "\001(\0132\027.svaf.MilTrackParameter\0220\n\016bittrack"
+    "_param\030\204\001 \001(\0132\027.svaf.MilTrackParameter\0228"
+    "\n\022featurepoint_param\030\214\001 \001(\0132\033.svaf.Featu"
+    "rePointParameter\0222\n\017siftpoint_param\030\215\001 \001"
+    "(\0132\030.svaf.SIFTPointParameter\0222\n\017surfpoin"
+    "t_param\030\216\001 \001(\0132\030.svaf.SURFPointParameter"
+    "\0222\n\017starpoint_param\030\217\001 \001(\0132\030.svaf.STARPo"
+    "intParameter\0224\n\020briskpoint_param\030\220\001 \001(\0132"
+    "\031.svaf.BRISKPointParameter\0222\n\017fastpoint_"
+    "param\030\221\001 \001(\0132\030.svaf.FASTPointParameter\0220"
+    "\n\016orbpoint_param\030\222\001 \001(\0132\027.svaf.ORBPointP"
+    "arameter\0222\n\017kazepoint_param\030\223\001 \001(\0132\030.sva"
+    "f.KAZEPointParameter\0226\n\021harrispoint_para"
+    "m\030\224\001 \001(\0132\032.svaf.HarrisPointParameter\022.\n\r"
+    "cvpoint_param\030\225\001 \001(\0132\026.svaf.CVPointParam"
+    "eter\022B\n\027featuredescriptor_param\030\226\001 \001(\0132 "
+    ".svaf.FeatureDescriptorParameter\022<\n\024sift"
+    "descriptor_param\030\227\001 \001(\0132\035.svaf.SIFTDescr"
+    "iptorParameter\022<\n\024surfdescriptor_param\030\230"
+    "\001 \001(\0132\035.svaf.SURFDescriptorParameter\022<\n\024"
+    "stardescriptor_param\030\231\001 \001(\0132\035.svaf.STARD"
+    "escriptorParameter\022>\n\025briefdescriptor_pa"
+    "ram\030\232\001 \001(\0132\036.svaf.BRIEFDescriptorParamet"
+    "er\022>\n\025briskdescriptor_param\030\233\001 \001(\0132\036.sva"
+    "f.BRISKDescriptorParameter\022<\n\024fastdescri"
+    "ptor_param\030\234\001 \001(\0132\035.svaf.FASTDescriptorP"
+    "arameter\022:\n\023orbdescriptor_param\030\235\001 \001(\0132\034"
+    ".svaf.ORBDescriptorParameter\022<\n\024kazedesc"
+    "riptor_param\030\236\001 \001(\0132\035.svaf.KAZEDescripto"
+    "rParameter\0228\n\022cvdescriptor_param\030\237\001 \001(\0132"
+    "\033.svaf.CVDescriptorParameter\0226\n\021vectorma"
+    "tch_param\030\240\001 \001(\0132\032.svaf.VectorMatchParam"
+    "eter\0226\n\021kdtreematch_param\030\241\001 \001(\0132\032.svaf."
+    "KDTreeMatchParameter\0224\n\020eularmatch_param"
+    "\030\242\001 \001(\0132\031.svaf.EularMatchParameter\022,\n\014ra"
+    "nsac_param\030\243\001 \001(\0132\025.svaf.RansacParameter"
+    "\0226\n\rbfmatch_param\030\244\001 \001(\0132\036.svaf.BruteFor"
+    "ceMatchParameter\0224\n\020flannmatch_param\030\245\001 "
+    "\001(\0132\031.svaf.FLANNMatchParameter\022.\n\recmatc"
+    "h_param\030\250\001 \001(\0132\026.svaf.ECMatchParameter\022."
+    "\n\rcvmatch_param\030\251\001 \001(\0132\026.svaf.CVMatchPar"
+    "ameter\0226\n\021stereomatch_param\030\252\001 \001(\0132\032.sva"
+    "f.StereoMatchParameter\022+\n\tsgm_param\030\253\001 \001"
+    "(\0132\027.svaf.SGMMatchParameter\022-\n\neadp_para"
+    "m\030\254\001 \001(\0132\030.svaf.EADPMatchParameter\022,\n\014ou"
+    "tput_param\030\264\001 \001(\0132\025.svaf.OutputParameter"
+    "\0220\n\014triang_param\030\265\001 \001(\0132\031.svaf.Triangula"
+    "rParameter\022.\n\013mxmul_param\030\266\001 \001(\0132\030.svaf."
+    "MatrixMulParameter\0226\n\014posest_param\030\276\001 \001("
+    "\0132\037.svaf.PositionEstimateParameter\0226\n\021ce"
+    "nterpoint_param\030\277\001 \001(\0132\032.svaf.CenterPoin"
+    "tParameter\"\301\005\n\tLayerType\022\010\n\004NONE\020\000\022\t\n\005IM"
+    "AGE\020\001\022\016\n\nIMAGE_PAIR\020\002\022\t\n\005VIDEO\020\003\022\016\n\nVIDE"
+    "O_PAIR\020\004\022\n\n\006CAMERA\020\005\022\017\n\013CAMERA_PAIR\020\006\022\007\n"
+    "\003DSP\020\007\022\014\n\010DSP_PAIR\020\010\022\n\n\006KINECT\020\t\022\020\n\014IMAG"
+    "E_FOLDER\020\013\022\025\n\021IMAGE_PAIR_FOLDER\020\014\022\014\n\010ADA"
+    "BOOST\020\025\022\014\n\010MILTRACK\020\037\022\014\n\010BITTRACK\020 \022\016\n\nS"
+    "IFT_POINT\020)\022\016\n\nSURF_POINT\020*\022\016\n\nSTAR_POIN"
+    "T\020+\022\017\n\013BRISK_POINT\020,\022\016\n\nFAST_POINT\020-\022\r\n\t"
+    "ORB_POINT\020.\022\016\n\nKAZE_POINT\020/\022\020\n\014HARRIS_PO"
+    "INT\0200\022\014\n\010CV_POINT\0201\022\r\n\tSIFT_DESP\0203\022\r\n\tSU"
+    "RF_DESP\0204\022\r\n\tSTAR_DESP\0205\022\016\n\nBRIEF_DESP\0206"
+    "\022\016\n\nBRISK_DESP\0207\022\r\n\tFAST_DESP\0208\022\014\n\010ORB_D"
+    "ESP\0209\022\r\n\tKAZE_DESP\020:\022\013\n\007CV_DESP\020;\022\020\n\014KDT"
+    "REE_MATCH\020=\022\017\n\013EULAR_MATCH\020>\022\n\n\006RANSAC\020\?"
+    "\022\014\n\010BF_MATCH\020@\022\017\n\013FLANN_MATCH\020A\022\014\n\010EC_MA"
+    "TCH\020D\022\014\n\010CV_MATCH\020E\022\r\n\tSGM_MATCH\020G\022\016\n\nEA"
+    "DP_MATCH\020H\022\n\n\006TRIANG\020Q\022\t\n\005MXMUL\020R\022\016\n\nCEN"
+    "TER_POS\020[\022\r\n\tSUPIX_SEG\020e\022\014\n\007RECTIFY\020\215\001", 10918);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "svaf.proto", &protobuf_RegisterTypes);
   SvafTask::_default_name_ =
@@ -2330,7 +2305,6 @@ void protobuf_AddDesc_svaf_2eproto() {
   MatrixMulParameter::default_instance_ = new MatrixMulParameter();
   PositionEstimateParameter::default_instance_ = new PositionEstimateParameter();
   CenterPointParameter::default_instance_ = new CenterPointParameter();
-  FeaturePoolParameter::default_instance_ = new FeaturePoolParameter();
   LayerParameter::default_instance_ = new LayerParameter();
   SvafTask::default_instance_->InitAsDefaultInstance();
   ImageOperationParameter::default_instance_->InitAsDefaultInstance();
@@ -2408,7 +2382,6 @@ void protobuf_AddDesc_svaf_2eproto() {
   MatrixMulParameter::default_instance_->InitAsDefaultInstance();
   PositionEstimateParameter::default_instance_->InitAsDefaultInstance();
   CenterPointParameter::default_instance_->InitAsDefaultInstance();
-  FeaturePoolParameter::default_instance_->InitAsDefaultInstance();
   LayerParameter::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_svaf_2eproto);
 }
@@ -23869,180 +23842,6 @@ void CenterPointParameter::Swap(CenterPointParameter* other) {
 
 // ===================================================================
 
-#ifndef _MSC_VER
-#endif  // !_MSC_VER
-
-FeaturePoolParameter::FeaturePoolParameter()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:svaf.FeaturePoolParameter)
-}
-
-void FeaturePoolParameter::InitAsDefaultInstance() {
-}
-
-FeaturePoolParameter::FeaturePoolParameter(const FeaturePoolParameter& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:svaf.FeaturePoolParameter)
-}
-
-void FeaturePoolParameter::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-FeaturePoolParameter::~FeaturePoolParameter() {
-  // @@protoc_insertion_point(destructor:svaf.FeaturePoolParameter)
-  SharedDtor();
-}
-
-void FeaturePoolParameter::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void FeaturePoolParameter::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* FeaturePoolParameter::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return FeaturePoolParameter_descriptor_;
-}
-
-const FeaturePoolParameter& FeaturePoolParameter::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_svaf_2eproto();
-  return *default_instance_;
-}
-
-FeaturePoolParameter* FeaturePoolParameter::default_instance_ = NULL;
-
-FeaturePoolParameter* FeaturePoolParameter::New() const {
-  return new FeaturePoolParameter;
-}
-
-void FeaturePoolParameter::Clear() {
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool FeaturePoolParameter::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:svaf.FeaturePoolParameter)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0 ||
-        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
-  }
-success:
-  // @@protoc_insertion_point(parse_success:svaf.FeaturePoolParameter)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:svaf.FeaturePoolParameter)
-  return false;
-#undef DO_
-}
-
-void FeaturePoolParameter::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:svaf.FeaturePoolParameter)
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:svaf.FeaturePoolParameter)
-}
-
-::google::protobuf::uint8* FeaturePoolParameter::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:svaf.FeaturePoolParameter)
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:svaf.FeaturePoolParameter)
-  return target;
-}
-
-int FeaturePoolParameter::ByteSize() const {
-  int total_size = 0;
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void FeaturePoolParameter::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const FeaturePoolParameter* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const FeaturePoolParameter*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void FeaturePoolParameter::MergeFrom(const FeaturePoolParameter& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void FeaturePoolParameter::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void FeaturePoolParameter::CopyFrom(const FeaturePoolParameter& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool FeaturePoolParameter::IsInitialized() const {
-
-  return true;
-}
-
-void FeaturePoolParameter::Swap(FeaturePoolParameter* other) {
-  if (other != this) {
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata FeaturePoolParameter::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = FeaturePoolParameter_descriptor_;
-  metadata.reflection = FeaturePoolParameter_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
 const ::google::protobuf::EnumDescriptor* LayerParameter_LayerType_descriptor() {
   protobuf_AssignDescriptorsOnce();
   return LayerParameter_LayerType_descriptor_;
@@ -24094,7 +23893,6 @@ bool LayerParameter_LayerType_IsValid(int value) {
     case 81:
     case 82:
     case 91:
-    case 93:
     case 101:
     case 141:
       return true;
@@ -24149,7 +23947,6 @@ const LayerParameter_LayerType LayerParameter::EADP_MATCH;
 const LayerParameter_LayerType LayerParameter::TRIANG;
 const LayerParameter_LayerType LayerParameter::MXMUL;
 const LayerParameter_LayerType LayerParameter::CENTER_POS;
-const LayerParameter_LayerType LayerParameter::FEAT_POOL;
 const LayerParameter_LayerType LayerParameter::SUPIX_SEG;
 const LayerParameter_LayerType LayerParameter::RECTIFY;
 const LayerParameter_LayerType LayerParameter::LayerType_MIN;
@@ -24224,7 +24021,6 @@ const int LayerParameter::kTriangParamFieldNumber;
 const int LayerParameter::kMxmulParamFieldNumber;
 const int LayerParameter::kPosestParamFieldNumber;
 const int LayerParameter::kCenterpointParamFieldNumber;
-const int LayerParameter::kFeatpoolParamFieldNumber;
 #endif  // !_MSC_VER
 
 LayerParameter::LayerParameter()
@@ -24293,7 +24089,6 @@ void LayerParameter::InitAsDefaultInstance() {
   mxmul_param_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
   posest_param_ = const_cast< ::svaf::PositionEstimateParameter*>(&::svaf::PositionEstimateParameter::default_instance());
   centerpoint_param_ = const_cast< ::svaf::CenterPointParameter*>(&::svaf::CenterPointParameter::default_instance());
-  featpool_param_ = const_cast< ::svaf::FeaturePoolParameter*>(&::svaf::FeaturePoolParameter::default_instance());
 }
 
 LayerParameter::LayerParameter(const LayerParameter& from)
@@ -24373,7 +24168,6 @@ void LayerParameter::SharedCtor() {
   mxmul_param_ = NULL;
   posest_param_ = NULL;
   centerpoint_param_ = NULL;
-  featpool_param_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -24452,7 +24246,6 @@ void LayerParameter::SharedDtor() {
     delete mxmul_param_;
     delete posest_param_;
     delete centerpoint_param_;
-    delete featpool_param_;
   }
 }
 
@@ -24688,7 +24481,7 @@ void LayerParameter::Clear() {
       if (triang_param_ != NULL) triang_param_->::svaf::TriangularParameter::Clear();
     }
   }
-  if (_has_bits_[64 / 32] & 15) {
+  if (_has_bits_[64 / 32] & 7) {
     if (has_mxmul_param()) {
       if (mxmul_param_ != NULL) mxmul_param_->::svaf::MatrixMulParameter::Clear();
     }
@@ -24697,9 +24490,6 @@ void LayerParameter::Clear() {
     }
     if (has_centerpoint_param()) {
       if (centerpoint_param_ != NULL) centerpoint_param_->::svaf::CenterPointParameter::Clear();
-    }
-    if (has_featpool_param()) {
-      if (featpool_param_ != NULL) featpool_param_->::svaf::FeaturePoolParameter::Clear();
     }
   }
 
@@ -25535,19 +25325,6 @@ bool LayerParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(1546)) goto parse_featpool_param;
-        break;
-      }
-
-      // optional .svaf.FeaturePoolParameter featpool_param = 193;
-      case 193: {
-        if (tag == 1546) {
-         parse_featpool_param:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_featpool_param()));
-        } else {
-          goto handle_unusual;
-        }
         if (input->ExpectTag(1602)) goto parse_imageop_param;
         break;
       }
@@ -26029,12 +25806,6 @@ void LayerParameter::SerializeWithCachedSizes(
       191, this->centerpoint_param(), output);
   }
 
-  // optional .svaf.FeaturePoolParameter featpool_param = 193;
-  if (has_featpool_param()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      193, this->featpool_param(), output);
-  }
-
   // optional .svaf.ImageOperationParameter imageop_param = 200;
   if (has_imageop_param()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -26509,13 +26280,6 @@ void LayerParameter::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         191, this->centerpoint_param(), target);
-  }
-
-  // optional .svaf.FeaturePoolParameter featpool_param = 193;
-  if (has_featpool_param()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        193, this->featpool_param(), target);
   }
 
   // optional .svaf.ImageOperationParameter imageop_param = 200;
@@ -27048,13 +26812,6 @@ int LayerParameter::ByteSize() const {
           this->centerpoint_param());
     }
 
-    // optional .svaf.FeaturePoolParameter featpool_param = 193;
-    if (has_featpool_param()) {
-      total_size += 2 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->featpool_param());
-    }
-
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -27299,9 +27056,6 @@ void LayerParameter::MergeFrom(const LayerParameter& from) {
     if (from.has_centerpoint_param()) {
       mutable_centerpoint_param()->::svaf::CenterPointParameter::MergeFrom(from.centerpoint_param());
     }
-    if (from.has_featpool_param()) {
-      mutable_featpool_param()->::svaf::FeaturePoolParameter::MergeFrom(from.featpool_param());
-    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -27392,7 +27146,6 @@ void LayerParameter::Swap(LayerParameter* other) {
     std::swap(mxmul_param_, other->mxmul_param_);
     std::swap(posest_param_, other->posest_param_);
     std::swap(centerpoint_param_, other->centerpoint_param_);
-    std::swap(featpool_param_, other->featpool_param_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_has_bits_[1], other->_has_bits_[1]);
     std::swap(_has_bits_[2], other->_has_bits_[2]);

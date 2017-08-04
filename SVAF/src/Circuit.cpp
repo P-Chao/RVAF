@@ -16,7 +16,6 @@
 #include "..\layer\EularMatchLayer.h"
 #include "..\layer\CenterPointLayer.h"
 #include "..\layer\CVDesciptorLayer.h"
-#include "..\layer\FeaturePoolLayer.h"
 #include "..\layer\StereoRectifyLayer.h"
 #include "..\layer\TriangulationLayer.h"
 #include "..\layer\SurfDescriptorLayer.h"
@@ -183,10 +182,6 @@ void Circuit::Build(){
 			break;
 		case svaf::LayerParameter_LayerType_CENTER_POS:
 			layerinstance = new CenterPointLayer(layer);
-			param = (void*)&world_;
-			break;
-		case svaf::LayerParameter_LayerType_FEAT_POOL:
-			layerinstance = new FeaturePoolLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_RECTIFY:

@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>Intel C++ Compiler 16.0</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -215,7 +215,6 @@
     <ClCompile Include="layer\EadpMatchLayer.cpp" />
     <ClCompile Include="layer\ECMatchLayer.cpp" />
     <ClCompile Include="layer\EularMatchLayer.cpp" />
-    <ClCompile Include="layer\FeaturePoolLayer.cpp" />
     <ClCompile Include="layer\Layer.cpp" />
     <ClCompile Include="layer\MatrixMulLayer.cpp" />
     <ClCompile Include="layer\MilTrackLayer.cpp" />
@@ -295,7 +294,6 @@
     <ClInclude Include="layer\EadpMatchLayer.h" />
     <ClInclude Include="layer\ECMatchLayer.h" />
     <ClInclude Include="layer\EularMatchLayer.h" />
-    <ClInclude Include="layer\FeaturePoolLayer.h" />
     <ClInclude Include="layer\Layer.h" />
     <ClInclude Include="layer\MatrixMulLayer.h" />
     <ClInclude Include="layer\MilTrackLayer.h" />
