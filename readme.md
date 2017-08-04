@@ -312,6 +312,11 @@ API Documentation
 
 Updata Log
 ---
+##### 2017/8/4 (v_1.21) #####
+1. SVAF项目开源 [__RVAF__](https://github.com/P-Chao/RVAF)
+2. 默认使用VS12编译环境和MATLAB2017a
+3. 删除FeaturePoolLayer
+4. 完善配置说明
 ##### 2016/12/20 (v_1.20) #####
 1. 修复v_1.10版本以来，立体匹配算法的Bug
 ##### 2016/12/13 (v_1.19) #####
@@ -411,7 +416,7 @@ Updata Log
 
 Contact Me
 ---
-[__Peng Chao__](http://bbs.p-chao.com)
+[__Peng Chao__](http://www.p-chao.com/about)
 
 
 
