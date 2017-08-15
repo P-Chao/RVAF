@@ -1562,9 +1562,10 @@ void protobuf_AssignDesc_svaf_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(SACIAParameter));
   SACIAEstimateParameter_descriptor_ = file->message_type(77);
-  static const int SACIAEstimateParameter_offsets_[2] = {
+  static const int SACIAEstimateParameter_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, pcd_filename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, sacia_param_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, ref_matrix_),
   };
   SACIAEstimateParameter_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1595,10 +1596,11 @@ void protobuf_AssignDesc_svaf_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ICPParameter));
   IAICPEstimateParameter_descriptor_ = file->message_type(79);
-  static const int IAICPEstimateParameter_offsets_[3] = {
+  static const int IAICPEstimateParameter_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, pcd_filename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, sacia_param_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, icp_param_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, ref_matrix_),
   };
   IAICPEstimateParameter_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1630,10 +1632,11 @@ void protobuf_AssignDesc_svaf_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(NDTParameter));
   IANDTEstimateParameter_descriptor_ = file->message_type(81);
-  static const int IANDTEstimateParameter_offsets_[3] = {
+  static const int IANDTEstimateParameter_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, pcd_filename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, sacia_param_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, ndt_param_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, ref_matrix_),
   };
   IANDTEstimateParameter_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -2269,127 +2272,130 @@ void protobuf_AddDesc_svaf_2eproto() {
     "ter\030\001 \001(\005:\0041000\022\023\n\010min_cors\030\002 \001(\002:\0013\022\026\n\010"
     "max_cors\030\003 \001(\002:\0041000\022\025\n\nvoxel_grid\030\004 \001(\002"
     ":\0013\022\024\n\010norm_rad\030\005 \001(\002:\00220\022\024\n\010feat_rad\030\006 "
-    "\001(\002:\00250\"Y\n\026SACIAEstimateParameter\022\024\n\014pcd"
-    "_filename\030\001 \001(\t\022)\n\013sacia_param\030\002 \001(\0132\024.s"
-    "vaf.SACIAParameter\"K\n\014ICPParameter\022\023\n\010ma"
-    "x_iter\030\001 \001(\005:\0012\022\024\n\010max_resp\030\002 \001(\002:\00210\022\020\n"
-    "\003esp\030\003 \001(\002:\0030.1\"\200\001\n\026IAICPEstimateParamet"
-    "er\022\024\n\014pcd_filename\030\001 \001(\t\022)\n\013sacia_param\030"
-    "\002 \001(\0132\024.svaf.SACIAParameter\022%\n\ticp_param"
-    "\030\003 \001(\0132\022.svaf.ICPParameter\"f\n\014NDTParamet"
-    "er\022\025\n\010max_iter\030\001 \001(\005:\003100\022\025\n\tstep_size\030\002"
-    " \001(\002:\00210\022\026\n\nresolution\030\003 \001(\002:\00210\022\020\n\003esp\030"
-    "\004 \001(\002:\0030.1\"\200\001\n\026IANDTEstimateParameter\022\024\n"
-    "\014pcd_filename\030\001 \001(\t\022)\n\013sacia_param\030\002 \001(\013"
-    "2\024.svaf.SACIAParameter\022%\n\tndt_param\030\003 \001("
-    "\0132\022.svaf.NDTParameter\"\245!\n\016LayerParameter"
-    "\022\014\n\004name\030\001 \001(\t\022\016\n\006bottom\030\002 \001(\t\022\013\n\003top\030\003 "
-    "\001(\t\022\023\n\004show\030\004 \001(\010:\005false\022\023\n\004save\030\005 \001(\010:\005"
-    "false\022\023\n\004logt\030\006 \001(\010:\005false\022\023\n\004logi\030\007 \001(\010"
-    ":\005false\022,\n\004type\030\n \001(\0162\036.svaf.LayerParame"
-    "ter.LayerType\0225\n\rimageop_param\030\310\001 \001(\0132\035."
-    "svaf.ImageOperationParameter\0226\n\013supix_pa"
-    "ram\030\311\001 \001(\0132 .svaf.SuperPixelSegmentParam"
-    "eter\0221\n\014resize_param\030\312\001 \001(\0132\032.svaf.Image"
-    "ResizeParameter\022-\n\ncrop_param\030\313\001 \001(\0132\030.s"
-    "vaf.ImageCropParameter\0227\n\016stereoop_param"
-    "\030\360\001 \001(\0132\036.svaf.StereoOperationParameter\022"
-    "4\n\rrectify_param\030\361\001 \001(\0132\034.svaf.StereoRec"
-    "tifyParameter\022\'\n\ndata_param\030d \001(\0132\023.svaf"
-    ".DataParameter\0221\n\017imagedata_param\030e \001(\0132"
-    "\030.svaf.ImageDataParameter\0221\n\017imagepair_p"
-    "aram\030f \001(\0132\030.svaf.ImagePairParameter\0221\n\017"
-    "videodata_param\030g \001(\0132\030.svaf.VideoDataPa"
-    "rameter\0221\n\017videopair_param\030h \001(\0132\030.svaf."
-    "VideoPairParameter\0223\n\020cameradata_param\030i"
-    " \001(\0132\031.svaf.CameraDataParameter\0223\n\020camer"
-    "apair_param\030j \001(\0132\031.svaf.CameraPairParam"
-    "eter\0229\n\023dspcameradata_param\030k \001(\0132\034.svaf"
-    ".DSPCameraDataParameter\0229\n\023dspcamerapair"
-    "_param\030l \001(\0132\034.svaf.DSPCameraPairParamet"
-    "er\0223\n\020kinectdata_param\030m \001(\0132\031.svaf.Kine"
-    "ctDataParameter\0220\n\014folder_param\030o \001(\0132\032."
-    "svaf.ImageFolderParameter\0228\n\020pairfolder_"
-    "param\030p \001(\0132\036.svaf.ImagePairFolderParame"
-    "ter\0221\n\017recognize_param\030x \001(\0132\030.svaf.Reco"
-    "gnizeParameter\022/\n\016adaboost_param\030y \001(\0132\027"
-    ".svaf.AdaboostParameter\022*\n\013track_param\030\202"
-    "\001 \001(\0132\024.svaf.TrackParameter\0220\n\016miltrack_"
-    "param\030\203\001 \001(\0132\027.svaf.MilTrackParameter\0220\n"
-    "\016bittrack_param\030\204\001 \001(\0132\027.svaf.MilTrackPa"
-    "rameter\0228\n\022featurepoint_param\030\214\001 \001(\0132\033.s"
-    "vaf.FeaturePointParameter\0222\n\017siftpoint_p"
-    "aram\030\215\001 \001(\0132\030.svaf.SIFTPointParameter\0222\n"
-    "\017surfpoint_param\030\216\001 \001(\0132\030.svaf.SURFPoint"
-    "Parameter\0222\n\017starpoint_param\030\217\001 \001(\0132\030.sv"
-    "af.STARPointParameter\0224\n\020briskpoint_para"
-    "m\030\220\001 \001(\0132\031.svaf.BRISKPointParameter\0222\n\017f"
-    "astpoint_param\030\221\001 \001(\0132\030.svaf.FASTPointPa"
-    "rameter\0220\n\016orbpoint_param\030\222\001 \001(\0132\027.svaf."
-    "ORBPointParameter\0222\n\017kazepoint_param\030\223\001 "
-    "\001(\0132\030.svaf.KAZEPointParameter\0226\n\021harrisp"
-    "oint_param\030\224\001 \001(\0132\032.svaf.HarrisPointPara"
-    "meter\022.\n\rcvpoint_param\030\225\001 \001(\0132\026.svaf.CVP"
-    "ointParameter\022B\n\027featuredescriptor_param"
-    "\030\226\001 \001(\0132 .svaf.FeatureDescriptorParamete"
-    "r\022<\n\024siftdescriptor_param\030\227\001 \001(\0132\035.svaf."
-    "SIFTDescriptorParameter\022<\n\024surfdescripto"
-    "r_param\030\230\001 \001(\0132\035.svaf.SURFDescriptorPara"
-    "meter\022<\n\024stardescriptor_param\030\231\001 \001(\0132\035.s"
-    "vaf.STARDescriptorParameter\022>\n\025briefdesc"
-    "riptor_param\030\232\001 \001(\0132\036.svaf.BRIEFDescript"
-    "orParameter\022>\n\025briskdescriptor_param\030\233\001 "
-    "\001(\0132\036.svaf.BRISKDescriptorParameter\022<\n\024f"
-    "astdescriptor_param\030\234\001 \001(\0132\035.svaf.FASTDe"
-    "scriptorParameter\022:\n\023orbdescriptor_param"
-    "\030\235\001 \001(\0132\034.svaf.ORBDescriptorParameter\022<\n"
-    "\024kazedescriptor_param\030\236\001 \001(\0132\035.svaf.KAZE"
-    "DescriptorParameter\0228\n\022cvdescriptor_para"
-    "m\030\237\001 \001(\0132\033.svaf.CVDescriptorParameter\0226\n"
-    "\021vectormatch_param\030\240\001 \001(\0132\032.svaf.VectorM"
-    "atchParameter\0226\n\021kdtreematch_param\030\241\001 \001("
-    "\0132\032.svaf.KDTreeMatchParameter\0224\n\020eularma"
-    "tch_param\030\242\001 \001(\0132\031.svaf.EularMatchParame"
-    "ter\022,\n\014ransac_param\030\243\001 \001(\0132\025.svaf.Ransac"
-    "Parameter\0226\n\rbfmatch_param\030\244\001 \001(\0132\036.svaf"
-    ".BruteForceMatchParameter\0224\n\020flannmatch_"
-    "param\030\245\001 \001(\0132\031.svaf.FLANNMatchParameter\022"
-    ".\n\recmatch_param\030\250\001 \001(\0132\026.svaf.ECMatchPa"
-    "rameter\022.\n\rcvmatch_param\030\251\001 \001(\0132\026.svaf.C"
-    "VMatchParameter\0226\n\021stereomatch_param\030\252\001 "
-    "\001(\0132\032.svaf.StereoMatchParameter\022+\n\tsgm_p"
-    "aram\030\253\001 \001(\0132\027.svaf.SGMMatchParameter\022-\n\n"
-    "eadp_param\030\254\001 \001(\0132\030.svaf.EADPMatchParame"
-    "ter\022,\n\014output_param\030\264\001 \001(\0132\025.svaf.Output"
-    "Parameter\0220\n\014triang_param\030\265\001 \001(\0132\031.svaf."
-    "TriangularParameter\022.\n\013mxmul_param\030\266\001 \001("
-    "\0132\030.svaf.MatrixMulParameter\0226\n\014posest_pa"
-    "ram\030\276\001 \001(\0132\037.svaf.PositionEstimateParame"
-    "ter\0226\n\021centerpoint_param\030\277\001 \001(\0132\032.svaf.C"
-    "enterPointParameter\0222\n\013sacia_param\030\302\001 \001("
-    "\0132\034.svaf.SACIAEstimateParameter\0222\n\013iaicp"
-    "_param\030\303\001 \001(\0132\034.svaf.IAICPEstimateParame"
-    "ter\0222\n\013iandt_param\030\304\001 \001(\0132\034.svaf.IANDTEs"
-    "timateParameter\"\353\005\n\tLayerType\022\010\n\004NONE\020\000\022"
-    "\t\n\005IMAGE\020\001\022\016\n\nIMAGE_PAIR\020\002\022\t\n\005VIDEO\020\003\022\016\n"
-    "\nVIDEO_PAIR\020\004\022\n\n\006CAMERA\020\005\022\017\n\013CAMERA_PAIR"
-    "\020\006\022\007\n\003DSP\020\007\022\014\n\010DSP_PAIR\020\010\022\n\n\006KINECT\020\t\022\020\n"
-    "\014IMAGE_FOLDER\020\013\022\025\n\021IMAGE_PAIR_FOLDER\020\014\022\014"
-    "\n\010ADABOOST\020\025\022\014\n\010MILTRACK\020\037\022\014\n\010BITTRACK\020 "
-    "\022\016\n\nSIFT_POINT\020)\022\016\n\nSURF_POINT\020*\022\016\n\nSTAR"
-    "_POINT\020+\022\017\n\013BRISK_POINT\020,\022\016\n\nFAST_POINT\020"
-    "-\022\r\n\tORB_POINT\020.\022\016\n\nKAZE_POINT\020/\022\020\n\014HARR"
-    "IS_POINT\0200\022\014\n\010CV_POINT\0201\022\r\n\tSIFT_DESP\0203\022"
-    "\r\n\tSURF_DESP\0204\022\r\n\tSTAR_DESP\0205\022\016\n\nBRIEF_D"
-    "ESP\0206\022\016\n\nBRISK_DESP\0207\022\r\n\tFAST_DESP\0208\022\014\n\010"
-    "ORB_DESP\0209\022\r\n\tKAZE_DESP\020:\022\013\n\007CV_DESP\020;\022\020"
-    "\n\014KDTREE_MATCH\020=\022\017\n\013EULAR_MATCH\020>\022\n\n\006RAN"
-    "SAC\020\?\022\014\n\010BF_MATCH\020@\022\017\n\013FLANN_MATCH\020A\022\014\n\010"
-    "EC_MATCH\020D\022\014\n\010CV_MATCH\020E\022\r\n\tSGM_MATCH\020G\022"
-    "\016\n\nEADP_MATCH\020H\022\n\n\006TRIANG\020Q\022\t\n\005MXMUL\020R\022\016"
-    "\n\nCENTER_POS\020[\022\n\n\006IA_EST\020^\022\r\n\tIAICP_EST\020"
-    "_\022\r\n\tIANDT_EST\020`\022\r\n\tSUPIX_SEG\020e\022\014\n\007RECTI"
-    "FY\020\215\001", 11805);
+    "\001(\002:\00250\"\207\001\n\026SACIAEstimateParameter\022\024\n\014pc"
+    "d_filename\030\001 \001(\t\022)\n\013sacia_param\030\002 \001(\0132\024."
+    "svaf.SACIAParameter\022,\n\nref_matrix\030\003 \001(\0132"
+    "\030.svaf.MatrixMulParameter\"K\n\014ICPParamete"
+    "r\022\023\n\010max_iter\030\001 \001(\005:\0012\022\024\n\010max_resp\030\002 \001(\002"
+    ":\00210\022\020\n\003esp\030\003 \001(\002:\0030.1\"\256\001\n\026IAICPEstimate"
+    "Parameter\022\024\n\014pcd_filename\030\001 \001(\t\022)\n\013sacia"
+    "_param\030\002 \001(\0132\024.svaf.SACIAParameter\022%\n\tic"
+    "p_param\030\003 \001(\0132\022.svaf.ICPParameter\022,\n\nref"
+    "_matrix\030\004 \001(\0132\030.svaf.MatrixMulParameter\""
+    "f\n\014NDTParameter\022\025\n\010max_iter\030\001 \001(\005:\003100\022\025"
+    "\n\tstep_size\030\002 \001(\002:\00210\022\026\n\nresolution\030\003 \001("
+    "\002:\00210\022\020\n\003esp\030\004 \001(\002:\0030.1\"\256\001\n\026IANDTEstimat"
+    "eParameter\022\024\n\014pcd_filename\030\001 \001(\t\022)\n\013saci"
+    "a_param\030\002 \001(\0132\024.svaf.SACIAParameter\022%\n\tn"
+    "dt_param\030\003 \001(\0132\022.svaf.NDTParameter\022,\n\nre"
+    "f_matrix\030\004 \001(\0132\030.svaf.MatrixMulParameter"
+    "\"\245!\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\016\n\006bot"
+    "tom\030\002 \001(\t\022\013\n\003top\030\003 \001(\t\022\023\n\004show\030\004 \001(\010:\005fa"
+    "lse\022\023\n\004save\030\005 \001(\010:\005false\022\023\n\004logt\030\006 \001(\010:\005"
+    "false\022\023\n\004logi\030\007 \001(\010:\005false\022,\n\004type\030\n \001(\016"
+    "2\036.svaf.LayerParameter.LayerType\0225\n\rimag"
+    "eop_param\030\310\001 \001(\0132\035.svaf.ImageOperationPa"
+    "rameter\0226\n\013supix_param\030\311\001 \001(\0132 .svaf.Sup"
+    "erPixelSegmentParameter\0221\n\014resize_param\030"
+    "\312\001 \001(\0132\032.svaf.ImageResizeParameter\022-\n\ncr"
+    "op_param\030\313\001 \001(\0132\030.svaf.ImageCropParamete"
+    "r\0227\n\016stereoop_param\030\360\001 \001(\0132\036.svaf.Stereo"
+    "OperationParameter\0224\n\rrectify_param\030\361\001 \001"
+    "(\0132\034.svaf.StereoRectifyParameter\022\'\n\ndata"
+    "_param\030d \001(\0132\023.svaf.DataParameter\0221\n\017ima"
+    "gedata_param\030e \001(\0132\030.svaf.ImageDataParam"
+    "eter\0221\n\017imagepair_param\030f \001(\0132\030.svaf.Ima"
+    "gePairParameter\0221\n\017videodata_param\030g \001(\013"
+    "2\030.svaf.VideoDataParameter\0221\n\017videopair_"
+    "param\030h \001(\0132\030.svaf.VideoPairParameter\0223\n"
+    "\020cameradata_param\030i \001(\0132\031.svaf.CameraDat"
+    "aParameter\0223\n\020camerapair_param\030j \001(\0132\031.s"
+    "vaf.CameraPairParameter\0229\n\023dspcameradata"
+    "_param\030k \001(\0132\034.svaf.DSPCameraDataParamet"
+    "er\0229\n\023dspcamerapair_param\030l \001(\0132\034.svaf.D"
+    "SPCameraPairParameter\0223\n\020kinectdata_para"
+    "m\030m \001(\0132\031.svaf.KinectDataParameter\0220\n\014fo"
+    "lder_param\030o \001(\0132\032.svaf.ImageFolderParam"
+    "eter\0228\n\020pairfolder_param\030p \001(\0132\036.svaf.Im"
+    "agePairFolderParameter\0221\n\017recognize_para"
+    "m\030x \001(\0132\030.svaf.RecognizeParameter\022/\n\016ada"
+    "boost_param\030y \001(\0132\027.svaf.AdaboostParamet"
+    "er\022*\n\013track_param\030\202\001 \001(\0132\024.svaf.TrackPar"
+    "ameter\0220\n\016miltrack_param\030\203\001 \001(\0132\027.svaf.M"
+    "ilTrackParameter\0220\n\016bittrack_param\030\204\001 \001("
+    "\0132\027.svaf.MilTrackParameter\0228\n\022featurepoi"
+    "nt_param\030\214\001 \001(\0132\033.svaf.FeaturePointParam"
+    "eter\0222\n\017siftpoint_param\030\215\001 \001(\0132\030.svaf.SI"
+    "FTPointParameter\0222\n\017surfpoint_param\030\216\001 \001"
+    "(\0132\030.svaf.SURFPointParameter\0222\n\017starpoin"
+    "t_param\030\217\001 \001(\0132\030.svaf.STARPointParameter"
+    "\0224\n\020briskpoint_param\030\220\001 \001(\0132\031.svaf.BRISK"
+    "PointParameter\0222\n\017fastpoint_param\030\221\001 \001(\013"
+    "2\030.svaf.FASTPointParameter\0220\n\016orbpoint_p"
+    "aram\030\222\001 \001(\0132\027.svaf.ORBPointParameter\0222\n\017"
+    "kazepoint_param\030\223\001 \001(\0132\030.svaf.KAZEPointP"
+    "arameter\0226\n\021harrispoint_param\030\224\001 \001(\0132\032.s"
+    "vaf.HarrisPointParameter\022.\n\rcvpoint_para"
+    "m\030\225\001 \001(\0132\026.svaf.CVPointParameter\022B\n\027feat"
+    "uredescriptor_param\030\226\001 \001(\0132 .svaf.Featur"
+    "eDescriptorParameter\022<\n\024siftdescriptor_p"
+    "aram\030\227\001 \001(\0132\035.svaf.SIFTDescriptorParamet"
+    "er\022<\n\024surfdescriptor_param\030\230\001 \001(\0132\035.svaf"
+    ".SURFDescriptorParameter\022<\n\024stardescript"
+    "or_param\030\231\001 \001(\0132\035.svaf.STARDescriptorPar"
+    "ameter\022>\n\025briefdescriptor_param\030\232\001 \001(\0132\036"
+    ".svaf.BRIEFDescriptorParameter\022>\n\025briskd"
+    "escriptor_param\030\233\001 \001(\0132\036.svaf.BRISKDescr"
+    "iptorParameter\022<\n\024fastdescriptor_param\030\234"
+    "\001 \001(\0132\035.svaf.FASTDescriptorParameter\022:\n\023"
+    "orbdescriptor_param\030\235\001 \001(\0132\034.svaf.ORBDes"
+    "criptorParameter\022<\n\024kazedescriptor_param"
+    "\030\236\001 \001(\0132\035.svaf.KAZEDescriptorParameter\0228"
+    "\n\022cvdescriptor_param\030\237\001 \001(\0132\033.svaf.CVDes"
+    "criptorParameter\0226\n\021vectormatch_param\030\240\001"
+    " \001(\0132\032.svaf.VectorMatchParameter\0226\n\021kdtr"
+    "eematch_param\030\241\001 \001(\0132\032.svaf.KDTreeMatchP"
+    "arameter\0224\n\020eularmatch_param\030\242\001 \001(\0132\031.sv"
+    "af.EularMatchParameter\022,\n\014ransac_param\030\243"
+    "\001 \001(\0132\025.svaf.RansacParameter\0226\n\rbfmatch_"
+    "param\030\244\001 \001(\0132\036.svaf.BruteForceMatchParam"
+    "eter\0224\n\020flannmatch_param\030\245\001 \001(\0132\031.svaf.F"
+    "LANNMatchParameter\022.\n\recmatch_param\030\250\001 \001"
+    "(\0132\026.svaf.ECMatchParameter\022.\n\rcvmatch_pa"
+    "ram\030\251\001 \001(\0132\026.svaf.CVMatchParameter\0226\n\021st"
+    "ereomatch_param\030\252\001 \001(\0132\032.svaf.StereoMatc"
+    "hParameter\022+\n\tsgm_param\030\253\001 \001(\0132\027.svaf.SG"
+    "MMatchParameter\022-\n\neadp_param\030\254\001 \001(\0132\030.s"
+    "vaf.EADPMatchParameter\022,\n\014output_param\030\264"
+    "\001 \001(\0132\025.svaf.OutputParameter\0220\n\014triang_p"
+    "aram\030\265\001 \001(\0132\031.svaf.TriangularParameter\022."
+    "\n\013mxmul_param\030\266\001 \001(\0132\030.svaf.MatrixMulPar"
+    "ameter\0226\n\014posest_param\030\276\001 \001(\0132\037.svaf.Pos"
+    "itionEstimateParameter\0226\n\021centerpoint_pa"
+    "ram\030\277\001 \001(\0132\032.svaf.CenterPointParameter\0222"
+    "\n\013sacia_param\030\302\001 \001(\0132\034.svaf.SACIAEstimat"
+    "eParameter\0222\n\013iaicp_param\030\303\001 \001(\0132\034.svaf."
+    "IAICPEstimateParameter\0222\n\013iandt_param\030\304\001"
+    " \001(\0132\034.svaf.IANDTEstimateParameter\"\353\005\n\tL"
+    "ayerType\022\010\n\004NONE\020\000\022\t\n\005IMAGE\020\001\022\016\n\nIMAGE_P"
+    "AIR\020\002\022\t\n\005VIDEO\020\003\022\016\n\nVIDEO_PAIR\020\004\022\n\n\006CAME"
+    "RA\020\005\022\017\n\013CAMERA_PAIR\020\006\022\007\n\003DSP\020\007\022\014\n\010DSP_PA"
+    "IR\020\010\022\n\n\006KINECT\020\t\022\020\n\014IMAGE_FOLDER\020\013\022\025\n\021IM"
+    "AGE_PAIR_FOLDER\020\014\022\014\n\010ADABOOST\020\025\022\014\n\010MILTR"
+    "ACK\020\037\022\014\n\010BITTRACK\020 \022\016\n\nSIFT_POINT\020)\022\016\n\nS"
+    "URF_POINT\020*\022\016\n\nSTAR_POINT\020+\022\017\n\013BRISK_POI"
+    "NT\020,\022\016\n\nFAST_POINT\020-\022\r\n\tORB_POINT\020.\022\016\n\nK"
+    "AZE_POINT\020/\022\020\n\014HARRIS_POINT\0200\022\014\n\010CV_POIN"
+    "T\0201\022\r\n\tSIFT_DESP\0203\022\r\n\tSURF_DESP\0204\022\r\n\tSTA"
+    "R_DESP\0205\022\016\n\nBRIEF_DESP\0206\022\016\n\nBRISK_DESP\0207"
+    "\022\r\n\tFAST_DESP\0208\022\014\n\010ORB_DESP\0209\022\r\n\tKAZE_DE"
+    "SP\020:\022\013\n\007CV_DESP\020;\022\020\n\014KDTREE_MATCH\020=\022\017\n\013E"
+    "ULAR_MATCH\020>\022\n\n\006RANSAC\020\?\022\014\n\010BF_MATCH\020@\022\017"
+    "\n\013FLANN_MATCH\020A\022\014\n\010EC_MATCH\020D\022\014\n\010CV_MATC"
+    "H\020E\022\r\n\tSGM_MATCH\020G\022\016\n\nEADP_MATCH\020H\022\n\n\006TR"
+    "IANG\020Q\022\t\n\005MXMUL\020R\022\016\n\nCENTER_POS\020[\022\n\n\006IA_"
+    "EST\020^\022\r\n\tIAICP_EST\020_\022\r\n\tIANDT_EST\020`\022\r\n\tS"
+    "UPIX_SEG\020e\022\014\n\007RECTIFY\020\215\001", 11944);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "svaf.proto", &protobuf_RegisterTypes);
   SvafTask::_default_name_ =
@@ -24439,6 +24445,7 @@ void SACIAParameter::Swap(SACIAParameter* other) {
 #ifndef _MSC_VER
 const int SACIAEstimateParameter::kPcdFilenameFieldNumber;
 const int SACIAEstimateParameter::kSaciaParamFieldNumber;
+const int SACIAEstimateParameter::kRefMatrixFieldNumber;
 #endif  // !_MSC_VER
 
 SACIAEstimateParameter::SACIAEstimateParameter()
@@ -24449,6 +24456,7 @@ SACIAEstimateParameter::SACIAEstimateParameter()
 
 void SACIAEstimateParameter::InitAsDefaultInstance() {
   sacia_param_ = const_cast< ::svaf::SACIAParameter*>(&::svaf::SACIAParameter::default_instance());
+  ref_matrix_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
 }
 
 SACIAEstimateParameter::SACIAEstimateParameter(const SACIAEstimateParameter& from)
@@ -24463,6 +24471,7 @@ void SACIAEstimateParameter::SharedCtor() {
   _cached_size_ = 0;
   pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sacia_param_ = NULL;
+  ref_matrix_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -24477,6 +24486,7 @@ void SACIAEstimateParameter::SharedDtor() {
   }
   if (this != default_instance_) {
     delete sacia_param_;
+    delete ref_matrix_;
   }
 }
 
@@ -24502,7 +24512,7 @@ SACIAEstimateParameter* SACIAEstimateParameter::New() const {
 }
 
 void SACIAEstimateParameter::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
+  if (_has_bits_[0 / 32] & 7) {
     if (has_pcd_filename()) {
       if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         pcd_filename_->clear();
@@ -24510,6 +24520,9 @@ void SACIAEstimateParameter::Clear() {
     }
     if (has_sacia_param()) {
       if (sacia_param_ != NULL) sacia_param_->::svaf::SACIAParameter::Clear();
+    }
+    if (has_ref_matrix()) {
+      if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -24548,6 +24561,19 @@ bool SACIAEstimateParameter::MergePartialFromCodedStream(
          parse_sacia_param:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_sacia_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_ref_matrix;
+        break;
+      }
+
+      // optional .svaf.MatrixMulParameter ref_matrix = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_ref_matrix:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ref_matrix()));
         } else {
           goto handle_unusual;
         }
@@ -24596,6 +24622,12 @@ void SACIAEstimateParameter::SerializeWithCachedSizes(
       2, this->sacia_param(), output);
   }
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 3;
+  if (has_ref_matrix()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->ref_matrix(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -24624,6 +24656,13 @@ void SACIAEstimateParameter::SerializeWithCachedSizes(
         2, this->sacia_param(), target);
   }
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 3;
+  if (has_ref_matrix()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->ref_matrix(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -24648,6 +24687,13 @@ int SACIAEstimateParameter::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->sacia_param());
+    }
+
+    // optional .svaf.MatrixMulParameter ref_matrix = 3;
+    if (has_ref_matrix()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->ref_matrix());
     }
 
   }
@@ -24683,6 +24729,9 @@ void SACIAEstimateParameter::MergeFrom(const SACIAEstimateParameter& from) {
     if (from.has_sacia_param()) {
       mutable_sacia_param()->::svaf::SACIAParameter::MergeFrom(from.sacia_param());
     }
+    if (from.has_ref_matrix()) {
+      mutable_ref_matrix()->::svaf::MatrixMulParameter::MergeFrom(from.ref_matrix());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -24708,6 +24757,7 @@ void SACIAEstimateParameter::Swap(SACIAEstimateParameter* other) {
   if (other != this) {
     std::swap(pcd_filename_, other->pcd_filename_);
     std::swap(sacia_param_, other->sacia_param_);
+    std::swap(ref_matrix_, other->ref_matrix_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -25027,6 +25077,7 @@ void ICPParameter::Swap(ICPParameter* other) {
 const int IAICPEstimateParameter::kPcdFilenameFieldNumber;
 const int IAICPEstimateParameter::kSaciaParamFieldNumber;
 const int IAICPEstimateParameter::kIcpParamFieldNumber;
+const int IAICPEstimateParameter::kRefMatrixFieldNumber;
 #endif  // !_MSC_VER
 
 IAICPEstimateParameter::IAICPEstimateParameter()
@@ -25038,6 +25089,7 @@ IAICPEstimateParameter::IAICPEstimateParameter()
 void IAICPEstimateParameter::InitAsDefaultInstance() {
   sacia_param_ = const_cast< ::svaf::SACIAParameter*>(&::svaf::SACIAParameter::default_instance());
   icp_param_ = const_cast< ::svaf::ICPParameter*>(&::svaf::ICPParameter::default_instance());
+  ref_matrix_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
 }
 
 IAICPEstimateParameter::IAICPEstimateParameter(const IAICPEstimateParameter& from)
@@ -25053,6 +25105,7 @@ void IAICPEstimateParameter::SharedCtor() {
   pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sacia_param_ = NULL;
   icp_param_ = NULL;
+  ref_matrix_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -25068,6 +25121,7 @@ void IAICPEstimateParameter::SharedDtor() {
   if (this != default_instance_) {
     delete sacia_param_;
     delete icp_param_;
+    delete ref_matrix_;
   }
 }
 
@@ -25093,7 +25147,7 @@ IAICPEstimateParameter* IAICPEstimateParameter::New() const {
 }
 
 void IAICPEstimateParameter::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
+  if (_has_bits_[0 / 32] & 15) {
     if (has_pcd_filename()) {
       if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         pcd_filename_->clear();
@@ -25104,6 +25158,9 @@ void IAICPEstimateParameter::Clear() {
     }
     if (has_icp_param()) {
       if (icp_param_ != NULL) icp_param_->::svaf::ICPParameter::Clear();
+    }
+    if (has_ref_matrix()) {
+      if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -25158,6 +25215,19 @@ bool IAICPEstimateParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(34)) goto parse_ref_matrix;
+        break;
+      }
+
+      // optional .svaf.MatrixMulParameter ref_matrix = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_ref_matrix:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ref_matrix()));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -25209,6 +25279,12 @@ void IAICPEstimateParameter::SerializeWithCachedSizes(
       3, this->icp_param(), output);
   }
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 4;
+  if (has_ref_matrix()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->ref_matrix(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -25244,6 +25320,13 @@ void IAICPEstimateParameter::SerializeWithCachedSizes(
         3, this->icp_param(), target);
   }
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 4;
+  if (has_ref_matrix()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->ref_matrix(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -25275,6 +25358,13 @@ int IAICPEstimateParameter::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->icp_param());
+    }
+
+    // optional .svaf.MatrixMulParameter ref_matrix = 4;
+    if (has_ref_matrix()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->ref_matrix());
     }
 
   }
@@ -25313,6 +25403,9 @@ void IAICPEstimateParameter::MergeFrom(const IAICPEstimateParameter& from) {
     if (from.has_icp_param()) {
       mutable_icp_param()->::svaf::ICPParameter::MergeFrom(from.icp_param());
     }
+    if (from.has_ref_matrix()) {
+      mutable_ref_matrix()->::svaf::MatrixMulParameter::MergeFrom(from.ref_matrix());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -25339,6 +25432,7 @@ void IAICPEstimateParameter::Swap(IAICPEstimateParameter* other) {
     std::swap(pcd_filename_, other->pcd_filename_);
     std::swap(sacia_param_, other->sacia_param_);
     std::swap(icp_param_, other->icp_param_);
+    std::swap(ref_matrix_, other->ref_matrix_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -25695,6 +25789,7 @@ void NDTParameter::Swap(NDTParameter* other) {
 const int IANDTEstimateParameter::kPcdFilenameFieldNumber;
 const int IANDTEstimateParameter::kSaciaParamFieldNumber;
 const int IANDTEstimateParameter::kNdtParamFieldNumber;
+const int IANDTEstimateParameter::kRefMatrixFieldNumber;
 #endif  // !_MSC_VER
 
 IANDTEstimateParameter::IANDTEstimateParameter()
@@ -25706,6 +25801,7 @@ IANDTEstimateParameter::IANDTEstimateParameter()
 void IANDTEstimateParameter::InitAsDefaultInstance() {
   sacia_param_ = const_cast< ::svaf::SACIAParameter*>(&::svaf::SACIAParameter::default_instance());
   ndt_param_ = const_cast< ::svaf::NDTParameter*>(&::svaf::NDTParameter::default_instance());
+  ref_matrix_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
 }
 
 IANDTEstimateParameter::IANDTEstimateParameter(const IANDTEstimateParameter& from)
@@ -25721,6 +25817,7 @@ void IANDTEstimateParameter::SharedCtor() {
   pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sacia_param_ = NULL;
   ndt_param_ = NULL;
+  ref_matrix_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -25736,6 +25833,7 @@ void IANDTEstimateParameter::SharedDtor() {
   if (this != default_instance_) {
     delete sacia_param_;
     delete ndt_param_;
+    delete ref_matrix_;
   }
 }
 
@@ -25761,7 +25859,7 @@ IANDTEstimateParameter* IANDTEstimateParameter::New() const {
 }
 
 void IANDTEstimateParameter::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
+  if (_has_bits_[0 / 32] & 15) {
     if (has_pcd_filename()) {
       if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         pcd_filename_->clear();
@@ -25772,6 +25870,9 @@ void IANDTEstimateParameter::Clear() {
     }
     if (has_ndt_param()) {
       if (ndt_param_ != NULL) ndt_param_->::svaf::NDTParameter::Clear();
+    }
+    if (has_ref_matrix()) {
+      if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -25826,6 +25927,19 @@ bool IANDTEstimateParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(34)) goto parse_ref_matrix;
+        break;
+      }
+
+      // optional .svaf.MatrixMulParameter ref_matrix = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_ref_matrix:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ref_matrix()));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -25877,6 +25991,12 @@ void IANDTEstimateParameter::SerializeWithCachedSizes(
       3, this->ndt_param(), output);
   }
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 4;
+  if (has_ref_matrix()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->ref_matrix(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -25912,6 +26032,13 @@ void IANDTEstimateParameter::SerializeWithCachedSizes(
         3, this->ndt_param(), target);
   }
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 4;
+  if (has_ref_matrix()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->ref_matrix(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -25943,6 +26070,13 @@ int IANDTEstimateParameter::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->ndt_param());
+    }
+
+    // optional .svaf.MatrixMulParameter ref_matrix = 4;
+    if (has_ref_matrix()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->ref_matrix());
     }
 
   }
@@ -25981,6 +26115,9 @@ void IANDTEstimateParameter::MergeFrom(const IANDTEstimateParameter& from) {
     if (from.has_ndt_param()) {
       mutable_ndt_param()->::svaf::NDTParameter::MergeFrom(from.ndt_param());
     }
+    if (from.has_ref_matrix()) {
+      mutable_ref_matrix()->::svaf::MatrixMulParameter::MergeFrom(from.ref_matrix());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -26007,6 +26144,7 @@ void IANDTEstimateParameter::Swap(IANDTEstimateParameter* other) {
     std::swap(pcd_filename_, other->pcd_filename_);
     std::swap(sacia_param_, other->sacia_param_);
     std::swap(ndt_param_, other->ndt_param_);
+    std::swap(ref_matrix_, other->ref_matrix_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

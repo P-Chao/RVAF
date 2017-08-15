@@ -7979,12 +7979,23 @@ class SACIAEstimateParameter : public ::google::protobuf::Message {
   inline ::svaf::SACIAParameter* release_sacia_param();
   inline void set_allocated_sacia_param(::svaf::SACIAParameter* sacia_param);
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 3;
+  inline bool has_ref_matrix() const;
+  inline void clear_ref_matrix();
+  static const int kRefMatrixFieldNumber = 3;
+  inline const ::svaf::MatrixMulParameter& ref_matrix() const;
+  inline ::svaf::MatrixMulParameter* mutable_ref_matrix();
+  inline ::svaf::MatrixMulParameter* release_ref_matrix();
+  inline void set_allocated_ref_matrix(::svaf::MatrixMulParameter* ref_matrix);
+
   // @@protoc_insertion_point(class_scope:svaf.SACIAEstimateParameter)
  private:
   inline void set_has_pcd_filename();
   inline void clear_has_pcd_filename();
   inline void set_has_sacia_param();
   inline void clear_has_sacia_param();
+  inline void set_has_ref_matrix();
+  inline void clear_has_ref_matrix();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -7992,6 +8003,7 @@ class SACIAEstimateParameter : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* pcd_filename_;
   ::svaf::SACIAParameter* sacia_param_;
+  ::svaf::MatrixMulParameter* ref_matrix_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -8183,6 +8195,15 @@ class IAICPEstimateParameter : public ::google::protobuf::Message {
   inline ::svaf::ICPParameter* release_icp_param();
   inline void set_allocated_icp_param(::svaf::ICPParameter* icp_param);
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 4;
+  inline bool has_ref_matrix() const;
+  inline void clear_ref_matrix();
+  static const int kRefMatrixFieldNumber = 4;
+  inline const ::svaf::MatrixMulParameter& ref_matrix() const;
+  inline ::svaf::MatrixMulParameter* mutable_ref_matrix();
+  inline ::svaf::MatrixMulParameter* release_ref_matrix();
+  inline void set_allocated_ref_matrix(::svaf::MatrixMulParameter* ref_matrix);
+
   // @@protoc_insertion_point(class_scope:svaf.IAICPEstimateParameter)
  private:
   inline void set_has_pcd_filename();
@@ -8191,6 +8212,8 @@ class IAICPEstimateParameter : public ::google::protobuf::Message {
   inline void clear_has_sacia_param();
   inline void set_has_icp_param();
   inline void clear_has_icp_param();
+  inline void set_has_ref_matrix();
+  inline void clear_has_ref_matrix();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8199,6 +8222,7 @@ class IAICPEstimateParameter : public ::google::protobuf::Message {
   ::std::string* pcd_filename_;
   ::svaf::SACIAParameter* sacia_param_;
   ::svaf::ICPParameter* icp_param_;
+  ::svaf::MatrixMulParameter* ref_matrix_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -8400,6 +8424,15 @@ class IANDTEstimateParameter : public ::google::protobuf::Message {
   inline ::svaf::NDTParameter* release_ndt_param();
   inline void set_allocated_ndt_param(::svaf::NDTParameter* ndt_param);
 
+  // optional .svaf.MatrixMulParameter ref_matrix = 4;
+  inline bool has_ref_matrix() const;
+  inline void clear_ref_matrix();
+  static const int kRefMatrixFieldNumber = 4;
+  inline const ::svaf::MatrixMulParameter& ref_matrix() const;
+  inline ::svaf::MatrixMulParameter* mutable_ref_matrix();
+  inline ::svaf::MatrixMulParameter* release_ref_matrix();
+  inline void set_allocated_ref_matrix(::svaf::MatrixMulParameter* ref_matrix);
+
   // @@protoc_insertion_point(class_scope:svaf.IANDTEstimateParameter)
  private:
   inline void set_has_pcd_filename();
@@ -8408,6 +8441,8 @@ class IANDTEstimateParameter : public ::google::protobuf::Message {
   inline void clear_has_sacia_param();
   inline void set_has_ndt_param();
   inline void clear_has_ndt_param();
+  inline void set_has_ref_matrix();
+  inline void clear_has_ref_matrix();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8416,6 +8451,7 @@ class IANDTEstimateParameter : public ::google::protobuf::Message {
   ::std::string* pcd_filename_;
   ::svaf::SACIAParameter* sacia_param_;
   ::svaf::NDTParameter* ndt_param_;
+  ::svaf::MatrixMulParameter* ref_matrix_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -15603,6 +15639,47 @@ inline void SACIAEstimateParameter::set_allocated_sacia_param(::svaf::SACIAParam
   // @@protoc_insertion_point(field_set_allocated:svaf.SACIAEstimateParameter.sacia_param)
 }
 
+// optional .svaf.MatrixMulParameter ref_matrix = 3;
+inline bool SACIAEstimateParameter::has_ref_matrix() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SACIAEstimateParameter::set_has_ref_matrix() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SACIAEstimateParameter::clear_has_ref_matrix() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SACIAEstimateParameter::clear_ref_matrix() {
+  if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
+  clear_has_ref_matrix();
+}
+inline const ::svaf::MatrixMulParameter& SACIAEstimateParameter::ref_matrix() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAEstimateParameter.ref_matrix)
+  return ref_matrix_ != NULL ? *ref_matrix_ : *default_instance_->ref_matrix_;
+}
+inline ::svaf::MatrixMulParameter* SACIAEstimateParameter::mutable_ref_matrix() {
+  set_has_ref_matrix();
+  if (ref_matrix_ == NULL) ref_matrix_ = new ::svaf::MatrixMulParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.SACIAEstimateParameter.ref_matrix)
+  return ref_matrix_;
+}
+inline ::svaf::MatrixMulParameter* SACIAEstimateParameter::release_ref_matrix() {
+  clear_has_ref_matrix();
+  ::svaf::MatrixMulParameter* temp = ref_matrix_;
+  ref_matrix_ = NULL;
+  return temp;
+}
+inline void SACIAEstimateParameter::set_allocated_ref_matrix(::svaf::MatrixMulParameter* ref_matrix) {
+  delete ref_matrix_;
+  ref_matrix_ = ref_matrix;
+  if (ref_matrix) {
+    set_has_ref_matrix();
+  } else {
+    clear_has_ref_matrix();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.SACIAEstimateParameter.ref_matrix)
+}
+
 // -------------------------------------------------------------------
 
 // ICPParameter
@@ -15839,6 +15916,47 @@ inline void IAICPEstimateParameter::set_allocated_icp_param(::svaf::ICPParameter
     clear_has_icp_param();
   }
   // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.icp_param)
+}
+
+// optional .svaf.MatrixMulParameter ref_matrix = 4;
+inline bool IAICPEstimateParameter::has_ref_matrix() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void IAICPEstimateParameter::set_has_ref_matrix() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void IAICPEstimateParameter::clear_has_ref_matrix() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void IAICPEstimateParameter::clear_ref_matrix() {
+  if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
+  clear_has_ref_matrix();
+}
+inline const ::svaf::MatrixMulParameter& IAICPEstimateParameter::ref_matrix() const {
+  // @@protoc_insertion_point(field_get:svaf.IAICPEstimateParameter.ref_matrix)
+  return ref_matrix_ != NULL ? *ref_matrix_ : *default_instance_->ref_matrix_;
+}
+inline ::svaf::MatrixMulParameter* IAICPEstimateParameter::mutable_ref_matrix() {
+  set_has_ref_matrix();
+  if (ref_matrix_ == NULL) ref_matrix_ = new ::svaf::MatrixMulParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IAICPEstimateParameter.ref_matrix)
+  return ref_matrix_;
+}
+inline ::svaf::MatrixMulParameter* IAICPEstimateParameter::release_ref_matrix() {
+  clear_has_ref_matrix();
+  ::svaf::MatrixMulParameter* temp = ref_matrix_;
+  ref_matrix_ = NULL;
+  return temp;
+}
+inline void IAICPEstimateParameter::set_allocated_ref_matrix(::svaf::MatrixMulParameter* ref_matrix) {
+  delete ref_matrix_;
+  ref_matrix_ = ref_matrix;
+  if (ref_matrix) {
+    set_has_ref_matrix();
+  } else {
+    clear_has_ref_matrix();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.ref_matrix)
 }
 
 // -------------------------------------------------------------------
@@ -16101,6 +16219,47 @@ inline void IANDTEstimateParameter::set_allocated_ndt_param(::svaf::NDTParameter
     clear_has_ndt_param();
   }
   // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.ndt_param)
+}
+
+// optional .svaf.MatrixMulParameter ref_matrix = 4;
+inline bool IANDTEstimateParameter::has_ref_matrix() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void IANDTEstimateParameter::set_has_ref_matrix() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void IANDTEstimateParameter::clear_has_ref_matrix() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void IANDTEstimateParameter::clear_ref_matrix() {
+  if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
+  clear_has_ref_matrix();
+}
+inline const ::svaf::MatrixMulParameter& IANDTEstimateParameter::ref_matrix() const {
+  // @@protoc_insertion_point(field_get:svaf.IANDTEstimateParameter.ref_matrix)
+  return ref_matrix_ != NULL ? *ref_matrix_ : *default_instance_->ref_matrix_;
+}
+inline ::svaf::MatrixMulParameter* IANDTEstimateParameter::mutable_ref_matrix() {
+  set_has_ref_matrix();
+  if (ref_matrix_ == NULL) ref_matrix_ = new ::svaf::MatrixMulParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IANDTEstimateParameter.ref_matrix)
+  return ref_matrix_;
+}
+inline ::svaf::MatrixMulParameter* IANDTEstimateParameter::release_ref_matrix() {
+  clear_has_ref_matrix();
+  ::svaf::MatrixMulParameter* temp = ref_matrix_;
+  ref_matrix_ = NULL;
+  return temp;
+}
+inline void IANDTEstimateParameter::set_allocated_ref_matrix(::svaf::MatrixMulParameter* ref_matrix) {
+  delete ref_matrix_;
+  ref_matrix_ = ref_matrix;
+  if (ref_matrix) {
+    set_has_ref_matrix();
+  } else {
+    clear_has_ref_matrix();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.ref_matrix)
 }
 
 // -------------------------------------------------------------------

@@ -500,6 +500,7 @@ message SACIAParameter{
 message SACIAEstimateParameter{
 	optional string pcd_filename = 1;
 	optional SACIAParameter sacia_param = 2;
+	optional MatrixMulParameter ref_matrix = 3;
 }
 
 message ICPParameter{
@@ -512,6 +513,7 @@ message IAICPEstimateParameter{
 	optional string pcd_filename = 1;
 	optional SACIAParameter sacia_param = 2;
 	optional ICPParameter icp_param = 3;
+	optional MatrixMulParameter ref_matrix = 4;
 }
 
 message NDTParameter{
@@ -525,6 +527,7 @@ message IANDTEstimateParameter{
 	optional string pcd_filename = 1;
 	optional SACIAParameter sacia_param = 2;
 	optional NDTParameter ndt_param = 3;
+	optional MatrixMulParameter ref_matrix = 4;
 }
 
 message LayerParameter{
