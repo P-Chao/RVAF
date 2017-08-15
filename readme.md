@@ -626,7 +626,7 @@ Updata Log
 
 Contact Me
 ---
-[__Peng Chao__](http://www.p-chao.com/about)
+[__Peng Chao__](http://www.p-chao.com)
 
 
 
