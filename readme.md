@@ -259,43 +259,206 @@ Examples
 
 API Documentation
 ---
-对应版本：v_1.03
+对应版本：v_1.21
+
+* __Layer__
+
+	所有层的基类，虚类，提供虚函数Run接口。提供时间统计函数，提供层名name，控制显示show，控制保存结果save，控制输出日志控制logi，logt等变量。
+
+	<pre>
+	message LayerParameter{
+		optional string name = 1;
+		optional string bottom = 2;
+		optional string top = 3;
+		optional bool	show = 4 [default = false];
+		optional bool	save = 5 [default = false];
+		optional bool	logt = 6 [default = false];
+		optional bool	logi = 7 [default = false];
+		enum LayerType{
+			NONE = 0;
+			IMAGE = 1;
+			...
+			RECTIFY = 141;
+		}
+		optional LayerType type = 10;
+	}
+	</pre>
 
 * __AdaboostLayer__
-
-		message AdaboostParameter{
-			optional string detector = 1;
-			optional bool	sync_frame = 2 [default = false];
-			optional bool	sync_video = 3 [default = false];
-			optional bool	epipolar = 4 [default = false];
-			optional float	thresh = 5 [default = 0];
-			optional float	nms = 6 [default = 0.65];
-		}
+	
+	<pre>
+	message AdaboostParameter{
+		optional string detector = 1;
+		optional bool	sync_frame = 2 [default = false];
+		optional bool	sync_video = 3 [default = false];
+		optional bool	sync_epipolar = 4 [default = false];
+		optional float	thresh = 5 [default = 0];
+		optional float	nms = 6 [default = 0.65];
+		optional ROIExtention pad_rect = 7;
+	}
+	</pre>
 	Adaboost层会自动剪裁图像，图像中置信度最高的区域会被作为ROI自动剪裁出来，同时，图像Block类中的 `roi` 会对应改变，Block中的 `roi` 永远都是相对于最初的图像，而Block类中的 `point` 则是相对当前图像的。
-	Adaboost算法为双目版本提供极线约束优化，sync开启时，左右图像ROI大小相同，epipolar开启时，左右图像的roi在同一水平线上，此时形成极线约束
+	Adaboost算法为双目版本提供极线约束优化，sync开启时，左右图像ROI大小相同，epipolar开启时，左右图像的roi在同一水平线上，此时形成极线约束。
+    可以通过ROIExtention对检测结果进行调整（如上下平移，拓展边界等）
 * __DataLayer__
+	<pre>
+	message DataParameter{
+		optional bool color = 1;
+	}
+	</pre>
 
-    数据层支持多种数据来源和格式，包括图像、视频、网络摄像头、图像文件夹、Kinect摄像头等，除此之外还有进程通信接口，可通过其它进程的内核映射对象获取数据
+    数据层支持多种数据来源和格式，包括图像、视频、网络摄像头、图像文件夹、Kinect摄像头等，除此之外还有进程通信接口，可通过其它进程的内核映射对象获取数据。数据来源被封装在程序中，这一层仅仅控制图像的色彩通道是单通道还是三通道。
 * __MatrixMulLayer__
-
-	使用一个3*4矩阵，完成相机坐标系和世界坐标系间的转换
+	<pre>
+	message MatrixMulParameter{
+		optional string	filename = 1;
+		optional string col0 = 2;
+		optional string col1 = 3;
+		optional string col2 = 4;
+	}
+	</pre>
+	使用一个3*4矩阵，完成相机坐标系和世界坐标系间的转换。支持二进制文件和配置文件直接输出两种形式，二进制文件为matlab直接保存的格式。
 * __MilTrackLayer__
+	<pre>
+	message MilTrackParameter{
+		enum InitType{
+			MOUSE = 1;
+			SELECT = 2;
+			AUTORECT = 3;
+			ADABOOST = 4;
+		}
+		optional InitType init_type = 1 [default = AUTORECT];
+		enum TrackType{
+			MIL = 1;
+			ADA = 2;
 
-    MIL图像跟踪
+			MIL_GRAY = 11;
+			MIL_RGB = 12;
+			MIL_LUV = 13;
+			MIL_HSV = 14;
+		}
+		optional TrackType track_type = 2 [default = MIL];
+		optional int32 track_count = 3 [default = 20];
+		repeated InitRectParameter init_rect = 4;
+		optional uint32 tr_width = 5 [default = 200];
+		optional uint32 tr_height = 6 [default = 150];
+		optional float  scalefactor = 7 [default = 0.5];
+
+		optional uint32 init_negnum = 11 [default = 65];
+		optional uint32 negnum = 12 [default = 65];
+		optional uint32 posmax = 13 [default = 100000];
+		optional uint32 srchwinsz = 14 [default = 25];
+		optional uint32 negsample_strat = 15 [default = 1];
+		optional uint32 numfeat = 16 [default = 250];
+		optional uint32 numsel = 17 [default = 50];
+	
+		optional float	lrate = 21 [default = 0.85];
+		optional float	posrad = 22 [default = 1.0];
+		optional float	init_posrad = 23 [default = 3.0];
+		optional uint32 haarmin_rectnum = 24 [default = 2];
+		optional uint32 haarmax_rectnum = 25 [default = 6];
+
+		optional bool	uselogr = 29 [default = true];
+
+		// only avaliable on binocular track
+		optional bool	tss = 31 [default = false];
+		optional bool	pool = 32 [default = false];
+		optional bool	sync = 33 [default = false];
+		optional bool	mixfeat = 34 [default = false];
+		optional bool	showprob = 35 [default = false];
+
+	}
+	</pre>
+    MIL图像跟踪，可以选择是手动框选目标，还是使用Adaboost自动框选目标，同时也可以选择是没格多少帧自动调用Adaboost算法进行目标检测。
+* __BinoTrackLayer__
+
+	_MILTrackLayer_的双目实例，参数表与_MILTrackLayer_相同
+
 * __RansacLayer__
-
-	使用Ransac算法筛选匹配点对，也就是说在Ransac之前需要一个初匹配
+	<pre>
+	message RansacParameter{
+		optional float	thresh = 1 [default = 5];
+	}
+	</pre>
+	使用Ransac算法筛选匹配点对，可以调整的参数为筛选阈值，一般需要在运行Ransac之前需要一个初匹配，防止计算量过大
 * __StereoRectifyLayer__
-
+	<pre>
+	message StereoRectifyParameter{
+		optional string filename = 1;
+	}
+	</pre>
 	读取Matlab工具生成的映射表进行立体矫正
 * __CVPointLayer__
+	<pre>
+	message CVPointParameter{
+		enum PointType{
+			FAST = 1;
+			FASTX = 2;
+			MSER = 3;
+			ORB = 4;
+			BRISK = 5;
+			FREAK = 6;
+			STAR = 7;
+			SIFT = 8;
+			SURF = 9;
+			GFTT = 10;
+			HARRIS = 11;
+			DENSE = 12;
+			SBLOB = 13;
+			AKAZE = 14;
+		}
+		optional PointType	type = 1;
+		optional bool		isadd = 2 [default = false];
 
+		optional FastParamCP	fast_param	= 11;
+		//optional FastParamCP	fastx_param = 12;
+		optional MSERParamCP	mser_param	= 13;
+		optional ORBParamCP		orb_param	= 14;
+		optional BriskParamCP	brisk_param = 15;
+		optional FreakParamCP	freak_param = 16;
+		optional StarParamCP	star_param	= 17;
+		optional SiftParamCP	sift_param	= 18;
+		optional SurfParamCP	surf_param	= 19;
+		optional GFTTParamCP	gftt_param	= 20;
+		optional HarrisParamCP	harris_param = 21;
+		optional DenseParamCP	dense_param = 22;
+		optional SimpleBlobParamCP	sb_param = 23;
+		optional AkazeParamCP	akaze_param = 24;
+
+	}
+	</pre>
     集成了OpenCV中9种特征点检测算法
 * __CVDescriptorLayer__
-
+	<pre>
+	message CVDescriptorParameter{
+		enum DespType{
+			SIFT = 1;
+			SURF = 2;
+			BRIEF = 3;
+			BRISK = 4;
+			ORB = 5;
+			FREAK = 6;
+			OPPONENT = 7;
+		}
+		optional DespType type = 1;
+		optional BriefDespCV brief_param = 2;
+	}
+	</pre>
     集成了OpenCV中多种特征描述子算法
 * __CVMatchLayer__
-
+	<pre>
+	message CVMatchParameter{
+		enum MatchType{
+			BFL1 = 1;
+			BFL2 = 2;
+			BFH1 = 3;
+			BFH2 = 4;
+			FLANN = 5;
+		}
+		optional MatchType	type = 1;
+		optional bool		crosscheck = 2 [default = true];
+	}
+	</pre>
     集成了OpenCV中2种特征匹配算法
 * __SurfPointLayer__
 
@@ -307,8 +470,63 @@ API Documentation
 
     抽象立体层，其中封装了PCL点云库中的多种算法，用于需要处理点云数据的层来继承
 * __TriangluarationLayer__
-
+	<pre>
+	message TriangularParameter{
+		optional bool	visible = 1 [default = true];
+		optional string toolbox_dir = 2;
+		optional string calibmat_dir = 3;
+		optional bool	savepc = 4 [default = false];
+		optional string pcname = 5 [default = "./ref_pointcloud.pc"];
+	}
+	</pre>
 	将左右相机的二维图像坐标，转换为相机世界坐标，调用Matlab实现，需要Matlab支持
+
+* __CenterPointLayer__
+
+	直接将目标检测中心位置作为最终结果进行输出，由于只是计算二维中心点，所以不需要额外参数，二维点映射三维坐标的任务交给其它层完成
+
+* __EadpMatchLayer__
+	<pre>
+	message EADPMatchParameter{
+		optional int32 max_disp = 1 [default = 24];
+		optional int32 factor = 2 [default = 2560];
+		optional int32 guidmr = 3 [default = 1];
+		optional int32 dispmr = 4 [default = 1];
+		optional float sg = 5 [default = -25.0];
+		optional float sc = 6 [default = 25.5];
+		optional float r1 = 7 [default = 10];
+		optional float r2 = 8 [default = 500];
+		optional string prefix = 9 [default = "./eadp"];
+		optional bool	savetxt = 10 [default = false];
+	}
+	</pre>
+	进行Eadp立体匹配，计算视差
+
+* __SGMMatchLayer__
+	<pre>
+	message SGMMatchParameter{
+		optional int32 max_disp = 1 [default = 24];
+		optional int32 factor = 2 [default = 2560];
+		optional int32 dispmr = 3 [default = 1];
+		optional float r1 = 4 [default = 10];
+		optional float r2 = 5 [default = 500];
+		optional string prefix = 6 [default = "./sgm"];
+		optional bool	savetxt = 7 [default = false];
+	}
+	</pre>
+	进行SGM立体匹配，计算视差
+
+* __SupixSegLayer__
+	<pre>
+	message SuperPixelSegmentParameter{
+		optional int32 K = 1 [default = 400];
+		optional int32 M = 2 [default = 10];
+		optional bool optint = 3 [default = true];
+		optional bool saveseg = 4 [default = false];
+		optional string segname = 5 [default = "./supix.seg"];
+	}
+	</pre>
+	进行超像素分割
 
 Updata Log
 ---

@@ -184,6 +184,12 @@ void Circuit::Build(){
 			layerinstance = new CenterPointLayer(layer);
 			param = (void*)&world_;
 			break;
+		case svaf::LayerParameter_LayerType_IA_EST:
+			break;
+		case svaf::LayerParameter_LayerType_IAICP_EST:
+			break;
+		case svaf::LayerParameter_LayerType_IANDT_EST:
+			break;
 		case svaf::LayerParameter_LayerType_RECTIFY:
 			layerinstance = new StereoRectifyLayer(layer);
 			param = (void*)&world_;
