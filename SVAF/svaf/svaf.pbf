@@ -1,6 +1,6 @@
-name:	"OpenCV Feature Point Detect"
-version:	"v_1.19"
-pause:	0
+name:	"Obtain 3D Point PCD File"
+version:	"v_1.21"
+pause:	10
 layer{
 	name:	"data"
 	type:	IMAGE_PAIR_FOLDER
@@ -41,12 +41,25 @@ layer{
 layer{
 	name:	"eadp"
 	type:	EADP_MATCH
-	top:	"eadp"
+	top:	"3dpoint"
 	eadp_param{
 		max_disp:	24
 		factor:		2560
-		r1:			30
-		r2:			500
+		#r1:			30
+		#r2:			500
 	}
 	show:	true
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"3dpoint"
+	triang_param{
+		visible:	false
+		savepc:		true
+		toolbox_dir:	"F:/svaf/calib/"
+		calibmat_dir:	"F:/svaf/data/calib/mat_161103/"
+	}
+	
+	show: true
 }

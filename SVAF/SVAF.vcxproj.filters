@@ -37,6 +37,9 @@
     <Filter Include="External Projects\Mil Track">
       <UniqueIdentifier>{cd48826d-ea4b-44df-9552-7ec31ef4133e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\v1.21 script">
+      <UniqueIdentifier>{608dafac-f40b-4d0e-aeac-4c03d50515ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="svaf\svaf.pbf">

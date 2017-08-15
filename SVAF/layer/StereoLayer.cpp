@@ -34,7 +34,6 @@ void StereoLayer::pcdsave(string filename, vector<Point3f>& points, bool is_dens
 	else{
 		LOG(ERROR) << "PCL Write Error, Empty Cloud.";
 	}
-	
 	return;
 }
 

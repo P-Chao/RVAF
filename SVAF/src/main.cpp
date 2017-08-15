@@ -18,7 +18,7 @@ int main(int argc, char *argv[]){
 	google::InitGoogleLogging((const char *)argv[0]);
 	google::SetLogDestination(google::GLOG_INFO, "./log/LOG");
 	google::SetStderrLogging(google::GLOG_INFO);
-	LOG(INFO) << "Svaf Copyright(c) 2016, Peng Chao";
+	LOG(INFO) << "Svaf Copyright(c) 2016-2017, Peng Chao";
 	gflags::ParseCommandLineFlags(&argc, &argv, true);
 	LOG(INFO) << FLAGS_config_file;
 	svaf::SvafTask svafTask;
