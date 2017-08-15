@@ -219,9 +219,12 @@
     <ClCompile Include="layer\EadpMatchLayer.cpp" />
     <ClCompile Include="layer\ECMatchLayer.cpp" />
     <ClCompile Include="layer\EularMatchLayer.cpp" />
+    <ClCompile Include="layer\IAEstimateLayer.cpp" />
+    <ClCompile Include="layer\ICPEstimateLayer.cpp" />
     <ClCompile Include="layer\Layer.cpp" />
     <ClCompile Include="layer\MatrixMulLayer.cpp" />
     <ClCompile Include="layer\MilTrackLayer.cpp" />
+    <ClCompile Include="layer\NDTEstimateLayer.cpp" />
     <ClCompile Include="layer\RansacLayer.cpp" />
     <ClCompile Include="layer\SgmMatchLayer.cpp" />
     <ClCompile Include="layer\StereoLayer.cpp" />
@@ -298,9 +301,12 @@
     <ClInclude Include="layer\EadpMatchLayer.h" />
     <ClInclude Include="layer\ECMatchLayer.h" />
     <ClInclude Include="layer\EularMatchLayer.h" />
+    <ClInclude Include="layer\IAEstimateLayer.h" />
+    <ClInclude Include="layer\ICPEstimateLayer.h" />
     <ClInclude Include="layer\Layer.h" />
     <ClInclude Include="layer\MatrixMulLayer.h" />
     <ClInclude Include="layer\MilTrackLayer.h" />
+    <ClInclude Include="layer\NDTEstimateLayer.h" />
     <ClInclude Include="layer\RansacLayer.h" />
     <ClInclude Include="layer\SgmMatchLayer.h" />
     <ClInclude Include="layer\StereoLayer.h" />

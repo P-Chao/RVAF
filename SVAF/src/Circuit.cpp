@@ -14,6 +14,9 @@
 #include "..\layer\MatrixMulLayer.h"
 #include "..\layer\SurfPointLayer.h"
 #include "..\layer\EularMatchLayer.h"
+#include "..\layer\IAEstimateLayer.h"
+#include "..\layer\ICPEstimateLayer.h"
+#include "..\layer\NDTEstimateLayer.h"
 #include "..\layer\CenterPointLayer.h"
 #include "..\layer\CVDesciptorLayer.h"
 #include "..\layer\StereoRectifyLayer.h"
@@ -185,10 +188,16 @@ void Circuit::Build(){
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_IA_EST:
+			layerinstance = new IAEstimateLayer(layer);
+			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_IAICP_EST:
+			layerinstance = new ICPEstimateLayer(layer);
+			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_IANDT_EST:
+			layerinstance = new NDTEstimateLayer(layer);
+			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_RECTIFY:
 			layerinstance = new StereoRectifyLayer(layer);

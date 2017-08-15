@@ -278,6 +278,15 @@
     <ClCompile Include="layer\BinoTrackLayer.cpp">
       <Filter>Layer Source</Filter>
     </ClCompile>
+    <ClCompile Include="layer\IAEstimateLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\ICPEstimateLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layer\NDTEstimateLayer.cpp">
+      <Filter>Layer Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="layer\AdaboostLayer.h">
@@ -500,6 +509,15 @@
       <Filter>External Projects\Mil Track</Filter>
     </ClInclude>
     <ClInclude Include="layer\BinoTrackLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\IAEstimateLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\ICPEstimateLayer.h">
+      <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="layer\NDTEstimateLayer.h">
       <Filter>Layer Source</Filter>
     </ClInclude>
   </ItemGroup>

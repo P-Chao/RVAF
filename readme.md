@@ -513,6 +513,13 @@ API Documentation
 	}</pre>
 	进行超像素分割
 
+Program Control
+---
+* Q: Quit
+* E: Exit
+* P: Pause
+* R: Reinitiate
+
 Updata Log
 ---
 ##### 2017/8/4 (v_1.21) #####
