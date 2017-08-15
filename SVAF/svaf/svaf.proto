@@ -488,6 +488,15 @@ message CenterPointParameter{
 //message FeaturePoolParameter{
 //}
 
+message SACIAEstimateParameter{
+}
+
+message IAICPEstimateParameter{
+}
+
+message IANDTEstimateParameter{
+}
+
 message LayerParameter{
 	optional string name = 1;
 	optional string bottom = 2;
@@ -552,6 +561,9 @@ message LayerParameter{
 		CENTER_POS = 91;
 		//LM_POS = 92;
 		//FEAT_POOL = 93;
+		IA_EST = 94;
+		IAICP_EST = 95;
+		IANDT_EST = 96;
 
 		SUPIX_SEG = 101;
 
@@ -630,4 +642,7 @@ message LayerParameter{
 	optional CenterPointParameter centerpoint_param = 191;
 	//optional LMPositionEstimateParameter lm_param = 192;
 	//optional FeaturePoolParameter featpool_param = 193;
+	optional SACIAEstimateParameter sacia_param = 194;
+	optional IAICPEstimateParameter iaicp_param = 195;
+	optional IANDTEstimateParameter iandt_param = 196;
 }
