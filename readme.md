@@ -5,13 +5,14 @@ Svaf
 Svaf:Stereo Vision Algorithm Framework.
 Svaf采用简洁的配置文件组织算法，目前包含以下模块：
 
-* 统一视频图像接口
+* 统一视频图像输入接口
 * 图像处理算法
 * 目标识别算法
 * 目标跟踪算法
 * 特征点提取算法
 * 立体匹配算法
 * 点云重建算法
+* 点云配准算法
 * 数据记录和表格输出
 
 目前Svaf仅由个人维护，仅支持Windows平台。任何Svaf源码的使用都需要遵守BSD2相关开源许可。
@@ -281,8 +282,7 @@ API Documentation
 			RECTIFY = 141;
 		}
 		optional LayerType type = 10;
-	}
-	</pre>
+	}</pre>
 
 * __AdaboostLayer__
 	
@@ -295,8 +295,7 @@ API Documentation
 		optional float	thresh = 5 [default = 0];
 		optional float	nms = 6 [default = 0.65];
 		optional ROIExtention pad_rect = 7;
-	}
-	</pre>
+	}</pre>
 	Adaboost层会自动剪裁图像，图像中置信度最高的区域会被作为ROI自动剪裁出来，同时，图像Block类中的 `roi` 会对应改变，Block中的 `roi` 永远都是相对于最初的图像，而Block类中的 `point` 则是相对当前图像的。
 	Adaboost算法为双目版本提供极线约束优化，sync开启时，左右图像ROI大小相同，epipolar开启时，左右图像的roi在同一水平线上，此时形成极线约束。
     可以通过ROIExtention对检测结果进行调整（如上下平移，拓展边界等）
@@ -304,8 +303,7 @@ API Documentation
 	<pre>
 	message DataParameter{
 		optional bool color = 1;
-	}
-	</pre>
+	}</pre>
 
     数据层支持多种数据来源和格式，包括图像、视频、网络摄像头、图像文件夹、Kinect摄像头等，除此之外还有进程通信接口，可通过其它进程的内核映射对象获取数据。数据来源被封装在程序中，这一层仅仅控制图像的色彩通道是单通道还是三通道。
 * __MatrixMulLayer__
@@ -315,8 +313,7 @@ API Documentation
 		optional string col0 = 2;
 		optional string col1 = 3;
 		optional string col2 = 4;
-	}
-	</pre>
+	}</pre>
 	使用一个3*4矩阵，完成相机坐标系和世界坐标系间的转换。支持二进制文件和配置文件直接输出两种形式，二进制文件为matlab直接保存的格式。
 * __MilTrackLayer__
 	<pre>
@@ -366,9 +363,7 @@ API Documentation
 		optional bool	sync = 33 [default = false];
 		optional bool	mixfeat = 34 [default = false];
 		optional bool	showprob = 35 [default = false];
-
-	}
-	</pre>
+	}</pre>
     MIL图像跟踪，可以选择是手动框选目标，还是使用Adaboost自动框选目标，同时也可以选择是没格多少帧自动调用Adaboost算法进行目标检测。
 * __BinoTrackLayer__
 
@@ -378,15 +373,13 @@ API Documentation
 	<pre>
 	message RansacParameter{
 		optional float	thresh = 1 [default = 5];
-	}
-	</pre>
+	}</pre>
 	使用Ransac算法筛选匹配点对，可以调整的参数为筛选阈值，一般需要在运行Ransac之前需要一个初匹配，防止计算量过大
 * __StereoRectifyLayer__
 	<pre>
 	message StereoRectifyParameter{
 		optional string filename = 1;
-	}
-	</pre>
+	}</pre>
 	读取Matlab工具生成的映射表进行立体矫正
 * __CVPointLayer__
 	<pre>
@@ -424,9 +417,7 @@ API Documentation
 		optional DenseParamCP	dense_param = 22;
 		optional SimpleBlobParamCP	sb_param = 23;
 		optional AkazeParamCP	akaze_param = 24;
-
-	}
-	</pre>
+	}</pre>
     集成了OpenCV中9种特征点检测算法
 * __CVDescriptorLayer__
 	<pre>
@@ -442,8 +433,7 @@ API Documentation
 		}
 		optional DespType type = 1;
 		optional BriefDespCV brief_param = 2;
-	}
-	</pre>
+	}</pre>
     集成了OpenCV中多种特征描述子算法
 * __CVMatchLayer__
 	<pre>
@@ -457,8 +447,7 @@ API Documentation
 		}
 		optional MatchType	type = 1;
 		optional bool		crosscheck = 2 [default = true];
-	}
-	</pre>
+	}</pre>
     集成了OpenCV中2种特征匹配算法
 * __SurfPointLayer__
 
@@ -477,8 +466,7 @@ API Documentation
 		optional string calibmat_dir = 3;
 		optional bool	savepc = 4 [default = false];
 		optional string pcname = 5 [default = "./ref_pointcloud.pc"];
-	}
-	</pre>
+	}</pre>
 	将左右相机的二维图像坐标，转换为相机世界坐标，调用Matlab实现，需要Matlab支持
 
 * __CenterPointLayer__
@@ -498,8 +486,7 @@ API Documentation
 		optional float r2 = 8 [default = 500];
 		optional string prefix = 9 [default = "./eadp"];
 		optional bool	savetxt = 10 [default = false];
-	}
-	</pre>
+	}</pre>
 	进行Eadp立体匹配，计算视差
 
 * __SGMMatchLayer__
@@ -512,8 +499,7 @@ API Documentation
 		optional float r2 = 5 [default = 500];
 		optional string prefix = 6 [default = "./sgm"];
 		optional bool	savetxt = 7 [default = false];
-	}
-	</pre>
+	}</pre>
 	进行SGM立体匹配，计算视差
 
 * __SupixSegLayer__
@@ -524,8 +510,7 @@ API Documentation
 		optional bool optint = 3 [default = true];
 		optional bool saveseg = 4 [default = false];
 		optional string segname = 5 [default = "./supix.seg"];
-	}
-	</pre>
+	}</pre>
 	进行超像素分割
 
 Updata Log
