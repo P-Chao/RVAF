@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SuperPixelSegment", "SuperP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MilTrack", "MilTrack\MilTrack.vcxproj", "{83A15BE9-89AB-4F94-91F8-083334F93009}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PointCloudRegistration", "PointCloudRegistration\PointCloudRegistration.vcxproj", "{44D4113C-1806-4A6F-9578-200569594D31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -88,6 +90,16 @@ Global
 		{83A15BE9-89AB-4F94-91F8-083334F93009}.Release|Win32.ActiveCfg = Release|Win32
 		{83A15BE9-89AB-4F94-91F8-083334F93009}.Release|Win32.Build.0 = Release|Win32
 		{83A15BE9-89AB-4F94-91F8-083334F93009}.Release|x64.ActiveCfg = Release|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Debug|Win32.ActiveCfg = Debug|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Debug|Win32.Build.0 = Debug|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Debug|x64.ActiveCfg = Debug|x64
+		{44D4113C-1806-4A6F-9578-200569594D31}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Release|Win32.ActiveCfg = Release|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Release|Win32.Build.0 = Release|Win32
+		{44D4113C-1806-4A6F-9578-200569594D31}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

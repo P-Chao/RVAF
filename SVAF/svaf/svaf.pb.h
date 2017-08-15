@@ -110,6 +110,12 @@ class TriangularParameter;
 class MatrixMulParameter;
 class PositionEstimateParameter;
 class CenterPointParameter;
+class SACIAParameter;
+class SACIAEstimateParameter;
+class ICPParameter;
+class IAICPEstimateParameter;
+class NDTParameter;
+class IANDTEstimateParameter;
 class LayerParameter;
 
 enum MilTrackParameter_InitType {
@@ -318,6 +324,9 @@ enum LayerParameter_LayerType {
   LayerParameter_LayerType_TRIANG = 81,
   LayerParameter_LayerType_MXMUL = 82,
   LayerParameter_LayerType_CENTER_POS = 91,
+  LayerParameter_LayerType_IA_EST = 94,
+  LayerParameter_LayerType_IAICP_EST = 95,
+  LayerParameter_LayerType_IANDT_EST = 96,
   LayerParameter_LayerType_SUPIX_SEG = 101,
   LayerParameter_LayerType_RECTIFY = 141
 };
@@ -7767,6 +7776,655 @@ class CenterPointParameter : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class SACIAParameter : public ::google::protobuf::Message {
+ public:
+  SACIAParameter();
+  virtual ~SACIAParameter();
+
+  SACIAParameter(const SACIAParameter& from);
+
+  inline SACIAParameter& operator=(const SACIAParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SACIAParameter& default_instance();
+
+  void Swap(SACIAParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  SACIAParameter* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SACIAParameter& from);
+  void MergeFrom(const SACIAParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 max_iter = 1 [default = 1000];
+  inline bool has_max_iter() const;
+  inline void clear_max_iter();
+  static const int kMaxIterFieldNumber = 1;
+  inline ::google::protobuf::int32 max_iter() const;
+  inline void set_max_iter(::google::protobuf::int32 value);
+
+  // optional float min_cors = 2 [default = 3];
+  inline bool has_min_cors() const;
+  inline void clear_min_cors();
+  static const int kMinCorsFieldNumber = 2;
+  inline float min_cors() const;
+  inline void set_min_cors(float value);
+
+  // optional float max_cors = 3 [default = 1000];
+  inline bool has_max_cors() const;
+  inline void clear_max_cors();
+  static const int kMaxCorsFieldNumber = 3;
+  inline float max_cors() const;
+  inline void set_max_cors(float value);
+
+  // optional float voxel_grid = 4 [default = 3];
+  inline bool has_voxel_grid() const;
+  inline void clear_voxel_grid();
+  static const int kVoxelGridFieldNumber = 4;
+  inline float voxel_grid() const;
+  inline void set_voxel_grid(float value);
+
+  // optional float norm_rad = 5 [default = 20];
+  inline bool has_norm_rad() const;
+  inline void clear_norm_rad();
+  static const int kNormRadFieldNumber = 5;
+  inline float norm_rad() const;
+  inline void set_norm_rad(float value);
+
+  // optional float feat_rad = 6 [default = 50];
+  inline bool has_feat_rad() const;
+  inline void clear_feat_rad();
+  static const int kFeatRadFieldNumber = 6;
+  inline float feat_rad() const;
+  inline void set_feat_rad(float value);
+
+  // @@protoc_insertion_point(class_scope:svaf.SACIAParameter)
+ private:
+  inline void set_has_max_iter();
+  inline void clear_has_max_iter();
+  inline void set_has_min_cors();
+  inline void clear_has_min_cors();
+  inline void set_has_max_cors();
+  inline void clear_has_max_cors();
+  inline void set_has_voxel_grid();
+  inline void clear_has_voxel_grid();
+  inline void set_has_norm_rad();
+  inline void clear_has_norm_rad();
+  inline void set_has_feat_rad();
+  inline void clear_has_feat_rad();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 max_iter_;
+  float min_cors_;
+  float max_cors_;
+  float voxel_grid_;
+  float norm_rad_;
+  float feat_rad_;
+  friend void  protobuf_AddDesc_svaf_2eproto();
+  friend void protobuf_AssignDesc_svaf_2eproto();
+  friend void protobuf_ShutdownFile_svaf_2eproto();
+
+  void InitAsDefaultInstance();
+  static SACIAParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SACIAEstimateParameter : public ::google::protobuf::Message {
+ public:
+  SACIAEstimateParameter();
+  virtual ~SACIAEstimateParameter();
+
+  SACIAEstimateParameter(const SACIAEstimateParameter& from);
+
+  inline SACIAEstimateParameter& operator=(const SACIAEstimateParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SACIAEstimateParameter& default_instance();
+
+  void Swap(SACIAEstimateParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  SACIAEstimateParameter* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SACIAEstimateParameter& from);
+  void MergeFrom(const SACIAEstimateParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string pcd_filename = 1;
+  inline bool has_pcd_filename() const;
+  inline void clear_pcd_filename();
+  static const int kPcdFilenameFieldNumber = 1;
+  inline const ::std::string& pcd_filename() const;
+  inline void set_pcd_filename(const ::std::string& value);
+  inline void set_pcd_filename(const char* value);
+  inline void set_pcd_filename(const char* value, size_t size);
+  inline ::std::string* mutable_pcd_filename();
+  inline ::std::string* release_pcd_filename();
+  inline void set_allocated_pcd_filename(::std::string* pcd_filename);
+
+  // optional .svaf.SACIAParameter sacia_param = 2;
+  inline bool has_sacia_param() const;
+  inline void clear_sacia_param();
+  static const int kSaciaParamFieldNumber = 2;
+  inline const ::svaf::SACIAParameter& sacia_param() const;
+  inline ::svaf::SACIAParameter* mutable_sacia_param();
+  inline ::svaf::SACIAParameter* release_sacia_param();
+  inline void set_allocated_sacia_param(::svaf::SACIAParameter* sacia_param);
+
+  // @@protoc_insertion_point(class_scope:svaf.SACIAEstimateParameter)
+ private:
+  inline void set_has_pcd_filename();
+  inline void clear_has_pcd_filename();
+  inline void set_has_sacia_param();
+  inline void clear_has_sacia_param();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* pcd_filename_;
+  ::svaf::SACIAParameter* sacia_param_;
+  friend void  protobuf_AddDesc_svaf_2eproto();
+  friend void protobuf_AssignDesc_svaf_2eproto();
+  friend void protobuf_ShutdownFile_svaf_2eproto();
+
+  void InitAsDefaultInstance();
+  static SACIAEstimateParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ICPParameter : public ::google::protobuf::Message {
+ public:
+  ICPParameter();
+  virtual ~ICPParameter();
+
+  ICPParameter(const ICPParameter& from);
+
+  inline ICPParameter& operator=(const ICPParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ICPParameter& default_instance();
+
+  void Swap(ICPParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  ICPParameter* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ICPParameter& from);
+  void MergeFrom(const ICPParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 max_iter = 1 [default = 2];
+  inline bool has_max_iter() const;
+  inline void clear_max_iter();
+  static const int kMaxIterFieldNumber = 1;
+  inline ::google::protobuf::int32 max_iter() const;
+  inline void set_max_iter(::google::protobuf::int32 value);
+
+  // optional float max_resp = 2 [default = 10];
+  inline bool has_max_resp() const;
+  inline void clear_max_resp();
+  static const int kMaxRespFieldNumber = 2;
+  inline float max_resp() const;
+  inline void set_max_resp(float value);
+
+  // optional float esp = 3 [default = 0.1];
+  inline bool has_esp() const;
+  inline void clear_esp();
+  static const int kEspFieldNumber = 3;
+  inline float esp() const;
+  inline void set_esp(float value);
+
+  // @@protoc_insertion_point(class_scope:svaf.ICPParameter)
+ private:
+  inline void set_has_max_iter();
+  inline void clear_has_max_iter();
+  inline void set_has_max_resp();
+  inline void clear_has_max_resp();
+  inline void set_has_esp();
+  inline void clear_has_esp();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 max_iter_;
+  float max_resp_;
+  float esp_;
+  friend void  protobuf_AddDesc_svaf_2eproto();
+  friend void protobuf_AssignDesc_svaf_2eproto();
+  friend void protobuf_ShutdownFile_svaf_2eproto();
+
+  void InitAsDefaultInstance();
+  static ICPParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class IAICPEstimateParameter : public ::google::protobuf::Message {
+ public:
+  IAICPEstimateParameter();
+  virtual ~IAICPEstimateParameter();
+
+  IAICPEstimateParameter(const IAICPEstimateParameter& from);
+
+  inline IAICPEstimateParameter& operator=(const IAICPEstimateParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IAICPEstimateParameter& default_instance();
+
+  void Swap(IAICPEstimateParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  IAICPEstimateParameter* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const IAICPEstimateParameter& from);
+  void MergeFrom(const IAICPEstimateParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string pcd_filename = 1;
+  inline bool has_pcd_filename() const;
+  inline void clear_pcd_filename();
+  static const int kPcdFilenameFieldNumber = 1;
+  inline const ::std::string& pcd_filename() const;
+  inline void set_pcd_filename(const ::std::string& value);
+  inline void set_pcd_filename(const char* value);
+  inline void set_pcd_filename(const char* value, size_t size);
+  inline ::std::string* mutable_pcd_filename();
+  inline ::std::string* release_pcd_filename();
+  inline void set_allocated_pcd_filename(::std::string* pcd_filename);
+
+  // optional .svaf.SACIAParameter sacia_param = 2;
+  inline bool has_sacia_param() const;
+  inline void clear_sacia_param();
+  static const int kSaciaParamFieldNumber = 2;
+  inline const ::svaf::SACIAParameter& sacia_param() const;
+  inline ::svaf::SACIAParameter* mutable_sacia_param();
+  inline ::svaf::SACIAParameter* release_sacia_param();
+  inline void set_allocated_sacia_param(::svaf::SACIAParameter* sacia_param);
+
+  // optional .svaf.ICPParameter icp_param = 3;
+  inline bool has_icp_param() const;
+  inline void clear_icp_param();
+  static const int kIcpParamFieldNumber = 3;
+  inline const ::svaf::ICPParameter& icp_param() const;
+  inline ::svaf::ICPParameter* mutable_icp_param();
+  inline ::svaf::ICPParameter* release_icp_param();
+  inline void set_allocated_icp_param(::svaf::ICPParameter* icp_param);
+
+  // @@protoc_insertion_point(class_scope:svaf.IAICPEstimateParameter)
+ private:
+  inline void set_has_pcd_filename();
+  inline void clear_has_pcd_filename();
+  inline void set_has_sacia_param();
+  inline void clear_has_sacia_param();
+  inline void set_has_icp_param();
+  inline void clear_has_icp_param();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* pcd_filename_;
+  ::svaf::SACIAParameter* sacia_param_;
+  ::svaf::ICPParameter* icp_param_;
+  friend void  protobuf_AddDesc_svaf_2eproto();
+  friend void protobuf_AssignDesc_svaf_2eproto();
+  friend void protobuf_ShutdownFile_svaf_2eproto();
+
+  void InitAsDefaultInstance();
+  static IAICPEstimateParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class NDTParameter : public ::google::protobuf::Message {
+ public:
+  NDTParameter();
+  virtual ~NDTParameter();
+
+  NDTParameter(const NDTParameter& from);
+
+  inline NDTParameter& operator=(const NDTParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NDTParameter& default_instance();
+
+  void Swap(NDTParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  NDTParameter* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const NDTParameter& from);
+  void MergeFrom(const NDTParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 max_iter = 1 [default = 100];
+  inline bool has_max_iter() const;
+  inline void clear_max_iter();
+  static const int kMaxIterFieldNumber = 1;
+  inline ::google::protobuf::int32 max_iter() const;
+  inline void set_max_iter(::google::protobuf::int32 value);
+
+  // optional float step_size = 2 [default = 10];
+  inline bool has_step_size() const;
+  inline void clear_step_size();
+  static const int kStepSizeFieldNumber = 2;
+  inline float step_size() const;
+  inline void set_step_size(float value);
+
+  // optional float resolution = 3 [default = 10];
+  inline bool has_resolution() const;
+  inline void clear_resolution();
+  static const int kResolutionFieldNumber = 3;
+  inline float resolution() const;
+  inline void set_resolution(float value);
+
+  // optional float esp = 4 [default = 0.1];
+  inline bool has_esp() const;
+  inline void clear_esp();
+  static const int kEspFieldNumber = 4;
+  inline float esp() const;
+  inline void set_esp(float value);
+
+  // @@protoc_insertion_point(class_scope:svaf.NDTParameter)
+ private:
+  inline void set_has_max_iter();
+  inline void clear_has_max_iter();
+  inline void set_has_step_size();
+  inline void clear_has_step_size();
+  inline void set_has_resolution();
+  inline void clear_has_resolution();
+  inline void set_has_esp();
+  inline void clear_has_esp();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 max_iter_;
+  float step_size_;
+  float resolution_;
+  float esp_;
+  friend void  protobuf_AddDesc_svaf_2eproto();
+  friend void protobuf_AssignDesc_svaf_2eproto();
+  friend void protobuf_ShutdownFile_svaf_2eproto();
+
+  void InitAsDefaultInstance();
+  static NDTParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class IANDTEstimateParameter : public ::google::protobuf::Message {
+ public:
+  IANDTEstimateParameter();
+  virtual ~IANDTEstimateParameter();
+
+  IANDTEstimateParameter(const IANDTEstimateParameter& from);
+
+  inline IANDTEstimateParameter& operator=(const IANDTEstimateParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IANDTEstimateParameter& default_instance();
+
+  void Swap(IANDTEstimateParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  IANDTEstimateParameter* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const IANDTEstimateParameter& from);
+  void MergeFrom(const IANDTEstimateParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string pcd_filename = 1;
+  inline bool has_pcd_filename() const;
+  inline void clear_pcd_filename();
+  static const int kPcdFilenameFieldNumber = 1;
+  inline const ::std::string& pcd_filename() const;
+  inline void set_pcd_filename(const ::std::string& value);
+  inline void set_pcd_filename(const char* value);
+  inline void set_pcd_filename(const char* value, size_t size);
+  inline ::std::string* mutable_pcd_filename();
+  inline ::std::string* release_pcd_filename();
+  inline void set_allocated_pcd_filename(::std::string* pcd_filename);
+
+  // optional .svaf.SACIAParameter sacia_param = 2;
+  inline bool has_sacia_param() const;
+  inline void clear_sacia_param();
+  static const int kSaciaParamFieldNumber = 2;
+  inline const ::svaf::SACIAParameter& sacia_param() const;
+  inline ::svaf::SACIAParameter* mutable_sacia_param();
+  inline ::svaf::SACIAParameter* release_sacia_param();
+  inline void set_allocated_sacia_param(::svaf::SACIAParameter* sacia_param);
+
+  // optional .svaf.NDTParameter ndt_param = 3;
+  inline bool has_ndt_param() const;
+  inline void clear_ndt_param();
+  static const int kNdtParamFieldNumber = 3;
+  inline const ::svaf::NDTParameter& ndt_param() const;
+  inline ::svaf::NDTParameter* mutable_ndt_param();
+  inline ::svaf::NDTParameter* release_ndt_param();
+  inline void set_allocated_ndt_param(::svaf::NDTParameter* ndt_param);
+
+  // @@protoc_insertion_point(class_scope:svaf.IANDTEstimateParameter)
+ private:
+  inline void set_has_pcd_filename();
+  inline void clear_has_pcd_filename();
+  inline void set_has_sacia_param();
+  inline void clear_has_sacia_param();
+  inline void set_has_ndt_param();
+  inline void clear_has_ndt_param();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* pcd_filename_;
+  ::svaf::SACIAParameter* sacia_param_;
+  ::svaf::NDTParameter* ndt_param_;
+  friend void  protobuf_AddDesc_svaf_2eproto();
+  friend void protobuf_AssignDesc_svaf_2eproto();
+  friend void protobuf_ShutdownFile_svaf_2eproto();
+
+  void InitAsDefaultInstance();
+  static IANDTEstimateParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class LayerParameter : public ::google::protobuf::Message {
  public:
   LayerParameter();
@@ -7864,6 +8522,9 @@ class LayerParameter : public ::google::protobuf::Message {
   static const LayerType TRIANG = LayerParameter_LayerType_TRIANG;
   static const LayerType MXMUL = LayerParameter_LayerType_MXMUL;
   static const LayerType CENTER_POS = LayerParameter_LayerType_CENTER_POS;
+  static const LayerType IA_EST = LayerParameter_LayerType_IA_EST;
+  static const LayerType IAICP_EST = LayerParameter_LayerType_IAICP_EST;
+  static const LayerType IANDT_EST = LayerParameter_LayerType_IANDT_EST;
   static const LayerType SUPIX_SEG = LayerParameter_LayerType_SUPIX_SEG;
   static const LayerType RECTIFY = LayerParameter_LayerType_RECTIFY;
   static inline bool LayerType_IsValid(int value) {
@@ -8491,6 +9152,33 @@ class LayerParameter : public ::google::protobuf::Message {
   inline ::svaf::CenterPointParameter* release_centerpoint_param();
   inline void set_allocated_centerpoint_param(::svaf::CenterPointParameter* centerpoint_param);
 
+  // optional .svaf.SACIAEstimateParameter sacia_param = 194;
+  inline bool has_sacia_param() const;
+  inline void clear_sacia_param();
+  static const int kSaciaParamFieldNumber = 194;
+  inline const ::svaf::SACIAEstimateParameter& sacia_param() const;
+  inline ::svaf::SACIAEstimateParameter* mutable_sacia_param();
+  inline ::svaf::SACIAEstimateParameter* release_sacia_param();
+  inline void set_allocated_sacia_param(::svaf::SACIAEstimateParameter* sacia_param);
+
+  // optional .svaf.IAICPEstimateParameter iaicp_param = 195;
+  inline bool has_iaicp_param() const;
+  inline void clear_iaicp_param();
+  static const int kIaicpParamFieldNumber = 195;
+  inline const ::svaf::IAICPEstimateParameter& iaicp_param() const;
+  inline ::svaf::IAICPEstimateParameter* mutable_iaicp_param();
+  inline ::svaf::IAICPEstimateParameter* release_iaicp_param();
+  inline void set_allocated_iaicp_param(::svaf::IAICPEstimateParameter* iaicp_param);
+
+  // optional .svaf.IANDTEstimateParameter iandt_param = 196;
+  inline bool has_iandt_param() const;
+  inline void clear_iandt_param();
+  static const int kIandtParamFieldNumber = 196;
+  inline const ::svaf::IANDTEstimateParameter& iandt_param() const;
+  inline ::svaf::IANDTEstimateParameter* mutable_iandt_param();
+  inline ::svaf::IANDTEstimateParameter* release_iandt_param();
+  inline void set_allocated_iandt_param(::svaf::IANDTEstimateParameter* iandt_param);
+
   // @@protoc_insertion_point(class_scope:svaf.LayerParameter)
  private:
   inline void set_has_name();
@@ -8627,6 +9315,12 @@ class LayerParameter : public ::google::protobuf::Message {
   inline void clear_has_posest_param();
   inline void set_has_centerpoint_param();
   inline void clear_has_centerpoint_param();
+  inline void set_has_sacia_param();
+  inline void clear_has_sacia_param();
+  inline void set_has_iaicp_param();
+  inline void clear_has_iaicp_param();
+  inline void set_has_iandt_param();
+  inline void clear_has_iandt_param();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8699,6 +9393,9 @@ class LayerParameter : public ::google::protobuf::Message {
   ::svaf::MatrixMulParameter* mxmul_param_;
   ::svaf::PositionEstimateParameter* posest_param_;
   ::svaf::CenterPointParameter* centerpoint_param_;
+  ::svaf::SACIAEstimateParameter* sacia_param_;
+  ::svaf::IAICPEstimateParameter* iaicp_param_;
+  ::svaf::IANDTEstimateParameter* iandt_param_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -14639,6 +15336,775 @@ inline void MatrixMulParameter::set_allocated_col2(::std::string* col2) {
 
 // -------------------------------------------------------------------
 
+// SACIAParameter
+
+// optional int32 max_iter = 1 [default = 1000];
+inline bool SACIAParameter::has_max_iter() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SACIAParameter::set_has_max_iter() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SACIAParameter::clear_has_max_iter() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SACIAParameter::clear_max_iter() {
+  max_iter_ = 1000;
+  clear_has_max_iter();
+}
+inline ::google::protobuf::int32 SACIAParameter::max_iter() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAParameter.max_iter)
+  return max_iter_;
+}
+inline void SACIAParameter::set_max_iter(::google::protobuf::int32 value) {
+  set_has_max_iter();
+  max_iter_ = value;
+  // @@protoc_insertion_point(field_set:svaf.SACIAParameter.max_iter)
+}
+
+// optional float min_cors = 2 [default = 3];
+inline bool SACIAParameter::has_min_cors() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SACIAParameter::set_has_min_cors() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SACIAParameter::clear_has_min_cors() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SACIAParameter::clear_min_cors() {
+  min_cors_ = 3;
+  clear_has_min_cors();
+}
+inline float SACIAParameter::min_cors() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAParameter.min_cors)
+  return min_cors_;
+}
+inline void SACIAParameter::set_min_cors(float value) {
+  set_has_min_cors();
+  min_cors_ = value;
+  // @@protoc_insertion_point(field_set:svaf.SACIAParameter.min_cors)
+}
+
+// optional float max_cors = 3 [default = 1000];
+inline bool SACIAParameter::has_max_cors() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SACIAParameter::set_has_max_cors() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SACIAParameter::clear_has_max_cors() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SACIAParameter::clear_max_cors() {
+  max_cors_ = 1000;
+  clear_has_max_cors();
+}
+inline float SACIAParameter::max_cors() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAParameter.max_cors)
+  return max_cors_;
+}
+inline void SACIAParameter::set_max_cors(float value) {
+  set_has_max_cors();
+  max_cors_ = value;
+  // @@protoc_insertion_point(field_set:svaf.SACIAParameter.max_cors)
+}
+
+// optional float voxel_grid = 4 [default = 3];
+inline bool SACIAParameter::has_voxel_grid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void SACIAParameter::set_has_voxel_grid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void SACIAParameter::clear_has_voxel_grid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void SACIAParameter::clear_voxel_grid() {
+  voxel_grid_ = 3;
+  clear_has_voxel_grid();
+}
+inline float SACIAParameter::voxel_grid() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAParameter.voxel_grid)
+  return voxel_grid_;
+}
+inline void SACIAParameter::set_voxel_grid(float value) {
+  set_has_voxel_grid();
+  voxel_grid_ = value;
+  // @@protoc_insertion_point(field_set:svaf.SACIAParameter.voxel_grid)
+}
+
+// optional float norm_rad = 5 [default = 20];
+inline bool SACIAParameter::has_norm_rad() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void SACIAParameter::set_has_norm_rad() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void SACIAParameter::clear_has_norm_rad() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void SACIAParameter::clear_norm_rad() {
+  norm_rad_ = 20;
+  clear_has_norm_rad();
+}
+inline float SACIAParameter::norm_rad() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAParameter.norm_rad)
+  return norm_rad_;
+}
+inline void SACIAParameter::set_norm_rad(float value) {
+  set_has_norm_rad();
+  norm_rad_ = value;
+  // @@protoc_insertion_point(field_set:svaf.SACIAParameter.norm_rad)
+}
+
+// optional float feat_rad = 6 [default = 50];
+inline bool SACIAParameter::has_feat_rad() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void SACIAParameter::set_has_feat_rad() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void SACIAParameter::clear_has_feat_rad() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void SACIAParameter::clear_feat_rad() {
+  feat_rad_ = 50;
+  clear_has_feat_rad();
+}
+inline float SACIAParameter::feat_rad() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAParameter.feat_rad)
+  return feat_rad_;
+}
+inline void SACIAParameter::set_feat_rad(float value) {
+  set_has_feat_rad();
+  feat_rad_ = value;
+  // @@protoc_insertion_point(field_set:svaf.SACIAParameter.feat_rad)
+}
+
+// -------------------------------------------------------------------
+
+// SACIAEstimateParameter
+
+// optional string pcd_filename = 1;
+inline bool SACIAEstimateParameter::has_pcd_filename() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SACIAEstimateParameter::set_has_pcd_filename() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SACIAEstimateParameter::clear_has_pcd_filename() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SACIAEstimateParameter::clear_pcd_filename() {
+  if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_->clear();
+  }
+  clear_has_pcd_filename();
+}
+inline const ::std::string& SACIAEstimateParameter::pcd_filename() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAEstimateParameter.pcd_filename)
+  return *pcd_filename_;
+}
+inline void SACIAEstimateParameter::set_pcd_filename(const ::std::string& value) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(value);
+  // @@protoc_insertion_point(field_set:svaf.SACIAEstimateParameter.pcd_filename)
+}
+inline void SACIAEstimateParameter::set_pcd_filename(const char* value) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(value);
+  // @@protoc_insertion_point(field_set_char:svaf.SACIAEstimateParameter.pcd_filename)
+}
+inline void SACIAEstimateParameter::set_pcd_filename(const char* value, size_t size) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:svaf.SACIAEstimateParameter.pcd_filename)
+}
+inline ::std::string* SACIAEstimateParameter::mutable_pcd_filename() {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:svaf.SACIAEstimateParameter.pcd_filename)
+  return pcd_filename_;
+}
+inline ::std::string* SACIAEstimateParameter::release_pcd_filename() {
+  clear_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = pcd_filename_;
+    pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void SACIAEstimateParameter::set_allocated_pcd_filename(::std::string* pcd_filename) {
+  if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete pcd_filename_;
+  }
+  if (pcd_filename) {
+    set_has_pcd_filename();
+    pcd_filename_ = pcd_filename;
+  } else {
+    clear_has_pcd_filename();
+    pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.SACIAEstimateParameter.pcd_filename)
+}
+
+// optional .svaf.SACIAParameter sacia_param = 2;
+inline bool SACIAEstimateParameter::has_sacia_param() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SACIAEstimateParameter::set_has_sacia_param() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SACIAEstimateParameter::clear_has_sacia_param() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SACIAEstimateParameter::clear_sacia_param() {
+  if (sacia_param_ != NULL) sacia_param_->::svaf::SACIAParameter::Clear();
+  clear_has_sacia_param();
+}
+inline const ::svaf::SACIAParameter& SACIAEstimateParameter::sacia_param() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAEstimateParameter.sacia_param)
+  return sacia_param_ != NULL ? *sacia_param_ : *default_instance_->sacia_param_;
+}
+inline ::svaf::SACIAParameter* SACIAEstimateParameter::mutable_sacia_param() {
+  set_has_sacia_param();
+  if (sacia_param_ == NULL) sacia_param_ = new ::svaf::SACIAParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.SACIAEstimateParameter.sacia_param)
+  return sacia_param_;
+}
+inline ::svaf::SACIAParameter* SACIAEstimateParameter::release_sacia_param() {
+  clear_has_sacia_param();
+  ::svaf::SACIAParameter* temp = sacia_param_;
+  sacia_param_ = NULL;
+  return temp;
+}
+inline void SACIAEstimateParameter::set_allocated_sacia_param(::svaf::SACIAParameter* sacia_param) {
+  delete sacia_param_;
+  sacia_param_ = sacia_param;
+  if (sacia_param) {
+    set_has_sacia_param();
+  } else {
+    clear_has_sacia_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.SACIAEstimateParameter.sacia_param)
+}
+
+// -------------------------------------------------------------------
+
+// ICPParameter
+
+// optional int32 max_iter = 1 [default = 2];
+inline bool ICPParameter::has_max_iter() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ICPParameter::set_has_max_iter() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ICPParameter::clear_has_max_iter() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ICPParameter::clear_max_iter() {
+  max_iter_ = 2;
+  clear_has_max_iter();
+}
+inline ::google::protobuf::int32 ICPParameter::max_iter() const {
+  // @@protoc_insertion_point(field_get:svaf.ICPParameter.max_iter)
+  return max_iter_;
+}
+inline void ICPParameter::set_max_iter(::google::protobuf::int32 value) {
+  set_has_max_iter();
+  max_iter_ = value;
+  // @@protoc_insertion_point(field_set:svaf.ICPParameter.max_iter)
+}
+
+// optional float max_resp = 2 [default = 10];
+inline bool ICPParameter::has_max_resp() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ICPParameter::set_has_max_resp() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ICPParameter::clear_has_max_resp() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ICPParameter::clear_max_resp() {
+  max_resp_ = 10;
+  clear_has_max_resp();
+}
+inline float ICPParameter::max_resp() const {
+  // @@protoc_insertion_point(field_get:svaf.ICPParameter.max_resp)
+  return max_resp_;
+}
+inline void ICPParameter::set_max_resp(float value) {
+  set_has_max_resp();
+  max_resp_ = value;
+  // @@protoc_insertion_point(field_set:svaf.ICPParameter.max_resp)
+}
+
+// optional float esp = 3 [default = 0.1];
+inline bool ICPParameter::has_esp() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ICPParameter::set_has_esp() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ICPParameter::clear_has_esp() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ICPParameter::clear_esp() {
+  esp_ = 0.1f;
+  clear_has_esp();
+}
+inline float ICPParameter::esp() const {
+  // @@protoc_insertion_point(field_get:svaf.ICPParameter.esp)
+  return esp_;
+}
+inline void ICPParameter::set_esp(float value) {
+  set_has_esp();
+  esp_ = value;
+  // @@protoc_insertion_point(field_set:svaf.ICPParameter.esp)
+}
+
+// -------------------------------------------------------------------
+
+// IAICPEstimateParameter
+
+// optional string pcd_filename = 1;
+inline bool IAICPEstimateParameter::has_pcd_filename() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void IAICPEstimateParameter::set_has_pcd_filename() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void IAICPEstimateParameter::clear_has_pcd_filename() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void IAICPEstimateParameter::clear_pcd_filename() {
+  if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_->clear();
+  }
+  clear_has_pcd_filename();
+}
+inline const ::std::string& IAICPEstimateParameter::pcd_filename() const {
+  // @@protoc_insertion_point(field_get:svaf.IAICPEstimateParameter.pcd_filename)
+  return *pcd_filename_;
+}
+inline void IAICPEstimateParameter::set_pcd_filename(const ::std::string& value) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(value);
+  // @@protoc_insertion_point(field_set:svaf.IAICPEstimateParameter.pcd_filename)
+}
+inline void IAICPEstimateParameter::set_pcd_filename(const char* value) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(value);
+  // @@protoc_insertion_point(field_set_char:svaf.IAICPEstimateParameter.pcd_filename)
+}
+inline void IAICPEstimateParameter::set_pcd_filename(const char* value, size_t size) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:svaf.IAICPEstimateParameter.pcd_filename)
+}
+inline ::std::string* IAICPEstimateParameter::mutable_pcd_filename() {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:svaf.IAICPEstimateParameter.pcd_filename)
+  return pcd_filename_;
+}
+inline ::std::string* IAICPEstimateParameter::release_pcd_filename() {
+  clear_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = pcd_filename_;
+    pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void IAICPEstimateParameter::set_allocated_pcd_filename(::std::string* pcd_filename) {
+  if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete pcd_filename_;
+  }
+  if (pcd_filename) {
+    set_has_pcd_filename();
+    pcd_filename_ = pcd_filename;
+  } else {
+    clear_has_pcd_filename();
+    pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.pcd_filename)
+}
+
+// optional .svaf.SACIAParameter sacia_param = 2;
+inline bool IAICPEstimateParameter::has_sacia_param() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void IAICPEstimateParameter::set_has_sacia_param() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void IAICPEstimateParameter::clear_has_sacia_param() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void IAICPEstimateParameter::clear_sacia_param() {
+  if (sacia_param_ != NULL) sacia_param_->::svaf::SACIAParameter::Clear();
+  clear_has_sacia_param();
+}
+inline const ::svaf::SACIAParameter& IAICPEstimateParameter::sacia_param() const {
+  // @@protoc_insertion_point(field_get:svaf.IAICPEstimateParameter.sacia_param)
+  return sacia_param_ != NULL ? *sacia_param_ : *default_instance_->sacia_param_;
+}
+inline ::svaf::SACIAParameter* IAICPEstimateParameter::mutable_sacia_param() {
+  set_has_sacia_param();
+  if (sacia_param_ == NULL) sacia_param_ = new ::svaf::SACIAParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IAICPEstimateParameter.sacia_param)
+  return sacia_param_;
+}
+inline ::svaf::SACIAParameter* IAICPEstimateParameter::release_sacia_param() {
+  clear_has_sacia_param();
+  ::svaf::SACIAParameter* temp = sacia_param_;
+  sacia_param_ = NULL;
+  return temp;
+}
+inline void IAICPEstimateParameter::set_allocated_sacia_param(::svaf::SACIAParameter* sacia_param) {
+  delete sacia_param_;
+  sacia_param_ = sacia_param;
+  if (sacia_param) {
+    set_has_sacia_param();
+  } else {
+    clear_has_sacia_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.sacia_param)
+}
+
+// optional .svaf.ICPParameter icp_param = 3;
+inline bool IAICPEstimateParameter::has_icp_param() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void IAICPEstimateParameter::set_has_icp_param() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void IAICPEstimateParameter::clear_has_icp_param() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void IAICPEstimateParameter::clear_icp_param() {
+  if (icp_param_ != NULL) icp_param_->::svaf::ICPParameter::Clear();
+  clear_has_icp_param();
+}
+inline const ::svaf::ICPParameter& IAICPEstimateParameter::icp_param() const {
+  // @@protoc_insertion_point(field_get:svaf.IAICPEstimateParameter.icp_param)
+  return icp_param_ != NULL ? *icp_param_ : *default_instance_->icp_param_;
+}
+inline ::svaf::ICPParameter* IAICPEstimateParameter::mutable_icp_param() {
+  set_has_icp_param();
+  if (icp_param_ == NULL) icp_param_ = new ::svaf::ICPParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IAICPEstimateParameter.icp_param)
+  return icp_param_;
+}
+inline ::svaf::ICPParameter* IAICPEstimateParameter::release_icp_param() {
+  clear_has_icp_param();
+  ::svaf::ICPParameter* temp = icp_param_;
+  icp_param_ = NULL;
+  return temp;
+}
+inline void IAICPEstimateParameter::set_allocated_icp_param(::svaf::ICPParameter* icp_param) {
+  delete icp_param_;
+  icp_param_ = icp_param;
+  if (icp_param) {
+    set_has_icp_param();
+  } else {
+    clear_has_icp_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.icp_param)
+}
+
+// -------------------------------------------------------------------
+
+// NDTParameter
+
+// optional int32 max_iter = 1 [default = 100];
+inline bool NDTParameter::has_max_iter() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void NDTParameter::set_has_max_iter() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void NDTParameter::clear_has_max_iter() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void NDTParameter::clear_max_iter() {
+  max_iter_ = 100;
+  clear_has_max_iter();
+}
+inline ::google::protobuf::int32 NDTParameter::max_iter() const {
+  // @@protoc_insertion_point(field_get:svaf.NDTParameter.max_iter)
+  return max_iter_;
+}
+inline void NDTParameter::set_max_iter(::google::protobuf::int32 value) {
+  set_has_max_iter();
+  max_iter_ = value;
+  // @@protoc_insertion_point(field_set:svaf.NDTParameter.max_iter)
+}
+
+// optional float step_size = 2 [default = 10];
+inline bool NDTParameter::has_step_size() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void NDTParameter::set_has_step_size() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void NDTParameter::clear_has_step_size() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void NDTParameter::clear_step_size() {
+  step_size_ = 10;
+  clear_has_step_size();
+}
+inline float NDTParameter::step_size() const {
+  // @@protoc_insertion_point(field_get:svaf.NDTParameter.step_size)
+  return step_size_;
+}
+inline void NDTParameter::set_step_size(float value) {
+  set_has_step_size();
+  step_size_ = value;
+  // @@protoc_insertion_point(field_set:svaf.NDTParameter.step_size)
+}
+
+// optional float resolution = 3 [default = 10];
+inline bool NDTParameter::has_resolution() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void NDTParameter::set_has_resolution() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void NDTParameter::clear_has_resolution() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void NDTParameter::clear_resolution() {
+  resolution_ = 10;
+  clear_has_resolution();
+}
+inline float NDTParameter::resolution() const {
+  // @@protoc_insertion_point(field_get:svaf.NDTParameter.resolution)
+  return resolution_;
+}
+inline void NDTParameter::set_resolution(float value) {
+  set_has_resolution();
+  resolution_ = value;
+  // @@protoc_insertion_point(field_set:svaf.NDTParameter.resolution)
+}
+
+// optional float esp = 4 [default = 0.1];
+inline bool NDTParameter::has_esp() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void NDTParameter::set_has_esp() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void NDTParameter::clear_has_esp() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void NDTParameter::clear_esp() {
+  esp_ = 0.1f;
+  clear_has_esp();
+}
+inline float NDTParameter::esp() const {
+  // @@protoc_insertion_point(field_get:svaf.NDTParameter.esp)
+  return esp_;
+}
+inline void NDTParameter::set_esp(float value) {
+  set_has_esp();
+  esp_ = value;
+  // @@protoc_insertion_point(field_set:svaf.NDTParameter.esp)
+}
+
+// -------------------------------------------------------------------
+
+// IANDTEstimateParameter
+
+// optional string pcd_filename = 1;
+inline bool IANDTEstimateParameter::has_pcd_filename() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void IANDTEstimateParameter::set_has_pcd_filename() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void IANDTEstimateParameter::clear_has_pcd_filename() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void IANDTEstimateParameter::clear_pcd_filename() {
+  if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_->clear();
+  }
+  clear_has_pcd_filename();
+}
+inline const ::std::string& IANDTEstimateParameter::pcd_filename() const {
+  // @@protoc_insertion_point(field_get:svaf.IANDTEstimateParameter.pcd_filename)
+  return *pcd_filename_;
+}
+inline void IANDTEstimateParameter::set_pcd_filename(const ::std::string& value) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(value);
+  // @@protoc_insertion_point(field_set:svaf.IANDTEstimateParameter.pcd_filename)
+}
+inline void IANDTEstimateParameter::set_pcd_filename(const char* value) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(value);
+  // @@protoc_insertion_point(field_set_char:svaf.IANDTEstimateParameter.pcd_filename)
+}
+inline void IANDTEstimateParameter::set_pcd_filename(const char* value, size_t size) {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  pcd_filename_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:svaf.IANDTEstimateParameter.pcd_filename)
+}
+inline ::std::string* IANDTEstimateParameter::mutable_pcd_filename() {
+  set_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    pcd_filename_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:svaf.IANDTEstimateParameter.pcd_filename)
+  return pcd_filename_;
+}
+inline ::std::string* IANDTEstimateParameter::release_pcd_filename() {
+  clear_has_pcd_filename();
+  if (pcd_filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = pcd_filename_;
+    pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void IANDTEstimateParameter::set_allocated_pcd_filename(::std::string* pcd_filename) {
+  if (pcd_filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete pcd_filename_;
+  }
+  if (pcd_filename) {
+    set_has_pcd_filename();
+    pcd_filename_ = pcd_filename;
+  } else {
+    clear_has_pcd_filename();
+    pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.pcd_filename)
+}
+
+// optional .svaf.SACIAParameter sacia_param = 2;
+inline bool IANDTEstimateParameter::has_sacia_param() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void IANDTEstimateParameter::set_has_sacia_param() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void IANDTEstimateParameter::clear_has_sacia_param() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void IANDTEstimateParameter::clear_sacia_param() {
+  if (sacia_param_ != NULL) sacia_param_->::svaf::SACIAParameter::Clear();
+  clear_has_sacia_param();
+}
+inline const ::svaf::SACIAParameter& IANDTEstimateParameter::sacia_param() const {
+  // @@protoc_insertion_point(field_get:svaf.IANDTEstimateParameter.sacia_param)
+  return sacia_param_ != NULL ? *sacia_param_ : *default_instance_->sacia_param_;
+}
+inline ::svaf::SACIAParameter* IANDTEstimateParameter::mutable_sacia_param() {
+  set_has_sacia_param();
+  if (sacia_param_ == NULL) sacia_param_ = new ::svaf::SACIAParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IANDTEstimateParameter.sacia_param)
+  return sacia_param_;
+}
+inline ::svaf::SACIAParameter* IANDTEstimateParameter::release_sacia_param() {
+  clear_has_sacia_param();
+  ::svaf::SACIAParameter* temp = sacia_param_;
+  sacia_param_ = NULL;
+  return temp;
+}
+inline void IANDTEstimateParameter::set_allocated_sacia_param(::svaf::SACIAParameter* sacia_param) {
+  delete sacia_param_;
+  sacia_param_ = sacia_param;
+  if (sacia_param) {
+    set_has_sacia_param();
+  } else {
+    clear_has_sacia_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.sacia_param)
+}
+
+// optional .svaf.NDTParameter ndt_param = 3;
+inline bool IANDTEstimateParameter::has_ndt_param() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void IANDTEstimateParameter::set_has_ndt_param() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void IANDTEstimateParameter::clear_has_ndt_param() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void IANDTEstimateParameter::clear_ndt_param() {
+  if (ndt_param_ != NULL) ndt_param_->::svaf::NDTParameter::Clear();
+  clear_has_ndt_param();
+}
+inline const ::svaf::NDTParameter& IANDTEstimateParameter::ndt_param() const {
+  // @@protoc_insertion_point(field_get:svaf.IANDTEstimateParameter.ndt_param)
+  return ndt_param_ != NULL ? *ndt_param_ : *default_instance_->ndt_param_;
+}
+inline ::svaf::NDTParameter* IANDTEstimateParameter::mutable_ndt_param() {
+  set_has_ndt_param();
+  if (ndt_param_ == NULL) ndt_param_ = new ::svaf::NDTParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IANDTEstimateParameter.ndt_param)
+  return ndt_param_;
+}
+inline ::svaf::NDTParameter* IANDTEstimateParameter::release_ndt_param() {
+  clear_has_ndt_param();
+  ::svaf::NDTParameter* temp = ndt_param_;
+  ndt_param_ = NULL;
+  return temp;
+}
+inline void IANDTEstimateParameter::set_allocated_ndt_param(::svaf::NDTParameter* ndt_param) {
+  delete ndt_param_;
+  ndt_param_ = ndt_param;
+  if (ndt_param) {
+    set_has_ndt_param();
+  } else {
+    clear_has_ndt_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.ndt_param)
+}
+
+// -------------------------------------------------------------------
+
 // LayerParameter
 
 // optional string name = 1;
@@ -17407,6 +18873,129 @@ inline void LayerParameter::set_allocated_centerpoint_param(::svaf::CenterPointP
     clear_has_centerpoint_param();
   }
   // @@protoc_insertion_point(field_set_allocated:svaf.LayerParameter.centerpoint_param)
+}
+
+// optional .svaf.SACIAEstimateParameter sacia_param = 194;
+inline bool LayerParameter::has_sacia_param() const {
+  return (_has_bits_[2] & 0x00000008u) != 0;
+}
+inline void LayerParameter::set_has_sacia_param() {
+  _has_bits_[2] |= 0x00000008u;
+}
+inline void LayerParameter::clear_has_sacia_param() {
+  _has_bits_[2] &= ~0x00000008u;
+}
+inline void LayerParameter::clear_sacia_param() {
+  if (sacia_param_ != NULL) sacia_param_->::svaf::SACIAEstimateParameter::Clear();
+  clear_has_sacia_param();
+}
+inline const ::svaf::SACIAEstimateParameter& LayerParameter::sacia_param() const {
+  // @@protoc_insertion_point(field_get:svaf.LayerParameter.sacia_param)
+  return sacia_param_ != NULL ? *sacia_param_ : *default_instance_->sacia_param_;
+}
+inline ::svaf::SACIAEstimateParameter* LayerParameter::mutable_sacia_param() {
+  set_has_sacia_param();
+  if (sacia_param_ == NULL) sacia_param_ = new ::svaf::SACIAEstimateParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.LayerParameter.sacia_param)
+  return sacia_param_;
+}
+inline ::svaf::SACIAEstimateParameter* LayerParameter::release_sacia_param() {
+  clear_has_sacia_param();
+  ::svaf::SACIAEstimateParameter* temp = sacia_param_;
+  sacia_param_ = NULL;
+  return temp;
+}
+inline void LayerParameter::set_allocated_sacia_param(::svaf::SACIAEstimateParameter* sacia_param) {
+  delete sacia_param_;
+  sacia_param_ = sacia_param;
+  if (sacia_param) {
+    set_has_sacia_param();
+  } else {
+    clear_has_sacia_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.LayerParameter.sacia_param)
+}
+
+// optional .svaf.IAICPEstimateParameter iaicp_param = 195;
+inline bool LayerParameter::has_iaicp_param() const {
+  return (_has_bits_[2] & 0x00000010u) != 0;
+}
+inline void LayerParameter::set_has_iaicp_param() {
+  _has_bits_[2] |= 0x00000010u;
+}
+inline void LayerParameter::clear_has_iaicp_param() {
+  _has_bits_[2] &= ~0x00000010u;
+}
+inline void LayerParameter::clear_iaicp_param() {
+  if (iaicp_param_ != NULL) iaicp_param_->::svaf::IAICPEstimateParameter::Clear();
+  clear_has_iaicp_param();
+}
+inline const ::svaf::IAICPEstimateParameter& LayerParameter::iaicp_param() const {
+  // @@protoc_insertion_point(field_get:svaf.LayerParameter.iaicp_param)
+  return iaicp_param_ != NULL ? *iaicp_param_ : *default_instance_->iaicp_param_;
+}
+inline ::svaf::IAICPEstimateParameter* LayerParameter::mutable_iaicp_param() {
+  set_has_iaicp_param();
+  if (iaicp_param_ == NULL) iaicp_param_ = new ::svaf::IAICPEstimateParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.LayerParameter.iaicp_param)
+  return iaicp_param_;
+}
+inline ::svaf::IAICPEstimateParameter* LayerParameter::release_iaicp_param() {
+  clear_has_iaicp_param();
+  ::svaf::IAICPEstimateParameter* temp = iaicp_param_;
+  iaicp_param_ = NULL;
+  return temp;
+}
+inline void LayerParameter::set_allocated_iaicp_param(::svaf::IAICPEstimateParameter* iaicp_param) {
+  delete iaicp_param_;
+  iaicp_param_ = iaicp_param;
+  if (iaicp_param) {
+    set_has_iaicp_param();
+  } else {
+    clear_has_iaicp_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.LayerParameter.iaicp_param)
+}
+
+// optional .svaf.IANDTEstimateParameter iandt_param = 196;
+inline bool LayerParameter::has_iandt_param() const {
+  return (_has_bits_[2] & 0x00000020u) != 0;
+}
+inline void LayerParameter::set_has_iandt_param() {
+  _has_bits_[2] |= 0x00000020u;
+}
+inline void LayerParameter::clear_has_iandt_param() {
+  _has_bits_[2] &= ~0x00000020u;
+}
+inline void LayerParameter::clear_iandt_param() {
+  if (iandt_param_ != NULL) iandt_param_->::svaf::IANDTEstimateParameter::Clear();
+  clear_has_iandt_param();
+}
+inline const ::svaf::IANDTEstimateParameter& LayerParameter::iandt_param() const {
+  // @@protoc_insertion_point(field_get:svaf.LayerParameter.iandt_param)
+  return iandt_param_ != NULL ? *iandt_param_ : *default_instance_->iandt_param_;
+}
+inline ::svaf::IANDTEstimateParameter* LayerParameter::mutable_iandt_param() {
+  set_has_iandt_param();
+  if (iandt_param_ == NULL) iandt_param_ = new ::svaf::IANDTEstimateParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.LayerParameter.iandt_param)
+  return iandt_param_;
+}
+inline ::svaf::IANDTEstimateParameter* LayerParameter::release_iandt_param() {
+  clear_has_iandt_param();
+  ::svaf::IANDTEstimateParameter* temp = iandt_param_;
+  iandt_param_ = NULL;
+  return temp;
+}
+inline void LayerParameter::set_allocated_iandt_param(::svaf::IANDTEstimateParameter* iandt_param) {
+  delete iandt_param_;
+  iandt_param_ = iandt_param;
+  if (iandt_param) {
+    set_has_iandt_param();
+  } else {
+    clear_has_iandt_param();
+  }
+  // @@protoc_insertion_point(field_set_allocated:svaf.LayerParameter.iandt_param)
 }
 
 

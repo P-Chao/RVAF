@@ -488,13 +488,43 @@ message CenterPointParameter{
 //message FeaturePoolParameter{
 //}
 
+message SACIAParameter{
+	optional int32 max_iter = 1 [default = 1000];
+	optional float min_cors = 2 [default = 3.0];
+	optional float max_cors = 3 [default = 1000.0];
+	optional float voxel_grid = 4 [default = 3.0];
+	optional float norm_rad = 5 [default = 20.0];
+	optional float feat_rad = 6 [default = 50.0];
+}
+
 message SACIAEstimateParameter{
+	optional string pcd_filename = 1;
+	optional SACIAParameter sacia_param = 2;
+}
+
+message ICPParameter{
+	optional int32 max_iter = 1 [default = 2];
+	optional float max_resp = 2 [default = 10.0];
+	optional float esp = 3 [default = 0.1];
 }
 
 message IAICPEstimateParameter{
+	optional string pcd_filename = 1;
+	optional SACIAParameter sacia_param = 2;
+	optional ICPParameter icp_param = 3;
+}
+
+message NDTParameter{
+	optional int32 max_iter = 1 [default = 100];
+	optional float step_size = 2 [default = 10.0];
+	optional float resolution = 3 [default = 10.0];
+	optional float esp = 4 [default = 0.1];
 }
 
 message IANDTEstimateParameter{
+	optional string pcd_filename = 1;
+	optional SACIAParameter sacia_param = 2;
+	optional NDTParameter ndt_param = 3;
 }
 
 message LayerParameter{
