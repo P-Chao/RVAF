@@ -104,10 +104,11 @@
       </PrecompiledHeader>
       <WarningLevel>Level2</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>NOMINMAX;_OPENMP;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMAX;_OMP;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <OpenMP>GenerateParallelCode</OpenMP>
       <Cpp0xSupport>true</Cpp0xSupport>
       <BrowseInformation>true</BrowseInformation>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -178,6 +179,11 @@
     <ClCompile Include="..\MilTrack\feature.cpp" />
     <ClCompile Include="..\MilTrack\trackmain.cpp" />
     <ClCompile Include="..\MilTrack\train.cpp" />
+    <ClCompile Include="..\PointCloudRegistration\features.cpp" />
+    <ClCompile Include="..\PointCloudRegistration\filters.cpp" />
+    <ClCompile Include="..\PointCloudRegistration\registration.cpp" />
+    <ClCompile Include="..\PointCloudRegistration\sac_ia.cpp" />
+    <ClCompile Include="..\PointCloudRegistration\visualization.cpp" />
     <ClCompile Include="..\SuperPixelSegment\BaseFuncDef.c" />
     <ClCompile Include="..\SuperPixelSegment\ctmf.c" />
     <ClCompile Include="..\SuperPixelSegment\ctmfopt.c" />
@@ -257,6 +263,11 @@
     <ClInclude Include="..\MilTrack\feature.h" />
     <ClInclude Include="..\MilTrack\milsvaf.h" />
     <ClInclude Include="..\MilTrack\train.h" />
+    <ClInclude Include="..\PointCloudRegistration\features.h" />
+    <ClInclude Include="..\PointCloudRegistration\filters.h" />
+    <ClInclude Include="..\PointCloudRegistration\registration.h" />
+    <ClInclude Include="..\PointCloudRegistration\sac_ia.h" />
+    <ClInclude Include="..\PointCloudRegistration\visualization.h" />
     <ClInclude Include="..\SuperPixelSegment\BaseConstDef.h" />
     <ClInclude Include="..\SuperPixelSegment\BaseFuncDef.h" />
     <ClInclude Include="..\SuperPixelSegment\BaseTypeDef.h" />

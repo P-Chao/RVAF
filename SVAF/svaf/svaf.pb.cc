@@ -1564,8 +1564,8 @@ void protobuf_AssignDesc_svaf_2eproto() {
   SACIAEstimateParameter_descriptor_ = file->message_type(77);
   static const int SACIAEstimateParameter_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, pcd_filename_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, sacia_param_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, ref_matrix_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, ia_param_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SACIAEstimateParameter, mxmul_param_),
   };
   SACIAEstimateParameter_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1600,7 +1600,7 @@ void protobuf_AssignDesc_svaf_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, pcd_filename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, sacia_param_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, icp_param_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, ref_matrix_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IAICPEstimateParameter, mxmul_param_),
   };
   IAICPEstimateParameter_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1636,7 +1636,7 @@ void protobuf_AssignDesc_svaf_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, pcd_filename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, sacia_param_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, ndt_param_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, ref_matrix_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IANDTEstimateParameter, mxmul_param_),
   };
   IANDTEstimateParameter_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -2272,23 +2272,23 @@ void protobuf_AddDesc_svaf_2eproto() {
     "ter\030\001 \001(\005:\0041000\022\023\n\010min_cors\030\002 \001(\002:\0013\022\026\n\010"
     "max_cors\030\003 \001(\002:\0041000\022\025\n\nvoxel_grid\030\004 \001(\002"
     ":\0013\022\024\n\010norm_rad\030\005 \001(\002:\00220\022\024\n\010feat_rad\030\006 "
-    "\001(\002:\00250\"\207\001\n\026SACIAEstimateParameter\022\024\n\014pc"
-    "d_filename\030\001 \001(\t\022)\n\013sacia_param\030\002 \001(\0132\024."
-    "svaf.SACIAParameter\022,\n\nref_matrix\030\003 \001(\0132"
-    "\030.svaf.MatrixMulParameter\"K\n\014ICPParamete"
-    "r\022\023\n\010max_iter\030\001 \001(\005:\0012\022\024\n\010max_resp\030\002 \001(\002"
-    ":\00210\022\020\n\003esp\030\003 \001(\002:\0030.1\"\256\001\n\026IAICPEstimate"
+    "\001(\002:\00250\"\205\001\n\026SACIAEstimateParameter\022\024\n\014pc"
+    "d_filename\030\001 \001(\t\022&\n\010ia_param\030\002 \001(\0132\024.sva"
+    "f.SACIAParameter\022-\n\013mxmul_param\030\003 \001(\0132\030."
+    "svaf.MatrixMulParameter\"K\n\014ICPParameter\022"
+    "\023\n\010max_iter\030\001 \001(\005:\0012\022\024\n\010max_resp\030\002 \001(\002:\002"
+    "10\022\020\n\003esp\030\003 \001(\002:\0030.1\"\257\001\n\026IAICPEstimatePa"
+    "rameter\022\024\n\014pcd_filename\030\001 \001(\t\022)\n\013sacia_p"
+    "aram\030\002 \001(\0132\024.svaf.SACIAParameter\022%\n\ticp_"
+    "param\030\003 \001(\0132\022.svaf.ICPParameter\022-\n\013mxmul"
+    "_param\030\004 \001(\0132\030.svaf.MatrixMulParameter\"f"
+    "\n\014NDTParameter\022\025\n\010max_iter\030\001 \001(\005:\003100\022\025\n"
+    "\tstep_size\030\002 \001(\002:\00210\022\026\n\nresolution\030\003 \001(\002"
+    ":\00210\022\020\n\003esp\030\004 \001(\002:\0030.1\"\257\001\n\026IANDTEstimate"
     "Parameter\022\024\n\014pcd_filename\030\001 \001(\t\022)\n\013sacia"
-    "_param\030\002 \001(\0132\024.svaf.SACIAParameter\022%\n\tic"
-    "p_param\030\003 \001(\0132\022.svaf.ICPParameter\022,\n\nref"
-    "_matrix\030\004 \001(\0132\030.svaf.MatrixMulParameter\""
-    "f\n\014NDTParameter\022\025\n\010max_iter\030\001 \001(\005:\003100\022\025"
-    "\n\tstep_size\030\002 \001(\002:\00210\022\026\n\nresolution\030\003 \001("
-    "\002:\00210\022\020\n\003esp\030\004 \001(\002:\0030.1\"\256\001\n\026IANDTEstimat"
-    "eParameter\022\024\n\014pcd_filename\030\001 \001(\t\022)\n\013saci"
-    "a_param\030\002 \001(\0132\024.svaf.SACIAParameter\022%\n\tn"
-    "dt_param\030\003 \001(\0132\022.svaf.NDTParameter\022,\n\nre"
-    "f_matrix\030\004 \001(\0132\030.svaf.MatrixMulParameter"
+    "_param\030\002 \001(\0132\024.svaf.SACIAParameter\022%\n\tnd"
+    "t_param\030\003 \001(\0132\022.svaf.NDTParameter\022-\n\013mxm"
+    "ul_param\030\004 \001(\0132\030.svaf.MatrixMulParameter"
     "\"\245!\n\016LayerParameter\022\014\n\004name\030\001 \001(\t\022\016\n\006bot"
     "tom\030\002 \001(\t\022\013\n\003top\030\003 \001(\t\022\023\n\004show\030\004 \001(\010:\005fa"
     "lse\022\023\n\004save\030\005 \001(\010:\005false\022\023\n\004logt\030\006 \001(\010:\005"
@@ -24444,8 +24444,8 @@ void SACIAParameter::Swap(SACIAParameter* other) {
 
 #ifndef _MSC_VER
 const int SACIAEstimateParameter::kPcdFilenameFieldNumber;
-const int SACIAEstimateParameter::kSaciaParamFieldNumber;
-const int SACIAEstimateParameter::kRefMatrixFieldNumber;
+const int SACIAEstimateParameter::kIaParamFieldNumber;
+const int SACIAEstimateParameter::kMxmulParamFieldNumber;
 #endif  // !_MSC_VER
 
 SACIAEstimateParameter::SACIAEstimateParameter()
@@ -24455,8 +24455,8 @@ SACIAEstimateParameter::SACIAEstimateParameter()
 }
 
 void SACIAEstimateParameter::InitAsDefaultInstance() {
-  sacia_param_ = const_cast< ::svaf::SACIAParameter*>(&::svaf::SACIAParameter::default_instance());
-  ref_matrix_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
+  ia_param_ = const_cast< ::svaf::SACIAParameter*>(&::svaf::SACIAParameter::default_instance());
+  mxmul_param_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
 }
 
 SACIAEstimateParameter::SACIAEstimateParameter(const SACIAEstimateParameter& from)
@@ -24470,8 +24470,8 @@ void SACIAEstimateParameter::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  sacia_param_ = NULL;
-  ref_matrix_ = NULL;
+  ia_param_ = NULL;
+  mxmul_param_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -24485,8 +24485,8 @@ void SACIAEstimateParameter::SharedDtor() {
     delete pcd_filename_;
   }
   if (this != default_instance_) {
-    delete sacia_param_;
-    delete ref_matrix_;
+    delete ia_param_;
+    delete mxmul_param_;
   }
 }
 
@@ -24518,11 +24518,11 @@ void SACIAEstimateParameter::Clear() {
         pcd_filename_->clear();
       }
     }
-    if (has_sacia_param()) {
-      if (sacia_param_ != NULL) sacia_param_->::svaf::SACIAParameter::Clear();
+    if (has_ia_param()) {
+      if (ia_param_ != NULL) ia_param_->::svaf::SACIAParameter::Clear();
     }
-    if (has_ref_matrix()) {
-      if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
+    if (has_mxmul_param()) {
+      if (mxmul_param_ != NULL) mxmul_param_->::svaf::MatrixMulParameter::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -24551,29 +24551,29 @@ bool SACIAEstimateParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_sacia_param;
+        if (input->ExpectTag(18)) goto parse_ia_param;
         break;
       }
 
-      // optional .svaf.SACIAParameter sacia_param = 2;
+      // optional .svaf.SACIAParameter ia_param = 2;
       case 2: {
         if (tag == 18) {
-         parse_sacia_param:
+         parse_ia_param:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_sacia_param()));
+               input, mutable_ia_param()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_ref_matrix;
+        if (input->ExpectTag(26)) goto parse_mxmul_param;
         break;
       }
 
-      // optional .svaf.MatrixMulParameter ref_matrix = 3;
+      // optional .svaf.MatrixMulParameter mxmul_param = 3;
       case 3: {
         if (tag == 26) {
-         parse_ref_matrix:
+         parse_mxmul_param:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_ref_matrix()));
+               input, mutable_mxmul_param()));
         } else {
           goto handle_unusual;
         }
@@ -24616,16 +24616,16 @@ void SACIAEstimateParameter::SerializeWithCachedSizes(
       1, this->pcd_filename(), output);
   }
 
-  // optional .svaf.SACIAParameter sacia_param = 2;
-  if (has_sacia_param()) {
+  // optional .svaf.SACIAParameter ia_param = 2;
+  if (has_ia_param()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->sacia_param(), output);
+      2, this->ia_param(), output);
   }
 
-  // optional .svaf.MatrixMulParameter ref_matrix = 3;
-  if (has_ref_matrix()) {
+  // optional .svaf.MatrixMulParameter mxmul_param = 3;
+  if (has_mxmul_param()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->ref_matrix(), output);
+      3, this->mxmul_param(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -24649,18 +24649,18 @@ void SACIAEstimateParameter::SerializeWithCachedSizes(
         1, this->pcd_filename(), target);
   }
 
-  // optional .svaf.SACIAParameter sacia_param = 2;
-  if (has_sacia_param()) {
+  // optional .svaf.SACIAParameter ia_param = 2;
+  if (has_ia_param()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, this->sacia_param(), target);
+        2, this->ia_param(), target);
   }
 
-  // optional .svaf.MatrixMulParameter ref_matrix = 3;
-  if (has_ref_matrix()) {
+  // optional .svaf.MatrixMulParameter mxmul_param = 3;
+  if (has_mxmul_param()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, this->ref_matrix(), target);
+        3, this->mxmul_param(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -24682,18 +24682,18 @@ int SACIAEstimateParameter::ByteSize() const {
           this->pcd_filename());
     }
 
-    // optional .svaf.SACIAParameter sacia_param = 2;
-    if (has_sacia_param()) {
+    // optional .svaf.SACIAParameter ia_param = 2;
+    if (has_ia_param()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->sacia_param());
+          this->ia_param());
     }
 
-    // optional .svaf.MatrixMulParameter ref_matrix = 3;
-    if (has_ref_matrix()) {
+    // optional .svaf.MatrixMulParameter mxmul_param = 3;
+    if (has_mxmul_param()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->ref_matrix());
+          this->mxmul_param());
     }
 
   }
@@ -24726,11 +24726,11 @@ void SACIAEstimateParameter::MergeFrom(const SACIAEstimateParameter& from) {
     if (from.has_pcd_filename()) {
       set_pcd_filename(from.pcd_filename());
     }
-    if (from.has_sacia_param()) {
-      mutable_sacia_param()->::svaf::SACIAParameter::MergeFrom(from.sacia_param());
+    if (from.has_ia_param()) {
+      mutable_ia_param()->::svaf::SACIAParameter::MergeFrom(from.ia_param());
     }
-    if (from.has_ref_matrix()) {
-      mutable_ref_matrix()->::svaf::MatrixMulParameter::MergeFrom(from.ref_matrix());
+    if (from.has_mxmul_param()) {
+      mutable_mxmul_param()->::svaf::MatrixMulParameter::MergeFrom(from.mxmul_param());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -24756,8 +24756,8 @@ bool SACIAEstimateParameter::IsInitialized() const {
 void SACIAEstimateParameter::Swap(SACIAEstimateParameter* other) {
   if (other != this) {
     std::swap(pcd_filename_, other->pcd_filename_);
-    std::swap(sacia_param_, other->sacia_param_);
-    std::swap(ref_matrix_, other->ref_matrix_);
+    std::swap(ia_param_, other->ia_param_);
+    std::swap(mxmul_param_, other->mxmul_param_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -25077,7 +25077,7 @@ void ICPParameter::Swap(ICPParameter* other) {
 const int IAICPEstimateParameter::kPcdFilenameFieldNumber;
 const int IAICPEstimateParameter::kSaciaParamFieldNumber;
 const int IAICPEstimateParameter::kIcpParamFieldNumber;
-const int IAICPEstimateParameter::kRefMatrixFieldNumber;
+const int IAICPEstimateParameter::kMxmulParamFieldNumber;
 #endif  // !_MSC_VER
 
 IAICPEstimateParameter::IAICPEstimateParameter()
@@ -25089,7 +25089,7 @@ IAICPEstimateParameter::IAICPEstimateParameter()
 void IAICPEstimateParameter::InitAsDefaultInstance() {
   sacia_param_ = const_cast< ::svaf::SACIAParameter*>(&::svaf::SACIAParameter::default_instance());
   icp_param_ = const_cast< ::svaf::ICPParameter*>(&::svaf::ICPParameter::default_instance());
-  ref_matrix_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
+  mxmul_param_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
 }
 
 IAICPEstimateParameter::IAICPEstimateParameter(const IAICPEstimateParameter& from)
@@ -25105,7 +25105,7 @@ void IAICPEstimateParameter::SharedCtor() {
   pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sacia_param_ = NULL;
   icp_param_ = NULL;
-  ref_matrix_ = NULL;
+  mxmul_param_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -25121,7 +25121,7 @@ void IAICPEstimateParameter::SharedDtor() {
   if (this != default_instance_) {
     delete sacia_param_;
     delete icp_param_;
-    delete ref_matrix_;
+    delete mxmul_param_;
   }
 }
 
@@ -25159,8 +25159,8 @@ void IAICPEstimateParameter::Clear() {
     if (has_icp_param()) {
       if (icp_param_ != NULL) icp_param_->::svaf::ICPParameter::Clear();
     }
-    if (has_ref_matrix()) {
-      if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
+    if (has_mxmul_param()) {
+      if (mxmul_param_ != NULL) mxmul_param_->::svaf::MatrixMulParameter::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -25215,16 +25215,16 @@ bool IAICPEstimateParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(34)) goto parse_ref_matrix;
+        if (input->ExpectTag(34)) goto parse_mxmul_param;
         break;
       }
 
-      // optional .svaf.MatrixMulParameter ref_matrix = 4;
+      // optional .svaf.MatrixMulParameter mxmul_param = 4;
       case 4: {
         if (tag == 34) {
-         parse_ref_matrix:
+         parse_mxmul_param:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_ref_matrix()));
+               input, mutable_mxmul_param()));
         } else {
           goto handle_unusual;
         }
@@ -25279,10 +25279,10 @@ void IAICPEstimateParameter::SerializeWithCachedSizes(
       3, this->icp_param(), output);
   }
 
-  // optional .svaf.MatrixMulParameter ref_matrix = 4;
-  if (has_ref_matrix()) {
+  // optional .svaf.MatrixMulParameter mxmul_param = 4;
+  if (has_mxmul_param()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->ref_matrix(), output);
+      4, this->mxmul_param(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -25320,11 +25320,11 @@ void IAICPEstimateParameter::SerializeWithCachedSizes(
         3, this->icp_param(), target);
   }
 
-  // optional .svaf.MatrixMulParameter ref_matrix = 4;
-  if (has_ref_matrix()) {
+  // optional .svaf.MatrixMulParameter mxmul_param = 4;
+  if (has_mxmul_param()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        4, this->ref_matrix(), target);
+        4, this->mxmul_param(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -25360,11 +25360,11 @@ int IAICPEstimateParameter::ByteSize() const {
           this->icp_param());
     }
 
-    // optional .svaf.MatrixMulParameter ref_matrix = 4;
-    if (has_ref_matrix()) {
+    // optional .svaf.MatrixMulParameter mxmul_param = 4;
+    if (has_mxmul_param()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->ref_matrix());
+          this->mxmul_param());
     }
 
   }
@@ -25403,8 +25403,8 @@ void IAICPEstimateParameter::MergeFrom(const IAICPEstimateParameter& from) {
     if (from.has_icp_param()) {
       mutable_icp_param()->::svaf::ICPParameter::MergeFrom(from.icp_param());
     }
-    if (from.has_ref_matrix()) {
-      mutable_ref_matrix()->::svaf::MatrixMulParameter::MergeFrom(from.ref_matrix());
+    if (from.has_mxmul_param()) {
+      mutable_mxmul_param()->::svaf::MatrixMulParameter::MergeFrom(from.mxmul_param());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -25432,7 +25432,7 @@ void IAICPEstimateParameter::Swap(IAICPEstimateParameter* other) {
     std::swap(pcd_filename_, other->pcd_filename_);
     std::swap(sacia_param_, other->sacia_param_);
     std::swap(icp_param_, other->icp_param_);
-    std::swap(ref_matrix_, other->ref_matrix_);
+    std::swap(mxmul_param_, other->mxmul_param_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -25789,7 +25789,7 @@ void NDTParameter::Swap(NDTParameter* other) {
 const int IANDTEstimateParameter::kPcdFilenameFieldNumber;
 const int IANDTEstimateParameter::kSaciaParamFieldNumber;
 const int IANDTEstimateParameter::kNdtParamFieldNumber;
-const int IANDTEstimateParameter::kRefMatrixFieldNumber;
+const int IANDTEstimateParameter::kMxmulParamFieldNumber;
 #endif  // !_MSC_VER
 
 IANDTEstimateParameter::IANDTEstimateParameter()
@@ -25801,7 +25801,7 @@ IANDTEstimateParameter::IANDTEstimateParameter()
 void IANDTEstimateParameter::InitAsDefaultInstance() {
   sacia_param_ = const_cast< ::svaf::SACIAParameter*>(&::svaf::SACIAParameter::default_instance());
   ndt_param_ = const_cast< ::svaf::NDTParameter*>(&::svaf::NDTParameter::default_instance());
-  ref_matrix_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
+  mxmul_param_ = const_cast< ::svaf::MatrixMulParameter*>(&::svaf::MatrixMulParameter::default_instance());
 }
 
 IANDTEstimateParameter::IANDTEstimateParameter(const IANDTEstimateParameter& from)
@@ -25817,7 +25817,7 @@ void IANDTEstimateParameter::SharedCtor() {
   pcd_filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sacia_param_ = NULL;
   ndt_param_ = NULL;
-  ref_matrix_ = NULL;
+  mxmul_param_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -25833,7 +25833,7 @@ void IANDTEstimateParameter::SharedDtor() {
   if (this != default_instance_) {
     delete sacia_param_;
     delete ndt_param_;
-    delete ref_matrix_;
+    delete mxmul_param_;
   }
 }
 
@@ -25871,8 +25871,8 @@ void IANDTEstimateParameter::Clear() {
     if (has_ndt_param()) {
       if (ndt_param_ != NULL) ndt_param_->::svaf::NDTParameter::Clear();
     }
-    if (has_ref_matrix()) {
-      if (ref_matrix_ != NULL) ref_matrix_->::svaf::MatrixMulParameter::Clear();
+    if (has_mxmul_param()) {
+      if (mxmul_param_ != NULL) mxmul_param_->::svaf::MatrixMulParameter::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -25927,16 +25927,16 @@ bool IANDTEstimateParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(34)) goto parse_ref_matrix;
+        if (input->ExpectTag(34)) goto parse_mxmul_param;
         break;
       }
 
-      // optional .svaf.MatrixMulParameter ref_matrix = 4;
+      // optional .svaf.MatrixMulParameter mxmul_param = 4;
       case 4: {
         if (tag == 34) {
-         parse_ref_matrix:
+         parse_mxmul_param:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_ref_matrix()));
+               input, mutable_mxmul_param()));
         } else {
           goto handle_unusual;
         }
@@ -25991,10 +25991,10 @@ void IANDTEstimateParameter::SerializeWithCachedSizes(
       3, this->ndt_param(), output);
   }
 
-  // optional .svaf.MatrixMulParameter ref_matrix = 4;
-  if (has_ref_matrix()) {
+  // optional .svaf.MatrixMulParameter mxmul_param = 4;
+  if (has_mxmul_param()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->ref_matrix(), output);
+      4, this->mxmul_param(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -26032,11 +26032,11 @@ void IANDTEstimateParameter::SerializeWithCachedSizes(
         3, this->ndt_param(), target);
   }
 
-  // optional .svaf.MatrixMulParameter ref_matrix = 4;
-  if (has_ref_matrix()) {
+  // optional .svaf.MatrixMulParameter mxmul_param = 4;
+  if (has_mxmul_param()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        4, this->ref_matrix(), target);
+        4, this->mxmul_param(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -26072,11 +26072,11 @@ int IANDTEstimateParameter::ByteSize() const {
           this->ndt_param());
     }
 
-    // optional .svaf.MatrixMulParameter ref_matrix = 4;
-    if (has_ref_matrix()) {
+    // optional .svaf.MatrixMulParameter mxmul_param = 4;
+    if (has_mxmul_param()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->ref_matrix());
+          this->mxmul_param());
     }
 
   }
@@ -26115,8 +26115,8 @@ void IANDTEstimateParameter::MergeFrom(const IANDTEstimateParameter& from) {
     if (from.has_ndt_param()) {
       mutable_ndt_param()->::svaf::NDTParameter::MergeFrom(from.ndt_param());
     }
-    if (from.has_ref_matrix()) {
-      mutable_ref_matrix()->::svaf::MatrixMulParameter::MergeFrom(from.ref_matrix());
+    if (from.has_mxmul_param()) {
+      mutable_mxmul_param()->::svaf::MatrixMulParameter::MergeFrom(from.mxmul_param());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -26144,7 +26144,7 @@ void IANDTEstimateParameter::Swap(IANDTEstimateParameter* other) {
     std::swap(pcd_filename_, other->pcd_filename_);
     std::swap(sacia_param_, other->sacia_param_);
     std::swap(ndt_param_, other->ndt_param_);
-    std::swap(ref_matrix_, other->ref_matrix_);
+    std::swap(mxmul_param_, other->mxmul_param_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

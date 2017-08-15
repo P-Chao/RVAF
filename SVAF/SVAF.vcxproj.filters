@@ -40,6 +40,9 @@
     <Filter Include="Resource Files\v1.21 script">
       <UniqueIdentifier>{608dafac-f40b-4d0e-aeac-4c03d50515ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="External Projects\Point Cloud">
+      <UniqueIdentifier>{169a1767-b784-4b3d-ac13-f7e62b2ad13c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="svaf\svaf.pbf">
@@ -287,6 +290,21 @@
     <ClCompile Include="layer\NDTEstimateLayer.cpp">
       <Filter>Layer Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\PointCloudRegistration\features.cpp">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PointCloudRegistration\filters.cpp">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PointCloudRegistration\registration.cpp">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PointCloudRegistration\sac_ia.cpp">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PointCloudRegistration\visualization.cpp">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="layer\AdaboostLayer.h">
@@ -519,6 +537,21 @@
     </ClInclude>
     <ClInclude Include="layer\NDTEstimateLayer.h">
       <Filter>Layer Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PointCloudRegistration\features.h">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PointCloudRegistration\filters.h">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PointCloudRegistration\registration.h">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PointCloudRegistration\sac_ia.h">
+      <Filter>External Projects\Point Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\PointCloudRegistration\visualization.h">
+      <Filter>External Projects\Point Cloud</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
