@@ -23,6 +23,8 @@
 using namespace pcl;
 using namespace std;
 
+namespace pc{
+
 void voxelFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_in, pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_out, float gridsize){
 	VoxelGrid<PointXYZ> vox_grid;
 	vox_grid.setLeafSize(gridsize, gridsize, gridsize);
@@ -42,6 +44,8 @@ void passFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr pc, double filter_limit){
 	pass.setFilterLimits(0, filter_limit);
 	pass.filter(*pc);
 	return;
+}
+
 }
 
 

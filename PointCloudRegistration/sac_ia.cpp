@@ -18,6 +18,8 @@
 
 using namespace pcl;
 
+namespace pc{
+
 SampleConsensusInitialAlignment<pcl::PointXYZ, pcl::PointXYZ, pcl::FPFHSignature33>
 
 align(PointCloud<PointXYZ>::Ptr cloud1, PointCloud<PointXYZ>::Ptr cloud2,
@@ -37,4 +39,6 @@ int max_sacia_iterations, double min_correspondence_dist, double max_corresponde
 	sac_ia.align(finalcloud);
 	sac_ia.getCorrespondenceRandomness();
 	return sac_ia;
+}
+
 }

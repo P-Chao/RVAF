@@ -30,6 +30,7 @@
 #include "visualization.h"
 
 using namespace std;
+using namespace pc;
 
 const double FILTER_LIMIT = 1000.0;
 const int MAX_SACIA_ITERATIONS = 1000; // 2000

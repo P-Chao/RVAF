@@ -23,6 +23,8 @@
 using namespace pcl;
 using namespace std;
 
+namespace pc{
+
 PointCloud<FPFHSignature33>::Ptr getFeatures(PointCloud<PointXYZ>::Ptr cloud, PointCloud<Normal>::Ptr normals, double feature_radius) {
 
 	PointCloud<FPFHSignature33>::Ptr features = PointCloud<FPFHSignature33>::Ptr(new PointCloud<FPFHSignature33>);
@@ -57,4 +59,6 @@ PointCloud<PointNormal>::Ptr getPointNormals(PointCloud<PointXYZ>::Ptr incloud, 
 	norm_est.compute(*points_with_normals);
 	pcl::copyPointCloud(*incloud, *points_with_normals);
 	return points_with_normals;
+}
+
 }

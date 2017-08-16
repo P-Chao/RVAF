@@ -19,6 +19,8 @@
 
 using namespace pcl;
 
+namespace pc{
+
 class MyPointRepresentation : public pcl::PointRepresentation <PointNormal> //¼Ì³Ð¹ØÏµ
 {
 	using pcl::PointRepresentation<PointNormal>::nr_dimensions_;
@@ -71,4 +73,6 @@ Eigen::Matrix4f icpNonLinear(PointCloud<PointNormal>::Ptr src_in, PointCloud<Poi
 	//Eigen::Matrix4f targetToSource = Ti.inverse();
 
 	return Ti;
+}
+
 }

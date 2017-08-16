@@ -22,6 +22,10 @@
 #include "pcl/filters/voxel_grid.h" 
 #include "pcl/features/fpfh.h" 
 
+namespace pc{
+
 pcl::PointCloud<pcl::FPFHSignature33>::Ptr getFeatures(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, pcl::PointCloud<pcl::Normal>::Ptr normals, double feature_radius = 50.0);
 pcl::PointCloud<pcl::Normal>::Ptr getNormals(pcl::PointCloud<pcl::PointXYZ>::Ptr incloud, double normals_radius = 20.0);
 pcl::PointCloud<pcl::PointNormal>::Ptr getPointNormals(pcl::PointCloud<pcl::PointXYZ>::Ptr incloud, int k = 30);
+
+}

@@ -18,8 +18,12 @@
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/kdtree/kdtree_flann.h>
 
+namespace pc{
+
 pcl::SampleConsensusInitialAlignment<pcl::PointXYZ, pcl::PointXYZ, pcl::FPFHSignature33>
 
 align(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud1, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud2,
 pcl::PointCloud<pcl::FPFHSignature33>::Ptr features1, pcl::PointCloud<pcl::FPFHSignature33>::Ptr features2,
 int max_sacia_iterations = 2000, double min_correspondence_dist = 3, double max_correspondence_dist = 2000);
+
+}

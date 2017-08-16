@@ -23,6 +23,8 @@ using namespace std;
 using pcl::visualization::PointCloudColorHandlerGenericField;
 using pcl::visualization::PointCloudColorHandlerCustom;
 
+namespace pc{
+
 void view(pcl::PointCloud<pcl::PointXYZ> &cloud)
 {
 	pcl::visualization::CloudViewer viewer1("Cloud Viewer");
@@ -78,3 +80,4 @@ PointCloud<pcl::PointXYZRGB>::Ptr coloredMerge(pcl::PointCloud<pcl::PointXYZ>::P
 	return cloud1color;
 }
 
+}

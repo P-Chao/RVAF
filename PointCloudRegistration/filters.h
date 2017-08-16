@@ -22,5 +22,9 @@
 #include "pcl/filters/voxel_grid.h" 
 #include "pcl/features/fpfh.h" 
 
+namespace pc{
+
 void voxelFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_in, pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_out, float gridsize = 2.0f);
 void passFilter(pcl::PointCloud<pcl::PointXYZ>::Ptr pc, double filter_limit = 1000.0);
+
+}

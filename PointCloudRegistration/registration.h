@@ -19,5 +19,9 @@
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/kdtree/kdtree_flann.h>
 
+namespace pc{
+
 Eigen::Matrix4f icpNonLinear(pcl::PointCloud<pcl::PointNormal>::Ptr src, pcl::PointCloud<pcl::PointNormal>::Ptr tgt,
 	int max_iteration = 2, double max_correspondence_distance = 0.02, double eps = 1e-6);
+
+}
