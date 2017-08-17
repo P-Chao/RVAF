@@ -20,8 +20,11 @@ protected:
 	
 	float M[3][4];
 
+	pcl::PointCloud<pcl::PointXYZ> targetpcd;
+
 private:
 	World *pWorld_;
+
 	
 };
 
