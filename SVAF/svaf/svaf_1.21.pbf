@@ -119,3 +119,82 @@ layer{
 	}
 	show:	true
 }
+
+############################ Run MIL Track Demo ############################
+
+name:	"Compute Center of ROI with DSP"
+version:	"v_1.16"
+pause:	10
+layer{
+	name:	"bino_dsp"
+	type:	DSP  #DSP_PAIR
+	bottom:	"bino_dsp"
+	top:	"miltrack"
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}
+layer{
+	name:	"miltrack"
+	type:	MILTRACK
+	top:	"miltrack"
+	miltrack_param{
+		init_type:	MOUSE
+		track_type: MIL
+		track_count: -1
+		tr_width:	200
+		tr_height:	150
+	}
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#sync_epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}
+
+############################ Run Adaboost From DSP Camera ############################
+
+name:	"Compute Center of ROI with DSP"
+version:	"v_1.03"
+pause:	10
+layer{
+	name:	"bino_dsp"
+	type:	DSP_PAIR
+	bottom:	"bino_dsp"
+	top:	"adaboost"
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+	show: true
+}

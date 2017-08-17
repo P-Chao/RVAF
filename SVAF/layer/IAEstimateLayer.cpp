@@ -62,7 +62,7 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	
 	pcl::PointCloud<pcl::PointXYZ>::Ptr source(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr target(new pcl::PointCloud<pcl::PointXYZ>);
-	pclconvert(*source, pWorld_->pointW);
+	pclconvert(*source, pWorld_->pointL);
 	target = targetpcd.makeShared();
 	
 	__t.StartWatchTimer();
