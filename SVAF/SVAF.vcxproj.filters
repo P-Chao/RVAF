@@ -37,11 +37,11 @@
     <Filter Include="External Projects\Mil Track">
       <UniqueIdentifier>{cd48826d-ea4b-44df-9552-7ec31ef4133e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\v1.21 script">
-      <UniqueIdentifier>{608dafac-f40b-4d0e-aeac-4c03d50515ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="External Projects\Point Cloud">
       <UniqueIdentifier>{169a1767-b784-4b3d-ac13-f7e62b2ad13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sample Script">
+      <UniqueIdentifier>{f7fef44e-1bb6-4d33-adda-0ffdd598d333}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +68,12 @@
     </None>
     <None Include="svaf\eadpmatch.pbf">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\svaf_1.21.pbf">
+      <Filter>Resource Files\Sample Script</Filter>
+    </None>
+    <None Include="svaf\svaf_1.22.pbf">
+      <Filter>Resource Files\Sample Script</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

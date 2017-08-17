@@ -163,6 +163,8 @@
     <None Include="svaf\surfmatch.pbf" />
     <None Include="svaf\svaf.pbf" />
     <None Include="svaf\svaf.proto" />
+    <None Include="svaf\svaf_1.21.pbf" />
+    <None Include="svaf\svaf_1.22.pbf" />
     <None Include="svaf\temp.pbf" />
     <None Include="svaf\track.pbf" />
   </ItemGroup>
