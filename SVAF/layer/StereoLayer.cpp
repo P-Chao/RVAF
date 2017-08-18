@@ -57,6 +57,12 @@ void StereoLayer::pcdsave(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud
 	return;
 }
 
+void StereoLayer::pcdsave(string filename, pcl::PointCloud<pcl::PointXYZRGB>& cloud, bool is_dense){
+	pcl::io::savePCDFileASCII(filename, cloud);
+	LOG(INFO) << filename << " Saved <" << cloud.size() << "> Points.";
+	return;
+}
+
 void StereoLayer::pcdread(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud){
 	if (pcl::io::loadPCDFile<pcl::PointXYZ>(filename, cloud) == -1){
 		LOG(FATAL) << " Couldn't Open " << filename;

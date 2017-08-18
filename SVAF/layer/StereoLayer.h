@@ -18,6 +18,7 @@ protected:
 	void pcdsave(string filename, vector<Point3f>& points, bool is_dense = false);
 	void pcdread(string filename, vector<Point3f>& points);
 	void pcdsave(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud, bool is_dense = false);
+	void pcdsave(string filename, pcl::PointCloud<pcl::PointXYZRGB>& cloud, bool is_dense = false);
 	void pcdread(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud);
 	void pclconvert(pcl::PointCloud<pcl::PointXYZ>& cloud, vector<Point3f>& inpoints);
 	void pclconvert(vector<Point3f>& points, pcl::PointCloud<pcl::PointXYZ>& incloud);

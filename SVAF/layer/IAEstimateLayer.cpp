@@ -109,7 +109,7 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		pcl::transformPointCloud(*target, *target, init_transform);
 		pcl::PointCloud<pcl::PointXYZRGB>::Ptr merged = pc::coloredMerge(source, target);
 		if (__save){
-			
+			pcdsave(string("tmp/R_") + Circuit::time_id_ + ".pcd", *merged);
 		}
 		if (__show){
 			pc::viewPair(cloud1ds, cloud2ds, source, target);
