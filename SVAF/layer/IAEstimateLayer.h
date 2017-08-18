@@ -18,7 +18,7 @@ protected:
 	float norm_rad;
 	float feat_rad;
 	
-	float M[3][4];
+	float a, b, c, x, y, z;
 
 	pcl::PointCloud<pcl::PointXYZ> targetpcd;
 

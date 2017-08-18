@@ -110,6 +110,7 @@ class TriangularParameter;
 class MatrixMulParameter;
 class PositionEstimateParameter;
 class CenterPointParameter;
+class CoordiParameter;
 class SACIAParameter;
 class SACIAEstimateParameter;
 class ICPParameter;
@@ -7776,6 +7777,135 @@ class CenterPointParameter : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class CoordiParameter : public ::google::protobuf::Message {
+ public:
+  CoordiParameter();
+  virtual ~CoordiParameter();
+
+  CoordiParameter(const CoordiParameter& from);
+
+  inline CoordiParameter& operator=(const CoordiParameter& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CoordiParameter& default_instance();
+
+  void Swap(CoordiParameter* other);
+
+  // implements Message ----------------------------------------------
+
+  CoordiParameter* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CoordiParameter& from);
+  void MergeFrom(const CoordiParameter& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional float x = 1 [default = 0];
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline float x() const;
+  inline void set_x(float value);
+
+  // optional float y = 2 [default = 0];
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline float y() const;
+  inline void set_y(float value);
+
+  // optional float z = 3 [default = 0];
+  inline bool has_z() const;
+  inline void clear_z();
+  static const int kZFieldNumber = 3;
+  inline float z() const;
+  inline void set_z(float value);
+
+  // optional float a = 4 [default = 0];
+  inline bool has_a() const;
+  inline void clear_a();
+  static const int kAFieldNumber = 4;
+  inline float a() const;
+  inline void set_a(float value);
+
+  // optional float b = 5 [default = 0];
+  inline bool has_b() const;
+  inline void clear_b();
+  static const int kBFieldNumber = 5;
+  inline float b() const;
+  inline void set_b(float value);
+
+  // optional float c = 6 [default = 0];
+  inline bool has_c() const;
+  inline void clear_c();
+  static const int kCFieldNumber = 6;
+  inline float c() const;
+  inline void set_c(float value);
+
+  // @@protoc_insertion_point(class_scope:svaf.CoordiParameter)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
+  inline void set_has_a();
+  inline void clear_has_a();
+  inline void set_has_b();
+  inline void clear_has_b();
+  inline void set_has_c();
+  inline void clear_has_c();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  float x_;
+  float y_;
+  float z_;
+  float a_;
+  float b_;
+  float c_;
+  friend void  protobuf_AddDesc_svaf_2eproto();
+  friend void protobuf_AssignDesc_svaf_2eproto();
+  friend void protobuf_ShutdownFile_svaf_2eproto();
+
+  void InitAsDefaultInstance();
+  static CoordiParameter* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class SACIAParameter : public ::google::protobuf::Message {
  public:
   SACIAParameter();
@@ -7979,14 +8109,14 @@ class SACIAEstimateParameter : public ::google::protobuf::Message {
   inline ::svaf::SACIAParameter* release_ia_param();
   inline void set_allocated_ia_param(::svaf::SACIAParameter* ia_param);
 
-  // optional .svaf.MatrixMulParameter mxmul_param = 3;
-  inline bool has_mxmul_param() const;
-  inline void clear_mxmul_param();
-  static const int kMxmulParamFieldNumber = 3;
-  inline const ::svaf::MatrixMulParameter& mxmul_param() const;
-  inline ::svaf::MatrixMulParameter* mutable_mxmul_param();
-  inline ::svaf::MatrixMulParameter* release_mxmul_param();
-  inline void set_allocated_mxmul_param(::svaf::MatrixMulParameter* mxmul_param);
+  // optional .svaf.CoordiParameter coor_param = 3;
+  inline bool has_coor_param() const;
+  inline void clear_coor_param();
+  static const int kCoorParamFieldNumber = 3;
+  inline const ::svaf::CoordiParameter& coor_param() const;
+  inline ::svaf::CoordiParameter* mutable_coor_param();
+  inline ::svaf::CoordiParameter* release_coor_param();
+  inline void set_allocated_coor_param(::svaf::CoordiParameter* coor_param);
 
   // @@protoc_insertion_point(class_scope:svaf.SACIAEstimateParameter)
  private:
@@ -7994,8 +8124,8 @@ class SACIAEstimateParameter : public ::google::protobuf::Message {
   inline void clear_has_pcd_filename();
   inline void set_has_ia_param();
   inline void clear_has_ia_param();
-  inline void set_has_mxmul_param();
-  inline void clear_has_mxmul_param();
+  inline void set_has_coor_param();
+  inline void clear_has_coor_param();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8003,7 +8133,7 @@ class SACIAEstimateParameter : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* pcd_filename_;
   ::svaf::SACIAParameter* ia_param_;
-  ::svaf::MatrixMulParameter* mxmul_param_;
+  ::svaf::CoordiParameter* coor_param_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -8195,14 +8325,14 @@ class IAICPEstimateParameter : public ::google::protobuf::Message {
   inline ::svaf::ICPParameter* release_icp_param();
   inline void set_allocated_icp_param(::svaf::ICPParameter* icp_param);
 
-  // optional .svaf.MatrixMulParameter mxmul_param = 4;
-  inline bool has_mxmul_param() const;
-  inline void clear_mxmul_param();
-  static const int kMxmulParamFieldNumber = 4;
-  inline const ::svaf::MatrixMulParameter& mxmul_param() const;
-  inline ::svaf::MatrixMulParameter* mutable_mxmul_param();
-  inline ::svaf::MatrixMulParameter* release_mxmul_param();
-  inline void set_allocated_mxmul_param(::svaf::MatrixMulParameter* mxmul_param);
+  // optional .svaf.CoordiParameter coor_param = 4;
+  inline bool has_coor_param() const;
+  inline void clear_coor_param();
+  static const int kCoorParamFieldNumber = 4;
+  inline const ::svaf::CoordiParameter& coor_param() const;
+  inline ::svaf::CoordiParameter* mutable_coor_param();
+  inline ::svaf::CoordiParameter* release_coor_param();
+  inline void set_allocated_coor_param(::svaf::CoordiParameter* coor_param);
 
   // @@protoc_insertion_point(class_scope:svaf.IAICPEstimateParameter)
  private:
@@ -8212,8 +8342,8 @@ class IAICPEstimateParameter : public ::google::protobuf::Message {
   inline void clear_has_sacia_param();
   inline void set_has_icp_param();
   inline void clear_has_icp_param();
-  inline void set_has_mxmul_param();
-  inline void clear_has_mxmul_param();
+  inline void set_has_coor_param();
+  inline void clear_has_coor_param();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8222,7 +8352,7 @@ class IAICPEstimateParameter : public ::google::protobuf::Message {
   ::std::string* pcd_filename_;
   ::svaf::SACIAParameter* sacia_param_;
   ::svaf::ICPParameter* icp_param_;
-  ::svaf::MatrixMulParameter* mxmul_param_;
+  ::svaf::CoordiParameter* coor_param_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -8424,14 +8554,14 @@ class IANDTEstimateParameter : public ::google::protobuf::Message {
   inline ::svaf::NDTParameter* release_ndt_param();
   inline void set_allocated_ndt_param(::svaf::NDTParameter* ndt_param);
 
-  // optional .svaf.MatrixMulParameter mxmul_param = 4;
-  inline bool has_mxmul_param() const;
-  inline void clear_mxmul_param();
-  static const int kMxmulParamFieldNumber = 4;
-  inline const ::svaf::MatrixMulParameter& mxmul_param() const;
-  inline ::svaf::MatrixMulParameter* mutable_mxmul_param();
-  inline ::svaf::MatrixMulParameter* release_mxmul_param();
-  inline void set_allocated_mxmul_param(::svaf::MatrixMulParameter* mxmul_param);
+  // optional .svaf.CoordiParameter coor_param = 4;
+  inline bool has_coor_param() const;
+  inline void clear_coor_param();
+  static const int kCoorParamFieldNumber = 4;
+  inline const ::svaf::CoordiParameter& coor_param() const;
+  inline ::svaf::CoordiParameter* mutable_coor_param();
+  inline ::svaf::CoordiParameter* release_coor_param();
+  inline void set_allocated_coor_param(::svaf::CoordiParameter* coor_param);
 
   // @@protoc_insertion_point(class_scope:svaf.IANDTEstimateParameter)
  private:
@@ -8441,8 +8571,8 @@ class IANDTEstimateParameter : public ::google::protobuf::Message {
   inline void clear_has_sacia_param();
   inline void set_has_ndt_param();
   inline void clear_has_ndt_param();
-  inline void set_has_mxmul_param();
-  inline void clear_has_mxmul_param();
+  inline void set_has_coor_param();
+  inline void clear_has_coor_param();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -8451,7 +8581,7 @@ class IANDTEstimateParameter : public ::google::protobuf::Message {
   ::std::string* pcd_filename_;
   ::svaf::SACIAParameter* sacia_param_;
   ::svaf::NDTParameter* ndt_param_;
-  ::svaf::MatrixMulParameter* mxmul_param_;
+  ::svaf::CoordiParameter* coor_param_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -15372,6 +15502,154 @@ inline void MatrixMulParameter::set_allocated_col2(::std::string* col2) {
 
 // -------------------------------------------------------------------
 
+// CoordiParameter
+
+// optional float x = 1 [default = 0];
+inline bool CoordiParameter::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CoordiParameter::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CoordiParameter::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CoordiParameter::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline float CoordiParameter::x() const {
+  // @@protoc_insertion_point(field_get:svaf.CoordiParameter.x)
+  return x_;
+}
+inline void CoordiParameter::set_x(float value) {
+  set_has_x();
+  x_ = value;
+  // @@protoc_insertion_point(field_set:svaf.CoordiParameter.x)
+}
+
+// optional float y = 2 [default = 0];
+inline bool CoordiParameter::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CoordiParameter::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CoordiParameter::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CoordiParameter::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline float CoordiParameter::y() const {
+  // @@protoc_insertion_point(field_get:svaf.CoordiParameter.y)
+  return y_;
+}
+inline void CoordiParameter::set_y(float value) {
+  set_has_y();
+  y_ = value;
+  // @@protoc_insertion_point(field_set:svaf.CoordiParameter.y)
+}
+
+// optional float z = 3 [default = 0];
+inline bool CoordiParameter::has_z() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void CoordiParameter::set_has_z() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void CoordiParameter::clear_has_z() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void CoordiParameter::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline float CoordiParameter::z() const {
+  // @@protoc_insertion_point(field_get:svaf.CoordiParameter.z)
+  return z_;
+}
+inline void CoordiParameter::set_z(float value) {
+  set_has_z();
+  z_ = value;
+  // @@protoc_insertion_point(field_set:svaf.CoordiParameter.z)
+}
+
+// optional float a = 4 [default = 0];
+inline bool CoordiParameter::has_a() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void CoordiParameter::set_has_a() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void CoordiParameter::clear_has_a() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void CoordiParameter::clear_a() {
+  a_ = 0;
+  clear_has_a();
+}
+inline float CoordiParameter::a() const {
+  // @@protoc_insertion_point(field_get:svaf.CoordiParameter.a)
+  return a_;
+}
+inline void CoordiParameter::set_a(float value) {
+  set_has_a();
+  a_ = value;
+  // @@protoc_insertion_point(field_set:svaf.CoordiParameter.a)
+}
+
+// optional float b = 5 [default = 0];
+inline bool CoordiParameter::has_b() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void CoordiParameter::set_has_b() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void CoordiParameter::clear_has_b() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void CoordiParameter::clear_b() {
+  b_ = 0;
+  clear_has_b();
+}
+inline float CoordiParameter::b() const {
+  // @@protoc_insertion_point(field_get:svaf.CoordiParameter.b)
+  return b_;
+}
+inline void CoordiParameter::set_b(float value) {
+  set_has_b();
+  b_ = value;
+  // @@protoc_insertion_point(field_set:svaf.CoordiParameter.b)
+}
+
+// optional float c = 6 [default = 0];
+inline bool CoordiParameter::has_c() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void CoordiParameter::set_has_c() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void CoordiParameter::clear_has_c() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void CoordiParameter::clear_c() {
+  c_ = 0;
+  clear_has_c();
+}
+inline float CoordiParameter::c() const {
+  // @@protoc_insertion_point(field_get:svaf.CoordiParameter.c)
+  return c_;
+}
+inline void CoordiParameter::set_c(float value) {
+  set_has_c();
+  c_ = value;
+  // @@protoc_insertion_point(field_set:svaf.CoordiParameter.c)
+}
+
+// -------------------------------------------------------------------
+
 // SACIAParameter
 
 // optional int32 max_iter = 1 [default = 1000];
@@ -15639,45 +15917,45 @@ inline void SACIAEstimateParameter::set_allocated_ia_param(::svaf::SACIAParamete
   // @@protoc_insertion_point(field_set_allocated:svaf.SACIAEstimateParameter.ia_param)
 }
 
-// optional .svaf.MatrixMulParameter mxmul_param = 3;
-inline bool SACIAEstimateParameter::has_mxmul_param() const {
+// optional .svaf.CoordiParameter coor_param = 3;
+inline bool SACIAEstimateParameter::has_coor_param() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void SACIAEstimateParameter::set_has_mxmul_param() {
+inline void SACIAEstimateParameter::set_has_coor_param() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void SACIAEstimateParameter::clear_has_mxmul_param() {
+inline void SACIAEstimateParameter::clear_has_coor_param() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void SACIAEstimateParameter::clear_mxmul_param() {
-  if (mxmul_param_ != NULL) mxmul_param_->::svaf::MatrixMulParameter::Clear();
-  clear_has_mxmul_param();
+inline void SACIAEstimateParameter::clear_coor_param() {
+  if (coor_param_ != NULL) coor_param_->::svaf::CoordiParameter::Clear();
+  clear_has_coor_param();
 }
-inline const ::svaf::MatrixMulParameter& SACIAEstimateParameter::mxmul_param() const {
-  // @@protoc_insertion_point(field_get:svaf.SACIAEstimateParameter.mxmul_param)
-  return mxmul_param_ != NULL ? *mxmul_param_ : *default_instance_->mxmul_param_;
+inline const ::svaf::CoordiParameter& SACIAEstimateParameter::coor_param() const {
+  // @@protoc_insertion_point(field_get:svaf.SACIAEstimateParameter.coor_param)
+  return coor_param_ != NULL ? *coor_param_ : *default_instance_->coor_param_;
 }
-inline ::svaf::MatrixMulParameter* SACIAEstimateParameter::mutable_mxmul_param() {
-  set_has_mxmul_param();
-  if (mxmul_param_ == NULL) mxmul_param_ = new ::svaf::MatrixMulParameter;
-  // @@protoc_insertion_point(field_mutable:svaf.SACIAEstimateParameter.mxmul_param)
-  return mxmul_param_;
+inline ::svaf::CoordiParameter* SACIAEstimateParameter::mutable_coor_param() {
+  set_has_coor_param();
+  if (coor_param_ == NULL) coor_param_ = new ::svaf::CoordiParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.SACIAEstimateParameter.coor_param)
+  return coor_param_;
 }
-inline ::svaf::MatrixMulParameter* SACIAEstimateParameter::release_mxmul_param() {
-  clear_has_mxmul_param();
-  ::svaf::MatrixMulParameter* temp = mxmul_param_;
-  mxmul_param_ = NULL;
+inline ::svaf::CoordiParameter* SACIAEstimateParameter::release_coor_param() {
+  clear_has_coor_param();
+  ::svaf::CoordiParameter* temp = coor_param_;
+  coor_param_ = NULL;
   return temp;
 }
-inline void SACIAEstimateParameter::set_allocated_mxmul_param(::svaf::MatrixMulParameter* mxmul_param) {
-  delete mxmul_param_;
-  mxmul_param_ = mxmul_param;
-  if (mxmul_param) {
-    set_has_mxmul_param();
+inline void SACIAEstimateParameter::set_allocated_coor_param(::svaf::CoordiParameter* coor_param) {
+  delete coor_param_;
+  coor_param_ = coor_param;
+  if (coor_param) {
+    set_has_coor_param();
   } else {
-    clear_has_mxmul_param();
+    clear_has_coor_param();
   }
-  // @@protoc_insertion_point(field_set_allocated:svaf.SACIAEstimateParameter.mxmul_param)
+  // @@protoc_insertion_point(field_set_allocated:svaf.SACIAEstimateParameter.coor_param)
 }
 
 // -------------------------------------------------------------------
@@ -15918,45 +16196,45 @@ inline void IAICPEstimateParameter::set_allocated_icp_param(::svaf::ICPParameter
   // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.icp_param)
 }
 
-// optional .svaf.MatrixMulParameter mxmul_param = 4;
-inline bool IAICPEstimateParameter::has_mxmul_param() const {
+// optional .svaf.CoordiParameter coor_param = 4;
+inline bool IAICPEstimateParameter::has_coor_param() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void IAICPEstimateParameter::set_has_mxmul_param() {
+inline void IAICPEstimateParameter::set_has_coor_param() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void IAICPEstimateParameter::clear_has_mxmul_param() {
+inline void IAICPEstimateParameter::clear_has_coor_param() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void IAICPEstimateParameter::clear_mxmul_param() {
-  if (mxmul_param_ != NULL) mxmul_param_->::svaf::MatrixMulParameter::Clear();
-  clear_has_mxmul_param();
+inline void IAICPEstimateParameter::clear_coor_param() {
+  if (coor_param_ != NULL) coor_param_->::svaf::CoordiParameter::Clear();
+  clear_has_coor_param();
 }
-inline const ::svaf::MatrixMulParameter& IAICPEstimateParameter::mxmul_param() const {
-  // @@protoc_insertion_point(field_get:svaf.IAICPEstimateParameter.mxmul_param)
-  return mxmul_param_ != NULL ? *mxmul_param_ : *default_instance_->mxmul_param_;
+inline const ::svaf::CoordiParameter& IAICPEstimateParameter::coor_param() const {
+  // @@protoc_insertion_point(field_get:svaf.IAICPEstimateParameter.coor_param)
+  return coor_param_ != NULL ? *coor_param_ : *default_instance_->coor_param_;
 }
-inline ::svaf::MatrixMulParameter* IAICPEstimateParameter::mutable_mxmul_param() {
-  set_has_mxmul_param();
-  if (mxmul_param_ == NULL) mxmul_param_ = new ::svaf::MatrixMulParameter;
-  // @@protoc_insertion_point(field_mutable:svaf.IAICPEstimateParameter.mxmul_param)
-  return mxmul_param_;
+inline ::svaf::CoordiParameter* IAICPEstimateParameter::mutable_coor_param() {
+  set_has_coor_param();
+  if (coor_param_ == NULL) coor_param_ = new ::svaf::CoordiParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IAICPEstimateParameter.coor_param)
+  return coor_param_;
 }
-inline ::svaf::MatrixMulParameter* IAICPEstimateParameter::release_mxmul_param() {
-  clear_has_mxmul_param();
-  ::svaf::MatrixMulParameter* temp = mxmul_param_;
-  mxmul_param_ = NULL;
+inline ::svaf::CoordiParameter* IAICPEstimateParameter::release_coor_param() {
+  clear_has_coor_param();
+  ::svaf::CoordiParameter* temp = coor_param_;
+  coor_param_ = NULL;
   return temp;
 }
-inline void IAICPEstimateParameter::set_allocated_mxmul_param(::svaf::MatrixMulParameter* mxmul_param) {
-  delete mxmul_param_;
-  mxmul_param_ = mxmul_param;
-  if (mxmul_param) {
-    set_has_mxmul_param();
+inline void IAICPEstimateParameter::set_allocated_coor_param(::svaf::CoordiParameter* coor_param) {
+  delete coor_param_;
+  coor_param_ = coor_param;
+  if (coor_param) {
+    set_has_coor_param();
   } else {
-    clear_has_mxmul_param();
+    clear_has_coor_param();
   }
-  // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.mxmul_param)
+  // @@protoc_insertion_point(field_set_allocated:svaf.IAICPEstimateParameter.coor_param)
 }
 
 // -------------------------------------------------------------------
@@ -16221,45 +16499,45 @@ inline void IANDTEstimateParameter::set_allocated_ndt_param(::svaf::NDTParameter
   // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.ndt_param)
 }
 
-// optional .svaf.MatrixMulParameter mxmul_param = 4;
-inline bool IANDTEstimateParameter::has_mxmul_param() const {
+// optional .svaf.CoordiParameter coor_param = 4;
+inline bool IANDTEstimateParameter::has_coor_param() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void IANDTEstimateParameter::set_has_mxmul_param() {
+inline void IANDTEstimateParameter::set_has_coor_param() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void IANDTEstimateParameter::clear_has_mxmul_param() {
+inline void IANDTEstimateParameter::clear_has_coor_param() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void IANDTEstimateParameter::clear_mxmul_param() {
-  if (mxmul_param_ != NULL) mxmul_param_->::svaf::MatrixMulParameter::Clear();
-  clear_has_mxmul_param();
+inline void IANDTEstimateParameter::clear_coor_param() {
+  if (coor_param_ != NULL) coor_param_->::svaf::CoordiParameter::Clear();
+  clear_has_coor_param();
 }
-inline const ::svaf::MatrixMulParameter& IANDTEstimateParameter::mxmul_param() const {
-  // @@protoc_insertion_point(field_get:svaf.IANDTEstimateParameter.mxmul_param)
-  return mxmul_param_ != NULL ? *mxmul_param_ : *default_instance_->mxmul_param_;
+inline const ::svaf::CoordiParameter& IANDTEstimateParameter::coor_param() const {
+  // @@protoc_insertion_point(field_get:svaf.IANDTEstimateParameter.coor_param)
+  return coor_param_ != NULL ? *coor_param_ : *default_instance_->coor_param_;
 }
-inline ::svaf::MatrixMulParameter* IANDTEstimateParameter::mutable_mxmul_param() {
-  set_has_mxmul_param();
-  if (mxmul_param_ == NULL) mxmul_param_ = new ::svaf::MatrixMulParameter;
-  // @@protoc_insertion_point(field_mutable:svaf.IANDTEstimateParameter.mxmul_param)
-  return mxmul_param_;
+inline ::svaf::CoordiParameter* IANDTEstimateParameter::mutable_coor_param() {
+  set_has_coor_param();
+  if (coor_param_ == NULL) coor_param_ = new ::svaf::CoordiParameter;
+  // @@protoc_insertion_point(field_mutable:svaf.IANDTEstimateParameter.coor_param)
+  return coor_param_;
 }
-inline ::svaf::MatrixMulParameter* IANDTEstimateParameter::release_mxmul_param() {
-  clear_has_mxmul_param();
-  ::svaf::MatrixMulParameter* temp = mxmul_param_;
-  mxmul_param_ = NULL;
+inline ::svaf::CoordiParameter* IANDTEstimateParameter::release_coor_param() {
+  clear_has_coor_param();
+  ::svaf::CoordiParameter* temp = coor_param_;
+  coor_param_ = NULL;
   return temp;
 }
-inline void IANDTEstimateParameter::set_allocated_mxmul_param(::svaf::MatrixMulParameter* mxmul_param) {
-  delete mxmul_param_;
-  mxmul_param_ = mxmul_param;
-  if (mxmul_param) {
-    set_has_mxmul_param();
+inline void IANDTEstimateParameter::set_allocated_coor_param(::svaf::CoordiParameter* coor_param) {
+  delete coor_param_;
+  coor_param_ = coor_param;
+  if (coor_param) {
+    set_has_coor_param();
   } else {
-    clear_has_mxmul_param();
+    clear_has_coor_param();
   }
-  // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.mxmul_param)
+  // @@protoc_insertion_point(field_set_allocated:svaf.IANDTEstimateParameter.coor_param)
 }
 
 // -------------------------------------------------------------------

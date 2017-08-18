@@ -17,37 +17,12 @@ IAEstimateLayer::IAEstimateLayer(LayerParameter& layer) : StereoLayer(layer){
 	norm_rad = layer.sacia_param().ia_param().norm_rad();
 	feat_rad = layer.sacia_param().ia_param().feat_rad();
 
-	if (layer.mxmul_param().has_col0() && layer.mxmul_param().has_col1() && layer.mxmul_param().has_col2()){
-		string col[3];
-		col[0] = layer.sacia_param().mxmul_param().col0();
-		col[1] = layer.sacia_param().mxmul_param().col1();
-		col[2] = layer.sacia_param().mxmul_param().col2();
-		stringstream ss;
-		for (int i = 0; i < 2; ++i){
-			ss.clear();
-			ss << col[i];
-			for (int j = 0; j < 3; ++j){
-				ss >> M[i][j];
-			}
-		}
-		LOG(INFO) << "Matrix Opened From Proto.";
-	}
-	else if (layer.sacia_param().mxmul_param().has_filename()){
-		string filename = layer.sacia_param().mxmul_param().filename();
-		FILE *fp = fopen(filename.c_str(), "rb+");
-		CHECK_NOTNULL(fp);
-		fread(&M[0], 4, 4, fp);
-		fread(&M[1], 4, 4, fp);
-		fread(&M[2], 4, 4, fp);
-		fclose(fp);
-		LOG(INFO) << "Matrix Opened From File " << filename;
-	}
-	else{
-		LOG(ERROR) << "No Input Matrix, Create Identify Matrix!";
-		M[0][0] = 1; M[0][1] = 0; M[0][2] = 0; M[0][3] = 0;
-		M[0][0] = 0; M[0][1] = 1; M[0][2] = 0; M[0][3] = 0;
-		M[0][0] = 0; M[0][1] = 0; M[0][2] = 1; M[0][3] = 0;
-	}
+	x = layer.sacia_param().coor_param().x();
+	y = layer.sacia_param().coor_param().y();
+	z = layer.sacia_param().coor_param().z();
+	a = layer.sacia_param().coor_param().a();
+	b = layer.sacia_param().coor_param().b();
+	c = layer.sacia_param().coor_param().c();
 
 	pcdread(targetfile, targetpcd);
 }
