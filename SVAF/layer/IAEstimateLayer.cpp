@@ -62,7 +62,15 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	
 	pcl::PointCloud<pcl::PointXYZ>::Ptr source(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr target(new pcl::PointCloud<pcl::PointXYZ>);
-	pclconvert(*source, pWorld_->pointL);
+
+	if (pWorld_->pointW.empty()){
+		pclconvert(*source, pWorld_->pointL);
+		LOG(INFO) << "SAC-IA use Left Camera Coordinate.";
+	} else{
+		pclconvert(*source, pWorld_->pointW);
+		LOG(INFO) << "SAC-IA use World Coordinate.";
+	}
+	
 	target = targetpcd.makeShared();
 	
 	__t.StartWatchTimer();
