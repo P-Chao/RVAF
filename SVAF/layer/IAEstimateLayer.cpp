@@ -64,6 +64,10 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	pcl::PointCloud<pcl::PointXYZ>::Ptr target(new pcl::PointCloud<pcl::PointXYZ>);
 
 	if (pWorld_->pointW.empty()){
+		if (pWorld_->pointL.empty()){
+			LOG(ERROR) << "\nLoop Cut Short\n";
+			return false;
+		}
 		pclconvert(*source, pWorld_->pointL);
 		LOG(INFO) << "SAC-IA use Left Camera Coordinate.";
 	} else{
