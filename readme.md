@@ -109,7 +109,8 @@ Installation instructions
     在VS中导入属性表之后，在编译程序时仍有可能报错，这是因为使用了许多第三方库。首先请务必开启C++11支持，如果你使用的是VS2013，请确保VS2013升级至Update5，否则在编译boost库相关部分时可能报错。如果同时使用OpenCV和PCL，那么flann库可能发生冲突，需要在报错的`flann`前面加上全局命名空间`::flann`，并且如果需要使用opencv的flann，那么需要使用`cv::flann`来进行空间声明。请务必启用NOMINMAX宏，防止stl库定义min和max，以防止其与STL中的min和max宏名冲突，当然，也可以手工在PCL头文件中max出现处添加括弧标识`(std::max)(a,b)`来避免编译器将max解释为宏。
 8. __添加数据文件__
 
-    下载bgr2luv.dat文件，放置到`SVAF\bgr2luv.dat`和`\AcfDetect\bgr2luv.dat`。该文件是在目标检测时使用的色彩空间转换表，数据过大，不利于git提交和下载，所以分离出来单独下载。
+    [下载bgr2luv.dat文件](http://wp.p-chao.com/data/acf/bgr2luv.dat)，放置到`SVAF\bgr2luv.dat`和`\AcfDetect\bgr2luv.dat`。该文件是在目标检测时使用的色彩空间转换表，数据过大，不利于git提交和下载，所以分离出来单独下载。
+    
 ### 编译过程
 
 1. __Proto文件的编译__
@@ -122,7 +123,7 @@ Installation instructions
 1. [__Camera Calibration Toolbox for Matlab__](http://www.vision.caltech.edu/bouguetj/calib_doc/index.html)
 
     这个工具箱实现了张正友法相机标定，Svaf和标定相关模块的参数需要该工具箱进行离线标定
-2. [__Piotr's Computer Vision Toolbox__](http://vision.ucsd.edu/~pdollar/toolbox/doc/index.html)
+2. [__Piotr's Computer Vision Toolbox__](https://pdollar.github.io/toolbox/)
 
     Svaf中的Adaboost模块采用该工具箱中的算法，使用该工具箱进行离线训练
 3. [__Netscope__](http://ethereon.github.io/netscope/#/editor)
