@@ -516,6 +516,7 @@ API Documentation
 
 Program Control
 ---
+    在框架运行过程中，可以使用以下按键对算法进行暂停、退出、初始化等控制：
 * Q: Quit
 * E: Exit
 * P: Pause
