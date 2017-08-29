@@ -10,6 +10,8 @@ public:
 	~IAEstimateLayer();
 	virtual bool Run(vector<Block>&, vector<Block>&, LayerParameter&, void*);
 protected:
+	vector<float> computeEularAngles(Eigen::Matrix4f& R, bool israd = true);
+
 	string targetfile;
 	int max_iter;
 	float min_cors;
