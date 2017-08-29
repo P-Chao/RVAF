@@ -22,6 +22,7 @@ protected:
 	void pcdread(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud);
 	void pclconvert(pcl::PointCloud<pcl::PointXYZ>& cloud, vector<Point3f>& inpoints);
 	void pclconvert(vector<Point3f>& points, pcl::PointCloud<pcl::PointXYZ>& incloud);
+	std::vector<float> computeEularAngles(Eigen::Matrix4f& R, bool israd = true);
 
 };
 
