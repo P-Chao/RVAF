@@ -64,7 +64,8 @@ Installation instructions
     下载源码，用Visual Studio打开工程，右键解决方案中的StereoVisionAlgorithmFramework工程，点击`属性`打开工程属性窗口
 2. __配置OpenCV__
 
-    需要配置include目录、lib目录、link库列表，也可以使用`#pragma comment(lib, 'opencv_XXX_2413.lib')`来进行链接。如果是动态库，那么还需要在系统的环境变量中加入bin目录，以调用dll。
+    编译好opencv之后，在环境变量中添加`OPENCV_ROOT`项，值为`D:\opencv\build`(opencv路径)，然后属性表会自动加载。
+    如果选择不使用属性表，也可以自己配置include目录、lib目录、link库列表，也可以使用`#pragma comment(lib, 'opencv_XXX_2413.lib')`来进行链接。如果是动态库，那么还需要在系统的环境变量中加入bin目录，以调用dll。
     这里需要表明，如果这里采用动态库，那么在编译下面三个库时，请编译相应的动态库，如果你调用的是OpenCV的静态库，那么在项目属性页面中修改`C++ -> CodeGeneration -> RunTime Libraty: = /MT`,于是在后面编译protobuf、glog和gflags的时候，就也需要做同样的设置。
 
 3. __配置Protobuf__
@@ -87,8 +88,9 @@ Installation instructions
     这样就只需要包含include一个文件夹了，并且特别注意，protobuf的上一层一定要有google这个目录
 6. __配置Matlab__
 
+	为了方便直接调用属性表，我们增加一个环境变量`MATLAB_ROOT`，值为`D:\Program Files\MATLAB\R2017a`
     由于Svaf中一些模块调用了Matlab，所以需要在程序中设置Matlab的include目录和lib目录。
-    点开属性页面，设置include目录为`MATLBA_INSTALL_PATH/extern/include`，32位开发环境设置lib目录为`MATLAB_INSTALL_PATH/extern/lib/win32/microsoft`，64位开发环境设置lib目录为`MATLAB_INSTALL_PATH/extern/lib/win64/microsoft`。
+    点开属性页面，设置include目录为`MATLAB_ROOT/extern/include`，32位开发环境设置lib目录为`MATLAB_ROOT/extern/lib/win32/microsoft`，64位开发环境设置lib目录为`MATLAB_ROOT/extern/lib/win64/microsoft`(如果调用了属性表，这几项会自动加载)。
     由于如下代码已经在Svaf工程中添加，所以无需再设置链接Matlab库。
 
         #pragma comment(lib, 'libeng.lib')
