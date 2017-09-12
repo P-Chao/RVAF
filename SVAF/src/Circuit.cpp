@@ -59,6 +59,15 @@ Circuit::~Circuit(){
 void Circuit::Build(){
 	
 	CHECK_GT(layers_.Size(), 0) << "Layer Count Error!";
+	Node *p = linklist_, *q;
+	while (p){
+		LOG(INFO) << "Destroy Layer [" << p->name << "].";
+		q = p->next;
+		delete p->layer;
+		delete p;
+		p = q;
+	}
+	linklist_ = NULL;
 	for (int i = 0; i < 1 + layers_.Size(); ++i){
 		if (layers_[i].name() == layers_[i].bottom()){
 			linklist_ = new Node(layers_[i].name());
@@ -67,7 +76,7 @@ void Circuit::Build(){
 		}
 		CHECK_EQ(i, layers_.Size() - 1) << "Not Found Start Layer!";
 	}
-	Node *p = linklist_;
+	p = linklist_;
 	while (true){
 		if (layers_[p->name].name() == layers_[p->name].top()){
 			LOG(INFO) << "Build All Layers.";
