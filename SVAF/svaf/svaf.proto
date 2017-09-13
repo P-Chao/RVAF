@@ -60,12 +60,12 @@ message VideoPairParameter{
 }
 
 message CameraDataParameter{
-	optional int64 camere = 1;
+	optional int32 camera = 1;
 }
 
 message CameraPairParameter{
-	optional int64 leftcamera = 1;
-	optional int64 rightcamera = 2;
+	optional int32 leftcamera = 1;
+	optional int32 rightcamera = 2;
 }
 
 message DSPCameraDataParameter{

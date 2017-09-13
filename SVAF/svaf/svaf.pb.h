@@ -1549,23 +1549,23 @@ class CameraDataParameter : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional int64 camere = 1;
-  inline bool has_camere() const;
-  inline void clear_camere();
-  static const int kCamereFieldNumber = 1;
-  inline ::google::protobuf::int64 camere() const;
-  inline void set_camere(::google::protobuf::int64 value);
+  // optional int32 camera = 1;
+  inline bool has_camera() const;
+  inline void clear_camera();
+  static const int kCameraFieldNumber = 1;
+  inline ::google::protobuf::int32 camera() const;
+  inline void set_camera(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:svaf.CameraDataParameter)
  private:
-  inline void set_has_camere();
-  inline void clear_has_camere();
+  inline void set_has_camera();
+  inline void clear_has_camera();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::int64 camere_;
+  ::google::protobuf::int32 camera_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -1628,19 +1628,19 @@ class CameraPairParameter : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional int64 leftcamera = 1;
+  // optional int32 leftcamera = 1;
   inline bool has_leftcamera() const;
   inline void clear_leftcamera();
   static const int kLeftcameraFieldNumber = 1;
-  inline ::google::protobuf::int64 leftcamera() const;
-  inline void set_leftcamera(::google::protobuf::int64 value);
+  inline ::google::protobuf::int32 leftcamera() const;
+  inline void set_leftcamera(::google::protobuf::int32 value);
 
-  // optional int64 rightcamera = 2;
+  // optional int32 rightcamera = 2;
   inline bool has_rightcamera() const;
   inline void clear_rightcamera();
   static const int kRightcameraFieldNumber = 2;
-  inline ::google::protobuf::int64 rightcamera() const;
-  inline void set_rightcamera(::google::protobuf::int64 value);
+  inline ::google::protobuf::int32 rightcamera() const;
+  inline void set_rightcamera(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:svaf.CameraPairParameter)
  private:
@@ -1653,8 +1653,8 @@ class CameraPairParameter : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::int64 leftcamera_;
-  ::google::protobuf::int64 rightcamera_;
+  ::google::protobuf::int32 leftcamera_;
+  ::google::protobuf::int32 rightcamera_;
   friend void  protobuf_AddDesc_svaf_2eproto();
   friend void protobuf_AssignDesc_svaf_2eproto();
   friend void protobuf_ShutdownFile_svaf_2eproto();
@@ -10486,35 +10486,35 @@ VideoPairParameter::mutable__pair() {
 
 // CameraDataParameter
 
-// optional int64 camere = 1;
-inline bool CameraDataParameter::has_camere() const {
+// optional int32 camera = 1;
+inline bool CameraDataParameter::has_camera() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CameraDataParameter::set_has_camere() {
+inline void CameraDataParameter::set_has_camera() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CameraDataParameter::clear_has_camere() {
+inline void CameraDataParameter::clear_has_camera() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CameraDataParameter::clear_camere() {
-  camere_ = GOOGLE_LONGLONG(0);
-  clear_has_camere();
+inline void CameraDataParameter::clear_camera() {
+  camera_ = 0;
+  clear_has_camera();
 }
-inline ::google::protobuf::int64 CameraDataParameter::camere() const {
-  // @@protoc_insertion_point(field_get:svaf.CameraDataParameter.camere)
-  return camere_;
+inline ::google::protobuf::int32 CameraDataParameter::camera() const {
+  // @@protoc_insertion_point(field_get:svaf.CameraDataParameter.camera)
+  return camera_;
 }
-inline void CameraDataParameter::set_camere(::google::protobuf::int64 value) {
-  set_has_camere();
-  camere_ = value;
-  // @@protoc_insertion_point(field_set:svaf.CameraDataParameter.camere)
+inline void CameraDataParameter::set_camera(::google::protobuf::int32 value) {
+  set_has_camera();
+  camera_ = value;
+  // @@protoc_insertion_point(field_set:svaf.CameraDataParameter.camera)
 }
 
 // -------------------------------------------------------------------
 
 // CameraPairParameter
 
-// optional int64 leftcamera = 1;
+// optional int32 leftcamera = 1;
 inline bool CameraPairParameter::has_leftcamera() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -10525,20 +10525,20 @@ inline void CameraPairParameter::clear_has_leftcamera() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void CameraPairParameter::clear_leftcamera() {
-  leftcamera_ = GOOGLE_LONGLONG(0);
+  leftcamera_ = 0;
   clear_has_leftcamera();
 }
-inline ::google::protobuf::int64 CameraPairParameter::leftcamera() const {
+inline ::google::protobuf::int32 CameraPairParameter::leftcamera() const {
   // @@protoc_insertion_point(field_get:svaf.CameraPairParameter.leftcamera)
   return leftcamera_;
 }
-inline void CameraPairParameter::set_leftcamera(::google::protobuf::int64 value) {
+inline void CameraPairParameter::set_leftcamera(::google::protobuf::int32 value) {
   set_has_leftcamera();
   leftcamera_ = value;
   // @@protoc_insertion_point(field_set:svaf.CameraPairParameter.leftcamera)
 }
 
-// optional int64 rightcamera = 2;
+// optional int32 rightcamera = 2;
 inline bool CameraPairParameter::has_rightcamera() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -10549,14 +10549,14 @@ inline void CameraPairParameter::clear_has_rightcamera() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void CameraPairParameter::clear_rightcamera() {
-  rightcamera_ = GOOGLE_LONGLONG(0);
+  rightcamera_ = 0;
   clear_has_rightcamera();
 }
-inline ::google::protobuf::int64 CameraPairParameter::rightcamera() const {
+inline ::google::protobuf::int32 CameraPairParameter::rightcamera() const {
   // @@protoc_insertion_point(field_get:svaf.CameraPairParameter.rightcamera)
   return rightcamera_;
 }
-inline void CameraPairParameter::set_rightcamera(::google::protobuf::int64 value) {
+inline void CameraPairParameter::set_rightcamera(::google::protobuf::int32 value) {
   set_has_rightcamera();
   rightcamera_ = value;
   // @@protoc_insertion_point(field_set:svaf.CameraPairParameter.rightcamera)

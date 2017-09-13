@@ -93,7 +93,7 @@ void Param::InitDataSource(){
 		case svaf::LayerParameter_LayerType_CAMERA:
 			runtype_ = layertype;
 			isbinocular_ = false;
-			camera_[0] = layer.cameradata_param().camere();
+			camera_[0] = layer.cameradata_param().camera();
 			break;
 		case svaf::LayerParameter_LayerType_CAMERA_PAIR:
 			runtype_ = layertype;
