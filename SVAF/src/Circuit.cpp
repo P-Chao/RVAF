@@ -23,6 +23,7 @@
 #include "..\layer\TriangulationLayer.h"
 #include "..\layer\SurfDescriptorLayer.h"
 
+#include <WinBase.h>
 
 namespace svaf{
 
@@ -31,8 +32,9 @@ Figures<float> Circuit::sout_;
 
 string GetTimeString();
 
-Circuit::Circuit(SvafTask& svafTask) : 
+Circuit::Circuit(SvafTask& svafTask, bool use_mapping) : 
 	layers_(svafTask), 
+	useMapping_(use_mapping),
 	linklist_(NULL), 
 	svaf_(svafTask),
 	id_(0){
@@ -40,6 +42,11 @@ Circuit::Circuit(SvafTask& svafTask) :
 	Layer::id = &id_;
 	pause_ms_ = svafTask.pause();
 	world_.rectified = false;
+	if (useMapping_){
+		mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD_MUTEX");
+		fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD");
+		pMsg_ = (LPTSTR)MapViewOfFile(fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+	}
 	Build();
 	Run();
 }
@@ -54,6 +61,11 @@ Circuit::~Circuit(){
 		p = q;
 	}
 	StereoRectifyLayer::ReleaseTable();
+	if (useMapping_){
+		if (!UnmapViewOfFile(fileMapping_)){}
+		CloseHandle(fileMapping_);
+		CloseHandle(mutex_);
+	}
 }
 
 void Circuit::Build(){
@@ -250,6 +262,9 @@ void Circuit::Run(){
 			break;
 		}
 		EndStep();
+		if (!ReciveCmd()){
+			break;
+		}
 	}
 
 	while (!layers_.IsBinocular()){
@@ -268,6 +283,9 @@ void Circuit::Run(){
 			break;
 		}
 		EndStep();
+		if (!ReciveCmd()){
+			break;
+		}
 	}
 
 	Analysis();
@@ -352,6 +370,25 @@ void Circuit::Analysis(){
 		sout_.print2scr();
 	}
 	
+}
+
+bool Circuit::ReciveCmd(){
+	if (!useMapping_){
+		return true;
+	}
+	LPTSTR p = pMsg_;
+	int cmd = ((int*)p)[0];
+	if (cmd == 1){ // exit();
+		LOG(INFO) << "Recived exit command.";
+		return false;
+	} else if (cmd == 2){
+		while (cmd != 3) {
+			WaitForSingleObject(mutex_, INFINITE);
+			cmd = ((int*)p)[0];
+		}
+	}
+	((int*)p)[0] = 0;
+	return true;
 }
 
 string GetTimeString(){

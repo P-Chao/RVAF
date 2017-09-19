@@ -4,6 +4,7 @@
 
 #include "Param.h"
 #include "Figures.h"
+#include <windows.h>
 
 using namespace std;
 using namespace cv;
@@ -64,7 +65,7 @@ typedef struct _Block{
 class Circuit
 {
 public:
-	explicit Circuit(SvafTask&);
+	explicit Circuit(SvafTask&, bool);
 	~Circuit();
 
 	static string time_id_;
@@ -77,9 +78,15 @@ protected:
 	void EndStep();
 	bool Disp();
 	void Analysis();
+	bool ReciveCmd();
 
 protected:
 	cv::VideoCapture cap_[2];
+
+	bool			useMapping_;
+	HANDLE			fileMapping_;
+	HANDLE			mutex_;
+	LPTSTR			pMsg_;
 
 private:
 	int			pause_ms_;
