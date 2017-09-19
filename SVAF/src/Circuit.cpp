@@ -43,9 +43,12 @@ Circuit::Circuit(SvafTask& svafTask, bool use_mapping) :
 	pause_ms_ = svafTask.pause();
 	world_.rectified = false;
 	if (useMapping_){
-		mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD_MUTEX");
-		fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD");
-		pMsg_ = (LPTSTR)MapViewOfFile(fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+		c_mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD_MUTEX");
+		c_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD");
+		c_pMsg_ = (LPTSTR)MapViewOfFile(c_fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+		d_mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_ALG2GUI_DATA_MUTEX");
+		d_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_ALG2GUI_DATA");
+		d_pMsg_ = (LPTSTR)MapViewOfFile(d_fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
 	}
 	Build();
 	Run();
@@ -62,9 +65,12 @@ Circuit::~Circuit(){
 	}
 	StereoRectifyLayer::ReleaseTable();
 	if (useMapping_){
-		if (!UnmapViewOfFile(fileMapping_)){}
-		CloseHandle(fileMapping_);
-		CloseHandle(mutex_);
+		if (!UnmapViewOfFile(c_fileMapping_)){}
+		CloseHandle(c_fileMapping_);
+		CloseHandle(c_mutex_);
+		if (!UnmapViewOfFile(d_fileMapping_)){}
+		CloseHandle(d_fileMapping_);
+		CloseHandle(d_mutex_);
 	}
 }
 
@@ -376,14 +382,14 @@ bool Circuit::ReciveCmd(){
 	if (!useMapping_){
 		return true;
 	}
-	LPTSTR p = pMsg_;
+	LPTSTR p = c_pMsg_;
 	int cmd = ((int*)p)[0];
 	if (cmd == 1){ // exit();
 		LOG(INFO) << "Recived exit command.";
 		return false;
 	} else if (cmd == 2){
 		while (cmd != 3) {
-			WaitForSingleObject(mutex_, INFINITE);
+			WaitForSingleObject(c_mutex_, INFINITE);
 			cmd = ((int*)p)[0];
 		}
 	}

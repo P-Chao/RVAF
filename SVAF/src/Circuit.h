@@ -84,9 +84,12 @@ protected:
 	cv::VideoCapture cap_[2];
 
 	bool			useMapping_;
-	HANDLE			fileMapping_;
-	HANDLE			mutex_;
-	LPTSTR			pMsg_;
+	HANDLE			c_fileMapping_;//cmd
+	HANDLE			c_mutex_;
+	LPTSTR			c_pMsg_;
+	HANDLE			d_fileMapping_;//data
+	HANDLE			d_mutex_;
+	LPTSTR			d_pMsg_;
 
 private:
 	int			pause_ms_;
