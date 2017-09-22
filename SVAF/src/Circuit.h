@@ -79,6 +79,7 @@ protected:
 	bool Disp();
 	void Analysis();
 	bool ReciveCmd();
+	void SendData();
 
 protected:
 	cv::VideoCapture cap_[2];

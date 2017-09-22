@@ -46,7 +46,7 @@ Circuit::Circuit(SvafTask& svafTask, bool use_mapping) :
 		c_mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD_MUTEX");
 		c_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD");
 		c_pMsg_ = (LPTSTR)MapViewOfFile(c_fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
-		d_mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_ALG2GUI_DATA_MUTEX");
+		d_mutex_ = CreateEvent(nullptr, false, false, "SVAF_ALG2GUI_DATA_MUTEX");
 		d_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_ALG2GUI_DATA");
 		d_pMsg_ = (LPTSTR)MapViewOfFile(d_fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
 	}
@@ -289,9 +289,7 @@ void Circuit::Run(){
 			break;
 		}
 		EndStep();
-		if (!ReciveCmd()){
-			break;
-		}
+		
 	}
 
 	Analysis();
@@ -360,6 +358,8 @@ void Circuit::InitStep(){
 
 void Circuit::EndStep(){
 	id_++;
+	SendData();
+	ReciveCmd();
 }
 
 void Circuit::Analysis(){
@@ -395,6 +395,24 @@ bool Circuit::ReciveCmd(){
 	}
 	((int*)p)[0] = 0;
 	return true;
+}
+
+using SyncBucket = struct{
+	char	head[16];
+	char	message[10][256];
+};
+
+void Circuit::SendData(){
+
+	if (!useMapping_){
+		return;
+	}
+
+	LPTSTR p = d_pMsg_;
+	SyncBucket bucket;
+	sprintf(bucket.message[0], "123");
+	memcpy(p, &bucket, sizeof(bucket));
+	SetEvent(d_mutex_);
 }
 
 string GetTimeString(){
