@@ -55,12 +55,37 @@ typedef struct _Block{
 
 	bool isSave;
 	bool isShow;
+	bool isOutput;
 
-	_Block(string str, Mat& mat, bool isshow = true, bool issave = false) 
-		:name(str), image(mat), isShow(isshow), isSave(issave), pMatch(NULL),
+	_Block(string str, Mat& mat, bool isshow = true, bool issave = false, bool isout = false) 
+		:name(str), image(mat), isShow(isshow), isSave(issave), isOutput(isout), pMatch(NULL),
 		roi(Rect(0, 0, mat.cols, mat.rows)){}
-	_Block() : roi(Rect(0, 0, 0, 0)), isShow(true), isSave(false), pMatch(NULL){}
+	_Block() : roi(Rect(0, 0, 0, 0)), isShow(true), isSave(false), isOutput(false), pMatch(NULL){}
 } Block;
+
+enum SvafApp{
+	NONE = 0, // gui_type = PROTO
+	S_SHOW = 1, // ONE
+	B_SHOW = 2, // TWO
+	S_RECTIFY = 3, // ONE
+	B_RECTIFY = 4, // TWO
+	S_DETECT = 5, // ONE
+	B_DETECT = 6, // TWO
+	//S_TRACK = 7, // ONE
+	//B_TRACK = 8, // TWO
+	S_POINT = 9, // ONE
+	B_POINT = 10, // TWO
+	S_POINTDESP = 11, // ONE
+	B_POINTDESP = 12, // TWO
+	S_SUPIX = 13, // ONE
+	B_SUPIX = 14, // TWO
+
+	POINT_MATCH = 21, // ONE_BIG
+	RANSAC_MATCH = 22, // ONE_BIG
+	STEREO_MATCH = 23, // FOUR
+	POINT_CLOUD = 24, // FOUR
+	SITCH = 25 // THREE_BIG
+};
 
 class Circuit
 {
@@ -97,6 +122,7 @@ private:
 	Param		layers_;
 	Block		block_;
 	SvafTask	svaf_;
+	SvafApp		tasktype_;
 	Node*		linklist_;
 	vector<Block>	images_;  // always clear begin frame;
 	vector<Block>	disp_;

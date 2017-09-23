@@ -41,6 +41,7 @@ Circuit::Circuit(SvafTask& svafTask, bool use_mapping) :
 	Layer::figures = &sout_;
 	Layer::id = &id_;
 	pause_ms_ = svafTask.pause();
+	tasktype_ = SvafApp::NONE;
 	world_.rectified = false;
 	if (useMapping_){
 		c_mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD_MUTEX");
@@ -397,9 +398,17 @@ bool Circuit::ReciveCmd(){
 	return true;
 }
 
-using SyncBucket = struct{
-	char	head[16];
-	char	message[10][256];
+using Bucket = struct{
+	char	head[4];
+	char	message[10][128];
+	int		msgCount;
+	int		frameid;
+	int		imgoffset;
+	int		frameCount;
+	int		width[8];
+	int		height[8];
+	int		channel[8];
+	int		pcdoffset;
 };
 
 void Circuit::SendData(){
@@ -409,9 +418,15 @@ void Circuit::SendData(){
 	}
 
 	LPTSTR p = d_pMsg_;
-	SyncBucket bucket;
-	sprintf(bucket.message[0], "123");
-	memcpy(p, &bucket, sizeof(bucket));
+	char *pBuf = p;
+	Bucket *pBucket = (Bucket*)pBuf;
+	sprintf(pBucket->head, "pch");
+	sprintf(pBucket->message[0], "123");
+
+	for (int i = 0; i < disp_.size(); ++i){
+		
+	}
+	
 	SetEvent(d_mutex_);
 }
 
