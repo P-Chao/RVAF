@@ -4,12 +4,14 @@ namespace svaf{
 
 size_t *Layer::id = NULL;
 Figures<> *Layer::figures = NULL;
+SvafApp Layer::task_type = SvafApp::NONE;
 
 Layer::Layer()
 {
 }
 
 Layer::Layer(LayerParameter& layer){
+	__bout = false;
 	__name = layer.name();
 	__show = layer.show();
 	__save = layer.save();

@@ -90,7 +90,7 @@ enum SvafApp{
 class Circuit
 {
 public:
-	explicit Circuit(SvafTask&, bool);
+	explicit Circuit(SvafTask&, bool, int);
 	~Circuit();
 
 	static string time_id_;
@@ -122,7 +122,6 @@ private:
 	Param		layers_;
 	Block		block_;
 	SvafTask	svaf_;
-	SvafApp		tasktype_;
 	Node*		linklist_;
 	vector<Block>	images_;  // always clear begin frame;
 	vector<Block>	disp_;

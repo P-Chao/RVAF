@@ -56,10 +56,12 @@ public:
 public:
 	static Figures<> *figures;
 	static size_t *id;
+	static SvafApp task_type;
 protected:
 	Timer __t;
 	bool  __show;
 	bool  __save;
+	bool  __bout;
 	bool  __logi;
 	bool  __logt;
 	string __name;

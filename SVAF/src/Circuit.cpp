@@ -32,7 +32,7 @@ Figures<float> Circuit::sout_;
 
 string GetTimeString();
 
-Circuit::Circuit(SvafTask& svafTask, bool use_mapping) : 
+Circuit::Circuit(SvafTask& svafTask, bool use_mapping, int task_type) : 
 	layers_(svafTask), 
 	useMapping_(use_mapping),
 	linklist_(NULL), 
@@ -40,8 +40,8 @@ Circuit::Circuit(SvafTask& svafTask, bool use_mapping) :
 	id_(0){
 	Layer::figures = &sout_;
 	Layer::id = &id_;
+	Layer::task_type = SvafApp(task_type);
 	pause_ms_ = svafTask.pause();
-	tasktype_ = SvafApp::NONE;
 	world_.rectified = false;
 	if (useMapping_){
 		c_mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD_MUTEX");
@@ -402,18 +402,17 @@ using Bucket = struct{
 	char	head[4];
 	char	message[10][128];
 	int		msgCount;
-	int		frameid;
-	int		imgoffset;
-	int		frameCount;
-	int		width[8];
-	int		height[8];
-	int		channel[8];
-	int		pcdoffset;
+	int		imgCount;
+	int		cols[8];
+	int		rows[8];
+	int		chns[8];
+	int		offs[8];
+	int		PCoff;
 };
 
 void Circuit::SendData(){
 
-	if (!useMapping_){
+	if (!useMapping_ || !d_pMsg_){
 		return;
 	}
 
@@ -422,10 +421,27 @@ void Circuit::SendData(){
 	Bucket *pBucket = (Bucket*)pBuf;
 	sprintf(pBucket->head, "pch");
 	sprintf(pBucket->message[0], "123");
+	pBucket->msgCount = 1;
 
+	int frameCount = 0;
+	int offset = sizeof(Bucket);
 	for (int i = 0; i < disp_.size(); ++i){
-		
+		if (disp_[i].isOutput && (!disp_[i].image.empty()) && frameCount < 8){
+			int cols = disp_[i].image.cols;
+			int rows = disp_[i].image.rows;
+			int chns = disp_[i].image.channels();
+			int length = cols * rows * chns;
+			memcpy(pBuf + offset, disp_[i].image.data, length);
+			pBucket->cols[frameCount] = cols;
+			pBucket->rows[frameCount] = rows;
+			pBucket->chns[frameCount] = chns;
+			pBucket->offs[frameCount] = offset;
+			offset += (cols * rows * chns);
+			frameCount++;
+		}
 	}
+	pBucket->imgCount = frameCount;
+	pBucket->PCoff = offset;
 	
 	SetEvent(d_mutex_);
 }

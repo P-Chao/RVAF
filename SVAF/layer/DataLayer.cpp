@@ -36,9 +36,15 @@ bool DataLayer::Run(std::vector<Block>& images, vector<Block>& disp, LayerParame
 		}
 	}
 
-	if (__show || __save){
+	if (task_type == SvafApp::S_SHOW || task_type == SvafApp::B_SHOW || task_type == SvafApp::SITCH){
+		__bout = true;
+	} else {
+		__bout = false;
+	}
+
+	if (__show || __save || __bout){
 		for (int i = 0; i < images.size(); ++i){
-			disp.push_back(Block(images[i].name, images[i].image, __show, __save));
+			disp.push_back(Block(images[i].name, images[i].image, __show, __save, __bout));
 		}
 	}
 	return true;
