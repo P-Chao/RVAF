@@ -237,9 +237,15 @@ bool StereoRectifyLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 	pWorld_->rectified = true;
 	LOG(INFO) << "Rectified two image.";
 
+	if (task_type == SvafApp::S_RECTIFY || task_type == SvafApp::B_RECTIFY){
+		__bout = true;
+	} else {
+		__bout = false;
+	}
+
 	if (__show || __save){
-		disp.push_back(Block(images[0].name + "rectified", images[0].image, __show, __save));
-		disp.push_back(Block(images[1].name + "rectified", images[1].image, __show, __save));
+		disp.push_back(Block(images[0].name + "rectified", images[0].image, __show, __save, __bout));
+		disp.push_back(Block(images[1].name + "rectified", images[1].image, __show, __save, __bout));
 	}
 
 	return true;

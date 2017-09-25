@@ -34,11 +34,18 @@ bool EadpMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 	if (__logt){
 		(*figures)[__name + "_t"][*id] = (float)__t;
 	}
-	if (__show || __save){
+
+	if (task_type == SvafApp::STEREO_MATCH){
+		__bout = true;
+	} else {
+		__bout = false;
+	}
+
+	if (__show || __save || __bout){
 		disp.push_back(Block("l_disp", l_disp, __show, __save));
 		disp.push_back(Block("r_disp", r_disp, __show, __save));
-		disp.push_back(Block("check", check, __show, __save));
-		disp.push_back(Block("fill", fill, __show, __save));
+		disp.push_back(Block("check", check, __show, __save, __bout));
+		disp.push_back(Block("fill", fill, __show, __save, __bout));
 	}
 	LOG(INFO) << "disparity map has been computed.";
 	CHECK_EQ(l_disp.type(), CV_16U) << "disparity map type error!";

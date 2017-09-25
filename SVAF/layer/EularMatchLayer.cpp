@@ -45,11 +45,17 @@ bool EularMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		}
 		LOG(INFO) << "Eular Matched <" << images[0].matches.size() << "> points.";
 
-		if (__show || __save){
+		if (task_type == SvafApp::POINT_MATCH){
+			__bout = true;
+		} else {
+			__bout = false;
+		}
+
+		if (__show || __save || __bout){
 			Mat img_match;
 			drawMatches(images[0].image, images[0].keypoint, images[1].image, images[1].keypoint,
 				images[0].matches, img_match);
-			disp.push_back(Block("Eular Matched", img_match, __show, __save));
+			disp.push_back(Block("Eular Matched", img_match, __show, __save, __bout));
 		}
 
 		if (images[0].matches.size() == 0){

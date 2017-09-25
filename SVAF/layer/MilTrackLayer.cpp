@@ -299,9 +299,15 @@ void MilTrackLayer::RecoverScale(vector<Block>& images, vector<Block>& disp){
 			images[i].roi.width = width;
 			images[i].roi.height = height;
 
-			if (__show || __save){
+			if (task_type == SvafApp::S_DETECT || task_type == SvafApp::B_DETECT){
+				__bout = true;
+			} else {
+				__bout = false;
+			}
+
+			if (__show || __save || __bout){
 				rectangle(disp_img, Rect(x, y, width, height), Scalar(255, 255, 255), 2);
-				disp.push_back(Block(images[i].name + " Track", disp_img, __show, __save));
+				disp.push_back(Block(images[i].name + " Track", disp_img, __show, __save, __bout));
 			}
 
 			images[i].image = images[i].image(Rect(x, y, width, height)).clone();
@@ -322,9 +328,17 @@ void MilTrackLayer::RecoverScale(vector<Block>& images, vector<Block>& disp){
 			images[i].roi.width = width;
 			images[i].roi.height = height;
 
-			if (__show || __save){
+			if (task_type == SvafApp::S_DETECT || task_type == SvafApp::B_DETECT ||
+				task_type == SvafApp::PC_TRIANGLE || task_type == SvafApp::PC_MULMATRIX ||
+				task_type == SvafApp::PC_REGISTRATION || task_type == SvafApp::PR_CENTER){
+				__bout = true;
+			} else {
+				__bout = false;
+			}
+
+			if (__show || __save || __bout){
 				rectangle(disp_img, Rect(x, y, width, height), Scalar(255, 255, 255), 2);
-				disp.push_back(Block(images[i].name + " Track", disp_img, __show, __save));
+				disp.push_back(Block(images[i].name + " Track", disp_img, __show, __save, __bout));
 			}
 
 			images[i].image = images[i].image(Rect(x, y, width, height)).clone();

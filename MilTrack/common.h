@@ -89,7 +89,7 @@ struct TrackParam{
 
 	int				numFeat = 250;
 	int				numSel = 50;
-	float			lRate = 0.85;
+	float			lRate = 0.85f;
 	vector<int>		selectors;
 	vector<Haar*>	haars;
 	vector<Weak>	weakclf;

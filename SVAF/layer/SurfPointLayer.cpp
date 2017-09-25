@@ -34,7 +34,14 @@ bool SurfPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 		}
 		LOG(INFO) << "Surf Detected <" << images[i].points.size() << "> points";
 	}
-	if (__show || __save){
+
+	if (task_type == SvafApp::S_POINT || task_type == SvafApp::B_POINT || task_type == SvafApp::S_POINTDESP || task_type == SvafApp::B_POINTDESP){
+		__bout = true;
+	} else {
+		__bout = false;
+	}
+
+	if (__show || __save || __bout){
 		for (int i = 0; i < images.size(); ++i){
 			Mat mat = images[i].image.clone();
 			if (images[i].points.size() > 0){
@@ -50,7 +57,7 @@ bool SurfPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 					}
 				}
 			}
-			disp.push_back(Block(images[i].name + " Surf Point", mat, __show, __save));
+			disp.push_back(Block(images[i].name + " Surf Point", mat, __show, __save, __bout));
 		}
 	}
 	return true;

@@ -83,14 +83,18 @@ enum SvafApp{
 	POINT_MATCH = 21, // ONE_BIG
 	RANSAC_MATCH = 22, // ONE_BIG
 	STEREO_MATCH = 23, // FOUR
-	POINT_CLOUD = 24, // FOUR
-	SITCH = 25 // THREE_BIG
+	PC_TRIANGLE = 24, // THREE_BIG
+	PC_MULMATRIX = 25, // THREE_BIG
+	PC_REGISTRATION = 26, // FOUR
+	PR_CENTER = 27, // TWO
+
+	SITCH = 31 // THREE_BIG
 };
 
 class Circuit
 {
 public:
-	explicit Circuit(SvafTask&, bool, int);
+	explicit Circuit(SvafTask&, bool);
 	~Circuit();
 
 	static string time_id_;

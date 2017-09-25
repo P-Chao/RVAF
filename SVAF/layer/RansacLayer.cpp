@@ -58,7 +58,13 @@ bool RansacLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter
 	LOG(INFO) << "Before Ransac: " << mask.size();
 	LOG(INFO) << "After Ransac: " << count;
 
-	if (__show || __save){
+	if (task_type == SvafApp::RANSAC_MATCH){
+		__bout = true;
+	} else {
+		__bout = false;
+	}
+
+	if (__show || __save || __bout){
 		Mat mat0 = images[0].image.clone();
 		Mat mat1 = images[0].pMatch->image.clone();
 		Rect roi0(0, 0, mat0.cols, mat0.rows);
@@ -78,7 +84,7 @@ bool RansacLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter
 			pt1.x += mat0.cols;
 			line(image, pt0, pt1, Scalar(255, 128, 0));
 		}
-		disp.push_back(Block("Ransac", image, __show, __save));
+		disp.push_back(Block("Ransac", image, __show, __save, __bout));
 	}
 
 	return true;

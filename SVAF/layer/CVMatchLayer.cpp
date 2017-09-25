@@ -58,11 +58,17 @@ bool CVMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 
 	(this->*ptr)(images, disp);
 
-	if (__show || __save){
+	if (task_type == SvafApp::POINT_MATCH){
+		__bout = true;
+	} else {
+		__bout = false;
+	}
+
+	if (__show || __save || __bout){
 		Mat img_match;
 		drawMatches(images[0].image, images[0].keypoint, images[1].image, images[1].keypoint,
 			images[0].matches, img_match);
-		disp.push_back(Block(layername + matchname, img_match, __show, __save));
+		disp.push_back(Block(layername + matchname, img_match, __show, __save, __bout));
 	}
 
 	return true;

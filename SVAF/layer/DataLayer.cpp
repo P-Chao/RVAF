@@ -36,7 +36,8 @@ bool DataLayer::Run(std::vector<Block>& images, vector<Block>& disp, LayerParame
 		}
 	}
 
-	if (task_type == SvafApp::S_SHOW || task_type == SvafApp::B_SHOW || task_type == SvafApp::SITCH){
+	if (task_type == SvafApp::S_SHOW || task_type == SvafApp::B_SHOW || task_type == SvafApp::SITCH ||
+		task_type == SvafApp::STEREO_MATCH){
 		__bout = true;
 	} else {
 		__bout = false;

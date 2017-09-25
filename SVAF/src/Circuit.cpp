@@ -32,7 +32,7 @@ Figures<float> Circuit::sout_;
 
 string GetTimeString();
 
-Circuit::Circuit(SvafTask& svafTask, bool use_mapping, int task_type) : 
+Circuit::Circuit(SvafTask& svafTask, bool use_mapping) : 
 	layers_(svafTask), 
 	useMapping_(use_mapping),
 	linklist_(NULL), 
@@ -40,7 +40,7 @@ Circuit::Circuit(SvafTask& svafTask, bool use_mapping, int task_type) :
 	id_(0){
 	Layer::figures = &sout_;
 	Layer::id = &id_;
-	Layer::task_type = SvafApp(task_type);
+	Layer::task_type = SvafApp::NONE;
 	pause_ms_ = svafTask.pause();
 	world_.rectified = false;
 	if (useMapping_){
@@ -128,113 +128,153 @@ void Circuit::Build(){
 		case svaf::LayerParameter_LayerType_KINECT:
 		case svaf::LayerParameter_LayerType_IMAGE_FOLDER:
 		case svaf::LayerParameter_LayerType_IMAGE_PAIR_FOLDER:
+			Layer::task_type = SvafApp::S_SHOW;
 			layerinstance = new DataLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_ADABOOST:
+			Layer::task_type = SvafApp::S_DETECT;
 			layerinstance = new AdaboostLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_MILTRACK:
+			Layer::task_type = SvafApp::S_DETECT;
 			layerinstance = new MilTrackLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_BITTRACK:
+			Layer::task_type = SvafApp::S_DETECT;
 			layerinstance = new BinoTrackLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_SIFT_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			break;
 		case svaf::LayerParameter_LayerType_SURF_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			layerinstance = new SurfPointLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_STAR_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			break;
 		case svaf::LayerParameter_LayerType_BRISK_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			break;
 		case svaf::LayerParameter_LayerType_FAST_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			break;
 		case svaf::LayerParameter_LayerType_ORB_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			break;
 		case svaf::LayerParameter_LayerType_KAZE_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			break;
 		case svaf::LayerParameter_LayerType_HARRIS_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			break;
 		case svaf::LayerParameter_LayerType_CV_POINT:
+			Layer::task_type = SvafApp::S_POINT;
 			layerinstance = new CVPointLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_SIFT_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
 		case svaf::LayerParameter_LayerType_SURF_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			layerinstance = new SurfDescriptorLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_STAR_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
 		case svaf::LayerParameter_LayerType_BRIEF_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
 		case svaf::LayerParameter_LayerType_CV_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			layerinstance = new CVDesciptorLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_BRISK_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
 		case svaf::LayerParameter_LayerType_FAST_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
 		case svaf::LayerParameter_LayerType_ORB_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
 		case svaf::LayerParameter_LayerType_KAZE_DESP:
+			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
 		case svaf::LayerParameter_LayerType_KDTREE_MATCH:
+			Layer::task_type = SvafApp::POINT_MATCH;
 			break;
 		case svaf::LayerParameter_LayerType_EULAR_MATCH:
+			Layer::task_type = SvafApp::POINT_MATCH;
 			layerinstance = new EularMatchLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_RANSAC:
+			Layer::task_type = SvafApp::RANSAC_MATCH;
 			layerinstance = new RansacLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_BF_MATCH:
+			Layer::task_type = SvafApp::RANSAC_MATCH;
 			break;
 		case svaf::LayerParameter_LayerType_FLANN_MATCH:
+			Layer::task_type = SvafApp::RANSAC_MATCH;
 			break;
 		case svaf::LayerParameter_LayerType_EC_MATCH:
+			Layer::task_type = SvafApp::RANSAC_MATCH;
 			layerinstance = new ECMatchLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_CV_MATCH:
+			Layer::task_type = SvafApp::RANSAC_MATCH;
 			layerinstance = new CVMatchLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_SGM_MATCH:
+			Layer::task_type = SvafApp::STEREO_MATCH;
 			layerinstance = new SgmMatchLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_EADP_MATCH:
+			Layer::task_type = SvafApp::STEREO_MATCH;
 			layerinstance = new EadpMatchLayer(layer);
 			break;
 		case svaf::LayerParameter_LayerType_TRIANG:
+			Layer::task_type = SvafApp::PC_TRIANGLE;
 			layerinstance = new TriangulationLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_MXMUL:
+			Layer::task_type = SvafApp::PC_MULMATRIX;
 			layerinstance = new MatrixMulLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_CENTER_POS:
+			Layer::task_type = SvafApp::PR_CENTER;
 			layerinstance = new CenterPointLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_IA_EST:
+			Layer::task_type = SvafApp::PC_REGISTRATION;
 			layerinstance = new IAEstimateLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_IAICP_EST:
+			Layer::task_type = SvafApp::PC_REGISTRATION;
 			layerinstance = new ICPEstimateLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_IANDT_EST:
+			Layer::task_type = SvafApp::PC_REGISTRATION;
 			layerinstance = new NDTEstimateLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_RECTIFY:
+			Layer::task_type = SvafApp::S_RECTIFY;
 			layerinstance = new StereoRectifyLayer(layer);
 			param = (void*)&world_;
 			break;
 		case svaf::LayerParameter_LayerType_SUPIX_SEG:
+			Layer::task_type = SvafApp::S_SUPIX;
 			layerinstance = new SupixSegLayer(layer);
 			break;
 		default:
+			Layer::task_type = SvafApp::NONE;
 			layerinstance = NULL;
 			break;
 		}

@@ -250,8 +250,16 @@ bool AdaboostLayer::ResultROI(vector<Block>& images, vector<Block>& disp){
 				Scalar(255, 255, 255), 2);
 		}
 
-		if (__show || __save){
-			disp.push_back(Block(images[i].name + " Adaboost", disp_img, __show, __save));
+		if (task_type == SvafApp::S_DETECT || task_type == SvafApp::B_DETECT || 
+			task_type == SvafApp::PC_TRIANGLE || task_type == SvafApp::PC_MULMATRIX || 
+			task_type == SvafApp::PC_REGISTRATION || task_type == SvafApp::PR_CENTER){
+			__bout = true;
+		} else {
+			__bout = false;
+		}
+
+		if (__show || __save || __bout){
+			disp.push_back(Block(images[i].name + " Adaboost", disp_img, __show, __save, __bout));
 		}
 
 		if (result_rect[i].size() == 0){

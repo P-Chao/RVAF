@@ -82,11 +82,17 @@ bool CVPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 
 	(this->*ptr)(images, disp);
 
-	if (__show || __save){
+	if (task_type == SvafApp::S_POINT || task_type == SvafApp::B_POINT || task_type == SvafApp::S_POINTDESP || task_type == SvafApp::B_POINTDESP){
+		__bout = true;
+	} else {
+		__bout = false;
+	}
+
+	if (__show || __save || __bout){
 		for (int i = 0; i < images.size(); ++i){
 			Mat img_point;
 			drawKeypoints(images[i].image, images[i].keypoint, img_point);
-			disp.push_back(Block(images[i].name + featname + __name, img_point, __show, __save));
+			disp.push_back(Block(images[i].name + featname + __name, img_point, __show, __save, __bout));
 		}
 	}
 
