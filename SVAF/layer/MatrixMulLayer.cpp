@@ -62,6 +62,20 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 		(*figures)[__name + "_t"][*id] = (float)__t;
 	}
 	
+	if (Layer::task_type == PC_MULMATRIX){
+		__bout = true;
+	} else{
+		__bout = false;
+	}
+
+	if (__bout){
+		Mat im;
+		Block block("Point Cloud World", im, false, false, __bout);
+		block.isOutput3DPoint = true;
+		block.point3d = pWorld->pointW;
+		disp.push_back(block);
+	}
+
 	char loginfo[160];
 	string logstr;
 	for (int i = 0; i < pWorld->xl.size(); ++i){

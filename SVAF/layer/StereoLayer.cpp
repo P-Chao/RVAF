@@ -30,8 +30,7 @@ void StereoLayer::pcdsave(string filename, vector<Point3f>& points, bool is_dens
 	if (!cloud.empty()){
 		pcl::io::savePCDFileASCII(filename, cloud);
 		LOG(INFO) << filename << " Saved <" << cloud.size() << "> Points.";
-	}
-	else{
+	} else{
 		LOG(ERROR) << "PCL Write Error, Empty Cloud.";
 	}
 	return;

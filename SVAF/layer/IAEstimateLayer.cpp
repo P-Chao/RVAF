@@ -86,7 +86,13 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		(*figures)[__name + "_t"][*id] = (float)__t;
 	}
 	
-	if (__show || __save){
+	if (Layer::task_type == PC_REGISTRATION){
+		__bout = true;
+	} else{
+		__bout = false;
+	}
+
+	if (__show || __save || __bout){
 		pcl::transformPointCloud(*target, *target, init_transform);
 		pcl::PointCloud<pcl::PointXYZRGB>::Ptr merged = pc::coloredMerge(source, target);
 		if (__save){
@@ -94,6 +100,47 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		}
 		if (__show){
 			pc::viewPair(cloud1ds, cloud2ds, source, target);
+		}
+		if (__bout){
+			Mat im;
+			float x, y, z, r, g, b;
+			Block block("ia_ori", im, false, false, __bout);
+			block.isOutput3DPoint = true;
+			for (int i = 0; i < cloud1ds->points.size(); ++i){
+				x = cloud1ds->points[i].x;
+				y = cloud1ds->points[i].y;
+				z = cloud1ds->points[i].z;
+				block.point3d.push_back(Point3f(x, y, x));
+				block.color3d.push_back(Color3f(0.0f, 1.0f, 0.0f));
+			}
+			for (int i = 0; i < cloud2ds->points.size(); ++i){
+				x = cloud2ds->points[i].x;
+				y = cloud2ds->points[i].y;
+				z = cloud2ds->points[i].z;
+				r = 0; g = 0; b = 1.0f;
+				block.point3d.push_back(Point3f(x, y, x));
+				block.color3d.push_back(Color3f(1.0f, 0.0f, 0.0f));
+			}
+			disp.push_back(block);
+
+			Block block2("ia_est", im, false, false, __bout);
+			block2.isOutput3DPoint = true;
+			for (int i = 0; i < source->points.size(); ++i){
+				x = source->points[i].x;
+				y = source->points[i].y;
+				z = source->points[i].z;
+				block2.point3d.push_back(Point3f(x, y, x));
+				block2.color3d.push_back(Color3f(0.0f, 1.0f, 0.0f));
+			}
+			for (int i = 0; i < target->points.size(); ++i){
+				x = target->points[i].x;
+				y = target->points[i].y;
+				z = target->points[i].z;
+				r = 0; g = 0; b = 1.0f;
+				block2.point3d.push_back(Point3f(x, y, x));
+				block2.color3d.push_back(Color3f(1.0f, 0.0f, 0.0f));
+			}
+			disp.push_back(block2);
 		}
 	}
 

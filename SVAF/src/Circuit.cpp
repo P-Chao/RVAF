@@ -447,7 +447,10 @@ using Bucket = struct{
 	int		rows[8];
 	int		chns[8];
 	int		offs[8];
-	int		PCoff;
+	int		PointSize[4];
+	int		PointChns[4];// xyz(3) or xyzrgb(6)
+	int		PointOffs[4];
+	int		pclCount;
 };
 
 void Circuit::SendData(){
@@ -464,9 +467,10 @@ void Circuit::SendData(){
 	pBucket->msgCount = 1;
 
 	int frameCount = 0;
+	int pointCount = 0;
 	int offset = sizeof(Bucket);
 	for (int i = 0; i < disp_.size(); ++i){
-		if (disp_[i].isOutput && (!disp_[i].image.empty()) && frameCount < 8){
+		if (disp_[i].isOutput && (!disp_[i].isOutput3DPoint) && (!disp_[i].image.empty()) && frameCount < 8){
 			int cols = disp_[i].image.cols;
 			int rows = disp_[i].image.rows;
 			int chns = disp_[i].image.channels();
@@ -479,9 +483,39 @@ void Circuit::SendData(){
 			offset += (cols * rows * chns);
 			frameCount++;
 		}
+		if (disp_[i].isOutput && disp_[i].isOutput3DPoint && pointCount < 4){
+			int count = disp_[i].point3d.size();
+			if (count <= 0){
+				continue;
+			}
+			int chns = (disp_[i].color3d.size() == disp_[i].point3d.size()) ? 6 : 3;
+			float *points = (float *)(pBuf + offset);
+			if (chns == 3){
+				for (int j = 0; j < count; ++j){
+					points[j * 3 + 0] = disp_[i].point3d[j].x;
+					points[j * 3 + 1] = disp_[i].point3d[j].y;
+					points[j * 3 + 2] = disp_[i].point3d[j].z;
+				}
+			} else{
+				for (int j = 0; j < count; ++j){
+					points[j * 3 + 0] = disp_[i].point3d[j].x;
+					points[j * 3 + 1] = disp_[i].point3d[j].y;
+					points[j * 3 + 2] = disp_[i].point3d[j].z;
+					points[j * 3 + 3] = disp_[i].color3d[j].r;
+					points[j * 3 + 4] = disp_[i].color3d[j].g;
+					points[j * 3 + 5] = disp_[i].color3d[j].b;
+				}
+			}
+			memcpy(pBuf + offset, points, count * chns * sizeof(float));
+			pBucket->PointSize[pointCount] = count;
+			pBucket->PointChns[pointCount] = chns;
+			pBucket->PointOffs[pointCount] = offset;
+			offset += (count * chns * sizeof(float));
+			pointCount++;
+		}
 	}
 	pBucket->imgCount = frameCount;
-	pBucket->PCoff = offset;
+	pBucket->pclCount = pointCount;
 	
 	SetEvent(d_mutex_);
 }

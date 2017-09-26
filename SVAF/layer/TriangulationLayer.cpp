@@ -67,6 +67,20 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 		(*figures)[__name + "_t"][*id] = (float)__t;
 	}
 
+	if (Layer::task_type == PC_TRIANGLE){
+		__bout = true;
+	} else{
+		__bout = false;
+	}
+
+	if (__bout){
+		Mat im;
+		Block block("Point Cloud Camera", im, false, false, __bout);
+		block.isOutput3DPoint = true;
+		block.point3d = pWorld_->pointW;
+		disp.push_back(block);
+	}
+
 	if (pWorld_->pointL.size() < 20){
 		for (int i = 0; i < pWorld_->xl.size(); ++i){
 			sprintf(loginfo, "(%8.3f, %8.3f) (%8.3f, %8.3f)\t(%8.3f, %8.3f, %8.3f)\n",

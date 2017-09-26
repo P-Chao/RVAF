@@ -36,6 +36,14 @@ typedef struct _World{
 	vector<Point2f> matchpt2;
 } World;
 
+struct Color3f{
+	float r;
+	float g;
+	float b;
+	Color3f(){}
+	Color3f(float rr, float gg, float bb) : r(rr), g(gg), b{ bb }{}
+};
+
 typedef struct _Block{
 	string	name;
 	Mat		image;
@@ -52,15 +60,17 @@ typedef struct _Block{
 	_Block*	pMatch;
 	vector<int>		ptidx;
 	vector<Point3f>	point3d;
+	vector<Color3f> color3d;
 
 	bool isSave;
 	bool isShow;
 	bool isOutput;
+	bool isOutput3DPoint;
 
 	_Block(string str, Mat& mat, bool isshow = true, bool issave = false, bool isout = false) 
-		:name(str), image(mat), isShow(isshow), isSave(issave), isOutput(isout), pMatch(NULL),
+		:name(str), image(mat), isShow(isshow), isSave(issave), isOutput(isout), isOutput3DPoint(false), pMatch(NULL),
 		roi(Rect(0, 0, mat.cols, mat.rows)){}
-	_Block() : roi(Rect(0, 0, 0, 0)), isShow(true), isSave(false), isOutput(false), pMatch(NULL){}
+	_Block() : roi(Rect(0, 0, 0, 0)), isShow(true), isSave(false), isOutput(false), isOutput3DPoint(false), pMatch(NULL){}
 } Block;
 
 enum SvafApp{
