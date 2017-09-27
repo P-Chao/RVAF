@@ -498,12 +498,12 @@ void Circuit::SendData(){
 				}
 			} else{
 				for (int j = 0; j < count; ++j){
-					points[j * 3 + 0] = disp_[i].point3d[j].x;
-					points[j * 3 + 1] = disp_[i].point3d[j].y;
-					points[j * 3 + 2] = disp_[i].point3d[j].z;
-					points[j * 3 + 3] = disp_[i].color3d[j].r;
-					points[j * 3 + 4] = disp_[i].color3d[j].g;
-					points[j * 3 + 5] = disp_[i].color3d[j].b;
+					points[j * 6 + 0] = disp_[i].point3d[j].x;
+					points[j * 6 + 1] = disp_[i].point3d[j].y;
+					points[j * 6 + 2] = disp_[i].point3d[j].z;
+					points[j * 6 + 3] = disp_[i].color3d[j].r;
+					points[j * 6 + 4] = disp_[i].color3d[j].g;
+					points[j * 6 + 5] = disp_[i].color3d[j].b;
 				}
 			}
 			memcpy(pBuf + offset, points, count * chns * sizeof(float));

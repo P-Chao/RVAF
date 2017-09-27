@@ -13,7 +13,7 @@ using namespace std;
 using namespace cv;
 
 DEFINE_bool(in_silence, false, "wheather isolate all visual output");
-DEFINE_bool(use_mapping, true, "wheather to use process communication module");
+DEFINE_bool(use_mapping, false, "wheather to use process communication module");
 DEFINE_string(config_file, "./svaf/svaf.pbf", "config file of the framework");
 
 int main(int argc, char *argv[]){
