@@ -57,6 +57,7 @@ public:
 	static Figures<> *figures;
 	static size_t *id;
 	static SvafApp task_type;
+	static bool gui_mode;
 protected:
 	Timer __t;
 	bool  __show;

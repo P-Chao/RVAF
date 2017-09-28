@@ -124,6 +124,7 @@ protected:
 	cv::VideoCapture cap_[2];
 
 	bool			useMapping_;
+	bool			guiMode_;
 	HANDLE			c_fileMapping_;//cmd
 	HANDLE			c_mutex_;
 	LPTSTR			c_pMsg_;

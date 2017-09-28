@@ -32,15 +32,17 @@ Figures<float> Circuit::sout_;
 
 string GetTimeString();
 
-Circuit::Circuit(SvafTask& svafTask, bool use_mapping) : 
+Circuit::Circuit(SvafTask& svafTask, bool gui_mode) : 
 	layers_(svafTask), 
-	useMapping_(use_mapping),
+	guiMode_(gui_mode),
+	useMapping_(gui_mode),
 	linklist_(NULL), 
 	svaf_(svafTask),
 	id_(0){
 	Layer::figures = &sout_;
 	Layer::id = &id_;
 	Layer::task_type = SvafApp::NONE;
+	Layer::gui_mode = guiMode_;
 	pause_ms_ = svafTask.pause();
 	world_.rectified = false;
 	if (useMapping_){
@@ -50,6 +52,9 @@ Circuit::Circuit(SvafTask& svafTask, bool use_mapping) :
 		d_mutex_ = CreateEvent(nullptr, false, false, "SVAF_ALG2GUI_DATA_MUTEX");
 		d_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_ALG2GUI_DATA");
 		d_pMsg_ = (LPTSTR)MapViewOfFile(d_fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+		if (!c_mutex_ || !c_fileMapping_ || !c_pMsg_ || !d_mutex_ || !d_fileMapping_ || !d_pMsg_){
+			useMapping_ = false;
+		}
 	}
 	Build();
 	Run();
