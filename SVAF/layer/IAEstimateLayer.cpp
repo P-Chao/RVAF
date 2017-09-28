@@ -110,15 +110,14 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 				x = cloud1ds->points[i].x;
 				y = cloud1ds->points[i].y;
 				z = cloud1ds->points[i].z;
-				block.point3d.push_back(Point3f(x, y, x));
+				block.point3d.push_back(Point3f(x, y, z));
 				block.color3d.push_back(Color3f(0.0f, 1.0f, 0.0f));
 			}
 			for (int i = 0; i < cloud2ds->points.size(); ++i){
 				x = cloud2ds->points[i].x;
 				y = cloud2ds->points[i].y;
 				z = cloud2ds->points[i].z;
-				r = 0; g = 0; b = 1.0f;
-				block.point3d.push_back(Point3f(x, y, x));
+				block.point3d.push_back(Point3f(x, y, z));
 				block.color3d.push_back(Color3f(1.0f, 0.0f, 0.0f));
 			}
 			disp.push_back(block);
@@ -129,15 +128,14 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 				x = source->points[i].x;
 				y = source->points[i].y;
 				z = source->points[i].z;
-				block2.point3d.push_back(Point3f(x, y, x));
+				block2.point3d.push_back(Point3f(x, y, z));
 				block2.color3d.push_back(Color3f(0.0f, 1.0f, 0.0f));
 			}
 			for (int i = 0; i < target->points.size(); ++i){
 				x = target->points[i].x;
 				y = target->points[i].y;
 				z = target->points[i].z;
-				r = 0; g = 0; b = 1.0f;
-				block2.point3d.push_back(Point3f(x, y, x));
+				block2.point3d.push_back(Point3f(x, y, z));
 				block2.color3d.push_back(Color3f(1.0f, 0.0f, 0.0f));
 			}
 			disp.push_back(block2);
