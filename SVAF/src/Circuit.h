@@ -119,6 +119,7 @@ protected:
 	void Analysis();
 	bool ReciveCmd();
 	void SendData();
+	void PostInfo(std::string);
 
 protected:
 	cv::VideoCapture cap_[2];
@@ -131,6 +132,9 @@ protected:
 	HANDLE			d_fileMapping_;//data
 	HANDLE			d_mutex_;
 	LPTSTR			d_pMsg_;
+	HANDLE			i_fileMapping_;//info
+	HANDLE			i_mutex_;
+	LPTSTR			i_pMsg_;
 
 private:
 	int			pause_ms_;

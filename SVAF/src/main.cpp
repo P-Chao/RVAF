@@ -12,7 +12,6 @@
 using namespace std;
 using namespace cv;
 
-DEFINE_bool(in_silence, false, "wheather isolate all visual output");
 DEFINE_bool(use_gui, false, "wheather to use process communication module");
 DEFINE_string(config_file, "./svaf/svaf.pbf", "config file of the framework");
 

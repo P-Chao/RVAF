@@ -52,7 +52,11 @@ Circuit::Circuit(SvafTask& svafTask, bool gui_mode) :
 		d_mutex_ = CreateEvent(nullptr, false, false, "SVAF_ALG2GUI_DATA_MUTEX");
 		d_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_ALG2GUI_DATA");
 		d_pMsg_ = (LPTSTR)MapViewOfFile(d_fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
-		if (!c_mutex_ || !c_fileMapping_ || !c_pMsg_ || !d_mutex_ || !d_fileMapping_ || !d_pMsg_){
+		i_mutex_ = CreateEvent(nullptr, false, false, "SVAF_ALG2GUI_INFO_MUTEX");
+		i_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_ALG2GUI_INFO");
+		i_pMsg_ = (LPTSTR)MapViewOfFile(i_fileMapping_, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+		if (!c_mutex_ || !c_fileMapping_ || !c_pMsg_ || !d_mutex_ || !d_fileMapping_ || !d_pMsg_ || 
+			!i_fileMapping_ || !i_pMsg_){
 			useMapping_ = false;
 		}
 	}
@@ -77,6 +81,9 @@ Circuit::~Circuit(){
 		if (!UnmapViewOfFile(d_fileMapping_)){}
 		CloseHandle(d_fileMapping_);
 		CloseHandle(d_mutex_);
+		if (!UnmapViewOfFile(i_fileMapping_)){}
+		CloseHandle(i_fileMapping_);
+		CloseHandle(i_mutex_);
 	}
 }
 
@@ -521,8 +528,20 @@ void Circuit::SendData(){
 	}
 	pBucket->imgCount = frameCount;
 	pBucket->pclCount = pointCount;
-	
 	SetEvent(d_mutex_);
+}
+
+void Circuit::PostInfo(std::string infoStr){
+
+	if (!useMapping_ || !i_pMsg_){
+		return;
+	}
+
+	LPTSTR p = i_pMsg_;
+	char *pBuf = p;
+	memcpy(pBuf, infoStr.data(), infoStr.length());
+	pBuf[infoStr.length() + 1] = '\0';
+	SetEvent(i_mutex_);
 }
 
 string GetTimeString(){
