@@ -8,6 +8,8 @@ using namespace cv;
 
 namespace svaf{
 
+class Circuit;
+
 class Timer{
 public:
 	void StartWatchTimer(){
@@ -53,11 +55,14 @@ public:
 	explicit Layer(LayerParameter&);
 	~Layer();
 	virtual bool Run(vector<Block>&, vector<Block>&, LayerParameter&, void*) = 0;
+	void RLOG(std::string&);
 public:
 	static Figures<> *figures;
 	static size_t *id;
 	static SvafApp task_type;
 	static bool gui_mode;
+	static Circuit *pCir;
+	
 protected:
 	Timer __t;
 	bool  __show;

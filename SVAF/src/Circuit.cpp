@@ -43,6 +43,7 @@ Circuit::Circuit(SvafTask& svafTask, bool gui_mode) :
 	Layer::id = &id_;
 	Layer::task_type = SvafApp::NONE;
 	Layer::gui_mode = guiMode_;
+	Layer::pCir = this;
 	pause_ms_ = svafTask.pause();
 	world_.rectified = false;
 	if (useMapping_){
@@ -60,6 +61,7 @@ Circuit::Circuit(SvafTask& svafTask, bool gui_mode) :
 			useMapping_ = false;
 		}
 	}
+	RLOG("SVAF opened.");
 	Build();
 	Run();
 }
@@ -85,6 +87,7 @@ Circuit::~Circuit(){
 		CloseHandle(i_fileMapping_);
 		CloseHandle(i_mutex_);
 	}
+	RLOG("SVAF closed.");
 }
 
 void Circuit::Build(){
@@ -299,18 +302,23 @@ void Circuit::Build(){
 		
 		p = p->next;
 	}
+	RLOG("All Layer Builded.");
 }
 
 void Circuit::Run(){
-
+	char buf[256] = {0};
 	while (layers_.IsBinocular()){
 		LOG(INFO) << "#Frame " << id_ << " Begin: ";
+		sprintf(buf, "Frame %d Begin.", id_);
+		RLOG(buf);
 
 		Mat left, right;
 		pair<Mat, Mat> matpair = make_pair(left, right);
 		layers_ >> matpair;
 		if (matpair.first.empty()){
 			LOG(WARNING) << "Mat empty, Finish All Process.";
+			sprintf(buf, "Frame %d Begin.", id_);
+			RLOG(buf);
 			break;
 		}
 		InitStep();
@@ -328,11 +336,15 @@ void Circuit::Run(){
 
 	while (!layers_.IsBinocular()){
 		LOG(INFO) << "#Frame " << id_ << " Begin: ";
+		sprintf(buf, "Frame %d Begin.", id_);
+		RLOG(buf);
 
 		Mat mat;
 		layers_ >> mat;
 		if (mat.empty()){
 			LOG(WARNING) << "Mat empty, Finish All Process.";
+			sprintf(buf, "Frame %d Begin.", id_);
+			RLOG(buf);
 			break;
 		}
 		InitStep();
@@ -413,9 +425,11 @@ void Circuit::EndStep(){
 	id_++;
 	SendData();
 	ReciveCmd();
+	RLOG("Process Finished.");
 }
 
 void Circuit::Analysis(){
+	RLOG("Analysis Data.");
 	string timestr = GetTimeString();
 	if (!layers_.images_.empty() && !layers_.IsBinocular()){
 		sout_.print2txt_im(string("tmp/A_") + timestr + ".txt", layers_.images_);
@@ -531,7 +545,7 @@ void Circuit::SendData(){
 	SetEvent(d_mutex_);
 }
 
-void Circuit::PostInfo(std::string infoStr){
+void Circuit::RLOG(std::string infoStr){
 
 	if (!useMapping_ || !i_pMsg_){
 		return;

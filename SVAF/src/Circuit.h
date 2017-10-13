@@ -108,6 +108,7 @@ public:
 	~Circuit();
 
 	static string time_id_;
+	void RLOG(std::string);
 
 protected:
 	void Build();
@@ -119,7 +120,6 @@ protected:
 	void Analysis();
 	bool ReciveCmd();
 	void SendData();
-	void PostInfo(std::string);
 
 protected:
 	cv::VideoCapture cap_[2];

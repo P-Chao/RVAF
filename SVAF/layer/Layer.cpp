@@ -6,6 +6,7 @@ size_t *Layer::id = NULL;
 Figures<> *Layer::figures = NULL;
 SvafApp Layer::task_type = SvafApp::NONE;
 bool Layer::gui_mode = false;
+Circuit *pCir = NULL;
 
 Layer::Layer()
 {
@@ -22,6 +23,10 @@ Layer::Layer(LayerParameter& layer){
 
 Layer::~Layer()
 {
+}
+
+void Layer::RLOG(std::string& i){
+	pCir->RLOG(i);
 }
 
 }
