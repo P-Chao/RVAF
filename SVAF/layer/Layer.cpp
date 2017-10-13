@@ -6,7 +6,7 @@ size_t *Layer::id = NULL;
 Figures<> *Layer::figures = NULL;
 SvafApp Layer::task_type = SvafApp::NONE;
 bool Layer::gui_mode = false;
-Circuit *pCir = NULL;
+Circuit *Layer::pCir = NULL;
 
 Layer::Layer()
 {

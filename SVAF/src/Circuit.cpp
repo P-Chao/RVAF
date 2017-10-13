@@ -309,8 +309,6 @@ void Circuit::Run(){
 	char buf[256] = {0};
 	while (layers_.IsBinocular()){
 		LOG(INFO) << "#Frame " << id_ << " Begin: ";
-		sprintf(buf, "Frame %d Begin.", id_);
-		RLOG(buf);
 
 		Mat left, right;
 		pair<Mat, Mat> matpair = make_pair(left, right);
@@ -321,6 +319,8 @@ void Circuit::Run(){
 			RLOG(buf);
 			break;
 		}
+		sprintf(buf, "Frame %d Begin.", id_);
+		RLOG(buf);
 		InitStep();
 		images_.push_back(Block("left", matpair.first.clone()));
 		images_.push_back(Block("right", matpair.second.clone()));
@@ -336,8 +336,6 @@ void Circuit::Run(){
 
 	while (!layers_.IsBinocular()){
 		LOG(INFO) << "#Frame " << id_ << " Begin: ";
-		sprintf(buf, "Frame %d Begin.", id_);
-		RLOG(buf);
 
 		Mat mat;
 		layers_ >> mat;
@@ -347,6 +345,8 @@ void Circuit::Run(){
 			RLOG(buf);
 			break;
 		}
+		sprintf(buf, "Frame %d Begin.", id_);
+		RLOG(buf);
 		InitStep();
 		images_.push_back(Block("left", mat.clone()));
 		RunStep();
