@@ -48,6 +48,7 @@ bool EadpMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 		disp.push_back(Block("fill", fill, __show, __save, __bout));
 	}
 	LOG(INFO) << "disparity map has been computed.";
+	RLOG("disparity map has been computed.");
 	CHECK_EQ(l_disp.type(), CV_16U) << "disparity map type error!";
 
 	images[0].pMatch = &images[1];

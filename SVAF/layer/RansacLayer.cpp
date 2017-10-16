@@ -31,6 +31,7 @@ bool RansacLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter
 	if (pt0.size() < 4){
 		LOG(ERROR) << "Ransac Need More Than 4 Point.";
 		LOG(ERROR) << "\nRansac No Work!\n";
+		RLOG("Ransac Need More Than 4 Point!");
 		return true;
 	}
 

@@ -182,6 +182,7 @@ bool AdaboostLayer::ScaleDetect(vector<Block>& images, vector<Block>& disp){
 		}
 		if (result.size() > 0){
 			LOG(INFO) << "Box: " << result[0].rs << ", " << result[0].modelHt;
+			RLOG("adaboost detected object.");
 		}
 		
 		bool isleft = true;

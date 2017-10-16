@@ -76,6 +76,7 @@ void StereoRectifyLayer::ReadTable(const string& filename){
 		index3channal((uint*)pTable[i][1], (uint*)pTable[i-5][1], r_length);
 	}
 	LOG(INFO) << "Rectify Tabel Has Been Created.";
+	RLOG(string("Rectify file: \"" + filename + "\" opened. Table has been created."));
 }
 
 StereoRectifyLayer::StereoRectifyLayer(LayerParameter& layer) : Layer(layer)

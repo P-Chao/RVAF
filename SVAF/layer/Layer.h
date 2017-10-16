@@ -55,7 +55,7 @@ public:
 	explicit Layer(LayerParameter&);
 	~Layer();
 	virtual bool Run(vector<Block>&, vector<Block>&, LayerParameter&, void*) = 0;
-	void RLOG(std::string&);
+	void RLOG(std::string);
 public:
 	static Figures<> *figures;
 	static size_t *id;

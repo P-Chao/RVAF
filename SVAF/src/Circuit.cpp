@@ -87,7 +87,6 @@ Circuit::~Circuit(){
 		CloseHandle(i_fileMapping_);
 		CloseHandle(i_mutex_);
 	}
-	RLOG("SVAF closed.");
 }
 
 void Circuit::Build(){
@@ -442,7 +441,7 @@ void Circuit::Analysis(){
 	if (id_ < 5){
 		sout_.print2scr();
 	}
-	
+	RLOG("SVAF closed.");
 }
 
 bool Circuit::ReciveCmd(){
@@ -455,10 +454,12 @@ bool Circuit::ReciveCmd(){
 		LOG(INFO) << "Recived exit command.";
 		return false;
 	} else if (cmd == 2){
+		RLOG("SVAF paused.");
 		while (cmd != 3) {
 			WaitForSingleObject(c_mutex_, INFINITE);
 			cmd = ((int*)p)[0];
 		}
+		RLOG("SVAF continued.");
 	}
 	((int*)p)[0] = 0;
 	return true;
@@ -554,8 +555,8 @@ void Circuit::RLOG(std::string infoStr){
 	LPTSTR p = i_pMsg_;
 	char *pBuf = p;
 	memcpy(pBuf, infoStr.data(), infoStr.length());
-	pBuf[infoStr.length() + 1] = '\0';
-	SetEvent(i_mutex_);
+	pBuf[infoStr.length()] = '\0';
+	PulseEvent(i_mutex_);
 }
 
 string GetTimeString(){

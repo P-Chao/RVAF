@@ -34,6 +34,7 @@ bool SupixSegLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamet
 		}
 	}
 	LOG(INFO) << "superpixel map has been computed.";
+	RLOG("superpixel map has been computed.");
 	return true;
 }
 

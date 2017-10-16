@@ -42,6 +42,7 @@ void CenterPointLayer::ROICenter(vector<Block>& images){
 	}
 
 	LOG(INFO) << "ROI Center Has Been Setted.";
+	RLOG("ROI CenterHas Been Selected.");
 }
 
 }

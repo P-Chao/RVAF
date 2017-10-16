@@ -46,9 +46,11 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		}
 		pclconvert(*source, pWorld_->pointL);
 		LOG(INFO) << "SAC-IA use Left Camera Coordinate.";
+		RLOG("SAC-IA use Left Camera Coordinate.");
 	} else{
 		pclconvert(*source, pWorld_->pointW);
 		LOG(INFO) << "SAC-IA use World Coordinate.";
+		RLOG("SAC-IA use World Cooordinate.");
 	}
 	
 	target = targetpcd.makeShared();

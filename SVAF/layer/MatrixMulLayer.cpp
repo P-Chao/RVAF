@@ -31,6 +31,7 @@ MatrixMulLayer::MatrixMulLayer(LayerParameter& layer) : Layer(layer)
 		LOG(INFO) << "Matrix Opened From File " << filename;
 	} else{
 		LOG(FATAL) << "Matrix Create Failed!";
+		RLOG("Matrix Create Failed!");
 	}
 	
 	char loginfo[160];
@@ -39,7 +40,7 @@ MatrixMulLayer::MatrixMulLayer(LayerParameter& layer) : Layer(layer)
 	sprintf(loginfo, "\t%8.3f\t%8.3f\t%8.3f\t%8.3f\n", M[1][0], M[1][1], M[1][2], M[1][3]); logstr += loginfo;
 	sprintf(loginfo, "\t%8.3f\t%8.3f\t%8.3f\t%8.3f\n", M[2][0], M[2][1], M[2][2], M[2][3]); logstr += loginfo;
 	LOG(INFO) << "world = M * camera, M = \n" << logstr;
-
+	RLOG(string("world = M * camera, M = \n") + logstr);
 }
 
 MatrixMulLayer::~MatrixMulLayer()

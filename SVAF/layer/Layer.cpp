@@ -25,7 +25,7 @@ Layer::~Layer()
 {
 }
 
-void Layer::RLOG(std::string& i){
+void Layer::RLOG(std::string i){
 	pCir->RLOG(i);
 }
 
