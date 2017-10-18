@@ -80,6 +80,7 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	LOG(INFO) << "SAC-IA scores: " << sac_ia.getFitnessScore();
 	
 	std::vector<float> angle = computeEularAngles(init_transform, false);
+	pWorld_->fetchtype = 1;
 	pWorld_->a = a + angle[0];
 	pWorld_->b = b + angle[1];
 	pWorld_->c = c + angle[2];
