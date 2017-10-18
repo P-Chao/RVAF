@@ -80,9 +80,12 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	LOG(INFO) << "SAC-IA scores: " << sac_ia.getFitnessScore();
 	
 	std::vector<float> angle = computeEularAngles(init_transform, false);
-	pWorld_->a = angle[0];
-	pWorld_->b = angle[1];
-	pWorld_->c = angle[2];
+	pWorld_->a = a + angle[0];
+	pWorld_->b = b + angle[1];
+	pWorld_->c = c + angle[2];
+	pWorld_->x = x + init_transform(0, 3);
+	pWorld_->y = y + init_transform(1, 3);
+	pWorld_->z = z + init_transform(2, 3);
 
 	if (__logt){
 		(*figures)[__name + "_t"][*id] = (float)__t;
@@ -105,21 +108,21 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		}
 		if (__bout){
 			Mat im;
-			float x, y, z, r, g, b;
+			float tmpx, tmpy, tmpz, tmpr, tmpg, tmpb;
 			Block block("ia_ori", im, false, false, __bout);
 			block.isOutput3DPoint = true;
 			for (int i = 0; i < cloud1ds->points.size(); ++i){
-				x = cloud1ds->points[i].x;
-				y = cloud1ds->points[i].y;
-				z = cloud1ds->points[i].z;
-				block.point3d.push_back(Point3f(x, y, z));
+				tmpx = cloud1ds->points[i].x;
+				tmpy = cloud1ds->points[i].y;
+				tmpz = cloud1ds->points[i].z;
+				block.point3d.push_back(Point3f(tmpx, tmpy, tmpz));
 				block.color3d.push_back(Color3f(0.0f, 1.0f, 0.0f));
 			}
 			for (int i = 0; i < cloud2ds->points.size(); ++i){
-				x = cloud2ds->points[i].x;
-				y = cloud2ds->points[i].y;
-				z = cloud2ds->points[i].z;
-				block.point3d.push_back(Point3f(x, y, z));
+				tmpx = cloud2ds->points[i].x;
+				tmpy = cloud2ds->points[i].y;
+				tmpz = cloud2ds->points[i].z;
+				block.point3d.push_back(Point3f(tmpx, tmpy, tmpz));
 				block.color3d.push_back(Color3f(1.0f, 0.0f, 0.0f));
 			}
 			disp.push_back(block);
@@ -127,17 +130,17 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 			Block block2("ia_est", im, false, false, __bout);
 			block2.isOutput3DPoint = true;
 			for (int i = 0; i < source->points.size(); ++i){
-				x = source->points[i].x;
-				y = source->points[i].y;
-				z = source->points[i].z;
-				block2.point3d.push_back(Point3f(x, y, z));
+				tmpx = source->points[i].x;
+				tmpy = source->points[i].y;
+				tmpz = source->points[i].z;
+				block2.point3d.push_back(Point3f(tmpx, tmpy, tmpz));
 				block2.color3d.push_back(Color3f(0.0f, 1.0f, 0.0f));
 			}
 			for (int i = 0; i < target->points.size(); ++i){
-				x = target->points[i].x;
-				y = target->points[i].y;
-				z = target->points[i].z;
-				block2.point3d.push_back(Point3f(x, y, z));
+				tmpx = target->points[i].x;
+				tmpy = target->points[i].y;
+				tmpz = target->points[i].z;
+				block2.point3d.push_back(Point3f(tmpx, tmpy, tmpz));
 				block2.color3d.push_back(Color3f(1.0f, 0.0f, 0.0f));
 			}
 			disp.push_back(block2);

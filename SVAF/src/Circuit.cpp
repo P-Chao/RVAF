@@ -318,8 +318,6 @@ void Circuit::Run(){
 			RLOG(buf);
 			break;
 		}
-		sprintf(buf, "Frame %d Begin.", id_);
-		RLOG(buf);
 		InitStep();
 		images_.push_back(Block("left", matpair.first.clone()));
 		images_.push_back(Block("right", matpair.second.clone()));
@@ -344,8 +342,6 @@ void Circuit::Run(){
 			RLOG(buf);
 			break;
 		}
-		sprintf(buf, "Frame %d Begin.", id_);
-		RLOG(buf);
 		InitStep();
 		images_.push_back(Block("left", mat.clone()));
 		RunStep();
@@ -411,6 +407,17 @@ bool Circuit::Disp(){
 void Circuit::InitStep(){
 	disp_.clear();
 	images_.clear();
+	world_.fetchtype = 0;
+	world_.x = 0;
+	world_.y = 0;
+	world_.z = 0;
+	world_.a = 0;
+	world_.b = 0;
+	world_.c = 0;
+
+	char buf[256] = { 0 };
+	sprintf(buf, "Frame %d Begin.", id_);
+	RLOG(buf);
 
 	char idch[5];
 	sprintf(idch, "%04d", id_);
@@ -467,7 +474,6 @@ bool Circuit::ReciveCmd(){
 
 using Bucket = struct{
 	char	head[4];
-	char	message[10][128];
 	int		msgCount;
 	int		imgCount;
 	int		cols[8];
@@ -478,6 +484,13 @@ using Bucket = struct{
 	int		PointChns[4];// xyz(3) or xyzrgb(6)
 	int		PointOffs[4];
 	int		pclCount;
+	int		fetchtype; // 0 dont fetch, 1 world coord
+	float	x;
+	float	y;
+	float	z;
+	float	a;
+	float	b;
+	float	c;
 };
 
 void Circuit::SendData(){
@@ -490,7 +503,6 @@ void Circuit::SendData(){
 	char *pBuf = p;
 	Bucket *pBucket = (Bucket*)pBuf;
 	sprintf(pBucket->head, "pch");
-	sprintf(pBucket->message[0], "123");
 	pBucket->msgCount = 1;
 
 	int frameCount = 0;
@@ -543,6 +555,15 @@ void Circuit::SendData(){
 	}
 	pBucket->imgCount = frameCount;
 	pBucket->pclCount = pointCount;
+	// decition fetch
+	pBucket->fetchtype = world_.fetchtype;
+	pBucket->x = world_.x;
+	pBucket->y = world_.y;
+	pBucket->z = world_.z;
+	pBucket->a = world_.a;
+	pBucket->b = world_.b;
+	pBucket->c = world_.c;
+
 	SetEvent(d_mutex_);
 }
 

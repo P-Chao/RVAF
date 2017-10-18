@@ -785,3 +785,166 @@ layer{
 }
 
 
+=== ROI Center ===
+
+name:	"Compute Center of ROI with DSP rectified"
+version:	"v_1.03"
+pause:	33
+layer{
+	name:	"bino_dsp"
+	type:	DSP_PAIR
+	bottom:	"bino_dsp"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"./data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"roicenter"
+	adaboost_param{
+		detector:	"./data/boost/detector_workpiece_161103.dat"
+		sync_frame:	true
+		#sync_video:	true
+		epipolar:	true
+		thresh:		0
+		nms:		0.2
+	}
+}
+layer{
+	name:	"roicenter"
+	type:	CENTER_POS
+	top:	"3dpoint"
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"camera2world"
+	triang_param{
+		visible:	false
+		#toolbox_dir:	"./calib/"
+		calibmat_dir:	"./data/calib/mat_161103/"
+	}
+}
+layer{
+	name:	"camera2world"
+	type:	MXMUL
+	top:	"camera2world"
+	mxmul_param{
+		filename:	"./data/calib/camera2world_rectified_161103.dat"
+	}
+}
+
+=== SURF
+
+name:	"Surf Match with DSP"
+version:	"v_1.03"
+pause:	33
+layer{
+	name:	"bino_dsp"
+	type:	DSP_PAIR
+	bottom:	"bino_dsp"
+	top:	"adaboost"
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"surfpoint"
+	adaboost_param{
+		detector:	"./data/boost/detector_workpiece_161103.dat"
+		#sync_frame:	true
+		#sync_video:	true
+		#epipolar:	true
+		thresh:		0
+		nms:		0.75
+	}
+}
+layer{
+	name:	"surfpoint"
+	type:	SURF_POINT
+	top:	"surfdescriptor"
+	surfpoint_param{
+		stride:		2
+		octaves:	5
+		intervals:	4
+		thresh:		0.00005
+	}
+}
+layer{
+	name:	"surfdescriptor"
+	type:	SURF_DESP
+	top:	"eularmatch"
+}
+layer{
+	name:	"eularmatch"
+	type:	EULAR_MATCH
+	bottom:	"surfdescriptor"
+	top:	"ransac"
+	eularmatch_param{
+		thresh:	0.65
+	}
+}
+layer{
+	name:	"ransac"
+	type:	RANSAC
+	bottom:	"eularmatch"
+	top:	"3dpoint"
+	ransac_param{
+		thresh: 5.0
+	}
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"camera2world"
+	triang_param{
+		visible:	false
+		#toolbox_dir:	"./calib/"
+		calibmat_dir:	"./data/calib/mat_161103/"
+	}
+}
+layer{
+	name:	"camera2world"
+	type:	MXMUL
+	top:	"camera2world"
+	mxmul_param{
+		filename:	"./data/calib/camera2world_161103.dat"
+	}
+}
+
+=== Adaboost Detection ===
+
+name: "Detect Image File"
+version: "v_1.03"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE
+	bottom:	"data"
+	top:	"adaboost"
+	imagedata_param{
+		name:	"./excute/example/data/a.jpg"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	bottom:	"data"
+	top:	"adaboost"
+	adaboost_param{
+		detector:	"./excute/example/data/acfCarDetector.dat"
+		thresh:		40.0
+	}
+}

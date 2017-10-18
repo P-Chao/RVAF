@@ -87,6 +87,16 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 	}
 	LOG(INFO) << "Left Camera Point: \n \t xl\t\t\t xr \t\t\t pointW\n" << logstr;
 
+	if (pWorld->xl.size() == 1){
+		pWorld->x = pWorld->pointW[0].x;
+		pWorld->y = pWorld->pointW[0].y;
+		pWorld->z = pWorld->pointW[0].z;
+		pWorld->a = 0;
+		pWorld->b = 0;
+		pWorld->c = 0;
+		pWorld->fetchtype = 1;
+	}
+
 	return true;
 }
 
