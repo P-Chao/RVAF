@@ -93,8 +93,8 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 		LOG(INFO) << "Left Camera Point Count " << pWorld_->pointL.size();
 	}
 	
-	if (isSavePointCloud){
-		pcdsave(string("tmp/") + Circuit::time_id_ + ".pcd", pWorld_->pointL);
+	if (__save){
+		pcdsave(string("tmp/C_") + Circuit::time_id_ + ".pcd", pWorld_->pointL);// camera coord
 		//LOG(INFO) << "ref_pointcloud.pc Point Cloud File Has Been Saved.";
 	}
 

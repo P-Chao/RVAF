@@ -3,8 +3,7 @@
 
 namespace svaf{
 
-
-MatrixMulLayer::MatrixMulLayer(LayerParameter& layer) : Layer(layer)
+MatrixMulLayer::MatrixMulLayer(LayerParameter& layer) : StereoLayer(layer)
 {
 	if (layer.mxmul_param().has_col0() && layer.mxmul_param().has_col1() && layer.mxmul_param().has_col2()){
 		string col[3];
@@ -63,6 +62,10 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 		(*figures)[__name + "_t"][*id] = (float)__t;
 	}
 	
+	if (__save){
+		pcdsave(string("tmp/W_") + Circuit::time_id_ + ".pcd", pWorld->pointW); // world coord
+	}
+
 	if (Layer::task_type == PC_MULMATRIX){
 		__bout = true;
 	} else{
@@ -79,7 +82,7 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 
 	char loginfo[160];
 	string logstr;
-	for (int i = 0; i < pWorld->xl.size(); ++i){
+	for (int i = 0; i < (std::min)((int)pWorld->xl.size(), 6); ++i){
 		sprintf(loginfo, "(%8.3f, %8.3f) (%8.3f, %8.3f)\t(%8.3f, %8.3f, %8.3f)\n",
 			pWorld->xl[i].x, pWorld->xl[i].y, pWorld->xr[i].x, pWorld->xr[i].y,
 			pWorld->pointW[i].x, pWorld->pointW[i].y, pWorld->pointW[i].z);

@@ -87,6 +87,8 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	pWorld_->x = x + init_transform(0, 3);
 	pWorld_->y = y + init_transform(1, 3);
 	pWorld_->z = z + init_transform(2, 3);
+	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
+	LOG(INFO) << "Result Angle   :" << " a: " << pWorld_->a << " b: " << pWorld_->b << " c: " << pWorld_->c;
 
 	if (__logt){
 		(*figures)[__name + "_t"][*id] = (float)__t;

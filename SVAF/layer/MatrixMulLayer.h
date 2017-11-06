@@ -1,11 +1,11 @@
 #pragma once
-#include "Layer.h"
+#include "StereoLayer.h"
 
 namespace svaf{
 
 
 class MatrixMulLayer :
-	public Layer
+	public StereoLayer
 {
 public:
 	explicit MatrixMulLayer(LayerParameter& layer);
