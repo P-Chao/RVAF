@@ -75,6 +75,12 @@
     <None Include="svaf\svaf_1.22.pbf">
       <Filter>Resource Files\Sample Script</Filter>
     </None>
+    <None Include="svaf\fetch_pcr.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\fetch_roi.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="layer\AdaboostLayer.cpp">

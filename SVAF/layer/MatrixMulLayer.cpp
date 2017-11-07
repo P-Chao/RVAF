@@ -82,7 +82,7 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 
 	char loginfo[160];
 	string logstr;
-	for (int i = 0; i < (std::min)((int)pWorld->xl.size(), 6); ++i){
+	for (int i = 0; i < (std::min)((int)pWorld->xl.size(), INT_MAX); ++i){
 		sprintf(loginfo, "(%8.3f, %8.3f) (%8.3f, %8.3f)\t(%8.3f, %8.3f, %8.3f)\n",
 			pWorld->xl[i].x, pWorld->xl[i].y, pWorld->xr[i].x, pWorld->xr[i].y,
 			pWorld->pointW[i].x, pWorld->pointW[i].y, pWorld->pointW[i].z);

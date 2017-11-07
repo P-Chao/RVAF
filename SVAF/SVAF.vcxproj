@@ -160,6 +160,8 @@
     <None Include="svaf\cvpoint.pbf" />
     <None Include="svaf\detect.pbf" />
     <None Include="svaf\eadpmatch.pbf" />
+    <None Include="svaf\fetch_pcr.pbf" />
+    <None Include="svaf\fetch_roi.pbf" />
     <None Include="svaf\surfmatch.pbf" />
     <None Include="svaf\svaf.pbf" />
     <None Include="svaf\svaf.proto" />

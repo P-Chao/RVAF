@@ -281,8 +281,10 @@ bool AdaboostLayer::ResultROI(vector<Block>& images, vector<Block>& disp){
 
 	if (kseline && return_flag){
 		if (images[0].roi.y != images[1].roi.y){
+			DLOG(ERROR) << "Yl: " << images[0].roi.y << " Yr: " << images[1].roi.y;
 			LOG(ERROR) << " Epipolar Constrain Failed!";
 			LOG(ERROR) << "\nLoop Cut Short\n";
+			
 			return false;
 		}
 		CHECK_EQ(images[0].roi.height, images[1].roi.height) << " Epipolar Constrain Failed!";

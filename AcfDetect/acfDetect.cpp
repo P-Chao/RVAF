@@ -155,7 +155,7 @@ void AcfDetector::Detect(Channels& chns, int32_t shrink, vector<DetectResult>& r
 
 	int SearchLine = -1;
 	if (epipolarLine > 0){
-		SearchLine = epipolarLine / stride;
+		SearchLine = (epipolarLine + 0.5) / stride;
 		if (SearchLine < 0 && SearchLine <= height1){
 			SearchLine = -1;
 		}

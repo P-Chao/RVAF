@@ -53,7 +53,7 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		RLOG("SAC-IA use World Cooordinate.");
 	}
 	
-	target = targetpcd.makeShared();
+	target = targetpcd.makeShared(); // deep copy
 	
 	__t.StartWatchTimer();
 	// downsample the cloud
@@ -75,20 +75,28 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	auto sac_ia = pc::align(cloud1ds, cloud2ds, features1, features2, max_iter, min_cors, max_cors);
 	__t.ReadWatchTimer("SAC-IA Time");
 
-	Eigen::Matrix4f init_transform = sac_ia.getFinalTransformation(); // make transform of cloud2 -> cloud2
-	LOG(INFO) << "SAC-IA Matrix:\n" << init_transform;
+	Eigen::Matrix4f Matrix = sac_ia.getFinalTransformation(); // make transform of cloud2 -> cloud2
+	LOG(INFO) << "SAC-IA Matrix:\n" << Matrix;
 	LOG(INFO) << "SAC-IA scores: " << sac_ia.getFitnessScore();
-	
-	std::vector<float> angle = computeEularAngles(init_transform, false);
+
+	//Matrix = Matrix.inverse();
+
+	std::vector<float> angle = computeEularAngles(Matrix, false);
 	pWorld_->fetchtype = 1;
-	pWorld_->a = a + angle[0];
-	pWorld_->b = b + angle[1];
-	pWorld_->c = c + angle[2];
-	pWorld_->x = x + init_transform(0, 3);
-	pWorld_->y = y + init_transform(1, 3);
-	pWorld_->z = z + init_transform(2, 3);
+	//pWorld_->a = a + angle[0];
+	//pWorld_->b = b + angle[1];
+	//pWorld_->c = c + angle[2];
+	//pWorld_->x = x + Matrix(0, 3);
+	//pWorld_->y = y + Matrix(1, 3);
+	//pWorld_->z = z + Matrix(2, 3);
+	//LOG(INFO) << "Result Angle   :" << " a: " << pWorld_->a << " b: " << pWorld_->b << " c: " << pWorld_->c;
+	//LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
+	
+	// Matrix * [x y z 1]' = [rx ry rz 1]';
+	pWorld_->x = Matrix(0, 0) * x + Matrix(0, 1) * y + Matrix(0, 2) * z + Matrix(0, 3);
+	pWorld_->y = Matrix(1, 0) * x + Matrix(1, 1) * y + Matrix(1, 2) * z + Matrix(1, 3);
+	pWorld_->z = Matrix(2, 0) * x + Matrix(2, 1) * y + Matrix(2, 2) * z + Matrix(2, 3);
 	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
-	LOG(INFO) << "Result Angle   :" << " a: " << pWorld_->a << " b: " << pWorld_->b << " c: " << pWorld_->c;
 
 	if (__logt){
 		(*figures)[__name + "_t"][*id] = (float)__t;
@@ -101,7 +109,7 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	}
 
 	if (__show || __save || __bout){
-		pcl::transformPointCloud(*target, *target, init_transform);
+		pcl::transformPointCloud(*target, *target, Matrix);
 		pcl::PointCloud<pcl::PointXYZRGB>::Ptr merged = pc::coloredMerge(source, target);
 		if (__save){
 			pcdsave(string("tmp/R_") + Circuit::time_id_ + ".pcd", *merged);
