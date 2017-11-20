@@ -21,6 +21,28 @@ layer{
 }
 
 
+version: "v2.2"				#版本信息
+layer{						
+	name:	"data"			#模块名称
+	type:	IMAGE 			#模块类型
+	bottom: "data"			#该模块之前的模块（用于确定算法的执行顺序）
+	top:	"adaboost"		#该模块之后的模块（用于确定算法的执行顺序）
+	imagedata_param{		#该模块的算法参数
+		name:	"F:/VS/StereoVisionAlgorithmFramework/AcfDetect/a.jpg"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	bottom:	"data"
+	top:	"adaboost"		#name==top表示该模块为算法最后一个模块
+	adaboost_param{
+		detector:	"F:/VS/StereoVisionAlgorithmFramework/AcfDetect/acfCarDetector.dat"
+		thresh:		40.0
+	}
+	save:	true			#该算法的结果将被保存
+}
+
 # configure text
 version: "v0.1"
 layer{

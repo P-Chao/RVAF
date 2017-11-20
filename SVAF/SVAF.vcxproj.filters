@@ -81,6 +81,12 @@
     <None Include="svaf\fetch_roi.pbf">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="svaf\fetch_pcr_dsp.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="svaf\fetch_roi_dsp.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="layer\AdaboostLayer.cpp">
