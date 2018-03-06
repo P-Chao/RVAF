@@ -15,7 +15,7 @@ layer{
 	type:	RECTIFY
 	top:	"adaboost"
 	rectify_param{
-		filename:	"C:/svaf/data/calib/stereo_rectify_171103.dat"
+		filename:	"C:/svaf/data/calib/stereo_rectify_180304.dat"
 		#filename:	"F:/svaf/data/calib/stereo_rectify_171103.dat"
 	}
 }
@@ -47,7 +47,7 @@ layer{
 		visible:	false
 		savepc:		true
 		toolbox_dir:	"C:/svaf/calib/"
-		calibmat_dir:	"C:/svaf/data/calib/mat_171103/"
+		calibmat_dir:	"C:/svaf/data/calib/mat_180304/"
 		#toolbox_dir:	"F:/svaf/calib/"
 		#calibmat_dir:	"F:/svaf/data/calib/mat_171103/"
 	}
@@ -59,7 +59,7 @@ layer{
 	type:	MXMUL
 	top:	"camera2world"
 	mxmul_param{
-		filename:	"C:/svaf/data/calib/camera2world_rectified_171103.dat"
+		filename:	"C:/svaf/data/calib/camera2world_rectified_180304.dat"
 		#filename:	"F:/svaf/data/calib/camera2world_rectified_171103.dat"
 	}
 	#save:  true
