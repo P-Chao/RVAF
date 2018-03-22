@@ -1,3 +1,7 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+*/
+
 #pragma once
 #include <opencv2\opencv.hpp>
 #include "../src/Circuit.h"

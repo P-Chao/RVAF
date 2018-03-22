@@ -1,3 +1,6 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+*/
 
 #include <hash_map>
 #include <opencv2\opencv.hpp>

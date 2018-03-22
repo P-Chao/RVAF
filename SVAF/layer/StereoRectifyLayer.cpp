@@ -1,3 +1,7 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+*/
+
 #include "StereoRectifyLayer.h"
 #ifdef _OPENMP
 #include <omp.h>
