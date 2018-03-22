@@ -65,7 +65,7 @@ bool CVDesciptorLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	return true;
 }
 
-// OpenCV调用SIFT特征点检测
+// OpenCV调用SIFT特征描述
 bool CVDesciptorLayer::Sift(vector<Block>& images, vector<Block>& disp){
 	Ptr<DescriptorExtractor> extractor = DescriptorExtractor::create(despname);
 	for (int i = 0; i < images.size(); ++i){
@@ -74,7 +74,7 @@ bool CVDesciptorLayer::Sift(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
-// OpenCV调用SURF特征点检测
+// OpenCV调用SURF特征描述
 bool CVDesciptorLayer::Surf(vector<Block>& images, vector<Block>& disp){
 	Ptr<DescriptorExtractor> extractor = DescriptorExtractor::create(despname);
 	for (int i = 0; i < images.size(); ++i){
@@ -83,7 +83,7 @@ bool CVDesciptorLayer::Surf(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
-// OpenCV调用Brief特征点检测
+// OpenCV调用Brief特征描述
 bool CVDesciptorLayer::Brief(vector<Block>& images, vector<Block>& disp){
 	BriefDescriptorExtractor extractor(brieflength);
 	for (int i = 0; i < images.size(); ++i){
@@ -92,7 +92,7 @@ bool CVDesciptorLayer::Brief(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
-// OpenCV调用Brisk特征点检测
+// OpenCV调用Brisk特征描述
 bool CVDesciptorLayer::Brisk(vector<Block>& images, vector<Block>& disp){
 	Ptr<DescriptorExtractor> extractor = DescriptorExtractor::create(despname);
 	for (int i = 0; i < images.size(); ++i){
@@ -101,7 +101,7 @@ bool CVDesciptorLayer::Brisk(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
-// OpenCV调用ORB特征点检测
+// OpenCV调用ORB特征描述
 bool CVDesciptorLayer::ORB(vector<Block>& images, vector<Block>& disp){
 	Ptr<DescriptorExtractor> extractor = DescriptorExtractor::create(despname);
 	for (int i = 0; i < images.size(); ++i){
@@ -110,7 +110,7 @@ bool CVDesciptorLayer::ORB(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
-// OpenCV调用Freak特征点检测
+// OpenCV调用Freak特征描述
 bool CVDesciptorLayer::Freak(vector<Block>& images, vector<Block>& disp){
 	Ptr<DescriptorExtractor> extractor = DescriptorExtractor::create(despname);
 	for (int i = 0; i < images.size(); ++i){
