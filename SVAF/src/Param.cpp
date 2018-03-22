@@ -10,6 +10,7 @@ using namespace std;
 
 namespace svaf{
 
+// 将目录中的所有文件加入向量列表
 void getFiles(string path, vector<string>& files)
 {
 	//文件句柄  
@@ -36,6 +37,7 @@ void getFiles(string path, vector<string>& files)
 	}
 }
 
+// 构造函数，初始执行
 Param::Param(SvafTask& svafTask) : index_(-1), frame_(0){
 	int size = svafTask.layer_size();
 	for (int i = 0; i < size; ++i){
@@ -44,23 +46,27 @@ Param::Param(SvafTask& svafTask) : index_(-1), frame_(0){
 		namelayers_[layer.name()] = layer;
 		LOG(INFO) << "Layer " << i << ": " << "name: " << layer.name();
 	}
-	InitDataSource();
-	InitVideoState();
+	InitDataSource(); // 初始化数据资源
+	InitVideoState(); // 初始化视频流
 }
 
+// 析构函数
 Param::~Param()
 {
 }
 
+// 初始化数据资源
 void Param::InitDataSource(){
 	
 	for (int i = 0; i < Size(); ++i){
 		auto &layer = layers_[i];
 
+		// 根据读入数据的源头创建资源池
 		LayerParameter_LayerType layertype = layer.type();
 		switch (layertype)
 		{
 		case svaf::LayerParameter_LayerType_IMAGE:
+			// 将图像文件依次读入图像列表
 			runtype_ = layertype;
 			isbinocular_ = false;
 			for (int j = 0; j < layer.imagedata_param().name_size(); ++j){
@@ -69,6 +75,7 @@ void Param::InitDataSource(){
 			}
 			break;
 		case svaf::LayerParameter_LayerType_IMAGE_PAIR:
+			// 将图像对依次读入图像列表
 			runtype_ = layertype;
 			isbinocular_ = true;
 			for (int j = 0; j < layer.imagepair_param().pair_size(); ++j){
@@ -80,6 +87,7 @@ void Param::InitDataSource(){
 			}
 			break;
 		case svaf::LayerParameter_LayerType_VIDEO:
+			// 读入视频文件名称
 			runtype_ = layertype;
 			isbinocular_ = false;
 			for (int j = 0; j < layer.videodata_param().name_size(); ++j){
@@ -87,6 +95,7 @@ void Param::InitDataSource(){
 			}
 			break;
 		case svaf::LayerParameter_LayerType_VIDEO_PAIR:
+			// 读入视频图像对名称
 			runtype_ = layertype;
 			isbinocular_ = true;
 			for (int j = 0; j < layer.videopair_param().pair_size(); ++j){
@@ -96,29 +105,35 @@ void Param::InitDataSource(){
 			}
 			break;
 		case svaf::LayerParameter_LayerType_CAMERA:
+			// 打开USB相机
 			runtype_ = layertype;
 			isbinocular_ = false;
 			camera_[0] = layer.cameradata_param().camera();
 			break;
 		case svaf::LayerParameter_LayerType_CAMERA_PAIR:
+			// 打开USB相机对
 			runtype_ = layertype;
 			isbinocular_ = true;
 			camera_[0] = layer.camerapair_param().leftcamera();
 			camera_[1] = layer.camerapair_param().rightcamera();
 			break;
 		case svaf::LayerParameter_LayerType_DSP:
+			// 进程通信方式获取图像
 			runtype_ = layertype;
 			isbinocular_ = false;
 			break;
 		case svaf::LayerParameter_LayerType_DSP_PAIR:
+			// 进程通信方式获取图像对
 			runtype_ = layertype;
 			isbinocular_ = true;
 			break;
 		case svaf::LayerParameter_LayerType_KINECT:
+			// 为Kinect获取图像预留的接口
 			runtype_ = layertype;
 			isbinocular_ = false;
 			break;
 		case svaf::LayerParameter_LayerType_IMAGE_FOLDER:
+			// 打开文件夹中的所有图像
 			runtype_ = layertype;
 			isbinocular_ = false;
 			for (int j = 0; j < layer.folder_param().name_size(); ++j){
@@ -130,6 +145,7 @@ void Param::InitDataSource(){
 			}
 			break;
 		case svaf::LayerParameter_LayerType_IMAGE_PAIR_FOLDER:
+			// 打开文件夹对中的所有图像
 			runtype_ = layertype;
 			isbinocular_ = true;
 			for (int j = 0; j < layer.pairfolder_param().pair_size(); ++j){
@@ -161,6 +177,7 @@ void Param::InitVideoState(){
 	switch (runtype_)
 	{
 	case svaf::LayerParameter_LayerType_VIDEO:
+		// 打开视频文件
 		index_++;
 		cap_[0].open(getVideo());
 		videoframecount_ = cap_[0].get(CV_CAP_PROP_FRAME_COUNT);
@@ -170,6 +187,7 @@ void Param::InitVideoState(){
 		frame_ = -1;
 		break;
 	case svaf::LayerParameter_LayerType_VIDEO_PAIR:
+		// 打开视频文件
 		index_++;
 		cap_[0].open(getVideoPair().first);
 		cap_[1].open(getVideoPair().second);
@@ -188,20 +206,24 @@ void Param::InitVideoState(){
 		frame_ = -1;
 		break;
 	case svaf::LayerParameter_LayerType_CAMERA:
+		// 打开USB摄像头
 		cap_[0].open(camera_[0]);
 		CHECK(cap_[0].isOpened()) << "Camera Open Filed: \n" << camera_[0];
 		LOG(INFO) << "Camera Opened: \n" << camera_[0];
 		break;
 	case svaf::LayerParameter_LayerType_CAMERA_PAIR:
+		// 打开USB摄像头对
 		cap_[0].open(camera_[0]);
 		cap_[1].open(camera_[1]);
 		CHECK(cap_[0].isOpened()) << "camera 1 open failed";
 		CHECK(cap_[1].isOpened()) << "camera 2 open failed";
 		break;
 	case svaf::LayerParameter_LayerType_DSP:
+		// 进程间通信获取图像
 		CHECK(dspcamera.open()) << "Base is not run, please open Base program";
 		break;
 	case svaf::LayerParameter_LayerType_DSP_PAIR:
+		// 进程间通信获取图像对
 		CHECK(dspcamera.open()) << "Base is not run, please open Base program";
 		break;
 	case svaf::LayerParameter_LayerType_KINECT:
