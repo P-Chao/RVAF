@@ -8,26 +8,27 @@ Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
 
 namespace svaf{
 
+// 构造函数
 EularMatchLayer::EularMatchLayer(LayerParameter& layer) : Layer(layer)
 {
 }
 
-
+// 析构函数
 EularMatchLayer::~EularMatchLayer()
 {
 }
 
+// 运行算法
 bool EularMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_GE(images.size(), 2) << "Need Image Pair(" << images.size() <<")";
 	
-
+	// 匹配对象引用
 	images[0].pMatch = &images[1];
 	images[1].pMatch = &images[0];
 	thresh = layer.eularmatch_param().thresh();
-	
-	
 
 	if (!images[0].descriptors.empty()){
+		// 检查特征点是否
 		if (images[0].keypoint.empty() || images[1].keypoint.empty()){
 			LOG(ERROR) << "Match Not Run, No Point";
 			return true;
