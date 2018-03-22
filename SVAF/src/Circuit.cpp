@@ -36,6 +36,7 @@ Figures<float> Circuit::sout_;
 
 string GetTimeString();
 
+// 构造函数，执行初始化
 Circuit::Circuit(SvafTask& svafTask, bool gui_mode) : 
 	layers_(svafTask), 
 	guiMode_(gui_mode),
@@ -43,6 +44,8 @@ Circuit::Circuit(SvafTask& svafTask, bool gui_mode) :
 	linklist_(NULL), 
 	svaf_(svafTask),
 	id_(0){
+
+	// 静态成员变量初始化
 	Layer::figures = &sout_;
 	Layer::id = &id_;
 	Layer::task_type = SvafApp::NONE;
@@ -50,6 +53,8 @@ Circuit::Circuit(SvafTask& svafTask, bool gui_mode) :
 	Layer::pCir = this;
 	pause_ms_ = svafTask.pause();
 	world_.rectified = false;
+
+	// 进程间通信初始化
 	if (useMapping_){
 		c_mutex_ = OpenEvent(MUTEX_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD_MUTEX");
 		c_fileMapping_ = OpenFileMapping(FILE_MAP_ALL_ACCESS, false, "SVAF_GUI2ALG_CMD");
@@ -70,7 +75,9 @@ Circuit::Circuit(SvafTask& svafTask, bool gui_mode) :
 	Run();
 }
 
+// 析构函数，结束时调用
 Circuit::~Circuit(){
+	// 删除算法链表
 	Node *q, *p = linklist_;
 	while (p){
 		LOG(INFO) << "Destroy Layer [" << p->name << "].";
@@ -79,7 +86,9 @@ Circuit::~Circuit(){
 		delete p;
 		p = q;
 	}
+	// 释放立体矫正参数表
 	StereoRectifyLayer::ReleaseTable();
+	// 释放进程间通信资源
 	if (useMapping_){
 		if (!UnmapViewOfFile(c_fileMapping_)){}
 		CloseHandle(c_fileMapping_);
@@ -93,8 +102,9 @@ Circuit::~Circuit(){
 	}
 }
 
+// 按照链表路径创建算法
 void Circuit::Build(){
-	
+	// 创建之前先删除链表
 	CHECK_GT(layers_.Size(), 0) << "Layer Count Error!";
 	Node *p = linklist_, *q;
 	while (p){
@@ -104,6 +114,7 @@ void Circuit::Build(){
 		delete p;
 		p = q;
 	}
+	// 读入各个节点
 	linklist_ = NULL;
 	for (int i = 0; i < 1 + layers_.Size(); ++i){
 		if (layers_[i].name() == layers_[i].bottom()){
@@ -113,6 +124,7 @@ void Circuit::Build(){
 		}
 		CHECK_EQ(i, layers_.Size() - 1) << "Not Found Start Layer!";
 	}
+	// 创建链表
 	p = linklist_;
 	while (true){
 		if (layers_[p->name].name() == layers_[p->name].top()){
@@ -126,6 +138,7 @@ void Circuit::Build(){
 		p = p->next;
 	}
 
+	// 按照链表顺序实例化各个算法
 	p = linklist_;
 	Layer *layerinstance = NULL;
 	void * param = NULL;
@@ -134,6 +147,7 @@ void Circuit::Build(){
 		auto layer = layers_[p->name];
 		switch (type)
 		{
+		// 读入图像数据
 		case svaf::LayerParameter_LayerType_NONE:
 		case svaf::LayerParameter_LayerType_IMAGE:
 		case svaf::LayerParameter_LayerType_IMAGE_PAIR:
@@ -149,18 +163,22 @@ void Circuit::Build(){
 			Layer::task_type = SvafApp::S_SHOW;
 			layerinstance = new DataLayer(layer);
 			break;
+		// Adaboost目标检测
 		case svaf::LayerParameter_LayerType_ADABOOST:
 			Layer::task_type = SvafApp::S_DETECT;
 			layerinstance = new AdaboostLayer(layer);
 			break;
+		// MIL目标跟踪
 		case svaf::LayerParameter_LayerType_MILTRACK:
 			Layer::task_type = SvafApp::S_DETECT;
 			layerinstance = new MilTrackLayer(layer);
 			break;
+		// 双目目标跟踪
 		case svaf::LayerParameter_LayerType_BITTRACK:
 			Layer::task_type = SvafApp::S_DETECT;
 			layerinstance = new BinoTrackLayer(layer);
 			break;
+		// 特征点检测
 		case svaf::LayerParameter_LayerType_SIFT_POINT:
 			Layer::task_type = SvafApp::S_POINT;
 			break;
@@ -190,6 +208,7 @@ void Circuit::Build(){
 			Layer::task_type = SvafApp::S_POINT;
 			layerinstance = new CVPointLayer(layer);
 			break;
+		// 特征描述
 		case svaf::LayerParameter_LayerType_SIFT_DESP:
 			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
@@ -219,6 +238,7 @@ void Circuit::Build(){
 		case svaf::LayerParameter_LayerType_KAZE_DESP:
 			Layer::task_type = SvafApp::S_POINTDESP;
 			break;
+		// 特征匹配
 		case svaf::LayerParameter_LayerType_KDTREE_MATCH:
 			Layer::task_type = SvafApp::POINT_MATCH;
 			break;
@@ -244,6 +264,7 @@ void Circuit::Build(){
 			Layer::task_type = SvafApp::RANSAC_MATCH;
 			layerinstance = new CVMatchLayer(layer);
 			break;
+		// 立体匹配
 		case svaf::LayerParameter_LayerType_SGM_MATCH:
 			Layer::task_type = SvafApp::STEREO_MATCH;
 			layerinstance = new SgmMatchLayer(layer);
@@ -252,41 +273,49 @@ void Circuit::Build(){
 			Layer::task_type = SvafApp::STEREO_MATCH;
 			layerinstance = new EadpMatchLayer(layer);
 			break;
+		// 三维重建，根据视差计算三维坐标
 		case svaf::LayerParameter_LayerType_TRIANG:
 			Layer::task_type = SvafApp::PC_TRIANGLE;
 			layerinstance = new TriangulationLayer(layer);
 			param = (void*)&world_;
 			break;
+		// 利用矩阵乘法进行三维空间坐标变换
 		case svaf::LayerParameter_LayerType_MXMUL:
 			Layer::task_type = SvafApp::PC_MULMATRIX;
 			layerinstance = new MatrixMulLayer(layer);
 			param = (void*)&world_;
 			break;
+		// 选取ROI区域中心位置
 		case svaf::LayerParameter_LayerType_CENTER_POS:
 			Layer::task_type = SvafApp::PR_CENTER;
 			layerinstance = new CenterPointLayer(layer);
 			param = (void*)&world_;
 			break;
+		// SAC-IA点云初始配准
 		case svaf::LayerParameter_LayerType_IA_EST:
 			Layer::task_type = SvafApp::PC_REGISTRATION;
 			layerinstance = new IAEstimateLayer(layer);
 			param = (void*)&world_;
 			break;
+		// ICP点云配准
 		case svaf::LayerParameter_LayerType_IAICP_EST:
 			Layer::task_type = SvafApp::PC_REGISTRATION;
 			layerinstance = new ICPEstimateLayer(layer);
 			param = (void*)&world_;
 			break;
+		// NDT点云配准
 		case svaf::LayerParameter_LayerType_IANDT_EST:
 			Layer::task_type = SvafApp::PC_REGISTRATION;
 			layerinstance = new NDTEstimateLayer(layer);
 			param = (void*)&world_;
 			break;
+		// 立体图像矫正
 		case svaf::LayerParameter_LayerType_RECTIFY:
 			Layer::task_type = SvafApp::S_RECTIFY;
 			layerinstance = new StereoRectifyLayer(layer);
 			param = (void*)&world_;
 			break;
+		// 超像素分割
 		case svaf::LayerParameter_LayerType_SUPIX_SEG:
 			Layer::task_type = SvafApp::S_SUPIX;
 			layerinstance = new SupixSegLayer(layer);
@@ -308,8 +337,10 @@ void Circuit::Build(){
 	RLOG("All Layer Builded.");
 }
 
+// 执行算法
 void Circuit::Run(){
 	char buf[256] = {0};
+	// 双目方式
 	while (layers_.IsBinocular()){
 		LOG(INFO) << "#Frame " << id_ << " Begin: ";
 
@@ -322,19 +353,20 @@ void Circuit::Run(){
 			RLOG(buf);
 			break;
 		}
-		InitStep();
+		InitStep(); // 初始化
 		images_.push_back(Block("left", matpair.first.clone()));
 		images_.push_back(Block("right", matpair.second.clone()));
-		RunStep();
+		RunStep(); // 运行
 		if (!Disp()){
 			break;
 		}
-		EndStep();
+		EndStep(); // 结束
 		if (!ReciveCmd()){
 			break;
 		}
 	}
 
+	// 单目方式
 	while (!layers_.IsBinocular()){
 		LOG(INFO) << "#Frame " << id_ << " Begin: ";
 
@@ -346,21 +378,23 @@ void Circuit::Run(){
 			RLOG(buf);
 			break;
 		}
-		InitStep();
+		InitStep(); // 初始化
 		images_.push_back(Block("left", mat.clone()));
-		RunStep();
+		RunStep(); // 运行
 		if (!Disp()){
 			break;
 		}
-		EndStep();
+		EndStep(); // 结束
 		
 	}
 
 	Analysis();
 }
 
+
+// 单帧执行
 void Circuit::RunStep(){
-	
+	// 遍历算法链表执行算法
 	void *param = NULL;
 	Node *p = linklist_;
 	while (p){
@@ -374,8 +408,10 @@ void Circuit::RunStep(){
 	
 }
 
+
+// 显示输出
 bool Circuit::Disp(){
-	
+	// 显示或保存图像
 	for (int i = 0; i < disp_.size(); ++i){
 		if (disp_[i].isShow){
 			imshow(disp_[i].name, disp_[i].image);
@@ -385,6 +421,7 @@ bool Circuit::Disp(){
 				+ ".png", disp_[i].image);
 		}
 	}
+	// 响应按键与帧间暂停
 	if (pause_ms_ < 0)
 		return true;
 	char key = waitKey(pause_ms_);
@@ -408,6 +445,7 @@ bool Circuit::Disp(){
 	return true;
 }
 
+// 每帧处理前初始化
 void Circuit::InitStep(){
 	disp_.clear();
 	images_.clear();
@@ -431,6 +469,7 @@ void Circuit::InitStep(){
 	sout_.setRow(id_+1);
 }
 
+// 每帧结束操作
 void Circuit::EndStep(){
 	id_++;
 	SendData();
@@ -438,6 +477,7 @@ void Circuit::EndStep(){
 	RLOG("Process Finished.");
 }
 
+// 数据记录与分析
 void Circuit::Analysis(){
 	RLOG("Analysis Data.");
 	string timestr = GetTimeString();
@@ -455,6 +495,7 @@ void Circuit::Analysis(){
 	RLOG("SVAF closed.");
 }
 
+// 接受外部进程控制
 bool Circuit::ReciveCmd(){
 	if (!useMapping_){
 		return true;
@@ -476,6 +517,7 @@ bool Circuit::ReciveCmd(){
 	return true;
 }
 
+// 向外部进程发送数据格式
 using Bucket = struct{
 	char	head[4];
 	int		msgCount;
@@ -497,8 +539,10 @@ using Bucket = struct{
 	float	c;
 };
 
+// 向外部进程发送数据
 void Circuit::SendData(){
 
+	// 检查进程间通信资源是否创建
 	if (!useMapping_ || !d_pMsg_){
 		return;
 	}
@@ -509,6 +553,7 @@ void Circuit::SendData(){
 	sprintf(pBucket->head, "pch");
 	pBucket->msgCount = 1;
 
+	// 按照协议发送图像和点云
 	int frameCount = 0;
 	int pointCount = 0;
 	int offset = sizeof(Bucket);
@@ -568,9 +613,11 @@ void Circuit::SendData(){
 	pBucket->b = world_.b;
 	pBucket->c = world_.c;
 
+	// 通知外部进程数据已写入
 	SetEvent(d_mutex_);
 }
 
+// 将信息字符串发送给外部进程
 void Circuit::RLOG(std::string infoStr){
 
 	if (!useMapping_ || !i_pMsg_){
@@ -584,6 +631,7 @@ void Circuit::RLOG(std::string infoStr){
 	PulseEvent(i_mutex_);
 }
 
+// 生成时间字符串，用于自动保存文件的文件名
 string GetTimeString(){
 	char filename[16];
 	time_t rawtime;
