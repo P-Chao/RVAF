@@ -7,15 +7,17 @@ Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
 
 namespace svaf{
 
-
+// 构造函数
 CenterPointLayer::CenterPointLayer(LayerParameter& layer) : Layer(layer)
 {
 }
 
+// 析构函数
 CenterPointLayer::~CenterPointLayer()
 {
 }
 
+// 运行
 bool CenterPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_GE(images.size(), 2) << "";
 	pWorld = (World*)param;
@@ -30,6 +32,7 @@ bool CenterPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	return true;
 }
 
+// 根据ROI，计算ROI中心位置，并放入二维点集
 void CenterPointLayer::ROICenter(vector<Block>& images){
 	auto roi0 = images[0].roi;
 	auto roi1 = images[1].roi;
