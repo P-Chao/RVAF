@@ -1,5 +1,6 @@
 /*
 Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+Ë«Ä¿Ä¿±ê¸ú×Ù
 */
 
 #include "BinoTrackLayer.h"
@@ -13,6 +14,7 @@ namespace svaf{
 
 bool BinoTrackLayer::reinit_;
 
+// 
 BinoTrackLayer::BinoTrackLayer(LayerParameter& layer) : Layer(layer), adaboost(NULL), scalefactor_(-1)
 {
 	init_type_ = layer.bittrack_param().init_type();

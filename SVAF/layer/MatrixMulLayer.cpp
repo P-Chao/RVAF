@@ -1,5 +1,6 @@
 /*
 Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+利用矩阵相乘完成空间坐标转换
 */
 
 #include "MatrixMulLayer.h"

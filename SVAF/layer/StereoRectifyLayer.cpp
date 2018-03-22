@@ -1,5 +1,6 @@
 /*
 Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+Á¢ÌåÍ¼Ïñ½ÃÕý
 */
 
 #include "StereoRectifyLayer.h"

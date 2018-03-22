@@ -1,5 +1,6 @@
 /*
 Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+立体层，电云层基类
 */
 
 #include "StereoLayer.h"

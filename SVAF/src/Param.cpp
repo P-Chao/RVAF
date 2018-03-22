@@ -1,5 +1,6 @@
 /*
 Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+统一的文件、视频数据流接口
 */
 
 

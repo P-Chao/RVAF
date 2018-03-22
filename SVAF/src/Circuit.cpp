@@ -1,5 +1,6 @@
 /*
 Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+算法的链表式顺序执行
 */
 
 #include "Circuit.h"
