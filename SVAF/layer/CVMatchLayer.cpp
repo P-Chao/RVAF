@@ -8,10 +8,11 @@ OpenCV实现特征匹配
 
 namespace svaf{
 
+// OpenCV特征匹配
 CVMatchLayer::CVMatchLayer(LayerParameter& layer) : Layer(layer)
 {
-	type = layer.cvmatch_param().type();
-	crossCheck = layer.cvmatch_param().crosscheck();
+	type = layer.cvmatch_param().type(); //特征匹配类型
+	crossCheck = layer.cvmatch_param().crosscheck(); // 是否进行交叉检验
 	switch (type)
 	{
 	case svaf::CVMatchParameter_MatchType_BFL1:
@@ -39,12 +40,14 @@ CVMatchLayer::CVMatchLayer(LayerParameter& layer) : Layer(layer)
 	}
 }
 
-
+// 析构函数
 CVMatchLayer::~CVMatchLayer()
 {
 }
 
+// 运行特征匹配
 bool CVMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
+	// 检查图像是否是一堆
 	CHECK_GE(images.size(), 2) << "Need Image Pairs";
 	if (images[0].keypoint.empty() || images[1].keypoint.empty()){
 		LOG(ERROR) << "Match Not Run, No Point";
@@ -61,6 +64,7 @@ bool CVMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 	}
 	CHECK_EQ(images[0].descriptors.cols, images[1].descriptors.cols);
 
+	// 调用算法
 	(this->*ptr)(images, disp);
 
 	if (task_type == SvafApp::POINT_MATCH){
@@ -71,6 +75,7 @@ bool CVMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 
 	if (__show || __save || __bout){
 		Mat img_match;
+		// 绘制匹配结果
 		drawMatches(images[0].image, images[0].keypoint, images[1].image, images[1].keypoint,
 			images[0].matches, img_match);
 		disp.push_back(Block(layername + matchname, img_match, __show, __save, __bout));
@@ -79,6 +84,7 @@ bool CVMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 	return true;
 }
 
+// OpenCV调用BF算法L1距离进行特征匹配
 bool CVMatchLayer::BFL1(vector<Block>& images, vector<Block>& disp){
 	BFMatcher matcher(NORM_L1, crossCheck);
 	vector<DMatch> matches;
@@ -106,6 +112,7 @@ bool CVMatchLayer::BFL1(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用BF算法L2距离进行特征匹配
 bool CVMatchLayer::BFL2(vector<Block>& images, vector<Block>& disp){
 	BFMatcher matcher(NORM_L2, crossCheck);
 	vector<DMatch> matches;
@@ -133,6 +140,7 @@ bool CVMatchLayer::BFL2(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用BFH1距离进行特征匹配
 bool CVMatchLayer::BFH1(vector<Block>& images, vector<Block>& disp){
 	BFMatcher matcher(NORM_HAMMING, crossCheck);
 	vector<DMatch> matches;
@@ -160,6 +168,7 @@ bool CVMatchLayer::BFH1(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用BFH2距离进行特征匹配
 bool CVMatchLayer::BFH2(vector<Block>& images, vector<Block>& disp){
 	BFMatcher matcher(NORM_HAMMING2, crossCheck);
 	vector<DMatch> matches;
@@ -187,6 +196,7 @@ bool CVMatchLayer::BFH2(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用Flann算法进行特征匹配
 bool CVMatchLayer::FLANN(vector<Block>& images, vector<Block>& disp){
 	FlannBasedMatcher matcher;
 	vector<DMatch> matches;
