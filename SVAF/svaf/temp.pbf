@@ -948,3 +948,122 @@ layer{
 		thresh:		40.0
 	}
 }
+
+=== ROI Center 201803===
+
+
+name:	"Point Cloud SAC-IA Demo"
+version:	"v_1.22"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	imagepair_param{
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103091536128.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103091536128.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103092149153.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103092149153.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103092332338.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103092332338.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103092739359.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103092739359.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103092818910.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103092818910.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103093213205.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103093213205.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103093245188.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103093245188.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103093751167.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103093751167.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103093830000.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103093830000.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103094756205.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103094756205.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103094847223.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103094847223.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103095149340.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103095149340.bmp"
+		}
+		pair{
+			left: "F:/Data/data20171101/img_obj/L_171103095218940.bmp";
+			right: "F:/Data/data20171101/img_obj/R_171103095218940.bmp"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_171103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"roicenter"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_171106.dat"
+		sync_frame:	true
+		#sync_video:	true
+		sync_epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	show: true
+}
+layer{
+	name:	"roicenter"
+	type:	CENTER_POS
+	top:	"3dpoint"
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"camera2world"
+	triang_param{
+		visible:	false
+		savepc:		true
+		toolbox_dir:	"F:/svaf/calib/"
+		calibmat_dir:	"F:/svaf/data/calib/mat_171103/"
+	}
+	show: true
+	save: false
+}
+layer{
+	name:	"camera2world"
+	type:	MXMUL
+	top:	"camera2world"
+	mxmul_param{
+		filename:	"F:/svaf/data/calib/camera2world_rectified_171103.dat"
+	}
+	#save:  true
+}
