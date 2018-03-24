@@ -10,20 +10,23 @@ using namespace pc;
 
 namespace svaf{
 
-
+// 构造函数
 SupixSegLayer::SupixSegLayer(LayerParameter& layer) : Layer(layer)
 {
-	K = layer.supix_param().k();
-	M = layer.supix_param().m();
-	optint = layer.supix_param().optint();
-	saveseg = layer.supix_param().saveseg();
+	// 超像素分割参数
+	K = layer.supix_param().k(); // K参数
+	M = layer.supix_param().m(); // 分割块大小
+	optint = layer.supix_param().optint();	// 是否整数
+	saveseg = layer.supix_param().saveseg(); // 保存分割文件
 	segname = layer.supix_param().segname();
 }
 
+// 析构函数
 SupixSegLayer::~SupixSegLayer()
 {
 }
 
+// 运行超像素分割算法
 bool SupixSegLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	for (int i = 0; i < images.size(); ++i){
 		Mat mat = SuperPixelSegment(images[i].image, K, M, optint, saveseg, segname);
