@@ -1,26 +1,29 @@
 /*
 Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
-立体层，电云层基类
+立体层，点云层基类
 */
 
 #include "StereoLayer.h"
 
 namespace svaf{
 
-
+// 构造函数
 StereoLayer::StereoLayer()
 {
 }
 
+// 传递参数给基类的构造函数
 StereoLayer::StereoLayer(LayerParameter& layer)
 	: Layer(layer)
 {
 }
 
+// 析构函数
 StereoLayer::~StereoLayer()
 {
 }
 
+// 调用PCL库保存点云为pcd文件
 void StereoLayer::pcdsave(string filename, vector<Point3f>& points, bool is_dense){
 	pcl::PointCloud<pcl::PointXYZ> cloud;
 	cloud.width = points.size();
@@ -41,6 +44,7 @@ void StereoLayer::pcdsave(string filename, vector<Point3f>& points, bool is_dens
 	return;
 }
 
+// 调用PCL库读取pcd点云文件
 void StereoLayer::pcdread(string filename, vector<Point3f>& points){
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 	if (pcl::io::loadPCDFile<pcl::PointXYZ>(filename, *cloud) == -1){
@@ -55,18 +59,21 @@ void StereoLayer::pcdread(string filename, vector<Point3f>& points){
 	return;
 }
 
+// 保存点云文件XYZ格式
 void StereoLayer::pcdsave(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud, bool is_dense){
 	pcl::io::savePCDFileASCII(filename, cloud);
 	LOG(INFO) << filename << " Saved <" << cloud.size() << "> Points.";
 	return;
 }
 
+// 保存点云文件XYZRGB格式
 void StereoLayer::pcdsave(string filename, pcl::PointCloud<pcl::PointXYZRGB>& cloud, bool is_dense){
 	pcl::io::savePCDFileASCII(filename, cloud);
 	LOG(INFO) << filename << " Saved <" << cloud.size() << "> Points.";
 	return;
 }
 
+// 读取点云文件
 void StereoLayer::pcdread(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud){
 	if (pcl::io::loadPCDFile<pcl::PointXYZ>(filename, cloud) == -1){
 		LOG(FATAL) << " Couldn't Open " << filename;
@@ -74,6 +81,7 @@ void StereoLayer::pcdread(string filename, pcl::PointCloud<pcl::PointXYZ>& cloud
 	}
 }
 
+// 将向量格式的点云转化为pcl格式
 void StereoLayer::pclconvert(pcl::PointCloud<pcl::PointXYZ>& cloud, vector<Point3f>& inpoints){
 	cloud.clear();
 	cloud.width = inpoints.size();
@@ -87,6 +95,7 @@ void StereoLayer::pclconvert(pcl::PointCloud<pcl::PointXYZ>& cloud, vector<Point
 
 }
 
+// 将pcl格式的点云转化为向量格式
 void StereoLayer::pclconvert(vector<Point3f>& points, pcl::PointCloud<pcl::PointXYZ>& incloud){
 	points.clear();
 	points.resize(incloud.size());
@@ -95,6 +104,7 @@ void StereoLayer::pclconvert(vector<Point3f>& points, pcl::PointCloud<pcl::Point
 	}
 }
 
+// 根据旋转矩阵计算欧拉角
 std::vector<float> StereoLayer::computeEularAngles(Eigen::Matrix4f& R, bool israd){
 	std::vector<float> result(3, 0);
 	const float pi = 3.14159265397932384626433;
