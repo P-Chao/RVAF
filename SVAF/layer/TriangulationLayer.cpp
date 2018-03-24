@@ -8,31 +8,37 @@ Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
 
 namespace svaf{
 
+// 构造函数
 TriangulationLayer::TriangulationLayer(LayerParameter& layer) : StereoLayer(layer)
 {
+	// 设置工具箱路径
 	if (layer.triang_param().has_toolbox_dir()){
 		toolbox_dir = layer.triang_param().toolbox_dir();
 	}else{
 		toolbox_dir = "D:/Program Files/Matlab/R2016a/toolbox/calib/";
 	}
 
+	// 设置标定文件路径
 	if (layer.triang_param().has_calibmat_dir()){
 		calibmat_dir = layer.triang_param().calibmat_dir();
 	}else{
 		calibmat_dir = "./calib/";
 	}
-	isMatlabVisible = layer.triang_param().visible();
-	isSavePointCloud = layer.triang_param().savepc();
-	OpenMatlab();
+	isMatlabVisible = layer.triang_param().visible(); // 设置Matlab窗口是否可见
+	isSavePointCloud = layer.triang_param().savepc(); // 是否保存点云
+	OpenMatlab(); // 打开Matlab
 }
 
+// 析构函数
 TriangulationLayer::~TriangulationLayer()
 {
-	CloseMatlab();
+	CloseMatlab(); // 关闭Matlab
 }
 
+// 运行算法
 bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_NOTNULL(images[0].pMatch);
+	// 读取之前算法产生的数据
 	pWorld_ = (World *)param;
 	pWorld_->xl.clear();
 	pWorld_->xr.clear();
@@ -42,6 +48,7 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 	Block& image0 = images[0];
 	Block& image1 = *images[0].pMatch;
 
+	// 将左右图像对应点转存起来
 	for (int i = 0; i < image0.ptidx.size(); ++i){
 		if (image0.ptidx[i] < 0){
 			continue;
@@ -65,6 +72,7 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 	char loginfo[120];
 	string logstr;
 	
+	// 由二维坐标计算三维坐标
 	__t.StartWatchTimer();
 	ComputeWorld();
 	__t.ReadWatchTimer("Triang Compute Time");
@@ -78,6 +86,7 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 		__bout = false;
 	}
 
+	// 输出点云
 	if (__bout){
 		Mat im;
 		Block block("Point Cloud Camera", im, false, false, __bout);
@@ -86,6 +95,7 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 		disp.push_back(block);
 	}
 
+	// 命令行显示
 	if (pWorld_->pointL.size() < 20){
 		for (int i = 0; i < pWorld_->xl.size(); ++i){
 			sprintf(loginfo, "(%8.3f, %8.3f) (%8.3f, %8.3f)\t(%8.3f, %8.3f, %8.3f)\n",
@@ -98,6 +108,7 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 		LOG(INFO) << "Left Camera Point Count " << pWorld_->pointL.size();
 	}
 	
+	// 保存点云
 	if (__save){
 		pcdsave(string("tmp/C_") + Circuit::time_id_ + ".pcd", pWorld_->pointL);// camera coord
 		//LOG(INFO) << "ref_pointcloud.pc Point Cloud File Has Been Saved.";
@@ -111,7 +122,9 @@ bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 	return true;
 }
 
+// 调用Matlab工具箱，由左右视图坐标计算三维坐标
 void TriangulationLayer::ComputeWorld(){
+	// 如果之前没有打开Matlab，则打开Matlab
 	if (!m_Ep){
 		OpenMatlab();
 	}
@@ -119,6 +132,7 @@ void TriangulationLayer::ComputeWorld(){
 	pWorld_->pointL.resize(pointCount);
 	pWorld_->pointR.resize(pointCount);
 
+	// 将左右图像对应点坐标读入Matlab
 	Matlab::mxArray* leftPoint = Matlab::mxCreateDoubleMatrix(2, pointCount, Matlab::mxREAL);
 	Matlab::mxArray* rightPoint = Matlab::mxCreateDoubleMatrix(2, pointCount, Matlab::mxREAL);
 	for (int i = 0; i < pointCount; ++i){
@@ -127,6 +141,7 @@ void TriangulationLayer::ComputeWorld(){
 		Matlab::mxGetPr(rightPoint)[2 * i] = pWorld_->xr[i].x;
 		Matlab::mxGetPr(rightPoint)[2 * i + 1] = pWorld_->xr[i].y;
 	}
+	// 调用工具箱计算三维坐标
 	Matlab::engEvalString(m_Ep, "clear xL, clear xR");
 	Matlab::engPutVariable(m_Ep, "xL", leftPoint);
 	Matlab::engPutVariable(m_Ep, "xR", rightPoint);
@@ -136,6 +151,7 @@ void TriangulationLayer::ComputeWorld(){
 		Matlab::engEvalString(m_Ep, "[XL, XR] = stereo_triangulation(xL, xR, om, T, fc_left, cc_left, kc_left, alpha_c_left, fc_right, cc_right, kc_right, alpha_c_right); ");
 	}
 	
+	// 从Matlab读出左右相机坐标系下的三维坐标
 	Matlab::mxArray* xL = Matlab::engGetVariable(m_Ep, "XL");
 	Matlab::mxArray* xR = Matlab::engGetVariable(m_Ep, "XR");
 
@@ -151,6 +167,7 @@ void TriangulationLayer::ComputeWorld(){
 		pWorld_->pointR[i].z = Matlab::mxGetPr(xR)[3 * i + 2];
 	}
 
+	// 调用Matlab的Figure窗口显示三维点云
 	if (__show){
 		Matlab::engEvalString(m_Ep, "figure(1), scatter3(XL(1, :), XL(2, :), XL(3, :));");
 		HWND hw = ::FindWindow(NULL, "right Adaboost");
@@ -225,6 +242,7 @@ void TriangulationLayer::ComputeWorld(){
 	//waitKey();
 }
 
+// 打开Matlab并加载工具箱和数据
 void TriangulationLayer::OpenMatlab(){
 	if (!(m_Ep = Matlab::engOpen(nullptr))){
 		LOG(FATAL) << "engOpen failed!";
@@ -247,6 +265,7 @@ void TriangulationLayer::OpenMatlab(){
 	Matlab::engEvalString(m_Ep, "load('Calib_Results_stereo_rectified.mat')");
 }
 
+// 关闭Matlab
 void TriangulationLayer::CloseMatlab(){
 	Matlab::engClose(m_Ep);
 }
