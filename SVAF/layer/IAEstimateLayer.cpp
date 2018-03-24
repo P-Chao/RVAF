@@ -14,15 +14,18 @@ SAC-IA点云配准
 
 namespace svaf{
 
+// 构造函数
 IAEstimateLayer::IAEstimateLayer(LayerParameter& layer) : StereoLayer(layer){
-	targetfile = layer.sacia_param().pcd_filename();
-	max_iter = layer.sacia_param().ia_param().max_iter();
-	min_cors = layer.sacia_param().ia_param().min_cors();
-	max_cors = layer.sacia_param().ia_param().max_cors();
-	voxel_grid = layer.sacia_param().ia_param().voxel_grid();
-	norm_rad = layer.sacia_param().ia_param().norm_rad();
-	feat_rad = layer.sacia_param().ia_param().feat_rad();
+	// 读入初始配准参数
+	targetfile = layer.sacia_param().pcd_filename();		// 目标点云文件
+	max_iter = layer.sacia_param().ia_param().max_iter();	// 最大迭代次数
+	min_cors = layer.sacia_param().ia_param().min_cors();	// 最小响应
+	max_cors = layer.sacia_param().ia_param().max_cors();	// 最大响应
+	voxel_grid = layer.sacia_param().ia_param().voxel_grid();	// 方格滤波器方格大小
+	norm_rad = layer.sacia_param().ia_param().norm_rad();	// 法向量半径
+	feat_rad = layer.sacia_param().ia_param().feat_rad();	// 特征半径
 
+	// 目标点云位置
 	x = layer.sacia_param().coor_param().x();
 	y = layer.sacia_param().coor_param().y();
 	z = layer.sacia_param().coor_param().z();
@@ -30,20 +33,25 @@ IAEstimateLayer::IAEstimateLayer(LayerParameter& layer) : StereoLayer(layer){
 	b = layer.sacia_param().coor_param().b();
 	c = layer.sacia_param().coor_param().c();
 
+	// 读入点云文件
 	pcdread(targetfile, targetpcd);
 }
 
+// 析构函数
 IAEstimateLayer::~IAEstimateLayer()
 {
 }
 
+// 运行算法
 bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_NOTNULL(param);
 	pWorld_ = (World*)param;
 	
+	// 点云智能指针
 	pcl::PointCloud<pcl::PointXYZ>::Ptr source(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr target(new pcl::PointCloud<pcl::PointXYZ>);
 
+	// 自动从相机坐标或世界坐标中选择数据作为待配准点云
 	if (pWorld_->pointW.empty()){
 		if (pWorld_->pointL.empty()){
 			LOG(ERROR) << "\nLoop Cut Short\n";
@@ -80,6 +88,7 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	auto sac_ia = pc::align(cloud1ds, cloud2ds, features1, features2, max_iter, min_cors, max_cors);
 	__t.ReadWatchTimer("SAC-IA Time");
 
+	// 计算得到配准变换矩阵
 	Eigen::Matrix4f Matrix = sac_ia.getFinalTransformation(); // make transform of cloud2 -> cloud2
 	LOG(INFO) << "SAC-IA Matrix:\n" << Matrix;
 	LOG(INFO) << "SAC-IA scores: " << sac_ia.getFitnessScore();
@@ -113,6 +122,7 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		__bout = false;
 	}
 
+	// 将点云接触输出或保存到tmp文件夹下
 	if (__show || __save || __bout){
 		pcl::transformPointCloud(*target, *target, Matrix);
 		pcl::PointCloud<pcl::PointXYZRGB>::Ptr merged = pc::coloredMerge(source, target);
