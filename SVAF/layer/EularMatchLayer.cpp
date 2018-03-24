@@ -27,8 +27,9 @@ bool EularMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	images[1].pMatch = &images[0];
 	thresh = layer.eularmatch_param().thresh();
 
+	// 图像0的描述符不为空，说明是OpenCV格式，调用OpenCV格式的欧氏距离匹配
 	if (!images[0].descriptors.empty()){
-		// 检查特征点是否
+		// 检查特征点和特征描述数据是否正常
 		if (images[0].keypoint.empty() || images[1].keypoint.empty()){
 			LOG(ERROR) << "Match Not Run, No Point";
 			return true;
@@ -44,6 +45,7 @@ bool EularMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 		}
 		CHECK_EQ(images[0].descriptors.cols, images[1].descriptors.cols);
 
+		// 执行欧式距离匹配
 		__t.StartWatchTimer();
 		EularMatchCVFormat(images);
 		__t.ReadWatchTimer("Eular Match Time");
@@ -70,6 +72,7 @@ bool EularMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 			return false;
 		}
 	}
+	// 图像0的描述符为空，采用非OpenCV格式的欧式距离匹配
 	else{
 		if (images[0].points.size() == 0 || images[1].points.size() == 0){
 			LOG(ERROR) << "No Feature Stored!";
@@ -123,6 +126,7 @@ bool EularMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	return true;
 }
 
+// 执行欧式距离匹配
 int EularMatchLayer::EularMatch(vector<Block>& images){
 	int count = 0;
 	float d0, d1, dist;
@@ -131,6 +135,7 @@ int EularMatchLayer::EularMatch(vector<Block>& images){
 	const unsigned int desp1_size = images[1].despciptors.size();
 	const unsigned int desp_length = images[0].despciptors[0].size();
 
+	// 对图像0中每个特征描述寻找距离最短的作为匹配值
 	images[0].ptidx.resize(desp0_size, -1);
 	for (int i = 0; i < desp0_size; ++i){
 		d0 = d1 = FLT_MAX;
@@ -151,7 +156,8 @@ int EularMatchLayer::EularMatch(vector<Block>& images){
 				d1 = dist;
 			}
 		}
-
+		 
+		// 对前两个匹配的匹配度进行筛选，对比度大于阈值的进行保留
 		if (d0 / d1 < thresh /*0.65*/){
 			images[0].ptidx[i] = match;
 			count++;
@@ -164,12 +170,14 @@ void EularMatchLayer::EularEpipolarConstraint(vector<Block>& images){
 
 }
 
+// 欧式距离匹配的OpenCV格式，采用Opencv的descriptors
 bool EularMatchLayer::EularMatchCVFormat(vector<Block>& images){
 	int p1_size = images[0].descriptors.rows;
 	int p2_size = images[1].descriptors.rows;
 	int length = images[0].descriptors.cols;
 	float d0, d1, dist;
 
+	// 不同格式描述符的索引方式不同，算法规则与欧式距离函数相同 
 	DMatch match;
 	switch (images[0].descriptors.depth()){
 	case CV_8U:
