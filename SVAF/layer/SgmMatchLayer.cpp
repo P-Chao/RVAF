@@ -10,24 +10,28 @@ using namespace pc;
 
 namespace svaf{
 
+// 构造函数
 SgmMatchLayer::SgmMatchLayer(LayerParameter& layer) : StereoLayer(layer)
 {
-	max_disp = layer.sgm_param().max_disp();
+	// 算法参数
+	max_disp = layer.sgm_param().max_disp();	// 最大搜索视差
 	factor = layer.sgm_param().factor();
 	dispmr = layer.sgm_param().dispmr();
-	r1 = layer.sgm_param().r1();
-	r2 = layer.sgm_param().r2();
-	savetxt = layer.sgm_param().savetxt();
+	r1 = layer.sgm_param().r1();				// P1惩罚
+	r2 = layer.sgm_param().r2();				// P2惩罚
+	savetxt = layer.sgm_param().savetxt();		// 是否将视差保存为txt文档
 }
 
-
+// 析构函数
 SgmMatchLayer::~SgmMatchLayer()
 {
 }
 
+// 运行算法
 bool SgmMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_GE(images.size(), 2) << "Need Image Pairs";
 	
+	// 执行SGM立体匹配算法
 	prefix = string("tmp/SGM_") + Circuit::time_id_;
 	Mat l_disp, r_disp, fill, check;
 	__t.StartWatchTimer();
@@ -44,6 +48,7 @@ bool SgmMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamet
 		__bout = false;
 	}
 
+	// 保存视差图结果
 	if (__show || __save){
 		disp.push_back(Block("l_disp", l_disp, __show, __save));
 		disp.push_back(Block("r_disp", r_disp, __show, __save));
