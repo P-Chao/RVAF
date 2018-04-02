@@ -148,6 +148,7 @@
       <Cpp0xSupport>true</Cpp0xSupport>
       <UseIntelOptimizedHeaders>true</UseIntelOptimizedHeaders>
       <OpenMP>GenerateParallelCode</OpenMP>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

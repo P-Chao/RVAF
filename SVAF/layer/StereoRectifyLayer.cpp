@@ -1,3 +1,8 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+立体图像矫正
+*/
+
 #include "StereoRectifyLayer.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -9,8 +14,7 @@ void *StereoRectifyLayer::pTable[14][2] = { NULL };
 uint StereoRectifyLayer::l_length, StereoRectifyLayer::r_length;
 uint StereoRectifyLayer::cols, StereoRectifyLayer::rows;
 
-
-
+// 释放立体矫正数据表
 void StereoRectifyLayer::ReleaseTable(){
 	for (int i = 0; i < 14; ++i){
 		if (pTable[i][0]){
@@ -24,6 +28,7 @@ void StereoRectifyLayer::ReleaseTable(){
 	}
 }
 
+// 单通道索引转化为三通道索引
 static void index3channal(uint* output, uint* input, uint length){
 	for (int i = 0; i < length; ++i){
 		output[3 * i] = 3 * input[i];
@@ -32,6 +37,7 @@ static void index3channal(uint* output, uint* input, uint length){
 	}
 }
 
+// 从二进制文件读取数据表
 void StereoRectifyLayer::ReadTable(const string& filename){
 	ReleaseTable();
 	FILE *fp = fopen(filename.c_str(), "rb+");
@@ -79,16 +85,18 @@ void StereoRectifyLayer::ReadTable(const string& filename){
 	RLOG(string("Rectify file: \"" + filename + "\" opened. Table has been created."));
 }
 
+// 构造函数将参数传递给基类并读取数据表
 StereoRectifyLayer::StereoRectifyLayer(LayerParameter& layer) : Layer(layer)
 {
 	ReadTable(layer.rectify_param().filename());
 }
 
-
+// 析构函数
 StereoRectifyLayer::~StereoRectifyLayer()
 {
 }
 
+// 运行算法
 bool StereoRectifyLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	if (pTable[0][0] == NULL){
 		ReadTable(layer.rectify_param().filename());
@@ -102,6 +110,7 @@ bool StereoRectifyLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 	Mat left_image_rectify(rows, cols, images[0].image.type());
 	Mat right_image_rectify(rows, cols, images[1].image.type());
 
+	// 建立索引表
 	const float * const a1_left = (float *)pTable[0][0];
 	const float * const a2_left = (float *)pTable[1][0];
 	const float * const a3_left = (float *)pTable[2][0];
@@ -145,6 +154,7 @@ bool StereoRectifyLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 	const uchar *const l_data = left_image.data;
 	const uchar *const r_data = right_image.data;
 	
+	// 进行坐标变换
 	// left
 	__t.StartWatchTimer();
 	if (lchannels == 3){
@@ -244,6 +254,7 @@ bool StereoRectifyLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPa
 		__bout = false;
 	}
 
+	// 显示或保存结果
 	if (__show || __save){
 		disp.push_back(Block(images[0].name + "rectified", images[0].image, __show, __save, __bout));
 		disp.push_back(Block(images[1].name + "rectified", images[1].image, __show, __save, __bout));

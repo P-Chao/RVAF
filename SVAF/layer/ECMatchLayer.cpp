@@ -1,3 +1,8 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+ÌØÕ÷Æ¥Åä
+*/
+
 #include "ECMatchLayer.h"
 
 namespace svaf{

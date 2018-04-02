@@ -1,11 +1,18 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+利用矩阵相乘完成空间坐标转换
+*/
+
 #include "MatrixMulLayer.h"
 #include <sstream>
 
 namespace svaf{
 
+// 在类构架时就从文件读取坐标变换矩阵
 MatrixMulLayer::MatrixMulLayer(LayerParameter& layer) : StereoLayer(layer)
 {
 	if (layer.mxmul_param().has_col0() && layer.mxmul_param().has_col1() && layer.mxmul_param().has_col2()){
+		// 从配置文件脚本中读取变换矩阵参数
 		string col[3];
 		col[0] = layer.mxmul_param().col0();
 		col[1] = layer.mxmul_param().col1();
@@ -20,6 +27,7 @@ MatrixMulLayer::MatrixMulLayer(LayerParameter& layer) : StereoLayer(layer)
 		}
 		LOG(INFO) << "Matrix Opened From Proto.";
 	} else if(layer.mxmul_param().has_filename()){
+		// 从二进制文件中读取变换矩阵参数
 		string filename = layer.mxmul_param().filename();
 		FILE *fp = fopen(filename.c_str(), "rb+");
 		CHECK_NOTNULL(fp);
@@ -29,6 +37,7 @@ MatrixMulLayer::MatrixMulLayer(LayerParameter& layer) : StereoLayer(layer)
 		fclose(fp);
 		LOG(INFO) << "Matrix Opened From File " << filename;
 	} else{
+		// 无矩阵变换参数，创建失败
 		LOG(FATAL) << "Matrix Create Failed!";
 		RLOG("Matrix Create Failed!");
 	}
@@ -48,6 +57,7 @@ MatrixMulLayer::~MatrixMulLayer()
 
 bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	auto pWorld = (World*)param;
+	// 通过矩阵相乘将左相机坐标变换为世界坐标
 	pWorld->pointW.clear();
 	__t.StartWatchTimer();
 	for (int i = 0; i < pWorld->pointL.size(); ++i){
@@ -62,6 +72,7 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 		(*figures)[__name + "_t"][*id] = (float)__t;
 	}
 	
+	// 保存世界坐标系下的点云结果
 	if (__save){
 		pcdsave(string("tmp/W_") + Circuit::time_id_ + ".pcd", pWorld->pointW); // world coord
 	}
@@ -80,6 +91,7 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 		disp.push_back(block);
 	}
 
+	// 输出信息并记录日志
 	char loginfo[160];
 	string logstr;
 	for (int i = 0; i < (std::min)((int)pWorld->xl.size(), INT_MAX); ++i){

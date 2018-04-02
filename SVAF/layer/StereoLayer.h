@@ -1,3 +1,7 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+*/
+
 #pragma once
 #include <pcl\io\pcd_io.h>
 #include <pcl\point_types.h>

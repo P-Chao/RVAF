@@ -1,3 +1,8 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+Eadp立体匹配（By：朱松）
+*/
+
 #include "EadpMatchLayer.h"
 #include "../../SuperPixelSegment/svafinterface.h"
 
@@ -5,27 +10,34 @@ using namespace pc;
 
 namespace svaf{
 
+// 构造函数
 EadpMatchLayer::EadpMatchLayer(LayerParameter& layer) : Layer(layer)
 {
-	max_disp = layer.eadp_param().max_disp();
+	// 算法参数
+	max_disp = layer.eadp_param().max_disp(); // 最大视差
 	factor = layer.eadp_param().factor();
+	// 边缘保持滤波器参数
 	guildmr = layer.eadp_param().guidmr();
 	dispmr = layer.eadp_param().dispmr();
 	sg = layer.eadp_param().sg();
 	sc = layer.eadp_param().sc();
 	r1 = layer.eadp_param().r1();
 	r2 = layer.eadp_param().r2();
+	// 是否将视差保存为txt文档
 	savetxt = layer.eadp_param().savetxt();
 }
 
+// 析构函数
 EadpMatchLayer::~EadpMatchLayer()
 {
 }
 
+// 运行
 bool EadpMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_GE(images.size(), 2) << "Need Image Pairs";
 	prefix = string("tmp/EADP_") + Circuit::time_id_;
 
+	// 执行Eadp立体匹配
 	Mat l_disp, r_disp, fill, check;
 	__t.StartWatchTimer();
 	EadpMatch(images[0].image, images[1].image, l_disp, r_disp, check, fill,
@@ -41,6 +53,7 @@ bool EadpMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 		__bout = false;
 	}
 
+	// 保存视差图结果
 	if (__show || __save || __bout){
 		disp.push_back(Block("l_disp", l_disp, __show, __save));
 		disp.push_back(Block("r_disp", r_disp, __show, __save));

@@ -1,24 +1,33 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+Ransac筛选匹配点对
+*/
+
 #include "RansacLayer.h"
 
 namespace svaf{
 
+// 构造函数
 RansacLayer::RansacLayer(LayerParameter& layer) : Layer(layer)
 {
 }
 
-
+// 析构函数
 RansacLayer::~RansacLayer()
 {
 }
 
+// 运行算法
 bool RansacLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_GE(images.size(), 2) << "Need Binocular Image!";
 	CHECK_NOTNULL(images[0].pMatch);
 	Block& image0 = images[0];
 	Block& image1 = *images[0].pMatch;
 	
+	// Ransac算法的阈值参数
 	float thresh = layer.ransac_param().thresh();
 
+	// Ransac直销需要四个匹配点
 	vector<Point2f> pt0, pt1;
 	for (int i = 0; i < image0.ptidx.size(); ++i){
 		if (image0.ptidx[i] < 0){
@@ -35,6 +44,7 @@ bool RansacLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter
 		return true;
 	}
 
+	// 调用OpenCV的Ransac算法
 	vector<uchar> mask(pt0.size());
 	__t.StartWatchTimer();
 	Mat homography = findHomography(pt1, pt0, mask, CV_RANSAC, thresh);
@@ -59,12 +69,14 @@ bool RansacLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter
 	LOG(INFO) << "Before Ransac: " << mask.size();
 	LOG(INFO) << "After Ransac: " << count;
 
+	// 判断是否需要输出结果到外部进程
 	if (task_type == SvafApp::RANSAC_MATCH){
 		__bout = true;
 	} else {
 		__bout = false;
 	}
 
+	// 显示保存输出结果
 	if (__show || __save || __bout){
 		Mat mat0 = images[0].image.clone();
 		Mat mat1 = images[0].pMatch->image.clone();

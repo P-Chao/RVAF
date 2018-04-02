@@ -1,3 +1,8 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+目标检测
+*/
+
 #include "AdaboostLayer.h"
 #include "../../AcfDetect/acfDetect.h"
 #include "../../AcfDetect/chnsCompute.h"
@@ -9,27 +14,29 @@ using namespace pc;
 
 namespace svaf{
 
+// 初始化Adaboost目标检测
 AdaboostLayer::AdaboostLayer(LayerParameter& layer) : scaleindex(-1), ksvideo(false), ksframe(false), kseline(false), epoLine(-1), Layer(layer)
 {
 	string	detectorfile = layer.adaboost_param().detector();
-	detector.Open((char*)detectorfile.data());
+	detector.Open((char*)detectorfile.data()); // 打开分类器文件
 
-	thresh = layer.adaboost_param().thresh();
-	nms = layer.adaboost_param().nms();
+	thresh = layer.adaboost_param().thresh(); // 检测阈值
+	nms = layer.adaboost_param().nms();	// 非极大抑制因子
 
-	if (layer.adaboost_param().sync_frame()){
-		ksframe = true;
+	if (layer.adaboost_param().sync_frame()){ // 对于每一帧保持尺度相同
+		ksframe = true;	
 	}
-	if (layer.adaboost_param().sync_video()){
+	if (layer.adaboost_param().sync_video()){ // 对于真个视频序列保持尺度相同
 		ksframe = true;
 		ksvideo = true;
 	}
-	if (layer.adaboost_param().sync_epipolar()){
+	if (layer.adaboost_param().sync_epipolar()){ // 对于左右两图应用极线约束
 		ksframe = true;
 		kseline = true;
 	}
 	video_firstframe = true;
 
+	// Acf特征参数
 	opt.minDs = Size(60, 60);
 	opt.nPerOct = 8;
 	opt.nApprox = opt.nPerOct - 1;
@@ -50,19 +57,23 @@ AdaboostLayer::AdaboostLayer(LayerParameter& layer) : scaleindex(-1), ksvideo(fa
 	opt.chnsOpt.gradHistUseHog = 0;
 	opt.chnsOpt.gradHistClipHog = 0.2f;
 
+	// 对ROI结果进行修正
 	roipad.x = -layer.adaboost_param().pad_rect().left();
 	roipad.y = -layer.adaboost_param().pad_rect().top();
 	roipad.width = layer.adaboost_param().pad_rect().right() + layer.adaboost_param().pad_rect().left();
 	roipad.height = layer.adaboost_param().pad_rect().bottom() + layer.adaboost_param().pad_rect().top();
 	xshift = layer.adaboost_param().pad_rect().xshift();
 
+	// 初始化图像金字塔
 	pc::ChnsComputeInit();
 }
 
+// 析构函数
 AdaboostLayer::~AdaboostLayer()
 {
 }
 
+// 运行算法
 bool AdaboostLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_GT(images.size(), 0) << "No Image In Block!";
 	result_sc.clear();
@@ -71,13 +82,14 @@ bool AdaboostLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamet
 	result_rect.resize(images.size());
 
 	if (ksframe == false){
-		ImageDetect(images, disp);
+		ImageDetect(images, disp); // 进行检测
 	} else{
-		ScaleDetect(images, disp);
+		ScaleDetect(images, disp); // 目标同尺度假设下进行检测
 	}
 	return ResultROI(images, disp);
 }
 
+// 供MiltrackLayer和BinotrakLayer调用的一次性目标检测函数
 bool AdaboostLayer::RunForOneRect(vector<Block>& images, LayerParameter& layer, vector<Rect>& rect){
 	CHECK_GT(images.size(), 0) << "No Image In Block!";
 	result_sc.clear();
@@ -97,6 +109,7 @@ bool AdaboostLayer::RunForOneRect(vector<Block>& images, LayerParameter& layer, 
 		ScaleDetect(images, disp);
 	}
 	
+	// 保存结果矩形的位置
 	for (int i = 0; i < images.size(); ++i){
 		if (result_rect[i].size() == 0){
 			return false;
@@ -108,6 +121,7 @@ bool AdaboostLayer::RunForOneRect(vector<Block>& images, LayerParameter& layer, 
 	return true;
 }
 
+// 对于没一副图像单独运行没有相互约束的目标检测
 bool AdaboostLayer::ImageDetect(vector<Block>& images, vector<Block>& disp){
 	for (int i = 0; i < images.size(); ++i){
 		vector<DetectResult> result;
@@ -127,10 +141,12 @@ bool AdaboostLayer::ImageDetect(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// 假设目标处于同一尺度下进行检测
 bool AdaboostLayer::ScaleDetect(vector<Block>& images, vector<Block>& disp){
 	bool flag = true;
 	bool ret = true;
 	int i = 0;
+	// 对于第一幅图像进行处理，得到尺度
 	if (video_firstframe){
 		video_firstframe = !ksvideo;
 
@@ -162,6 +178,7 @@ bool AdaboostLayer::ScaleDetect(vector<Block>& images, vector<Block>& disp){
 		}
 	}
 
+	// 在后续图像序列中按照之前得到的制度进行搜索
 	for (; i < images.size(); ++i){
 		vector<DetectResult> result;
 		Mat img = images[i].image.clone();
@@ -189,7 +206,10 @@ bool AdaboostLayer::ScaleDetect(vector<Block>& images, vector<Block>& disp){
 		if (i > 0){
 			isleft = false;
 		}
-		SelectROI(images[i], i, result, isleft);
+		if (!SelectROI(images[i], i, result, isleft)){
+			LOG(ERROR) << "\nLoop Cut Short\n";
+			return false;
+		}
 	}
 
 	//if (kseline && flag){
@@ -205,7 +225,11 @@ bool AdaboostLayer::ScaleDetect(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// 从检测结果中选择正常的进行保存，并修正坐标
 bool AdaboostLayer::SelectROI(Block& image, int num, vector<DetectResult>& result, bool isleft){
+	if (result.size() == 0){
+		return false;
+	}
 	for (int i = 0; i < result.size(); ++i){
 		if (result[i].hs < thresh){
 			continue;
@@ -228,10 +252,13 @@ bool AdaboostLayer::SelectROI(Block& image, int num, vector<DetectResult>& resul
 		result_rect[num].push_back(rect);
 		result_sc[num].push_back(result[i].hs);
 	}
-	
+	if (result_rect[num].size() == 0){
+		return false;
+	}
 	return true;
 }
 
+// 产生结果ROI区域
 bool AdaboostLayer::ResultROI(vector<Block>& images, vector<Block>& disp){
 	bool return_flag = true;
 	for (int i = 0; i < images.size(); ++i){

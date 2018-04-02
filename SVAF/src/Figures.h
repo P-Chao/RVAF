@@ -1,3 +1,8 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+记录结果的数据表格
+*/
+
 
 #include <glog\logging.h>
 #include <iostream>
@@ -8,6 +13,7 @@ using namespace std;
 
 namespace svaf{
 
+// 操作数据模板元
 template<typename T>
 struct Cell{
 	bool	mask = false;
@@ -18,6 +24,7 @@ struct Cell{
 	Cell() : mask(false){};
 };
 
+// 数据表模板
 template<typename T = float>
 class Figures{
 public:
@@ -52,30 +59,36 @@ private:
 
 namespace svaf{
 
+	// 构造
 	template<typename T>
 	Figures<T>::Figures(){
 	}
 
+	// 析构
 	template<typename T>
 	Figures<T>::~Figures(){
 	}
 
+	// 返回行数
 	template<typename T>
 	size_t Figures<T>::rows(){
 		return size_;
 	}
 
+	// 返回列数
 	template<typename T>
 	size_t Figures<T>::cols(){
 		return figure_.size();
 	}
 
+	// 添加一行
 	template<typename T>
 	void Figures<T>::addRow(){
 		size_++;
 		resize(size_);
 	}
 
+	// 设置行数
 	template<typename T>
 	void Figures<T>::setRow(size_t size){
 		if (size < size_){
@@ -84,12 +97,14 @@ namespace svaf{
 		resize(size);
 	}
 
+	// 添加一列
 	template<typename T>
 	void Figures<T>::addCol(string filed){
 		vector<Cell<T>> tempvec
 			figure_[filed] = tempvec;
 	}
 
+	// 设置表格大小
 	template<typename T>
 	void Figures<T>::resize(size_t size){
 		size_ = size;
@@ -99,6 +114,7 @@ namespace svaf{
 
 	}
 
+	// 输入数据到表格中
 	template<typename T>
 	void Figures<T>::push_back(string filed, size_t id, T value){
 		if (id >= size_){
@@ -113,6 +129,7 @@ namespace svaf{
 		(*this)[filed][id].val = value;
 	}
 
+	// 重载操作运算符
 	template<typename T>
 	vector<Cell<T>>& Figures<T>::operator[](string& filed){
 		auto iter = figure_.find(filed);
@@ -127,6 +144,7 @@ namespace svaf{
 		return figure_[string(filed)];
 	}
 
+	// 清空数据表
 	template<typename T>
 	void Figures<T>::clear(){
 		resize(0);
@@ -138,6 +156,7 @@ namespace svaf{
 		figure_.clear();
 	}
 
+	// 输出数据结果到文件
 	template<typename T>
 	void Figures<T>::print2txt(string filename){
 		FILE* fp = fopen(filename.c_str(), "wb+");
@@ -163,6 +182,7 @@ namespace svaf{
 		fclose(fp);
 	}
 
+	// 输出数据结果到文件（包含图像文件名）
 	template<typename T>
 	void Figures<T>::print2txt_im(string filename, vector<string>& images){
 		FILE* fp = fopen(filename.c_str(), "wb+");
@@ -194,6 +214,7 @@ namespace svaf{
 		fclose(fp);
 	}
 
+	// 输出数据结果到文件（包含一对图像文件名）
 	template<typename T>
 	void Figures<T>::print2txt_impair(string filename, vector<pair<string, string>>& imagepairs){
 		FILE* fp = fopen(filename.c_str(), "wb+");
@@ -231,6 +252,7 @@ namespace svaf{
 		fclose(fp);
 	}
 
+	// 输出表格到屏幕
 	template<typename T>
 	void Figures<T>::print2scr(){
 		for (auto it : figure_){

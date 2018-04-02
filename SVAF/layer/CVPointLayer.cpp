@@ -1,62 +1,68 @@
+/*
+Stereo Vision Algorithm Framework, Copyright(c) 2016-2018, Peng Chao
+OpenCV实现特征点检测
+*/
+
 #include "CVPointLayer.h"
 #include <opencv2\nonfree\nonfree.hpp>
 
 namespace svaf{
 
+// 构造函数
 CVPointLayer::CVPointLayer(LayerParameter& layer) : Layer(layer)
 {
-	type = layer.cvpoint_param().type();
+	type = layer.cvpoint_param().type(); // 特征点检测算法类型
 	switch (type)
 	{
-	case svaf::CVPointParameter_PointType_FAST:
+	case svaf::CVPointParameter_PointType_FAST: // FAST特征点检测
 		ptr = &CVPointLayer::Fast;
 		featname = "Fast";
 		break;
-	case svaf::CVPointParameter_PointType_FASTX:
+	case svaf::CVPointParameter_PointType_FASTX: // FASTX特征点检测
 		ptr = &CVPointLayer::FastX;
 		featname = "FastX";
 		break;
-	case svaf::CVPointParameter_PointType_MSER:
+	case svaf::CVPointParameter_PointType_MSER: // MSER特征点检测
 		ptr = &CVPointLayer::MSER;
 		featname = "MSER";
 		break;
-	case svaf::CVPointParameter_PointType_ORB:
+	case svaf::CVPointParameter_PointType_ORB: // ORB特征点检测
 		ptr = &CVPointLayer::ORB;
 		featname = "ORB";
 		break;
-	case svaf::CVPointParameter_PointType_BRISK:
+	case svaf::CVPointParameter_PointType_BRISK: // BRISK特征点检测
 		ptr = &CVPointLayer::Brisk;
 		featname = "Brisk";
 		break;
-	case svaf::CVPointParameter_PointType_FREAK:
+	case svaf::CVPointParameter_PointType_FREAK: // FREAK特征点检测
 		ptr = &CVPointLayer::Freak;
 		featname = "Freak";
 		break;
-	case svaf::CVPointParameter_PointType_STAR:
+	case svaf::CVPointParameter_PointType_STAR: // STAR特征点检测
 		ptr = &CVPointLayer::Star;
 		featname = "Star";
 		break;
-	case svaf::CVPointParameter_PointType_SIFT:
+	case svaf::CVPointParameter_PointType_SIFT: // SIFT特征点检测
 		ptr = &CVPointLayer::Sift;
 		featname = "Sift";
 		break;
-	case svaf::CVPointParameter_PointType_SURF:
+	case svaf::CVPointParameter_PointType_SURF: // SURF特征点检测
 		ptr = &CVPointLayer::Surf;
 		featname = "Surf";
 		break;
-	case svaf::CVPointParameter_PointType_GFTT:
+	case svaf::CVPointParameter_PointType_GFTT: // GFTT特征点检测
 		ptr = &CVPointLayer::GFTT;
 		featname = "GFTT";
 		break;
-	case svaf::CVPointParameter_PointType_HARRIS:
+	case svaf::CVPointParameter_PointType_HARRIS: // Harris特征点检测
 		ptr = &CVPointLayer::Harris;
 		featname = "Harris";
 		break;
-	case svaf::CVPointParameter_PointType_DENSE:
+	case svaf::CVPointParameter_PointType_DENSE: // DENSE特征点检测
 		ptr = &CVPointLayer::Dense;
 		featname = "Dense";
 		break;
-	case svaf::CVPointParameter_PointType_SBLOB:
+	case svaf::CVPointParameter_PointType_SBLOB: // SBLOB特征点检测
 		ptr = &CVPointLayer::SimpleBlob;
 		featname = "SimpleBlob";
 		break;
@@ -66,11 +72,14 @@ CVPointLayer::CVPointLayer(LayerParameter& layer) : Layer(layer)
 	
 }
 
+// 析构函数
 CVPointLayer::~CVPointLayer()
 {
 }
 
+// 运行算法
 bool CVPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
+	// 读取参数
 	layerparam = layer.cvpoint_param();
 
 	if (!layer.cvpoint_param().isadd()){
@@ -80,6 +89,7 @@ bool CVPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 		}
 	}
 
+	// 调用算法
 	(this->*ptr)(images, disp);
 
 	if (task_type == SvafApp::S_POINT || task_type == SvafApp::B_POINT || task_type == SvafApp::S_POINTDESP || task_type == SvafApp::B_POINTDESP){
@@ -91,7 +101,7 @@ bool CVPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 	if (__show || __save || __bout){
 		for (int i = 0; i < images.size(); ++i){
 			Mat img_point;
-			drawKeypoints(images[i].image, images[i].keypoint, img_point);
+			drawKeypoints(images[i].image, images[i].keypoint, img_point); // 绘制特征点
 			disp.push_back(Block(images[i].name + featname + __name, img_point, __show, __save, __bout));
 		}
 	}
@@ -99,6 +109,7 @@ bool CVPointLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParamete
 	return true;
 }
 
+// OpenCV调用Fast特征点检测
 bool CVPointLayer::Fast(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	FastFeatureDetector fast(layerparam.fast_param().thresh(), layerparam.fast_param().isnms());
@@ -120,6 +131,7 @@ bool CVPointLayer::Fast(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用FastX特征点检测
 bool CVPointLayer::FastX(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	int xtype = 0;
@@ -156,6 +168,7 @@ bool CVPointLayer::FastX(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用MSER特征点检测
 bool CVPointLayer::MSER(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.mser_param();
@@ -179,6 +192,7 @@ bool CVPointLayer::MSER(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用ORB特征点检测
 bool CVPointLayer::ORB(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.orb_param();
@@ -214,6 +228,7 @@ bool CVPointLayer::ORB(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用Brisk特征点检测
 bool CVPointLayer::Brisk(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.brisk_param();
@@ -235,6 +250,7 @@ bool CVPointLayer::Brisk(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用Freak特征点检测
 bool CVPointLayer::Freak(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	FREAK freak;
@@ -242,6 +258,7 @@ bool CVPointLayer::Freak(vector<Block>& images, vector<Block>& disp){
 	return false;
 }
 
+// OpenCV调用STAR特征点检测
 bool CVPointLayer::Star(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.star_param();
@@ -264,6 +281,7 @@ bool CVPointLayer::Star(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用SIFT特征点检测
 bool CVPointLayer::Sift(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.sift_param();
@@ -286,6 +304,7 @@ bool CVPointLayer::Sift(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用SURF特征点检测
 bool CVPointLayer::Surf(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.surf_param();
@@ -308,6 +327,7 @@ bool CVPointLayer::Surf(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用GFTT特征点检测
 bool CVPointLayer::GFTT(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.gftt_param();
@@ -330,6 +350,7 @@ bool CVPointLayer::GFTT(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用Harris特征点检测
 bool CVPointLayer::Harris(vector<Block>& images, vector<Block>& disp){
 	/*vector<KeyPoint> pt;
 	Ptr<FeatureDetector> detector = FeatureDetector::create("HARRIS");
@@ -362,6 +383,7 @@ bool CVPointLayer::Harris(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用Dense特征点检测
 bool CVPointLayer::Dense(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	auto param = layerparam.dense_param();
@@ -384,6 +406,7 @@ bool CVPointLayer::Dense(vector<Block>& images, vector<Block>& disp){
 	return true;
 }
 
+// OpenCV调用Blob特征点检测
 bool CVPointLayer::SimpleBlob(vector<Block>& images, vector<Block>& disp){
 	vector<KeyPoint> pt;
 	SimpleBlobDetector sb;
