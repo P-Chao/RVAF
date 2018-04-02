@@ -206,7 +206,10 @@ bool AdaboostLayer::ScaleDetect(vector<Block>& images, vector<Block>& disp){
 		if (i > 0){
 			isleft = false;
 		}
-		SelectROI(images[i], i, result, isleft);
+		if (!SelectROI(images[i], i, result, isleft)){
+			LOG(ERROR) << "\nLoop Cut Short\n";
+			return false;
+		}
 	}
 
 	//if (kseline && flag){
@@ -224,6 +227,9 @@ bool AdaboostLayer::ScaleDetect(vector<Block>& images, vector<Block>& disp){
 
 // 从检测结果中选择正常的进行保存，并修正坐标
 bool AdaboostLayer::SelectROI(Block& image, int num, vector<DetectResult>& result, bool isleft){
+	if (result.size() == 0){
+		return false;
+	}
 	for (int i = 0; i < result.size(); ++i){
 		if (result[i].hs < thresh){
 			continue;
@@ -246,7 +252,9 @@ bool AdaboostLayer::SelectROI(Block& image, int num, vector<DetectResult>& resul
 		result_rect[num].push_back(rect);
 		result_sc[num].push_back(result[i].hs);
 	}
-	
+	if (result_rect[num].size() == 0){
+		return false;
+	}
 	return true;
 }
 
