@@ -87,6 +87,9 @@
     <None Include="svaf\fetch_roi_dsp.pbf">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="svaf-pcl.pbf">
+      <Filter>Resource Files\Sample Script</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="layer\AdaboostLayer.cpp">

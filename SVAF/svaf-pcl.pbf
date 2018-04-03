@@ -1,0 +1,82 @@
+name:	"Point Cloud SAC-IA Demo"
+version:	"v_1.22"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	imagepair_param{
+		pair{
+			left: "F:/data/BaseData/left/161102150945915.bmp";
+			right: "F:/data/BaseData/right/161102150945915.bmp"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_161103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"eadp"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_workpiece_161103.dat"
+		sync_frame:	true
+		#sync_video:	true
+		sync_epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	#show: true
+}
+layer{
+	name:	"eadp"
+	type:	EADP_MATCH
+	top:	"3dpoint"
+	eadp_param{
+		max_disp:	24
+		factor:		2560
+		#r1:			30
+		#r2:			500
+	}
+	show:	true
+	#logt:	true
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"pointcloud"
+	triang_param{
+		visible:	false
+		savepc:		true
+		toolbox_dir:	"F:/svaf/calib/"
+		calibmat_dir:	"F:/svaf/data/calib/mat_161103/"
+	}
+	show: true
+}
+layer{
+	name:	"pointcloud"
+	type:	IA_EST
+	top:	"pointcloud"
+	sacia_param{
+		pcd_filename:	"F:/pdb/170804194326884_0179.pcd"
+		ia_param{
+			max_iter:	500
+			min_cors:	3.0
+			max_cors:	1000.0
+			voxel_grid:	3.0
+			norm_rad:	20.0
+			feat_rad:	50.0
+		}
+	}
+	show: true
+}

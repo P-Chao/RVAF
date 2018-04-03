@@ -389,7 +389,7 @@ void Circuit::Run(){
 		
 	}
 
-	Analysis();
+	//Analysis();
 }
 
 
