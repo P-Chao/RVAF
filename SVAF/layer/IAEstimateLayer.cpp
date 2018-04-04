@@ -112,6 +112,9 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	pWorld_->z = Matrix(2, 0) * x + Matrix(2, 1) * y + Matrix(2, 2) * z + Matrix(2, 3);
 	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
 
+	// new add C2 location
+	pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
+
 	if (__logt){
 		(*figures)[__name + "_t"][*id] = (float)__t;
 	}

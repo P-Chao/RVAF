@@ -30,7 +30,7 @@ typedef _Node<string> Node;
 typedef struct _World{
 	bool		rectified;
 	int			fetchtype;
-	float		x, y, z, a, b, c; // 抓取点，和抓取方向，世界坐标
+	double		x, y, z, a, b, c; // 抓取点，和抓取方向，世界坐标
 
 	vector<Point2f> xl, xr;
 	vector<Point3f> pointL, pointR;

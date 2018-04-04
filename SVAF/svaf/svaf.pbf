@@ -149,21 +149,21 @@ layer{
 	}
 	save: true
 }
-#layer{
-#	name:	"pointcloud"
-#	type:	IA_EST
-#	top:	"pointcloud"
-#	sacia_param{
-#		pcd_filename:	"F:/pdb/170804194326884_0179.pcd"
-#		ia_param{
-#			max_iter:	500
-#			min_cors:	3.0
-#			max_cors:	1000.0
-#			voxel_grid:	3.0
-#			norm_rad:	20.0
-#			feat_rad:	50.0
-#		}
-#	}
-#	show: true
-#	save: true
-#}
+layer{
+	name:	"pointcloud"
+	type:	IA_EST
+	top:	"pointcloud"
+	sacia_param{
+		pcd_filename:	"F:/pdb/170804194326884_0179.pcd"
+		ia_param{
+			max_iter:	500
+			min_cors:	3.0
+			max_cors:	1000.0
+			voxel_grid:	3.0
+			norm_rad:	20.0
+			feat_rad:	50.0
+		}
+	}
+	show: true
+	save: true
+}
