@@ -1,0 +1,66 @@
+name:	"Point Cloud SAC-IA Demo"
+version:	"v_1.22"
+pause:	10
+layer{
+	name:	"data"
+	type:	DSP_PAIR
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"C:/svaf/data/calib/stereo_rectify_180309.dat"
+		#filename:	"F:/svaf/data/calib/stereo_rectify_171103.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"roicenter"
+	adaboost_param{
+		detector:	"C:/svaf/data/boost/detector_workpiece_171106.dat"
+		#detector:	"F:/svaf/data/boost/detector_workpiece_171106.dat"
+		sync_frame:	true
+		#sync_video:	true
+		sync_epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	show: true
+}
+layer{
+	name:	"roicenter"
+	type:	CENTER_POS
+	top:	"3dpoint"
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"camera2world"
+	triang_param{
+		visible:	false
+		savepc:		true
+		toolbox_dir:	"C:/svaf/calib/"
+		calibmat_dir:	"C:/svaf/data/calib/mat_180309/"
+		#toolbox_dir:	"F:/svaf/calib/"
+		#calibmat_dir:	"F:/svaf/data/calib/mat_171103/"
+	}
+	#show: true
+	#save: false
+}
+layer{
+	name:	"camera2world"
+	type:	MXMUL
+	top:	"camera2world"
+	mxmul_param{
+		filename:	"C:/svaf/data/calib/camera2world_rectified_180309.dat"
+		#filename:	"F:/svaf/data/calib/camera2world_rectified_171103.dat"
+	}
+	#save:  true
+}

@@ -149,4 +149,20 @@ std::vector<float> StereoLayer::computeEularAngles(Eigen::Matrix4f& R, bool isra
 	return result;
 }
 
+void StereoLayer::pcdcenterlocation(pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud, double & x, double & y, double & z){
+	long double cx = 0, cy = 0, cz = 0;
+	for (size_t i = 0; i < cloud->points.size(); ++i){
+		cx += cloud->points[i].x;
+		cy += cloud->points[i].y;
+		cz += cloud->points[i].z;
+	}
+	cx /= cloud->points.size();
+	cy /= cloud->points.size();
+	cz /= cloud->points.size();
+	x = cx;
+	y = cy;
+	z = cz;
+	return;
+}
+
 }

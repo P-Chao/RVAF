@@ -90,6 +90,9 @@
     <None Include="svaf-pcl.pbf">
       <Filter>Resource Files\Sample Script</Filter>
     </None>
+    <None Include="svaf-dsp-pos.pbf">
+      <Filter>Resource Files\Sample Script</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="layer\AdaboostLayer.cpp">
