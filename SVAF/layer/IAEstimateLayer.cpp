@@ -110,6 +110,10 @@ bool IAEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParam
 	pWorld_->x = Matrix(0, 0) * x + Matrix(0, 1) * y + Matrix(0, 2) * z + Matrix(0, 3);
 	pWorld_->y = Matrix(1, 0) * x + Matrix(1, 1) * y + Matrix(1, 2) * z + Matrix(1, 3);
 	pWorld_->z = Matrix(2, 0) * x + Matrix(2, 1) * y + Matrix(2, 2) * z + Matrix(2, 3);
+
+	// pcd center location
+	//pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
+
 	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
 
 	if (__logt){

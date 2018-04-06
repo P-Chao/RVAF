@@ -22,7 +22,7 @@ protected:
 	float norm_rad;
 	float feat_rad;
 	
-	float a, b, c, x, y, z;
+	double a, b, c, x, y, z;
 
 	pcl::PointCloud<pcl::PointXYZ> targetpcd;
 
