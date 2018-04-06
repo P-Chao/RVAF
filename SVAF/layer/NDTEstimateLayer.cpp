@@ -12,6 +12,8 @@ NDTµãÔÆÅä×¼
 #include "../../PointCloudRegistration/sac_ia.h"
 #include "../../PointCloudRegistration/visualization.h"
 
+#include <pcl/registration/ndt.h>
+
 namespace svaf{
 
 NDTEstimateLayer::NDTEstimateLayer(LayerParameter& layer) : StereoLayer(layer)
@@ -101,16 +103,49 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	//pWorld_->x = x + Matrix(0, 3);
 	//pWorld_->y = y + Matrix(1, 3);
 	//pWorld_->z = z + Matrix(2, 3);
-	LOG(INFO) << "Result Angle   :" << " a: " << pWorld_->a << " b: " << pWorld_->b << " c: " << pWorld_->c;
+	//LOG(INFO) << "Result Angle   :" << " a: " << pWorld_->a << " b: " << pWorld_->b << " c: " << pWorld_->c;
 	//LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
 
 	// Matrix * [x y z 1]' = [rx ry rz 1]';
-	pWorld_->x = Matrix(0, 0) * x + Matrix(0, 1) * y + Matrix(0, 2) * z + Matrix(0, 3);
-	pWorld_->y = Matrix(1, 0) * x + Matrix(1, 1) * y + Matrix(1, 2) * z + Matrix(1, 3);
-	pWorld_->z = Matrix(2, 0) * x + Matrix(2, 1) * y + Matrix(2, 2) * z + Matrix(2, 3);
+	//pWorld_->x = Matrix(0, 0) * x + Matrix(0, 1) * y + Matrix(0, 2) * z + Matrix(0, 3);
+	//pWorld_->y = Matrix(1, 0) * x + Matrix(1, 1) * y + Matrix(1, 2) * z + Matrix(1, 3);
+	//pWorld_->z = Matrix(2, 0) * x + Matrix(2, 1) * y + Matrix(2, 2) * z + Matrix(2, 3);
 
 	// pcd center location
 	//pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
+
+	// ndt
+	pcl::transformPointCloud(*cloud2ds, *cloud2ds, Matrix);
+	
+	pcl::PointCloud<pcl::PointXYZ>::Ptr src(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr tgt(new pcl::PointCloud<pcl::PointXYZ>);
+	
+	src = source;
+	tgt = target;
+
+	pcl::NormalDistributionsTransform<pcl::PointXYZ, pcl::PointXYZ> ndt;
+
+	ndt.setTransformationEpsilon(0.1);
+	ndt.setStepSize(10);
+
+	ndt.setResolution(10);
+	ndt.setMaximumIterations(100);
+	ndt.setInputCloud(src);
+	ndt.setInputTarget(tgt);
+
+	pcl::PointCloud<pcl::PointXYZ>::Ptr reg_result(new pcl::PointCloud<pcl::PointXYZ>);
+	ndt.align(*reg_result);
+
+	Eigen::Matrix4f Ti = ndt.~NormalDistributionsTransform.getFinalTransformation();
+	Eigen::Matrix4f Tiv = Ti.inverse();
+	vector<float> ndt_angles = computeEularAngles(Tiv, false);
+	
+	pWorld_->a = a + angle[2] + ndt_angles[2];
+	pWorld_->b = b + angle[1] + ndt_angles[1];
+	pWorld_->c = c + angle[0] + ndt_angles[0];
+
+
+
 
 	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
 
