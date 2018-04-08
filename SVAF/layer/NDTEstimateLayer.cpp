@@ -136,7 +136,7 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	pcl::PointCloud<pcl::PointXYZ>::Ptr reg_result(new pcl::PointCloud<pcl::PointXYZ>);
 	ndt.align(*reg_result);
 
-	Eigen::Matrix4f Ti = ndt.~NormalDistributionsTransform.getFinalTransformation();
+	Eigen::Matrix4f Ti = ndt.getFinalTransformation();
 	Eigen::Matrix4f Tiv = Ti.inverse();
 	vector<float> ndt_angles = computeEularAngles(Tiv, false);
 	
@@ -144,7 +144,8 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	pWorld_->b = b + angle[1] + ndt_angles[1];
 	pWorld_->c = c + angle[0] + ndt_angles[0];
 
-
+	// pcd center location
+	pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
 
 
 	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
