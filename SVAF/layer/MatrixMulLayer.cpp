@@ -60,6 +60,16 @@ bool MatrixMulLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 	// 通过矩阵相乘将左相机坐标变换为世界坐标
 	pWorld->pointW.clear();
 	__t.StartWatchTimer();
+	// center roi
+	if (images[0].useroi){
+		double xx = pWorld->x * M[0][0] + pWorld->y * M[0][1] + pWorld->z * M[0][2] + M[0][3];
+		double yy = pWorld->x * M[1][0] + pWorld->y * M[1][1] + pWorld->z * M[1][2] + M[1][3];
+		double zz = pWorld->x * M[2][0] + pWorld->y * M[2][1] + pWorld->z * M[2][2] + M[2][3];
+		pWorld->x = xx;
+		pWorld->y = yy;
+		pWorld->z = zz;
+	}
+
 	for (int i = 0; i < pWorld->pointL.size(); ++i){
 		Point3f point;
 		point.x = pWorld->pointL[i].x * M[0][0] + pWorld->pointL[i].y * M[0][1] + pWorld->pointL[i].z * M[0][2] + M[0][3];

@@ -22,6 +22,7 @@ protected:
 	bool ScaleDetect(vector<Block>&, vector<Block>&);
 	bool SelectROI(Block&, int, vector<pc::DetectResult>&, bool isleft = false);
 	bool ResultROI(vector<Block>&, vector<Block>&);
+	//void ROICenter();
 
 private:
 	vector<vector<Rect>> result_rect;

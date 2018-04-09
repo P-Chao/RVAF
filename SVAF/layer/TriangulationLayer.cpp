@@ -38,15 +38,25 @@ TriangulationLayer::~TriangulationLayer()
 // 运行算法
 bool TriangulationLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParameter& layer, void* param){
 	CHECK_NOTNULL(images[0].pMatch);
+	
 	// 读取之前算法产生的数据
 	pWorld_ = (World *)param;
 	pWorld_->xl.clear();
 	pWorld_->xr.clear();
 	pWorld_->pointL.clear();
 	pWorld_->pointR.clear();
-	
 	Block& image0 = images[0];
 	Block& image1 = *images[0].pMatch;
+
+	// Run For ROI
+	if (images.size() > 1 && images[1].useroi){
+		double xx, yy, zz;
+		ComputeWorld(image0.xct, image0.yct, image1.xct, image1.yct,
+			xx, yy, zz);
+		pWorld_->x = xx;
+		pWorld_->y = yy;
+		pWorld_->z = zz;
+	}
 
 	// 将左右图像对应点转存起来
 	for (int i = 0; i < image0.ptidx.size(); ++i){
@@ -240,6 +250,65 @@ void TriangulationLayer::ComputeWorld(){
 	//}
 
 	//waitKey();
+}
+
+void TriangulationLayer::ComputeWorld(double lx, double ly, double rx, double ry,
+	double& xx, double& yy, double& zz){
+
+	// 如果之前没有打开Matlab，则打开Matlab
+	if (!m_Ep){
+		OpenMatlab();
+	}
+	const int pointCount = 1;
+	pWorld_->pointL.resize(pointCount);
+	pWorld_->pointR.resize(pointCount);
+
+	// 将左右图像对应点坐标读入Matlab
+	Matlab::mxArray* leftPoint = Matlab::mxCreateDoubleMatrix(2, pointCount, Matlab::mxREAL);
+	Matlab::mxArray* rightPoint = Matlab::mxCreateDoubleMatrix(2, pointCount, Matlab::mxREAL);
+	//for (int i = 0; i < pointCount; ++i){
+		Matlab::mxGetPr(leftPoint)[0] = lx;
+		Matlab::mxGetPr(leftPoint)[1] = ly;
+		Matlab::mxGetPr(rightPoint)[0] = rx;
+		Matlab::mxGetPr(rightPoint)[1] = ry;
+	//}
+	// 调用工具箱计算三维坐标
+	Matlab::engEvalString(m_Ep, "clear xL, clear xR");
+	Matlab::engPutVariable(m_Ep, "xL", leftPoint);
+	Matlab::engPutVariable(m_Ep, "xR", rightPoint);
+	if (pWorld_->rectified){
+		Matlab::engEvalString(m_Ep, "[XL, XR] = stereo_triangulation(xL, xR, om_new, T_new, fc_left_new, cc_left_new, kc_left_new, alpha_c_left_new, fc_right_new, cc_right_new, kc_right_new, alpha_c_right_new); ");
+	}
+	else{
+		Matlab::engEvalString(m_Ep, "[XL, XR] = stereo_triangulation(xL, xR, om, T, fc_left, cc_left, kc_left, alpha_c_left, fc_right, cc_right, kc_right, alpha_c_right); ");
+	}
+
+	// 从Matlab读出左右相机坐标系下的三维坐标
+	Matlab::mxArray* xL = Matlab::engGetVariable(m_Ep, "XL");
+	Matlab::mxArray* xR = Matlab::engGetVariable(m_Ep, "XR");
+
+	CHECK_NOTNULL(xL);
+	CHECK_NOTNULL(xR);
+
+	//for (int i = 0; i < pointCount; ++i){
+		xx = Matlab::mxGetPr(xL)[0];
+		yy = Matlab::mxGetPr(xL)[1];
+		zz = Matlab::mxGetPr(xL)[2];
+		
+	//}
+
+	// 调用Matlab的Figure窗口显示三维点云
+	/*if (__show){
+		Matlab::engEvalString(m_Ep, "figure(1), scatter3(XL(1, :), XL(2, :), XL(3, :));");
+		HWND hw = ::FindWindow(NULL, "right Adaboost");
+		if (hw != NULL){
+			::SetForegroundWindow(hw);
+		}
+	}*/
+
+	Matlab::mxDestroyArray(leftPoint);
+	Matlab::mxDestroyArray(rightPoint);
+
 }
 
 // 打开Matlab并加载工具箱和数据

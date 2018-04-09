@@ -67,6 +67,10 @@ typedef struct _Block{
 	vector<Point3f>	point3d;
 	vector<Color3f> color3d;
 
+	// roi center reverse
+	bool useroi;
+	double xct, yct;
+
 	bool isSave;
 	bool isShow;
 	bool isOutput;

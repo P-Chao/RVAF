@@ -27,6 +27,8 @@ protected:
 	void OpenMatlab();
 	void CloseMatlab();
 	void ComputeWorld();
+	void ComputeWorld(double lx, double ly, double rx, double ry,
+		double& xx, double& yy, double& zz);
 
 private:
 	World *pWorld_;

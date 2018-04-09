@@ -47,6 +47,13 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	CHECK_NOTNULL(param);
 	pWorld_ = (World*)param;
 
+	double xx, yy, zz;
+	if (images[0].useroi){
+		xx = pWorld_->x;
+		yy = pWorld_->y;
+		zz = pWorld_->z;
+	}
+
 	// µ„‘∆÷«ƒ‹÷∏’Î
 	pcl::PointCloud<pcl::PointXYZ>::Ptr source(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr target(new pcl::PointCloud<pcl::PointXYZ>);
@@ -145,8 +152,14 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	pWorld_->c = c + angle[0] + ndt_angles[0];
 
 	// pcd center location
-	pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
+	//pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
 
+	// roi center location
+	if (images[0].useroi){
+		pWorld_->x = xx;
+		pWorld_->y = yy;
+		pWorld_->z = zz;
+	}
 
 	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
 
