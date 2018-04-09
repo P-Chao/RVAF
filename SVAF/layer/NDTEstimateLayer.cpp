@@ -127,8 +127,8 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	pcl::PointCloud<pcl::PointXYZ>::Ptr src(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr tgt(new pcl::PointCloud<pcl::PointXYZ>);
 	
-	src = source;
-	tgt = target;
+	src = cloud1ds;
+	tgt = cloud2ds;
 
 	pcl::NormalDistributionsTransform<pcl::PointXYZ, pcl::PointXYZ> ndt;
 
@@ -152,14 +152,14 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 	pWorld_->c = c + angle[0] + ndt_angles[0];
 
 	// pcd center location
-	//pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
+	pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
 
 	// roi center location
-	if (images[0].useroi){
-		pWorld_->x = xx;
-		pWorld_->y = yy;
-		pWorld_->z = zz;
-	}
+	//if (images[0].useroi){
+		//pWorld_->x = xx;
+		//pWorld_->y = yy;
+		//pWorld_->z = zz;
+	//}
 
 	LOG(INFO) << "Result Position:" << " x: " << pWorld_->x << " y: " << pWorld_->y << " z: " << pWorld_->z;
 
