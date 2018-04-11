@@ -102,11 +102,11 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 
 	//Matrix = Matrix.inverse();
 
-	std::vector<float> angle = computeEularAngles(Matrix, false);
+	//std::vector<float> angle = computeEularAngles(Matrix, false);
 	pWorld_->fetchtype = 1;
-	pWorld_->a = a + angle[0];
-	pWorld_->b = b + angle[1];
-	pWorld_->c = c + angle[2];
+	//pWorld_->a = a + angle[0];
+	//pWorld_->b = b + angle[1];
+	//pWorld_->c = c + angle[2];
 	//pWorld_->x = x + Matrix(0, 3);
 	//pWorld_->y = y + Matrix(1, 3);
 	//pWorld_->z = z + Matrix(2, 3);
@@ -145,11 +145,21 @@ bool NDTEstimateLayer::Run(vector<Block>& images, vector<Block>& disp, LayerPara
 
 	Eigen::Matrix4f Ti = ndt.getFinalTransformation();
 	Eigen::Matrix4f Tiv = Ti.inverse();
-	vector<float> ndt_angles = computeEularAngles(Tiv, false);
+	Eigen::Matrix4f RT = Matrix * Tiv;
+	vector<float> ndt_angles = computeEularAngles(RT, false);
 	
-	pWorld_->a = a + angle[2] + ndt_angles[2];
-	pWorld_->b = b + angle[1] + ndt_angles[1];
-	pWorld_->c = c + angle[0] + ndt_angles[0];
+	pWorld_->a = a + ndt_angles[0];
+	pWorld_->b = b + ndt_angles[1];
+	pWorld_->c = c + ndt_angles[2];
+	//pWorld_->x = x + RT(0, 0);
+	//pWorld_->y = y + RT(0, 1);
+	//pWorld_->z = z + RT(0, 2);
+	// compute eular angle
+	//pWorld_->a = a + angle[2] + ndt_angles[2];
+	//pWorld_->b = b + angle[1] + ndt_angles[1];
+	//pWorld_->c = c + angle[0] + ndt_angles[0];
+
+
 
 	// pcd center location
 	pcdcenterlocation(source, pWorld_->x, pWorld_->y, pWorld_->z);
