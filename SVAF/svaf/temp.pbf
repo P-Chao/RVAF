@@ -1331,3 +1331,155 @@ layer{
 #	save: true
 #}
 
+########### 20180418 ################
+name:	"Generate Point Cloud in World Coordinate"
+version:	"v_1.22"
+pause:	0
+layer{
+	name:	"data"
+	type:	IMAGE_PAIR
+	bottom:	"data"
+	top:	"rectify"
+	data_param{
+		color: true
+	}
+	imagepair_param{
+		pair{
+			left: "F:/data/BaseData-rubber0418/L_180418084500926.bmp";
+			right: "F:/data/BaseData-rubber0418/R_180418084500926.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/L_180418084523882.bmp";
+			right: "F:/data/BaseData-rubber0418/R_180418084523882.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/L_180403151350792.bmp";
+			right: "F:/data/BaseData-rubber0418/R_180403151350792.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/L_180403151653006.bmp";
+			right: "F:/data/BaseData-rubber0418/R_180403151653006.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/L_180403151745139.bmp";
+			right: "F:/data/BaseData-rubber0418/R_180403151745139.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403151829698.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403151829698.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403151921810.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403151921810.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403152203677.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403152203677.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403152350846.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403152350846.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403152744495.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403152744495.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403152905077.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403152905077.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403153557162.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403153557162.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403153724965.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403153724965.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403153809513.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403153809513.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403153850975.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403153850975.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403153957130.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403153957130.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403154039611.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403154039611.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403154143276.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403154143276.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403154257990.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403154257990.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-rubber0418/BaseData/L_180403154410406.bmp";
+			right: "F:/data/BaseData-rubber0418/BaseData/R_180403154410406.bmp"
+		}
+	}
+}
+layer{
+	name:	"rectify"
+	type:	RECTIFY
+	top:	"adaboost"
+	rectify_param{
+		filename:	"F:/svaf/data/calib/stereo_rectify_180309.dat"
+	}
+}
+layer{
+	name:	"adaboost"
+	type:	ADABOOST
+	top:	"eadp"
+	adaboost_param{
+		detector:	"F:/svaf/data/boost/detector_rubber_180418.dat"
+		sync_frame:	true
+		#sync_video:	true
+		sync_epipolar:	true
+		thresh:		40
+		nms:		0.3
+	}
+	show: true
+}
+layer{
+	name:	"eadp"
+	type:	EADP_MATCH
+	top:	"3dpoint"
+	eadp_param{
+		max_disp:	24
+		factor:		2560
+		#r1:			30
+		#r2:			500
+	}
+	show:	true
+	#logt:	true
+}
+layer{
+	name:	"3dpoint"
+	type:	TRIANG
+	top:	"camera2world"
+	triang_param{
+		visible:	false
+		savepc:		true
+		toolbox_dir:	"F:/svaf/calib/"
+		calibmat_dir:	"F:/svaf/data/calib/mat_161103/"
+	}
+	#show: true
+	#save: true
+}
+layer{
+	name:	"camera2world"
+	type:	MXMUL
+	top:	"camera2world"
+	mxmul_param{
+		filename:	"F:/svaf/data/calib/camera2world_rectified_180309.dat"
+	}
+	save: true
+}

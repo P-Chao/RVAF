@@ -10,7 +10,7 @@ layer{
 		color:	true
 	}
 	imagedata_param{
-		name:	"F:/Data/BaseData-magiccube0418/L_180418171145174.bmp"
+		name:	"F:/VS/StereoVisionAlgorithmFramework/AcfDetect/a.jpg"
 	}
 }
 layer{

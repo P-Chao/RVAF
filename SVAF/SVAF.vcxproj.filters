@@ -93,6 +93,12 @@
     <None Include="svaf-dsp-pos.pbf">
       <Filter>Resource Files\Sample Script</Filter>
     </None>
+    <None Include="svaf_dsp_ndt.pbf">
+      <Filter>Resource Files\Sample Script</Filter>
+    </None>
+    <None Include="adaboost_img.pbf">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="layer\AdaboostLayer.cpp">
