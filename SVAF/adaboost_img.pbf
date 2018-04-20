@@ -10,7 +10,7 @@ layer{
 		color:	true
 	}
 	imagedata_param{
-		name:	"F:/VS/StereoVisionAlgorithmFramework/AcfDetect/a.jpg"
+		name:	"F:/Data/BaseData-staple0418/R_180418094227432.bmp"
 	}
 }
 layer{
@@ -18,7 +18,7 @@ layer{
 	type:	ADABOOST
 	top:	"adaboost"
 	adaboost_param{
-		detector:	"F:/svaf/data/boost/detector_rubber_180418.dat"
+		detector:	"F:/svaf/data/boost/detector_staple_180418.dat"
 		sync_frame:	true
 		#sync_video:	true
 		sync_epipolar:	true
@@ -26,4 +26,5 @@ layer{
 		nms:		0.3
 	}
 	show: true
+	#save: true
 }
