@@ -55,10 +55,12 @@ bool EadpMatchLayer::Run(vector<Block>& images, vector<Block>& disp, LayerParame
 
 	// 保存视差图结果
 	if (__show || __save || __bout){
-		disp.push_back(Block("l_disp", l_disp, __show, __save));
-		disp.push_back(Block("r_disp", r_disp, __show, __save));
-		disp.push_back(Block("check", check, __show, __save, __bout));
-		disp.push_back(Block("fill", fill, __show, __save, __bout));
+		disp.push_back(Block("cp_l", images[0].image, __show, __save));
+		disp.push_back(Block("cp_r", images[1].image, __show, __save));
+		disp.push_back(Block("disp_l", l_disp, __show, __save));
+		disp.push_back(Block("disp_r", r_disp, __show, __save));
+		disp.push_back(Block("disp_check", check, __show, __save, __bout));
+		disp.push_back(Block("disp_fill", fill, __show, __save, __bout));
 	}
 	LOG(INFO) << "disparity map has been computed.";
 	RLOG("disparity map has been computed.");

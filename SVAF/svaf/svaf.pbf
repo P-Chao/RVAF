@@ -10,48 +10,66 @@ layer{
 		color: true
 	}
 	imagepair_param{
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180418171611211.bmp";
-			right: "F:/data/BaseData-magic0418/R_180418171611211.bmp"
-		}
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180418171618311.bmp";
-			right: "F:/data/BaseData-magic0418/R_180418171618311.bmp"
-		}
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180418171730726.bmp";
-			right: "F:/data/BaseData-magic0418/R_180418171730726.bmp"
-		}
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180418171642127.bmp";
-			right: "F:/data/BaseData-magic0418/R_180418171642127.bmp"
-		}
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180418171741727.bmp";
-			right: "F:/data/BaseData-magic0418/R_180418171741727.bmp"
-		}
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180418171632695.bmp";
-			right: "F:/data/BaseData-magic0418/R_180418171632695.bmp"
-		}
 
+		pair{
+			left: "F:/data/BaseData-magic0418/L_180418171431815.bmp";
+			right: "F:/data/BaseData-magic0418/R_180418171431815.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-magic0418/L_180418171324477.bmp";
+			right: "F:/data/BaseData-magic0418/R_180418171324477.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-magic0418/L_180418171525791.bmp";
+			right: "F:/data/BaseData-magic0418/R_180418171525791.bmp"
+		}
 		
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180403151829698.bmp";
-			right: "F:/data/BaseData-magic0418/BaseData/R_180403151829698.bmp"
-		}
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180403151921810.bmp";
-			right: "F:/data/BaseData-magic0418/R_180403151921810.bmp"
-		}
-		pair{
-			left: "F:/data/BaseData-magic0418/L_180403152203677.bmp";
-			right: "F:/data/BaseData-magic0418/R_180403152203677.bmp"
-		}
+		
 		pair{
 			left: "F:/data/BaseData-magic0418/L_180403152350846.bmp";
 			right: "F:/data/BaseData-magic0418/R_180403152350846.bmp"
 		}
+
+		pair{
+			left: "F:/data/BaseData-battle2/L_180420192758402.bmp";
+			right: "F:/data/BaseData-battle2/R_180420192758402.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-battle2/L_180420194042408.bmp";
+			right: "F:/data/BaseData-battle2/R_180420194042408.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-battle2/L_180420192622432.bmp";
+			right: "F:/data/BaseData-battle2/R_180420192622432.bmp"
+		}
+
+		pair{
+			left: "F:/data/BaseData-battle0420/L_180420091645465.bmp";
+			right: "F:/data/BaseData-battle0420/R_180420091645465.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-battle0420/L_180420091805836.bmp";
+			right: "F:/data/BaseData-battle0420/R_180420091805836.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-battle0420/L_180418171730726.bmp";
+			right: "F:/data/BaseData-battle0420/R_180418171730726.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-battle0420/L_180418171642127.bmp";
+			right: "F:/data/BaseData-battle0420/R_180418171642127.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-battle0420/L_180418171741727.bmp";
+			right: "F:/data/BaseData-battle0420/R_180418171741727.bmp"
+		}
+		pair{
+			left: "F:/data/BaseData-battle0420/L_180418171632695.bmp";
+			right: "F:/data/BaseData-battle0420/R_180418171632695.bmp"
+		}
+
+		
+		
 		pair{
 			left: "F:/data/BaseData-rubber0418/BaseData/L_180403152744495.bmp";
 			right: "F:/data/BaseData-rubber0418/BaseData/R_180403152744495.bmp"
@@ -112,28 +130,31 @@ layer{
 	top:	"eadp"
 	adaboost_param{
 		detector:	"F:/svaf/data/boost/detector_magic_180418.dat"
+		#detector:	"F:/svaf/data/boost/detector_battle_180420.dat"
 		sync_frame:	true
 		#sync_video:	true
 		sync_epipolar:	true
 		thresh:		30
 		nms:		0.3
 		pad_rect{
-			xshift: -10
+			xshift: -5
 		}
 	}
 	show: true
+	save: true
 }
 layer{
 	name:	"eadp"
 	type:	EADP_MATCH
 	top:	"3dpoint"
 	eadp_param{
-		max_disp:	72
+		max_disp:	24
 		factor:		2560
 		#r1:			30
 		#r2:			500
 	}
 	show:	true
+	save:	true
 	#logt:	true
 }
 layer{
