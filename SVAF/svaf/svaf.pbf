@@ -148,10 +148,16 @@ layer{
 	type:	EADP_MATCH
 	top:	"3dpoint"
 	eadp_param{
-		max_disp:	24
-		factor:		2560
-		#r1:			30
-		#r2:			500
+
+
+		max_disp:	48
+		factor:		1280
+		guidmr:		1
+		dispmr:		1
+		sg:			-25.0
+		sc:			25.5
+		r1:			30
+		r2:			500
 	}
 	show:	true
 	save:	true
